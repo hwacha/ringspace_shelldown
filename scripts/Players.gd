@@ -4,6 +4,8 @@ var starting_ids = []
 var living_ids = []
 var killed_ids = []
 
+var winner_id = -1
+
 var should_check_round_end = false
 
 const play_to = 3
@@ -94,6 +96,7 @@ func _process(delta):
 
 func _on_RoundTimer_timeout():
 	if living_ids.size() > 0 and score[str(living_ids[0])] >= play_to:
-		get_tree().change_scene("res://scenes/opening_screen.tscn")
+		winner_id = living_ids[0]
+		get_tree().change_scene("res://scenes/win_screen.tscn")
 	else:
 		get_tree().change_scene("res://scenes/main.tscn")
