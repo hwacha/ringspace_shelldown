@@ -19,7 +19,6 @@ func _ready():
 	
 	var d_theta = 2 * PI / num_segments
 	midpoint_radius = (outer_radius + inner_radius) / 2
-	print(midpoint_radius)
 	
 	for i in range(num_segments):
 		var collider = CollisionShape2D.new()

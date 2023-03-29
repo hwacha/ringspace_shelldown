@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/daxbotsheet.png" type="Texture" id=2]
@@ -76,6 +76,12 @@ extents = Vector2( 9.5, 10.5 )
 [sub_resource type="CircleShape2D" id=13]
 radius = 12.0
 
+[sub_resource type="Curve" id=17]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 17 )
+
 [sub_resource type="ParticlesMaterial" id=14]
 emission_shape = 5
 emission_ring_radius = 1.0
@@ -93,7 +99,8 @@ linear_accel = 100.0
 radial_accel = 15.0
 damping = 40.0
 angle = 45.0
-scale = 0.02
+scale = 0.03
+scale_curve = SubResource( 16 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 500, 597 )
@@ -136,6 +143,7 @@ shape = SubResource( 13 )
 
 [node name="DeathParticles" type="Particles2D" parent="."]
 visible = false
+scale = Vector2( 0.598, 1.078 )
 emitting = false
 amount = 100
 one_shot = true
