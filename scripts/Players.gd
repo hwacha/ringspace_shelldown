@@ -12,6 +12,8 @@ const play_to = 3
 var score = {}
 var star_direction
 
+var starfield_rotation = 0
+
 const initial_settings = {
 	"fast_fall_enabled": true,
 	"invert_controls": false
@@ -99,4 +101,5 @@ func _on_RoundTimer_timeout():
 		winner_id = living_ids[0]
 		get_tree().change_scene("res://scenes/win_screen.tscn")
 	else:
+		starfield_rotation = get_node("/root/Main/Starfield").rotation
 		get_tree().change_scene("res://scenes/main.tscn")
