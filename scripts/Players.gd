@@ -1,0 +1,99 @@
+extends Node2D
+
+var starting_ids = []
+var living_ids = []
+var killed_ids = []
+
+var should_check_round_end = false
+
+const play_to = 3
+var score = {}
+var star_direction
+
+const initial_settings = {
+	"fast_fall_enabled": true,
+	"invert_controls": false
+}
+
+var settings = initial_settings
+
+const player_colors = [
+	Color(1, 0, 0),
+	Color(0, 0.5, 1),
+	Color(0, 1, 0),
+	Color(1, 1, 0),
+]
+
+var elapsed_time = 0
+
+func _ready():
+	pass
+
+func set_player_ids(x):
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	star_direction = (rng.randi_range(0, 1) * 2) - 1
+	
+	starting_ids = x
+	
+	score = {}
+	for id in starting_ids:
+		score[str(id)] = 0
+	
+func spawn_players():
+	living_ids = starting_ids.duplicate()
+	should_check_round_end = true
+	var i = 0
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var priorities = range(1, starting_ids.size() + 1)
+	for x in starting_ids:
+		var player_scene = load("res://scenes/Player.tscn")
+		var player_instance = player_scene.instance()
+		player_instance.id = x
+		player_instance.modulate = player_colors[x - 1]
+		player_instance.starting_theta = ((2 * PI * i / starting_ids.size()) + PI)
+		i += 1
+		
+		# shuffle priorities for breaking ties in collision
+		var priority = priorities[rng.randi_range(0, priorities.size() - 1)]
+		priorities.erase(priority)
+		player_instance.set_process_priority(priority)
+		
+		get_node("/root/Main").call_deferred("add_child", (player_instance))
+		
+func player_killed(id):
+	killed_ids.push_back(id)
+		
+func handle_killed_players():
+	for killed_id in killed_ids:
+		should_check_round_end = true
+		living_ids.erase(killed_id)
+	
+	if should_check_round_end:
+		if living_ids.size() == 0:
+			pass
+#			print("draw")
+		elif living_ids.size() == 1:
+			score[str(living_ids[0])] += 1
+			get_node("/root/Main/Score").update()
+#			for player_id in score:
+#				print(player_id +  " -> " + str(score[player_id]))
+
+			if $RoundTimer.get_time_left() == 0:
+				$RoundTimer.start()
+
+func _process(delta):
+	elapsed_time += delta
+	handle_killed_players()
+	killed_ids = []
+	should_check_round_end = false
+	
+	if Input.is_action_just_pressed("exit_game"):
+		get_tree().change_scene("res://scenes/opening_screen.tscn")
+
+func _on_RoundTimer_timeout():
+	if living_ids.size() > 0 and score[str(living_ids[0])] >= play_to:
+		get_tree().change_scene("res://scenes/opening_screen.tscn")
+	else:
+		get_tree().change_scene("res://scenes/main.tscn")
