@@ -97,7 +97,7 @@ scale = 0.02
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 500, 597 )
-scale = Vector2( 1.519, 0.844 )
+scale = Vector2( 1.671, 0.928 )
 z_index = 3
 collision_layer = 2
 script = ExtResource( 1 )

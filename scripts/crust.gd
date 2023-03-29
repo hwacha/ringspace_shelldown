@@ -1,20 +1,25 @@
 extends Node2D
 
 export(int) var num_segments = 80
-export(int) var crust_size = 30
+export(int) var crust_ratio = 1.0 / 15.0 # 1 is the length of the screen
 
 var screen_size
+var outer_radius
+var inner_radius
 var midpoint_radius
+var crust_size
 
 func _ready():
 	screen_size = get_viewport().size
-	var outer_radius = min(screen_size.x, screen_size.y) / 2
-	print(outer_radius)
-	var inner_radius = outer_radius - crust_size
-	print(inner_radius)
+	transform.origin.x = screen_size.x / 2
+	transform.origin.y = screen_size.y / 2
+	outer_radius = min(screen_size.x, screen_size.y) / 2
+	crust_size = outer_radius * crust_ratio
+	inner_radius = outer_radius - crust_size
 	
 	var d_theta = 2 * PI / num_segments
 	midpoint_radius = (outer_radius + inner_radius) / 2
+	print(midpoint_radius)
 	
 	for i in range(num_segments):
 		var collider = CollisionShape2D.new()

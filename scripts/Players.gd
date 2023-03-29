@@ -60,7 +60,7 @@ func spawn_players():
 		priorities.erase(priority)
 		player_instance.set_process_priority(priority)
 		
-		get_node("/root/Main").call_deferred("add_child", (player_instance))
+		get_node("/root/Main").call_deferred("add_child", player_instance)
 		
 func player_killed(id):
 	killed_ids.push_back(id)
@@ -77,8 +77,8 @@ func handle_killed_players():
 		elif living_ids.size() == 1:
 			score[str(living_ids[0])] += 1
 			get_node("/root/Main/Score").update()
-#			for player_id in score:
-#				print(player_id +  " -> " + str(score[player_id]))
+			for player_id in score:
+				print(player_id +  " -> " + str(score[player_id]))
 
 			if $RoundTimer.get_time_left() == 0:
 				$RoundTimer.start()

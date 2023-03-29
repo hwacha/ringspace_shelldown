@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/crust.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Stars.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Score.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Score.gd" type="Script" id=5]
 
 [node name="Main" type="Node2D"]
 
@@ -17,7 +17,6 @@ color = Color( 0, 0, 0, 1 )
 script = ExtResource( 2 )
 
 [node name="Crust" type="StaticBody2D" parent="."]
-position = Vector2( 375, 375 )
 z_index = 1
 collision_mask = 2
 script = ExtResource( 1 )
