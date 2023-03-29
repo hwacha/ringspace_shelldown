@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/crust.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Stars.gd" type="Script" id=2]
+[ext_resource path="res://assets/starfield.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Starfield.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Score.gd" type="Script" id=5]
 
 [node name="Main" type="Node2D"]
@@ -13,8 +14,10 @@ margin_right = 750.0
 margin_bottom = 750.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Stars" type="Node2D" parent="."]
-script = ExtResource( 2 )
+[node name="Starfield" type="Sprite" parent="."]
+scale = Vector2( 0.707, 0.707 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="Crust" type="StaticBody2D" parent="."]
 z_index = 1
