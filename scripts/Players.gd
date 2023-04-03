@@ -31,7 +31,7 @@ const player_colors = [
 var elapsed_time = 0
 
 func _ready():
-	pass
+	killed_ids = []
 
 func set_player_ids(x):
 	var rng = RandomNumberGenerator.new()
@@ -67,7 +67,8 @@ func spawn_players():
 		get_node("/root/Main").call_deferred("add_child", player_instance)
 		
 func player_killed(id):
-	killed_ids.push_back(id)
+	if (living_ids.size() > 1):
+		killed_ids.push_back(id)
 		
 func handle_killed_players():
 	for killed_id in killed_ids:

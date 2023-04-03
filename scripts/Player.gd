@@ -116,18 +116,24 @@ func _on_HurtBox_area_entered(hitbox):
 		hitter.velocity = -hurtbox_down * jump_impulse * (surface_to_centroid / hurtbox_down.length())
 		hitter.fast_falling = false
 		# kill
-		dead = true
-		Players.player_killed(self.id)
-		velocity = Vector2(0, 0)
-		$AnimatedSprite.hide()
-		$CollisionShape2D.set_deferred("disabled", true)
-		$HitBox.set_deferred("monitoring", false)
-		$HurtBox.set_deferred("monitorable", false)
-		# death animation
-		$DeathParticles.show()
-		$DeathParticles.emitting = true
-		$DeathTimer.start()
+		self.die()
+
+func die():
+	dead = true
+	Players.player_killed(self.id)
+	velocity = Vector2(0, 0)
+	$AnimatedSprite.hide()
+	$CollisionShape2D.set_deferred("disabled", true)
+	$HitBox.set_deferred("monitoring", false)
+	$HurtBox.set_deferred("monitorable", false)
+	# death animation
+	$DeathParticles.show()
+	$DeathParticles.emitting = true
+	$DeathTimer.start()
 
 func _on_DeathTimer_timeout():
 	hide()
 	queue_free()
+
+func _on_VisibilityNotifier2D_screen_exited():
+	die()
