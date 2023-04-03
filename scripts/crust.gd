@@ -10,6 +10,8 @@ var inner_radius
 var midpoint_radius
 var crust_size
 
+var rng
+
 func _ready():
 	screen_size = get_viewport().size
 	transform.origin.x = screen_size.x / 2
@@ -50,9 +52,19 @@ func _ready():
 			crust_segment.add_child(collider)
 		
 		self.add_child(crust_segment)
-		
+	
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
 	get_node("/root/Players").spawn_players()
+	get_node("../CrustDecay").start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func _on_CrustDecay_timeout():
+	print(get_child_count())
+	var rand = rng.randi_range(0, get_child_count() - 1)
+	print(rand)
+	remove_child(get_child(rand))
