@@ -1,6 +1,7 @@
 extends Node2D
 
-export(int) var num_segments = 80
+export(int) var num_segments = 16
+export(int) var colliders_per_segment = 5
 export(int) var crust_ratio = 1.0 / 15.0 # 1 is the length of the screen
 
 var screen_size
@@ -17,27 +18,40 @@ func _ready():
 	crust_size = outer_radius * crust_ratio
 	inner_radius = outer_radius - crust_size
 	
-	var d_theta = 2 * PI / num_segments
 	midpoint_radius = (outer_radius + inner_radius) / 2
 	
+	var segment_d_theta = 2 * PI / num_segments
+	
+	var num_colliders = num_segments * colliders_per_segment
+	var collider_d_theta = segment_d_theta / colliders_per_segment
+	
+	var crust_segment_scene = load("res://scenes/CrustSegment.tscn")
+	
 	for i in range(num_segments):
-		var collider = CollisionShape2D.new()
-		var cord = RectangleShape2D.new()
-		cord.extents = Vector2(PI * midpoint_radius / num_segments, crust_size / 2)
-		collider.shape = cord
+		var crust_segment = crust_segment_scene.instance()
+		crust_segment.set_name("segment_" + str(i))
+		crust_segment.midpoint_radius = midpoint_radius
+		crust_segment.crust_size = crust_size
+		crust_segment.num_segments = num_segments
+		crust_segment.arc_index = i
+		var crust_segment_theta = i * segment_d_theta
 		
-		var theta = i * d_theta
+		for j in range(colliders_per_segment):
+			var cord = RectangleShape2D.new()
+			cord.extents = Vector2(PI * midpoint_radius / num_colliders, crust_size / 2)
+			var collider = CollisionShape2D.new()
+			collider.shape = cord
+			
+			var collider_theta = (i * colliders_per_segment + j) * collider_d_theta
+			
+			collider.rotation = collider_theta + (PI / 2)
+			collider.transform.origin = midpoint_radius * Vector2(cos(collider_theta), sin(collider_theta))
+			
+			crust_segment.add_child(collider)
 		
-		collider.rotation = theta + (PI / 2)
-		collider.transform.origin = midpoint_radius * Vector2(cos(theta), sin(theta))
-		
-		self.add_child(collider)
+		self.add_child(crust_segment)
 		
 	get_node("/root/Players").spawn_players()
-	
-func _draw():
-	draw_arc(Vector2(0, 0), \
-	midpoint_radius, 0, 2 * PI, num_segments, Color(0.125, 0.125, 0.125, 1), crust_size, true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
