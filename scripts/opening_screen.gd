@@ -27,7 +27,8 @@ func get_input():
 	if Input.is_action_just_pressed("settings_invert_controls"):
 		players.settings["invert_controls"] = not players.settings["invert_controls"]
 		
-	$Settings.text = "[1] fast_fall_enabled: " + str(players.settings["fast_fall_enabled"]) + "\n[2] invert_controls: " + str(players.settings["invert_controls"])
+	$Settings.text = "[1] fast_fall_enabled: " + str(players.settings["fast_fall_enabled"]) + \
+				  "\n[2] invert_controls: " + str(players.settings["invert_controls"])
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		players.set_player_ids(registered_players)

@@ -67,6 +67,8 @@ func _ready():
 
 func _on_CrustDecay_timeout():
 	var rand = rng.randi_range(0, get_child_count() - 1)
-	remove_child(get_child(rand))
-	crust_decay.set_wait_time(crust_decay.wait_time * 0.5)
-	crust_decay.start()
+	var segment = get_child(rand)
+	if segment != null:
+		segment.destroy()
+		crust_decay.set_wait_time(crust_decay.wait_time * 0.5)
+		crust_decay.start()
