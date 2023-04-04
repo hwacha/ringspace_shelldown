@@ -13,7 +13,13 @@ var crust_size
 var rng
 onready var crust_decay = get_node("../CrustDecay")
 
+# decay time
+export(float) var minimum_decay_period = 3.0  # seconds
+var decay_constant
+
 func _ready():
+	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/num_segments)
+	
 	screen_size = get_viewport().size
 	transform.origin.x = screen_size.x / 2
 	transform.origin.y = screen_size.y / 2
@@ -66,9 +72,10 @@ func _ready():
 #	pass
 
 func _on_CrustDecay_timeout():
+	print(crust_decay.wait_time)
 	var rand = rng.randi_range(0, get_child_count() - 1)
 	var segment = get_child(rand)
 	if segment != null:
 		segment.destroy()
-		crust_decay.set_wait_time(crust_decay.wait_time * 0.5)
+		crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
 		crust_decay.start()
