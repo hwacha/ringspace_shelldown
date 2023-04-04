@@ -19,6 +19,8 @@ onready var anim = $AnimatedSprite
 var fast_falling = false
 var dead = false
 
+var ontop_of = []
+
 func _ready():
 	var crust = get_node("../Crust")
 	centroid = crust.transform.origin
@@ -137,3 +139,17 @@ func _on_DeathTimer_timeout():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	die()
+
+
+func _on_Overlap_area_entered(area):
+	var other = area.get_parent()
+	if self.get_index() > other.get_index() and not other in ontop_of:
+		ontop_of.push_back(other)
+		self.modulate.a = 0.6
+
+func _on_Overlap_area_exited(area):
+	var other = area.get_parent()
+	ontop_of.erase(other)
+	if ontop_of == []:
+		self.modulate.a = 1
+		
