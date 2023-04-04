@@ -7,6 +7,7 @@ var killed_ids = []
 var winner_id = -1
 
 var should_check_round_end = false
+var is_round_ongoing = false
 
 const play_to = 3
 var score = {}
@@ -32,6 +33,13 @@ var elapsed_time = 0
 
 func _ready():
 	killed_ids = []
+	
+func initialize_for_new_round():
+	winner_id = -1
+	should_check_round_end = false
+	living_ids = []
+	killed_ids = []
+	is_round_ongoing = false
 
 func set_player_ids(x):
 	var rng = RandomNumberGenerator.new()
@@ -65,26 +73,28 @@ func spawn_players():
 		player_instance.set_process_priority(priority)
 		
 		get_node("/root/Main").call_deferred("add_child", player_instance)
-		
+	
+	is_round_ongoing = true
+
 func player_killed(id):
-	if (living_ids.size() > 1):
-		killed_ids.push_back(id)
+	if is_round_ongoing:
+		if living_ids.size() > 1 or starting_ids.size() == 1:
+			killed_ids.push_back(id)
 		
 func handle_killed_players():
 	for killed_id in killed_ids:
 		should_check_round_end = true
 		living_ids.erase(killed_id)
-	
+
 	if should_check_round_end:
-		if living_ids.size() == 0:
-			pass
-#			print("draw")
-		elif living_ids.size() == 1:
+		if living_ids.size() == 1 and starting_ids.size() != 1:
 			score[str(living_ids[0])] += 1
 			get_node("/root/Main/Score").update()
 #			for player_id in score:
 #				print(player_id +  " -> " + str(score[player_id]))
-
+		if  living_ids.size() == 0 or \
+		   (living_ids.size() == 1 and starting_ids.size() != 1):
+			print(living_ids.size())
 			if $RoundTimer.get_time_left() == 0:
 				$RoundTimer.start()
 
@@ -95,6 +105,7 @@ func _process(delta):
 	should_check_round_end = false
 	
 	if Input.is_action_just_pressed("exit_game"):
+		is_round_ongoing = false
 		get_tree().change_scene("res://scenes/opening_screen.tscn")
 
 func _on_RoundTimer_timeout():
@@ -103,4 +114,5 @@ func _on_RoundTimer_timeout():
 		get_tree().change_scene("res://scenes/win_screen.tscn")
 	else:
 		starfield_rotation = get_node("/root/Main/Starfield").rotation
+		initialize_for_new_round()
 		get_tree().change_scene("res://scenes/main.tscn")

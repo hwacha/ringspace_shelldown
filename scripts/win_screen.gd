@@ -11,3 +11,4 @@ func _ready():
 
 func _on_Timer_timeout():
 	get_tree().change_scene("res://scenes/opening_screen.tscn")
+	Players.initialize_for_new_round()
