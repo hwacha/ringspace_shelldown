@@ -17,7 +17,8 @@ var starfield_rotation = 0
 
 const initial_settings = {
 	"fast_fall_enabled": true,
-	"invert_controls": false
+	"invert_controls": false,
+	"segment_decay_enabled": true,
 }
 
 var settings = initial_settings

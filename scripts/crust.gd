@@ -65,17 +65,19 @@ func _ready():
 	rng.randomize()
 	
 	get_node("/root/Players").spawn_players()
-	crust_decay.start()
+	
+	if Players.settings["segment_decay_enabled"]:
+		crust_decay.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 func _on_CrustDecay_timeout():
-	print(crust_decay.wait_time)
-	var rand = rng.randi_range(0, get_child_count() - 1)
-	var segment = get_child(rand)
-	if segment != null:
-		segment.destroy()
-		crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
-		crust_decay.start()
+	if Players.settings["segment_decay_enabled"]:
+		var rand = rng.randi_range(0, get_child_count() - 1)
+		var segment = get_child(rand)
+		if segment != null:
+			segment.destroy()
+			crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
+			crust_decay.start()
