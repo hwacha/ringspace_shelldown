@@ -68,7 +68,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 12.8665, 26.9397 )
+extents = Vector2( 9.27589, 26.9397 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9.5, 10.5 )
@@ -114,7 +114,7 @@ frames = SubResource( 12 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.897675, -4.31042 )
+position = Vector2( 1.49612, -4.31042 )
 scale = Vector2( 1, 1 )
 shape = SubResource( 18 )
 
