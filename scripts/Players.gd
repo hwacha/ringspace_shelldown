@@ -29,6 +29,13 @@ const player_colors = [
 	Color(1, 1, 0),
 ]
 
+const player_names = [
+	"Red",
+	"Blue",
+	"Green",
+	"Yellow"
+]
+
 var elapsed_time = 0
 
 func _ready():
@@ -94,7 +101,6 @@ func handle_killed_players():
 #				print(player_id +  " -> " + str(score[player_id]))
 		if  living_ids.size() == 0 or \
 		   (living_ids.size() == 1 and starting_ids.size() != 1):
-			print(living_ids.size())
 			if $RoundTimer.get_time_left() == 0:
 				$RoundTimer.start()
 

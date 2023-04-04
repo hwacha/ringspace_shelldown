@@ -1,7 +1,10 @@
 extends Control
 
+
+
 func _ready():
-	$WinText.text = "Player " + str(Players.winner_id) + " wins!"
+	self.modulate = Players.player_colors[Players.winner_id - 1]
+	$WinText.text = Players.player_names[Players.winner_id - 1] + " wins!"
 	$Timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

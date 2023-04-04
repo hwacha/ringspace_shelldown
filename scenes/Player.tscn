@@ -67,8 +67,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 29.3636
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 12.8665, 26.9397 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9.5, 10.5 )
@@ -114,8 +114,9 @@ frames = SubResource( 12 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -4.66666 )
-shape = SubResource( 1 )
+position = Vector2( -0.897675, -4.31042 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 18 )
 
 [node name="HitBox" type="Area2D" parent="."]
 position = Vector2( 0, 21.5517 )
