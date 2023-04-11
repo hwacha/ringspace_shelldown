@@ -16,7 +16,7 @@ var surface_to_centroid_squared
 
 onready var anim = $AnimatedSprite
 
-var fast_falling = false
+var fast_falling = false setget set_fast_falling
 var dead = false
 
 var ontop_of = []
@@ -37,7 +37,7 @@ func get_input(diff):
 	var grounded = self.is_on_floor()
 	if grounded:
 		ps *= 15
-		fast_falling = false
+		set_fast_falling(false)
 		
 	var move_clockwise = Input.is_action_pressed("move_clockwise_p" + str(id))
 	var move_counterclockwise = Input.is_action_pressed("move_counterclockwise_p" + str(id))
@@ -79,7 +79,7 @@ func get_input(diff):
 		$Jump.play()
 	
 	if not grounded and fast_fall:
-		fast_falling = true
+		set_fast_falling(true)
 
 func _physics_process(delta):
 	if dead:
@@ -104,6 +104,14 @@ func _physics_process(delta):
 	if is_on_floor():
 		velocity = Vector2(0, 0)
 
+func set_fast_falling(new_fast_falling):
+	if not fast_falling and new_fast_falling:
+		$FastFall.play()
+	elif fast_falling and not new_fast_falling:
+		$FastFall.stop()
+	
+	fast_falling = new_fast_falling
+		
 func _on_HurtBox_area_entered(hitbox):
 	var hitter = hitbox.get_parent()
 	if self.dead or hitter.dead:
@@ -117,7 +125,7 @@ func _on_HurtBox_area_entered(hitbox):
 	   velocity.dot(hurtbox_down) < 0:
 		# bounce
 		hitter.velocity = -hurtbox_down * jump_impulse * (surface_to_centroid / hurtbox_down.length())
-		hitter.fast_falling = false
+		hitter.set_fast_falling(false)
 		# kill
 		self.die()
 
@@ -132,6 +140,7 @@ func die():
 	# death animation
 	$DeathParticles.show()
 	$DeathParticles.emitting = true
+	$Death.play()
 	$DeathTimer.start()
 
 func _on_DeathTimer_timeout():

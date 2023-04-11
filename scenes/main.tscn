@@ -40,10 +40,6 @@ script = ExtResource( 5 )
 wait_time = 51.285
 one_shot = true
 
-[node name="CrustDecay2" type="Timer" parent="."]
-wait_time = 51.285
-one_shot = true
-
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -12.0
@@ -71,5 +67,4 @@ position = Vector2( 1280, 540 )
 shape = SubResource( 2 )
 
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
-[connection signal="timeout" from="CrustDecay2" to="Crust" method="_on_CrustDecay_timeout"]
 [connection signal="body_shape_entered" from="OutOfBounds" to="OutOfBounds" method="_on_OutOfBounds_body_shape_entered"]
