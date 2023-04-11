@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/daxbotsheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/hero-2-circle.png" type="Texture" id=3]
+[ext_resource path="res://assets/121645028-video-game-jump-sound-effect-1.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -158,8 +159,6 @@ texture = ExtResource( 3 )
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-
 [node name="Overlap" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 16
@@ -168,8 +167,11 @@ collision_mask = 16
 position = Vector2( -1.19687, -4.31036 )
 shape = SubResource( 19 )
 
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -21.0
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="area_entered" from="Overlap" to="." method="_on_Overlap_area_entered"]
 [connection signal="area_exited" from="Overlap" to="." method="_on_Overlap_area_exited"]

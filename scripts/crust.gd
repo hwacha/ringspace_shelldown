@@ -2,7 +2,7 @@ extends Node2D
 
 export(int) var num_segments = 16
 export(int) var colliders_per_segment = 5
-export(int) var crust_ratio = 1.0 / 15.0 # 1 is the length of the screen
+export(float) var crust_ratio = 1.0 / 15 # 1 is the length of the screen
 
 var screen_size
 var outer_radius

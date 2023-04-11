@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/CrustSegment.gd" type="Script" id=1]
 [ext_resource path="res://assets/warning-28-xxl.png" type="Texture" id=2]
+[ext_resource path="res://assets/ring_game_segment_alarm.wav" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "segment_destroy"
@@ -30,17 +31,33 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true, false, true, false, true, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Alarm:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true ]
+}
 
 [node name="CrustSegment" type="StaticBody2D"]
 script = ExtResource( 1 )
+is_flash_on = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/segment_destroy = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 position = Vector2( 0, -8 )
 scale = Vector2( 0.3, 0.298438 )
 texture = ExtResource( 2 )
+
+[node name="Alarm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -6.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

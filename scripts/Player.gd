@@ -76,6 +76,7 @@ func get_input(diff):
 	if jump and grounded:
 		velocity += -diff * jump_impulse
 		anim.set_animation("jumping")
+		$Jump.play()
 	
 	if not grounded and fast_fall:
 		fast_falling = true
@@ -136,10 +137,6 @@ func die():
 func _on_DeathTimer_timeout():
 	hide()
 	queue_free()
-
-func _on_VisibilityNotifier2D_screen_exited():
-	die()
-
 
 func _on_Overlap_area_entered(area):
 	var other = area.get_parent()
