@@ -1,28 +1,29 @@
 extends Node2D
 
-export(int) var num_segments = 16
-export(int) var colliders_per_segment = 5
-export(float) var crust_ratio = 1.0 / 15 # 1 is the length of the screen
+@export var num_segments: int = 16
+@export var colliders_per_segment: int = 5
+@export var crust_ratio: float = 1.0 / 15 # 1 is the length of the screen
 
 var screen_size
+
 var outer_radius
 var inner_radius
 var midpoint_radius
 var crust_size
 
 var rng
-onready var crust_decay = get_node("../CrustDecay")
+@onready var crust_decay = get_node("../CrustDecay")
 
 # decay time
-export(float) var minimum_decay_period = 3.0  # seconds
+@export var minimum_decay_period: float = 3.0  # seconds
 var decay_constant
 
 func _ready():
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/num_segments)
-	
-	screen_size = get_viewport().size
-	transform.origin.x = screen_size.x / 2
-	transform.origin.y = screen_size.y / 2
+
+	var screen_width = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var screen_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+	screen_size = Vector2(screen_width, screen_height)
 	outer_radius = min(screen_size.x, screen_size.y) / 2
 	crust_size = outer_radius * crust_ratio
 	inner_radius = outer_radius - crust_size
@@ -37,7 +38,7 @@ func _ready():
 	var crust_segment_scene = load("res://scenes/CrustSegment.tscn")
 	
 	for i in range(num_segments):
-		var crust_segment = crust_segment_scene.instance()
+		var crust_segment = crust_segment_scene.instantiate()
 		crust_segment.set_name("segment_" + str(i))
 		crust_segment.midpoint_radius = midpoint_radius
 		crust_segment.crust_size = crust_size
@@ -48,7 +49,7 @@ func _ready():
 		
 		for j in range(colliders_per_segment):
 			var cord = RectangleShape2D.new()
-			cord.extents = Vector2(PI * midpoint_radius / num_colliders, crust_size / 2)
+			cord.size = Vector2(PI * 2 * midpoint_radius / num_colliders, crust_size)
 			var collider = CollisionShape2D.new()
 			collider.shape = cord
 			

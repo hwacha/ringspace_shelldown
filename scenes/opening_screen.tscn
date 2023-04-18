@@ -1,119 +1,150 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dmu5yhute6x8k"]
 
-[ext_resource path="res://scripts/opening_screen.gd" type="Script" id=2]
-[ext_resource path="res://assets/Silver Forte.ttf" type="DynamicFontData" id=3]
+[ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="3"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 64
-font_data = ExtResource( 3 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("3")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 3 )
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("3")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="OpeningScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
 [node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
 anchor_left = 0.285
 anchor_top = 0.333
 anchor_right = 0.715
 anchor_bottom = 0.639
-custom_fonts/normal_font = SubResource( 1 )
+theme_override_fonts/normal_font = SubResource("1")
 text = "Ringspace
 Shelldown"
 scroll_active = false
 
 [node name="P1Unregistered" type="RichTextLabel" parent="."]
+layout_mode = 0
 anchor_left = 0.05
 anchor_top = 0.662
 anchor_right = 0.3
 anchor_bottom = 0.722
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Press W to Join"
 scroll_active = false
 
 [node name="P1Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color( 1, 0, 0, 1 )
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
 anchor_left = 0.05
 anchor_top = 0.662
 anchor_right = 0.3
 anchor_bottom = 0.722
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Red Joined"
 scroll_active = false
 
 [node name="P2Unregistered" type="RichTextLabel" parent="."]
+layout_mode = 0
 anchor_left = 0.292
 anchor_top = 0.662
 anchor_right = 0.5
 anchor_bottom = 0.722
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Press T to Join"
 scroll_active = false
 
 [node name="P2Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color( 0, 0.5, 1, 1 )
+modulate = Color(0, 0.5, 1, 1)
+layout_mode = 0
 anchor_left = 0.275
 anchor_top = 0.662
 anchor_right = 0.5
 anchor_bottom = 0.773
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Blue Joined
 "
 scroll_active = false
 
 [node name="P3Unregistered" type="RichTextLabel" parent="."]
+layout_mode = 0
 anchor_left = 0.529
 anchor_top = 0.662
 anchor_right = 0.8
 anchor_bottom = 0.722
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Press i to Join"
 scroll_active = false
 
 [node name="P3Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color( 0, 1, 0.180392, 1 )
+modulate = Color(0, 1, 0.180392, 1)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.662
 anchor_right = 0.8
 anchor_bottom = 0.722
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Green Joined"
 scroll_active = false
 
 [node name="P4Unregistered" type="RichTextLabel" parent="."]
+layout_mode = 0
 anchor_left = 0.75
 anchor_top = 0.662
 anchor_right = 1.0
 anchor_bottom = 0.722
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Press UP to Join"
 scroll_active = false
 
 [node name="P4Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color( 1, 0.960784, 0, 1 )
+modulate = Color(1, 0.960784, 0, 1)
+layout_mode = 0
 anchor_left = 0.75
 anchor_top = 0.662
 anchor_right = 1.0
 anchor_bottom = 0.722
-custom_fonts/normal_font = SubResource( 2 )
+theme_override_fonts/normal_font = SubResource("2")
 text = "Yellow Joined"
 scroll_active = false
 
 [node name="Settings" type="Label" parent="."]
+layout_mode = 0
 anchor_left = 0.1
 anchor_top = 0.02
 anchor_right = 0.95
 anchor_bottom = 0.2
-align = 2

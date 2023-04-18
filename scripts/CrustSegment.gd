@@ -1,20 +1,20 @@
 extends Node2D
 
-export(int) var arc_resolution = 100
+@export var arc_resolution: int = 100
 
 # received fields
 var midpoint_radius
 var crust_size
-var num_segments setget set_num_segments
-var colliders_per_segment setget set_colliders_per_segment
-var arc_index setget set_arc_index
+var num_segments : set = set_num_segments
+var colliders_per_segment : set = set_colliders_per_segment
+var arc_index : set = set_arc_index
 
 # derived fields
 var arc_angle
 var offset
 
 # for warning animation
-export(bool) var is_flash_on setget set_flash
+@export var is_flash_on: bool: set = set_flash
 
 func set_num_segments(new_num_segments):
 	num_segments = new_num_segments
@@ -23,12 +23,12 @@ func set_num_segments(new_num_segments):
 func set_arc_index(new_arc_index):
 	arc_index = new_arc_index
 	var theta = arc_angle * (arc_index + 0.4)
-	$Sprite.rotate(theta - PI/2)
-	$Sprite.transform.origin = midpoint_radius * 0.8 * Vector2(cos(theta), sin(theta))
+	$Sprite2D.rotate(theta - PI/2)
+	$Sprite2D.transform.origin = midpoint_radius * 0.8 * Vector2(cos(theta), sin(theta))
 	
 func set_flash(new_is_flash_on):
 	is_flash_on = new_is_flash_on
-	update()
+	queue_redraw()
 
 func set_colliders_per_segment(new_colliders_per_segment):
 	colliders_per_segment = new_colliders_per_segment
@@ -36,7 +36,7 @@ func set_colliders_per_segment(new_colliders_per_segment):
 
 func _ready():
 	is_flash_on = false
-	$Sprite.visible = false
+	$Sprite2D.visible = false
 
 func _draw():
 	var color = Color(0.125, 0.125, 0.125, 1)

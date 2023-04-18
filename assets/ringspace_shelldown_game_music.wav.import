@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ringspace_shelldown_game_music.wav-12e291d1e06cef040dadfa7373e07393.sample"
+type="AudioStreamWAV"
+uid="uid://dfbmiy2yoydhd"
+path="res://.godot/imported/ringspace_shelldown_game_music.wav-12e291d1e06cef040dadfa7373e07393.sample"
 
 [deps]
 
 source_file="res://assets/ringspace_shelldown_game_music.wav"
-dest_files=[ "res://.import/ringspace_shelldown_game_music.wav-12e291d1e06cef040dadfa7373e07393.sample" ]
+dest_files=["res://.godot/imported/ringspace_shelldown_game_music.wav-12e291d1e06cef040dadfa7373e07393.sample"]
 
 [params]
 

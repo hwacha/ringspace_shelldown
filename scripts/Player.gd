@@ -1,9 +1,11 @@
-extends KinematicBody2D
+class_name Player
+extends CharacterBody2D
 
-export(int) var id
+@export var id: int
 
+var norm_velocity = Vector2(0, 0)
 var perp_velocity = Vector2(0, 0)
-var velocity = Vector2(0, 0)
+#var velocity = Vector2(0, 0)
 var cf = 0.105
 
 var perp_speed = 40 * 0.75
@@ -14,9 +16,9 @@ var centroid
 var surface_to_centroid
 var surface_to_centroid_squared
 
-onready var anim = $AnimatedSprite
+@onready var anim = $AnimatedSprite2D
 
-var fast_falling = false setget set_fast_falling
+var fast_falling = false: set = set_fast_falling
 var dead = false
 
 var ontop_of = []
@@ -29,7 +31,9 @@ func _ready():
 	
 	transform.origin = centroid + \
 	(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
-			 sin(starting_theta) * crust.screen_size.y / 10))
+		sin(starting_theta) * crust.screen_size.y / 10))
+	
+	anim.play()
 	
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
@@ -74,7 +78,7 @@ func get_input(diff):
 				anim.set_animation("falling")
 		
 	if jump and grounded:
-		velocity += -diff * jump_impulse
+		norm_velocity += -diff * jump_impulse
 		anim.set_animation("jumping")
 		$Jump.play()
 	
@@ -86,23 +90,32 @@ func _physics_process(delta):
 		return
 
 	var diff = self.transform.origin - centroid
-	self.rotation = self.transform.origin.angle_to_point(centroid) - (PI / 2)
+	
+	self.rotation = self.transform.origin.angle_to_point(centroid) + (PI / 2)
 
 	var fast_fall_mult = 1
 	
 	if fast_falling and Players.settings.fast_fall_enabled:
 		fast_fall_mult = 10
-		
-	velocity += diff * cf * fast_fall_mult
+	
+
+
+	var old_norm_velocity = norm_velocity
+	norm_velocity += diff * cf * fast_fall_mult
+	
+	if not self.is_on_floor() and id == 1:
+		print(norm_velocity.length() - old_norm_velocity.length())
 	
 	get_input(diff)
 	
-	var new_velocity = move_and_slide(velocity + perp_velocity, -diff)
-	velocity = new_velocity.normalized() * velocity.length()
+	set_velocity(norm_velocity + perp_velocity)
+	set_up_direction(-diff)
+	move_and_slide()
+	norm_velocity = velocity.normalized() * norm_velocity.length()
 #	velocity -= perp_velocity
 	
 	if is_on_floor():
-		velocity = Vector2(0, 0)
+		norm_velocity = Vector2(0, 0)
 
 func set_fast_falling(new_fast_falling):
 	if not fast_falling and new_fast_falling:
@@ -121,10 +134,10 @@ func _on_HurtBox_area_entered(hitbox):
 	var hitbox_down  = hitter.transform.origin - centroid
 	var hurtbox_down = self.transform.origin - centroid
 	
-	if hitter.velocity.dot(hitbox_down) > 0 or \
-	   velocity.dot(hurtbox_down) < 0:
+	if hitter.norm_velocity.dot(hitbox_down) > 0 or \
+	norm_velocity.dot(hurtbox_down) < 0:
 		# bounce
-		hitter.velocity = -hurtbox_down * jump_impulse * (surface_to_centroid / hurtbox_down.length())
+		hitter.norm_velocity = -hurtbox_down * jump_impulse * (surface_to_centroid / hurtbox_down.length())
 		hitter.set_fast_falling(false)
 		# kill
 		self.die()
@@ -132,8 +145,8 @@ func _on_HurtBox_area_entered(hitbox):
 func die():
 	dead = true
 	Players.player_killed(self.id)
-	velocity = Vector2(0, 0)
-	$AnimatedSprite.hide()
+	norm_velocity = Vector2(0, 0)
+	$AnimatedSprite2D.hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)

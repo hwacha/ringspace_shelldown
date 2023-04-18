@@ -69,8 +69,8 @@ func spawn_players():
 	var priorities = range(1, starting_ids.size() + 1)
 	for x in starting_ids:
 		var player_scene = load("res://scenes/Player.tscn")
-		var player_instance = player_scene.instance()
-		player_instance.id = x
+		var player_instance = player_scene.instantiate()
+		player_instance.id = int(x)
 		player_instance.modulate = player_colors[x - 1]
 		player_instance.starting_theta = ((2 * PI * i / starting_ids.size()) + PI)
 		i += 1
@@ -97,11 +97,11 @@ func handle_killed_players():
 	if should_check_round_end:
 		if living_ids.size() == 1 and starting_ids.size() != 1:
 			score[str(living_ids[0])] += 1
-			get_node("/root/Main/Score").update()
+			get_node("/root/Main/Score").queue_redraw()
 #			for player_id in score:
 #				print(player_id +  " -> " + str(score[player_id]))
 		if  living_ids.size() == 0 or \
-		   (living_ids.size() == 1 and starting_ids.size() != 1):
+			(living_ids.size() == 1 and starting_ids.size() != 1):
 			if $RoundTimer.get_time_left() == 0:
 				$RoundTimer.start()
 
@@ -113,13 +113,13 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("exit_game"):
 		is_round_ongoing = false
-		get_tree().change_scene("res://scenes/opening_screen.tscn")
+		get_tree().change_scene_to_file("res://scenes/opening_screen.tscn")
 
 func _on_RoundTimer_timeout():
 	if living_ids.size() > 0 and score[str(living_ids[0])] >= play_to:
 		winner_id = living_ids[0]
-		get_tree().change_scene("res://scenes/win_screen.tscn")
+		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 	else:
 		starfield_rotation = get_node("/root/Main/Starfield").rotation
 		initialize_for_new_round()
-		get_tree().change_scene("res://scenes/main.tscn")
+		get_tree().change_scene_to_file("res://scenes/main.tscn")

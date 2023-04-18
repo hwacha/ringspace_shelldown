@@ -1,11 +1,9 @@
-extends Sprite
+extends Sprite2D
 
-export(float) var rotation_speed = 0.03
+@export var rotation_speed: float = 0.03
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	transform.origin.x = get_viewport().size.x / 2
-	transform.origin.y = get_viewport().size.y / 2
 	rotate(Players.starfield_rotation)
 
 

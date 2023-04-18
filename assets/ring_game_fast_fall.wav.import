@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ring_game_fast_fall.wav-8791c799ea2d277a3cdb846d11ed0592.sample"
+type="AudioStreamWAV"
+uid="uid://crcbtp8rmyd23"
+path="res://.godot/imported/ring_game_fast_fall.wav-8791c799ea2d277a3cdb846d11ed0592.sample"
 
 [deps]
 
 source_file="res://assets/ring_game_fast_fall.wav"
-dest_files=[ "res://.import/ring_game_fast_fall.wav-8791c799ea2d277a3cdb846d11ed0592.sample" ]
+dest_files=["res://.godot/imported/ring_game_fast_fall.wav-8791c799ea2d277a3cdb846d11ed0592.sample"]
 
 [params]
 

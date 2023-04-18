@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/121645028-video-game-jump-sound-effect-1.wav-3dd936607c60bbeac0796ec6110a171a.sample"
+type="AudioStreamWAV"
+uid="uid://c1x1y5wi84yf"
+path="res://.godot/imported/121645028-video-game-jump-sound-effect-1.wav-3dd936607c60bbeac0796ec6110a171a.sample"
 
 [deps]
 
 source_file="res://assets/121645028-video-game-jump-sound-effect-1.wav"
-dest_files=[ "res://.import/121645028-video-game-jump-sound-effect-1.wav-3dd936607c60bbeac0796ec6110a171a.sample" ]
+dest_files=["res://.godot/imported/121645028-video-game-jump-sound-effect-1.wav-3dd936607c60bbeac0796ec6110a171a.sample"]
 
 [params]
 

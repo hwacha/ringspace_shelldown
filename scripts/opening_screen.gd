@@ -29,13 +29,13 @@ func get_input():
 	if Input.is_action_just_pressed("settings_toggle_segment_decay"):
 		players.settings["segment_decay_enabled"] = not players.settings["segment_decay_enabled"]
 		
-	$Settings.text = "[1] fast_fall_enabled: " + str(players.settings["fast_fall_enabled"]) + \
-				  "\n[2] invert_controls: " + str(players.settings["invert_controls"]) + \
-				  "\n[3] segment_decay_enabled: " + str(players.settings["segment_decay_enabled"])
+	$Settings.text = "[1] fast_fall_enabled: " + str(Players.settings["fast_fall_enabled"]) + \
+					"\n[2] invert_controls: " + str(Players.settings["invert_controls"]) + \
+					"\n[3] segment_decay_enabled: " + str(Players.settings["segment_decay_enabled"])
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		players.set_player_ids(registered_players)
-		get_tree().change_scene("scenes/main.tscn")
+		Players.set_player_ids(registered_players)
+		get_tree().change_scene_to_file("scenes/main.tscn")
 
 func _process(delta):
 	get_input()

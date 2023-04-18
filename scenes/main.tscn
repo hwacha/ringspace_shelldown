@@ -1,70 +1,73 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://drhojbykt66ha"]
 
-[ext_resource path="res://scripts/crust.gd" type="Script" id=1]
-[ext_resource path="res://assets/starfield.png" type="Texture" id=2]
-[ext_resource path="res://scripts/Starfield.gd" type="Script" id=3]
-[ext_resource path="res://assets/ringspace_shelldown_game_music.wav" type="AudioStream" id=4]
-[ext_resource path="res://scripts/Score.gd" type="Script" id=5]
-[ext_resource path="res://scripts/OutOfBounds.gd" type="Script" id=6]
+[ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b1pi05tyv3krf" path="res://assets/starfield.png" id="2"]
+[ext_resource type="Script" path="res://scripts/Starfield.gd" id="3"]
+[ext_resource type="AudioStream" uid="uid://dfbmiy2yoydhd" path="res://assets/ringspace_shelldown_game_music.wav" id="4"]
+[ext_resource type="Script" path="res://scripts/Score.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/OutOfBounds.gd" id="6"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 540, 200 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(1080, 400)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 200, 540 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(400, 1080)
 
 [node name="Main" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1080.0
-margin_bottom = 1080.0
-color = Color( 0, 0, 0, 1 )
+offset_right = 1080.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
 
-[node name="Starfield" type="Sprite" parent="."]
-scale = Vector2( 0.707, 0.707 )
-texture = ExtResource( 2 )
-script = ExtResource( 3 )
+[node name="Starfield" type="Sprite2D" parent="."]
+position = Vector2(540, 540)
+scale = Vector2(0.707, 0.707)
+texture = ExtResource("2")
+script = ExtResource("3")
 
 [node name="Crust" type="StaticBody2D" parent="."]
 z_index = 1
+position = Vector2(540, 540)
 collision_mask = 2
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Score" type="Node2D" parent="."]
 z_index = 3
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="CrustDecay" type="Timer" parent="."]
 wait_time = 51.285
 one_shot = true
 
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource("4")
 volume_db = -12.0
 autoplay = true
 
 [node name="OutOfBounds" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds"]
-position = Vector2( 540, -200 )
-shape = SubResource( 1 )
+position = Vector2(540, -200)
+shape = SubResource("1")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="OutOfBounds"]
-position = Vector2( 540, 1280 )
-shape = SubResource( 1 )
+position = Vector2(540, 1280)
+shape = SubResource("1")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="OutOfBounds"]
-position = Vector2( -200, 540 )
-shape = SubResource( 2 )
+position = Vector2(-200, 540)
+shape = SubResource("2")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="OutOfBounds"]
-position = Vector2( 1280, 540 )
-shape = SubResource( 2 )
+position = Vector2(1280, 540)
+shape = SubResource("2")
 
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
 [connection signal="body_shape_entered" from="OutOfBounds" to="OutOfBounds" method="_on_OutOfBounds_body_shape_entered"]

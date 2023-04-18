@@ -1,6 +1,6 @@
 extends Node2D
 
-export(int) var num_stars = 1000
+@export var num_stars: int = 1000
 
 var screen_size
 var centroid

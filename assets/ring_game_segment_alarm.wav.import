@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ring_game_segment_alarm.wav-ee133ae9f1d747b1f755926fcb68d197.sample"
+type="AudioStreamWAV"
+uid="uid://fam7b4tmvgkb"
+path="res://.godot/imported/ring_game_segment_alarm.wav-ee133ae9f1d747b1f755926fcb68d197.sample"
 
 [deps]
 
 source_file="res://assets/ring_game_segment_alarm.wav"
-dest_files=[ "res://.import/ring_game_segment_alarm.wav-ee133ae9f1d747b1f755926fcb68d197.sample" ]
+dest_files=["res://.godot/imported/ring_game_segment_alarm.wav-ee133ae9f1d747b1f755926fcb68d197.sample"]
 
 [params]
 

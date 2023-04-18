@@ -6,7 +6,9 @@ var epsilon = 0.1
 var score_locations = {}
 
 func _ready():
-	var screen_size = get_viewport().size
+	var screen_width = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var screen_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+	var screen_size = Vector2(screen_width, screen_height)
 	var min_screen_dimension = min(screen_size.x, screen_size.y)
 	score_radius = min_screen_dimension / (6 + 4 * sqrt(2))
 	
