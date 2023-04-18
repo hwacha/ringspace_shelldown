@@ -61,14 +61,15 @@ func get_input(diff):
 	var jump_animation_ongoing = anim.animation == "jumping" and anim.get_frame() < 2
 
 	if cw_xor_ccw:
-		if move_clockwise:
+		if move_clockwise and not Players.lock_action:
 			perp_velocity += diff.rotated(PI / 2).normalized() * ps
 			anim.flip_h = true
-		if move_counterclockwise:
+		if move_counterclockwise and not Players.lock_action:
 			perp_velocity += diff.rotated(-PI / 2).normalized() * ps
 			anim.flip_h = false
 		if grounded:
-			anim.set_animation("running")
+			if not Players.lock_action:
+				anim.set_animation("running")
 		elif not jump_animation_ongoing:
 				anim.set_animation("falling")
 	else:
@@ -77,12 +78,12 @@ func get_input(diff):
 		elif not jump_animation_ongoing:
 				anim.set_animation("falling")
 		
-	if jump and grounded:
+	if jump and grounded and not Players.lock_action:
 		norm_velocity += -diff * jump_impulse
 		anim.set_animation("jumping")
 		$Jump.play()
 	
-	if not grounded and fast_fall:
+	if not grounded and fast_fall and not Players.lock_action:
 		set_fast_falling(true)
 
 func _physics_process(delta):
@@ -97,15 +98,13 @@ func _physics_process(delta):
 	
 	if fast_falling and Players.settings.fast_fall_enabled:
 		fast_fall_mult = 10
-	
-
 
 	var old_norm_velocity = norm_velocity
 	norm_velocity += diff * cf * fast_fall_mult
 	
 	if not self.is_on_floor() and id == 1:
 		print(norm_velocity.length() - old_norm_velocity.length())
-	
+		
 	get_input(diff)
 	
 	set_velocity(norm_velocity + perp_velocity)

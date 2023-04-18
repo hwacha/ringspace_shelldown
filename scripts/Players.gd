@@ -8,6 +8,7 @@ var winner_id = -1
 
 var should_check_round_end = false
 var is_round_ongoing = false
+var lock_action = false
 
 const play_to = 3
 var score = {}

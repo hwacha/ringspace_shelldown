@@ -19,6 +19,7 @@ var rng
 var decay_constant
 
 func _ready():
+	Players.lock_action = true
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/num_segments)
 
 	var screen_width = ProjectSettings.get_setting("display/window/size/viewport_width")
@@ -36,6 +37,9 @@ func _ready():
 	var collider_d_theta = segment_d_theta / colliders_per_segment
 	
 	var crust_segment_scene = load("res://scenes/CrustSegment.tscn")
+	
+	var anim = get_node("../Camera2D/AnimationPlayer")
+	anim.play("zoom_out")
 	
 	for i in range(num_segments):
 		var crust_segment = crust_segment_scene.instantiate()
@@ -82,3 +86,12 @@ func _on_CrustDecay_timeout():
 			segment.destroy()
 			crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
 			crust_decay.start()
+
+
+func _on_animation_player_animation_finished(anim_name):
+	Players.lock_action = false
+	get_node("../RichTextLabel").text = "[center]GO[/center]"
+	get_node("../RichTextLabel/Go").start()
+
+func _on_go_timeout():
+	get_node("../RichTextLabel").set_visible(false)

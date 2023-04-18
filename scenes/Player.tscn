@@ -1,11 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://b43fpm1uymldf"]
+[gd_scene load_steps=23 format=3 uid="uid://b43fpm1uymldf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bpf25rlsyouxh" path="res://assets/daxbotsheet.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://b2xnsmtpoeasa" path="res://assets/hero-2-circle.png" id="3"]
-[ext_resource type="AudioStream" uid="uid://c1x1y5wi84yf" path="res://assets/121645028-video-game-jump-sound-effect-1.wav" id="4"]
-[ext_resource type="AudioStream" uid="uid://bhgbt5xrn707q" path="res://assets/ring_game_death_sound.wav" id="5"]
-[ext_resource type="AudioStream" uid="uid://crcbtp8rmyd23" path="res://assets/ring_game_fast_fall.wav" id="6"]
+[ext_resource type="Texture2D" uid="uid://cg46x5udpdu3b" path="res://assets/daxbotsheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="3_yudyd"]
+[ext_resource type="AudioStream" uid="uid://dm4vxiqb7oit5" path="res://assets/121645028-video-game-jump-sound-effect-1.wav" id="4"]
+[ext_resource type="AudioStream" uid="uid://grfls847bx6u" path="res://assets/ring_game_death_sound.wav" id="5"]
+[ext_resource type="AudioStream" uid="uid://bgkhlkm6fuxo4" path="res://assets/ring_game_fast_fall.wav" id="6"]
 
 [sub_resource type="AtlasTexture" id="3"]
 atlas = ExtResource("2")
@@ -98,9 +98,20 @@ size = Vector2(19.7487, 10.5)
 [sub_resource type="CircleShape2D" id="13"]
 radius = 13.7642
 
-[sub_resource type="Curve" id="17"]
-_data = [Vector2(0, 0.212821), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_nrnvk"]
+_data = [Vector2(0, 0.0282052), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b8w18"]
+curve = SubResource("Curve_nrnvk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xcvbt"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_curve = SubResource("CurveTexture_b8w18")
 
 [sub_resource type="CapsuleShape2D" id="19"]
 radius = 11.9689
@@ -138,26 +149,15 @@ collision_mask = 8
 position = Vector2(0, 0.603516)
 shape = SubResource("13")
 
-[node name="DeathParticles" type="CPUParticles2D" parent="."]
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0.59845, -18.319)
 scale = Vector2(0.598, 1.078)
 emitting = false
 amount = 100
+process_material = SubResource("ParticleProcessMaterial_xcvbt")
+texture = ExtResource("3_yudyd")
 one_shot = true
 explosiveness = 1.0
-fixed_fps = 30
-draw_order = 1
-texture = ExtResource("3")
-emission_shape = 5
-emission_points = PackedVector2Array()
-emission_normals = PackedVector2Array()
-emission_colors = PackedColorArray()
-direction = Vector2(0, -1)
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_max = 186.67
-scale_amount_min = 0.1
-scale_amount_max = 0.1
-scale_amount_curve = SubResource("17")
 
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true

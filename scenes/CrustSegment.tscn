@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyffdrfd3y8kk"]
 
 [ext_resource type="Script" path="res://scripts/CrustSegment.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://b3c8tuh61j0xx" path="res://assets/warning-28-xxl.png" id="2"]
-[ext_resource type="AudioStream" uid="uid://fam7b4tmvgkb" path="res://assets/ring_game_segment_alarm.wav" id="3"]
+[ext_resource type="Texture2D" uid="uid://be7f25jo1583g" path="res://assets/warning-28-xxl.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://jm5c8xsyqmwq" path="res://assets/ring_game_segment_alarm.wav" id="3"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "segment_destroy"

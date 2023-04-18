@@ -1,11 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://drhojbykt66ha"]
+[gd_scene load_steps=12 format=3 uid="uid://drhojbykt66ha"]
 
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://b1pi05tyv3krf" path="res://assets/starfield.png" id="2"]
+[ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1_i7osw"]
+[ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="2"]
 [ext_resource type="Script" path="res://scripts/Starfield.gd" id="3"]
-[ext_resource type="AudioStream" uid="uid://dfbmiy2yoydhd" path="res://assets/ringspace_shelldown_game_music.wav" id="4"]
+[ext_resource type="AudioStream" uid="uid://betn3px4wblfd" path="res://assets/ringspace_shelldown_game_music.wav" id="4"]
 [ext_resource type="Script" path="res://scripts/Score.gd" id="5"]
 [ext_resource type="Script" path="res://scripts/OutOfBounds.gd" id="6"]
+
+[sub_resource type="Animation" id="Animation_dw41s"]
+resource_name = "zoom_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kyhoo"]
+_data = {
+"zoom_out": SubResource("Animation_dw41s")
+}
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(1080, 400)
@@ -14,6 +35,17 @@ size = Vector2(1080, 400)
 size = Vector2(400, 1080)
 
 [node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 540)
+rotation = 6.28319
+ignore_rotation = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_kyhoo")
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -69,5 +101,26 @@ shape = SubResource("2")
 position = Vector2(1280, 540)
 shape = SubResource("2")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 476.0
+offset_right = 1080.0
+offset_bottom = 1016.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_i7osw")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]READY[/center]"
+scroll_active = false
+
+[node name="Go" type="Timer" parent="RichTextLabel"]
+wait_time = 0.4
+
+[connection signal="animation_finished" from="Camera2D/AnimationPlayer" to="Crust" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
 [connection signal="body_shape_entered" from="OutOfBounds" to="OutOfBounds" method="_on_OutOfBounds_body_shape_entered"]
+[connection signal="timeout" from="RichTextLabel/Go" to="Crust" method="_on_go_timeout"]
