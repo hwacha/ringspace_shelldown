@@ -13,6 +13,7 @@ var crust_size
 
 var rng
 @onready var crust_decay = get_node("../CrustDecay")
+@onready var round_text = get_node("../RoundText")
 
 # decay time
 @export var minimum_decay_period: float = 3.0  # seconds
@@ -90,8 +91,9 @@ func _on_CrustDecay_timeout():
 
 func _on_animation_player_animation_finished(anim_name):
 	Players.lock_action = false
-	get_node("../RichTextLabel").text = "[center]GO[/center]"
-	get_node("../RichTextLabel/Go").start()
+	round_text.text = "[center]GO[/center]"
+	round_text.modulate.a = 255
+	round_text.get_node("Go").start()
 
 func _on_go_timeout():
-	get_node("../RichTextLabel").set_visible(false)
+	round_text.set_visible(false)
