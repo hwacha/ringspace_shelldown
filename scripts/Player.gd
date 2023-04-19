@@ -124,7 +124,6 @@ func set_fast_falling(new_fast_falling):
 	fast_falling = new_fast_falling
 		
 func _on_HurtBox_area_entered(hitbox):
-	print("hit!")
 	var hitter = hitbox.get_parent()
 	if self.dead or hitter.dead:
 		return
