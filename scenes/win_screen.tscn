@@ -1,22 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://s8etm5nag28a"]
 
-[ext_resource path="res://assets/Silver Forte.ttf" type="FontFile" id=1]
-[ext_resource path="res://scripts/win_screen.gd" type="Script" id=2]
+[ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1"]
+[ext_resource type="Script" path="res://scripts/win_screen.gd" id="2"]
 
-[sub_resource type="FontFile" id=1]
-size = 64
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("1")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/64/0 = Vector2(0, 0)
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/64/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/64/0/kerning_overrides/64/0 = Vector2(0, 0)
 
 [node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="WinText" type="RichTextLabel" parent="."]
-anchor_top = 0.333
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.667
-theme_override_fonts/normal_font = SubResource( 1 )
+theme_override_fonts/normal_font = SubResource("1")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
 scroll_active = false
 
 [node name="Timer" type="Timer" parent="."]

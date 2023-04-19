@@ -4,7 +4,7 @@ extends Control
 
 func _ready():
 	self.modulate = Players.player_colors[Players.winner_id - 1]
-	$WinText.text = Players.player_names[Players.winner_id - 1] + " wins!"
+	$WinText.text = "[center]" + Players.player_names[Players.winner_id - 1] + " wins![/center]"
 	$Timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
