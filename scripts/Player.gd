@@ -30,8 +30,8 @@ func _ready():
 	surface_to_centroid_squared = surface_to_centroid * surface_to_centroid
 	
 	transform.origin = centroid + \
-	(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
-		sin(starting_theta) * crust.screen_size.y / 10))
+	(Vector2(cos(starting_theta) * crust.screen_size.x / 20, \
+		sin(starting_theta) * crust.screen_size.y / 20))
 	
 	anim.play()
 	
@@ -124,6 +124,7 @@ func set_fast_falling(new_fast_falling):
 	fast_falling = new_fast_falling
 		
 func _on_HurtBox_area_entered(hitbox):
+	print("hit!")
 	var hitter = hitbox.get_parent()
 	if self.dead or hitter.dead:
 		return

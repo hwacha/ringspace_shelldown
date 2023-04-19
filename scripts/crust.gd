@@ -71,9 +71,6 @@ func _ready():
 	rng.randomize()
 	
 	get_node("/root/Players").spawn_players()
-	
-	if Players.settings["segment_decay_enabled"]:
-		crust_decay.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -89,11 +86,7 @@ func _on_CrustDecay_timeout():
 			crust_decay.start()
 
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_round_begin():
 	Players.lock_action = false
-	round_text.text = "[center]GO[/center]"
-	round_text.modulate.a = 255
-	round_text.get_node("Go").start()
-
-func _on_go_timeout():
-	round_text.set_visible(false)
+	if Players.settings["segment_decay_enabled"]:
+		crust_decay.start()

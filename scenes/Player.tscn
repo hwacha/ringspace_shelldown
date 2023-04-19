@@ -109,8 +109,8 @@ curve = SubResource("Curve_nrnvk")
 direction = Vector3(0, 0, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
 scale_curve = SubResource("CurveTexture_b8w18")
 
 [sub_resource type="CapsuleShape2D" id="19"]
@@ -179,7 +179,7 @@ stream = ExtResource("5")
 
 [node name="FastFall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6")
-volume_db = -24.0
+volume_db = -18.0
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
