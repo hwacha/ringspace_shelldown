@@ -58,7 +58,7 @@ func _ready():
 			var collider = CollisionShape2D.new()
 			collider.shape = cord
 			
-			var collider_theta = (i * colliders_per_segment + j) * collider_d_theta
+			var collider_theta = PI/16 + PI/80 + (i * colliders_per_segment + j) * collider_d_theta
 			
 			collider.rotation = collider_theta + (PI / 2)
 			collider.transform.origin = midpoint_radius * Vector2(cos(collider_theta), sin(collider_theta))

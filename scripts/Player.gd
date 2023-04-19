@@ -99,11 +99,10 @@ func _physics_process(delta):
 	if fast_falling and Players.settings.fast_fall_enabled:
 		fast_fall_mult = 10
 
-	var old_norm_velocity = norm_velocity
+#	var old_norm_velocity = norm_velocity
 	norm_velocity += diff * cf * fast_fall_mult
-	
-	if not self.is_on_floor() and id == 1:
-		print(norm_velocity.length() - old_norm_velocity.length())
+#	if not self.is_on_floor() and id == 1:
+#		print(norm_velocity.length() - old_norm_velocity.length())
 		
 	get_input(diff)
 	
