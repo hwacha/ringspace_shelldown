@@ -1,8 +1,7 @@
 extends Node2D
 
 @export var num_segments: int = 16
-@export var colliders_per_segment: int = 5
-@export var crust_ratio: float = 1.0 / 15 # 1 is the length of the screen
+var crust_ratio: float = 1.0 / 10 # 1 is the length of the screen
 
 var screen_size
 
@@ -34,9 +33,6 @@ func _ready():
 	
 	var segment_d_theta = 2 * PI / num_segments
 	
-	var num_colliders = num_segments * colliders_per_segment
-	var collider_d_theta = segment_d_theta / colliders_per_segment
-	
 	var crust_segment_scene = load("res://scenes/CrustSegment.tscn")
 	
 	var anim = get_node("../Camera2D/AnimationPlayer")
@@ -44,27 +40,13 @@ func _ready():
 	
 	for i in range(num_segments):
 		var crust_segment = crust_segment_scene.instantiate()
-		crust_segment.set_name("segment_" + str(i))
-		crust_segment.midpoint_radius = midpoint_radius
-		crust_segment.crust_size = crust_size
-		crust_segment.num_segments = num_segments
-		crust_segment.colliders_per_segment = colliders_per_segment
 		crust_segment.arc_index = i
+		crust_segment.set_name("segment_" + str(i))
+		
 		var crust_segment_theta = i * segment_d_theta
 		
-		for j in range(colliders_per_segment):
-			var cord = RectangleShape2D.new()
-			cord.size = Vector2(PI * 2 * midpoint_radius / num_colliders, crust_size)
-			var collider = CollisionShape2D.new()
-			collider.shape = cord
-			
-			var collider_theta = PI/16 + PI/80 + (i * colliders_per_segment + j) * collider_d_theta
-			
-			collider.rotation = collider_theta + (PI / 2)
-			collider.transform.origin = midpoint_radius * Vector2(cos(collider_theta), sin(collider_theta))
-			
-			crust_segment.add_child(collider)
-		
+		crust_segment.transform.origin = midpoint_radius * Vector2(cos(crust_segment_theta), sin(crust_segment_theta))
+		crust_segment.rotation += crust_segment_theta
 		self.add_child(crust_segment)
 	
 	rng = RandomNumberGenerator.new()

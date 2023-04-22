@@ -150,7 +150,7 @@ z_index = 3
 script = ExtResource("5")
 
 [node name="CrustDecay" type="Timer" parent="."]
-wait_time = 51.285
+wait_time = 41.171
 one_shot = true
 
 [node name="Round Beep" type="AudioStreamPlayer" parent="."]

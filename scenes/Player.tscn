@@ -1,49 +1,20 @@
-[gd_scene load_steps=23 format=3 uid="uid://b43fpm1uymldf"]
+[gd_scene load_steps=18 format=3 uid="uid://b43fpm1uymldf"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://cg46x5udpdu3b" path="res://assets/daxbotsheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://kc104urk51tg" path="res://assets/Idle.PNG" id="2_t2xe0"]
+[ext_resource type="Texture2D" uid="uid://dqa4so3434a6d" path="res://assets/Fall.PNG" id="3_q0uvc"]
 [ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="3_yudyd"]
 [ext_resource type="AudioStream" uid="uid://dm4vxiqb7oit5" path="res://assets/121645028-video-game-jump-sound-effect-1.wav" id="4"]
+[ext_resource type="Texture2D" uid="uid://du423aadqqah3" path="res://assets/Crouch before jump.PNG" id="4_ud4lb"]
 [ext_resource type="AudioStream" uid="uid://grfls847bx6u" path="res://assets/ring_game_death_sound.wav" id="5"]
+[ext_resource type="Texture2D" uid="uid://bmphhqucs0kfu" path="res://assets/Run.PNG" id="5_thlnb"]
 [ext_resource type="AudioStream" uid="uid://bgkhlkm6fuxo4" path="res://assets/ring_game_fast_fall.wav" id="6"]
-
-[sub_resource type="AtlasTexture" id="3"]
-atlas = ExtResource("2")
-region = Rect2(0, 4, 64, 67)
-
-[sub_resource type="AtlasTexture" id="4"]
-atlas = ExtResource("2")
-region = Rect2(192, 138, 64, 67)
-
-[sub_resource type="AtlasTexture" id="5"]
-atlas = ExtResource("2")
-region = Rect2(0, 4, 64, 67)
-
-[sub_resource type="AtlasTexture" id="6"]
-atlas = ExtResource("2")
-region = Rect2(64, 138, 64, 67)
-
-[sub_resource type="AtlasTexture" id="7"]
-atlas = ExtResource("2")
-region = Rect2(128, 138, 64, 67)
-
-[sub_resource type="AtlasTexture" id="9"]
-atlas = ExtResource("2")
-region = Rect2(64, 71, 64, 67)
-
-[sub_resource type="AtlasTexture" id="10"]
-atlas = ExtResource("2")
-region = Rect2(128, 71, 64, 67)
-
-[sub_resource type="AtlasTexture" id="11"]
-atlas = ExtResource("2")
-region = Rect2(192, 71, 64, 67)
 
 [sub_resource type="SpriteFrames" id="12"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("3")
+"texture": ExtResource("2_t2xe0")
 }],
 "loop": true,
 "name": &"default",
@@ -51,7 +22,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("4")
+"texture": ExtResource("3_q0uvc")
 }],
 "loop": true,
 "name": &"falling",
@@ -59,30 +30,15 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("5")
-}, {
-"duration": 1.0,
-"texture": SubResource("6")
-}, {
-"duration": 1.0,
-"texture": SubResource("7")
+"texture": ExtResource("4_ud4lb")
 }],
-"loop": true,
+"loop": false,
 "name": &"jumping",
-"speed": 20.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("9")
-}, {
-"duration": 1.0,
-"texture": SubResource("10")
-}, {
-"duration": 1.0,
-"texture": SubResource("11")
-}, {
-"duration": 1.0,
-"texture": SubResource("10")
+"texture": ExtResource("5_thlnb")
 }],
 "loop": true,
 "name": &"running",
@@ -90,13 +46,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="18"]
-size = Vector2(17.9533, 56.0345)
+size = Vector2(30.754, 71.639)
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(19.7487, 10.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7vnx"]
+size = Vector2(42.659, 15.377)
 
 [sub_resource type="CircleShape2D" id="13"]
-radius = 13.7642
+radius = 19.0
 
 [sub_resource type="Curve" id="Curve_nrnvk"]
 _data = [Vector2(0, 0.0282052), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -114,21 +70,22 @@ initial_velocity_max = 300.0
 scale_curve = SubResource("CurveTexture_b8w18")
 
 [sub_resource type="CapsuleShape2D" id="19"]
-radius = 11.9689
-height = 56.0345
+radius = 20.0
+height = 72.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
-position = Vector2(500, 597)
-scale = Vector2(1.671, 0.928)
+position = Vector2(540, 540)
 collision_layer = 2
 script = ExtResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.056, 0.056)
 sprite_frames = SubResource("12")
+animation = &"jumping"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.59845, -4.31036)
+[node name="CollisionShapeForGround" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0.180481)
 shape = SubResource("18")
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -137,8 +94,8 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(1.49612, 5.38794)
-shape = SubResource("2")
+position = Vector2(-1, 6.4483)
+shape = SubResource("RectangleShape2D_p7vnx")
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -20)
@@ -146,12 +103,11 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 0.603516)
+position = Vector2(-2, 2)
 shape = SubResource("13")
 
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0.59845, -18.319)
-scale = Vector2(0.598, 1.078)
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_xcvbt")
@@ -167,7 +123,7 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Overlap"]
-position = Vector2(-1.19687, -4.31036)
+position = Vector2(-1.99997, 1)
 shape = SubResource("19")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
@@ -181,6 +137,7 @@ stream = ExtResource("5")
 stream = ExtResource("6")
 volume_db = -18.0
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="area_entered" from="Overlap" to="." method="_on_Overlap_area_entered"]

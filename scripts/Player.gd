@@ -17,6 +17,7 @@ var surface_to_centroid
 var surface_to_centroid_squared
 
 @onready var anim = $AnimatedSprite2D
+var jump_animation_ongoing = false
 
 var fast_falling = false: set = set_fast_falling
 var dead = false
@@ -30,8 +31,8 @@ func _ready():
 	surface_to_centroid_squared = surface_to_centroid * surface_to_centroid
 	
 	transform.origin = centroid + \
-	(Vector2(cos(starting_theta) * crust.screen_size.x / 20, \
-		sin(starting_theta) * crust.screen_size.y / 20))
+	(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
+		sin(starting_theta) * crust.screen_size.y / 10))
 	
 	anim.play()
 	
@@ -39,6 +40,7 @@ func get_input(diff):
 	perp_velocity = Vector2(0, 0)
 	var ps = perp_speed
 	var grounded = self.is_on_floor()
+
 	if grounded:
 		ps *= 15
 		set_fast_falling(false)
@@ -57,8 +59,6 @@ func get_input(diff):
 	
 	var cw_xor_ccw = move_clockwise or move_counterclockwise
 	cw_xor_ccw = cw_xor_ccw and not (move_clockwise and move_counterclockwise)
-	
-	var jump_animation_ongoing = anim.animation == "jumping" and anim.get_frame() < 2
 
 	if cw_xor_ccw:
 		if move_clockwise and not Players.lock_action:
@@ -76,11 +76,12 @@ func get_input(diff):
 		if grounded:
 			anim.set_animation("default")
 		elif not jump_animation_ongoing:
-				anim.set_animation("falling")
+			anim.set_animation("falling")
 		
 	if jump and grounded and not Players.lock_action:
 		norm_velocity += -diff * jump_impulse
 		anim.set_animation("jumping")
+		jump_animation_ongoing = false
 		$Jump.play()
 	
 	if not grounded and fast_fall and not Players.lock_action:
@@ -145,7 +146,7 @@ func die():
 	Players.player_killed(self.id)
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.hide()
-	$CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShapeForGround.set_deferred("disabled", true)
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)
 	# death animation
@@ -169,4 +170,7 @@ func _on_Overlap_area_exited(area):
 	ontop_of.erase(other)
 	if ontop_of == []:
 		self.modulate.a = 1
-		
+
+func _on_animated_sprite_2d_animation_finished():
+	if anim.animation == "jump":
+		jump_animation_ongoing = false

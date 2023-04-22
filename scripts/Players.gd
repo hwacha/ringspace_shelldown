@@ -72,7 +72,7 @@ func spawn_players():
 		var player_scene = load("res://scenes/Player.tscn")
 		var player_instance = player_scene.instantiate()
 		player_instance.id = int(x)
-		player_instance.modulate = player_colors[x - 1]
+		player_instance.get_node("DeathParticles").modulate = player_colors[x - 1]
 		player_instance.starting_theta = ((2 * PI * i / starting_ids.size()) + PI)
 		i += 1
 		
