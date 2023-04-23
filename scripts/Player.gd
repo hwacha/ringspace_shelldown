@@ -21,6 +21,7 @@ var jump_animation_ongoing = false
 
 var fast_falling = false: set = set_fast_falling
 var dead = false
+var lock_physics = false
 
 var ontop_of = []
 
@@ -88,6 +89,9 @@ func get_input(diff):
 		set_fast_falling(true)
 
 func _physics_process(delta):
+	if lock_physics:
+		return
+
 	var diff = self.transform.origin - centroid
 	
 	self.rotation = self.transform.origin.angle_to_point(centroid) + (PI / 2)

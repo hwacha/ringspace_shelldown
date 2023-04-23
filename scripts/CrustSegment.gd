@@ -5,18 +5,12 @@ extends Node2D
 # received fields
 var colliders_per_segment
 var arc_index
-
-# for warning animation
-@export var is_flash_on: bool: set = set_flash
 	
 func set_arc_index(new_arc_index):
 	arc_index = new_arc_index
-	
-func set_flash(new_is_flash_on):
-	is_flash_on = new_is_flash_on
 
 func _ready():
-	is_flash_on = false
+	modulate = Color(1, 1, 1, 1)
 	$Visuals/Warning.visible = false
 		
 func destroy():

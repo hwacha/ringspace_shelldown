@@ -20,7 +20,7 @@ tracks/0/path = NodePath("Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(2, 2), Vector2(1, 1)]
@@ -150,7 +150,7 @@ z_index = 3
 script = ExtResource("5")
 
 [node name="CrustDecay" type="Timer" parent="."]
-wait_time = 41.171
+wait_time = 5.0
 one_shot = true
 
 [node name="Round Beep" type="AudioStreamPlayer" parent="."]
