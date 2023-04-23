@@ -88,9 +88,6 @@ func get_input(diff):
 		set_fast_falling(true)
 
 func _physics_process(delta):
-	if dead:
-		return
-
 	var diff = self.transform.origin - centroid
 	
 	self.rotation = self.transform.origin.angle_to_point(centroid) + (PI / 2)
@@ -104,8 +101,9 @@ func _physics_process(delta):
 	norm_velocity += diff * cf * fast_fall_mult
 #	if not self.is_on_floor() and id == 1:
 #		print(norm_velocity.length() - old_norm_velocity.length())
-		
-	get_input(diff)
+	
+	if not dead:
+		get_input(diff)
 	
 	set_velocity(norm_velocity + perp_velocity)
 	set_up_direction(-diff)
@@ -145,8 +143,8 @@ func die():
 	dead = true
 	Players.player_killed(self.id)
 	norm_velocity = Vector2(0, 0)
-	$AnimatedSprite2D.hide()
-	$CollisionShapeForGround.set_deferred("disabled", true)
+	$AnimatedSprite2D.set_animation("dead")
+#	$CollisionShapeForGround.set_deferred("disabled", true)
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)
 	# death animation
