@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var num_segments: int = 16
-var crust_ratio: float = 1.0 / 10 # 1 is the length of the screen
+var crust_ratio: float = 1.0 / 13.5 # 1 is the length of the screen
 
 var screen_size
 
@@ -45,8 +45,27 @@ func _ready():
 		
 		var crust_segment_theta = i * segment_d_theta
 		
-		crust_segment.transform.origin = midpoint_radius * Vector2(cos(crust_segment_theta), sin(crust_segment_theta))
-		crust_segment.rotation += crust_segment_theta
+		crust_segment.get_node("Visuals").transform.origin = midpoint_radius * Vector2(cos(crust_segment_theta), sin(crust_segment_theta))
+		crust_segment.get_node("Visuals").rotation += crust_segment_theta
+		
+		var colliders_per_segment = 5
+		var num_colliders = colliders_per_segment * num_segments
+		var collider_d_theta = segment_d_theta / colliders_per_segment
+		
+		
+		for j in range(-2, 3):
+			var cord = RectangleShape2D.new()
+			cord.size = Vector2(PI * 2 * midpoint_radius / num_colliders, crust_size)
+			var collider = CollisionShape2D.new()
+			collider.shape = cord
+			
+			var collider_theta = (i * colliders_per_segment + j) * collider_d_theta
+			
+			collider.rotation = crust_segment.rotation + collider_theta + PI/2
+			collider.transform.origin = crust_segment.transform.origin + midpoint_radius * Vector2(cos(collider_theta), sin(collider_theta))
+			
+			crust_segment.add_child(collider)
+
 		self.add_child(crust_segment)
 	
 	rng = RandomNumberGenerator.new()

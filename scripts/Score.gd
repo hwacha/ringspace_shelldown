@@ -24,7 +24,7 @@ func _draw():
 	for pn in Players.score:
 		var theta_offset = 7 * PI / 4 + theta - (PI / 2 * int(pn))
 		for i in range(0, Players.play_to):
-			var color = Color(0.25, 0.25, 0.25, 0.5)
+			var color = Color(0.25, 0.3, 0.3, 0.5)
 			if i + 1 <= Players.score[pn]:
 				color = get_node("/root/Players").player_colors[int(pn) - 1]
 			draw_arc(score_locations[pn], score_radius * 11 / 16, \

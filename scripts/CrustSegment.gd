@@ -17,7 +17,7 @@ func set_flash(new_is_flash_on):
 
 func _ready():
 	is_flash_on = false
-	$Warning.visible = false
+	$Visuals/Warning.visible = false
 		
 func destroy():
 	$AnimationPlayer.play("segment_destroy")
