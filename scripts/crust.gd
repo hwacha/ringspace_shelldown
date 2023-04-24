@@ -40,7 +40,6 @@ func _ready():
 	
 	for i in range(num_segments):
 		var crust_segment = crust_segment_scene.instantiate()
-		crust_segment.arc_index = i
 		crust_segment.set_name("segment_" + str(i))
 		
 		var crust_segment_theta = i * segment_d_theta
@@ -80,7 +79,7 @@ func _ready():
 func _on_CrustDecay_timeout():
 	if Players.settings["segment_decay_enabled"]:
 		var rand = rng.randi_range(0, get_child_count() - 1)
-		var segment = get_child(rand)
+		var segment : CrustSegment = get_child(rand)
 		if segment != null:
 			segment.destroy()
 			crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
