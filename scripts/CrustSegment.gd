@@ -10,7 +10,6 @@ func set_arc_index(new_arc_index):
 	arc_index = new_arc_index
 
 func _ready():
-	modulate = Color(1, 1, 1, 1)
 	$Visuals/Warning.visible = false
 		
 func destroy():
