@@ -12,11 +12,12 @@ var perp_speed = 40 * 0.75
 var jump_impulse = 2.6
 
 var starting_theta
-var centroid
+var centroid : Vector2
 var surface_to_centroid
 var surface_to_centroid_squared
 
 @onready var anim = $AnimatedSprite2D
+var rand = RandomNumberGenerator.new()
 
 var fast_falling = false: set = set_fast_falling
 var dead = false
@@ -35,8 +36,10 @@ func _ready():
 	(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
 		sin(starting_theta) * crust.screen_size.y / 10))
 	
+	rand.randomize()
+	
 	anim.set_animation("default")
-	anim.play()	
+	anim.play()
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
@@ -52,6 +55,7 @@ func get_input(diff):
 	
 	var jump_input = Input.is_action_just_pressed("jump_p" + str(id))
 	var fast_fall = Input.is_action_just_pressed("fast_fall_p" + str(id))
+	var teleport = Input.is_action_just_pressed("teleport_p" + str(id))
 	
 	var cw_xor_ccw = move_clockwise or move_counterclockwise
 	cw_xor_ccw = cw_xor_ccw and not (move_clockwise and move_counterclockwise)
@@ -96,8 +100,33 @@ func get_input(diff):
 	
 	if not grounded and fast_fall:
 		set_fast_falling(true)
+	
+	if teleport and $Orbs.get_child_count() > 0:
+		# randomly select a safe crust segment
+		var crust_segments = get_parent().get_node("Crust").get_children()
+		var crust_index = rand.randi_range(0, crust_segments.size() - 1)
+		var destination_segment = crust_segments[crust_index]
+		if destination_segment.get_node("AnimationPlayer").current_animation == "segment_destroy":
+			var second_crust_index = rand.randi_range(0, crust_segments.size() - 2)
+			if second_crust_index >= crust_index:
+				second_crust_index += 1
+			destination_segment = crust_segments[second_crust_index]
+		
+		# expend orb
+		$Orbs.remove_child($Orbs.get_child(0))
+		
+		# invulnerable
+		$HitBox.monitoring = false
+		$HurtBox.monitorable = false
+		$TeleportInvulnerability.start()
+		
+		# teleport
+		norm_velocity = Vector2(0, 0)
+		perp_velocity = Vector2(0, 0)
+		transform.origin = (get_parent().get_node("Crust").transform.origin + 0.7 * destination_segment.get_node("Visuals").transform.origin)
+		
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if lock_physics:
 		return
 
@@ -158,7 +187,6 @@ func die():
 	Players.player_killed(self.id)
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.set_animation("dead")
-#	$CollisionShapeForGround.set_deferred("disabled", true)
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)
 	# death animation
@@ -166,6 +194,19 @@ func die():
 	$DeathParticles.emitting = true
 	$Death.play()
 	$DeathTimer.start()
+	# spawn orb
+	var orb_scene = load("res://scenes/Orb.tscn")
+	var orb_instance = orb_scene.instantiate()
+	orb_instance.id = self.id
+	orb_instance.modulate = $DeathParticles.modulate
+	
+	rand.randomize()
+	var r = 400 * sqrt(rand.randf())
+	var theta = rand.randf() * 2 * PI
+	orb_instance.transform.origin = r * Vector2(sin(theta), cos(theta)) + centroid
+	for orb in $Orbs.get_children():
+		orb.transform.origin = r * Vector2(sin(theta), cos(theta)) + centroid
+	get_parent().call_deferred("add_child", orb_instance)
 
 func _on_DeathTimer_timeout():
 	hide()
@@ -188,3 +229,8 @@ func _on_animated_sprite_2d_frame_changed():
 		jump_complete = true
 		anim.set_animation("falling")
 		anim.play()
+
+
+func _on_teleport_invulnerability_timeout():
+	$HitBox.set_deferred("monitoring", true)
+	$HurtBox.set_deferred("monitorable", true)

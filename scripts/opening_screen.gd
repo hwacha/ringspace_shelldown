@@ -19,8 +19,6 @@ func get_input():
 	for i in range(1, 5):
 		if Input.is_action_just_pressed("jump_p" + str(i)):
 			set_registered_players(i)
-			
-	var players = get_node("/root/Players")
 	
 	var master_sound = AudioServer.get_bus_index("Master")
 	var is_muted = AudioServer.is_bus_mute(master_sound)
@@ -36,5 +34,5 @@ func get_input():
 		get_tree().change_scene_to_file("scenes/main.tscn")
 	
 
-func _process(delta):
+func _process(_delta):
 	get_input()
