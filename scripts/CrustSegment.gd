@@ -14,9 +14,6 @@ var colliders_per_segment
 @onready var original_position = $Visuals/Ring.transform.origin
 
 func _ready():
-	$Visuals/Ring.modulate = Color(1, 1, 1, 1)
-	$Visuals/Warning.visible = false
-	
 	rand.randomize()
 		
 func destroy():
