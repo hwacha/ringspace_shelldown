@@ -77,16 +77,14 @@ func _ready():
 #	pass
 
 func _on_CrustDecay_timeout():
-	if Players.settings["segment_decay_enabled"]:
-		var rand = rng.randi_range(0, get_child_count() - 1)
-		var segment : CrustSegment = get_child(rand)
-		if segment != null:
-			segment.destroy()
-			crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
-			crust_decay.start()
+	var rand = rng.randi_range(0, get_child_count() - 1)
+	var segment : CrustSegment = get_child(rand)
+	if segment != null:
+		segment.destroy()
+		crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
+		crust_decay.start()
 
 
 func _on_round_begin():
 	Players.lock_action = false
-	if Players.settings["segment_decay_enabled"]:
-		crust_decay.start()
+	crust_decay.start()

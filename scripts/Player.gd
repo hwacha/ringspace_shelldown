@@ -17,11 +17,11 @@ var surface_to_centroid
 var surface_to_centroid_squared
 
 @onready var anim = $AnimatedSprite2D
-var jump_animation_ongoing = false
 
 var fast_falling = false: set = set_fast_falling
 var dead = false
 var lock_physics = false
+var jump_complete = false # true on the last frame of the jump animation
 
 var ontop_of = []
 
@@ -35,8 +35,9 @@ func _ready():
 	(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
 		sin(starting_theta) * crust.screen_size.y / 10))
 	
-	anim.play()
-	
+	anim.set_animation("default")
+	anim.play()	
+
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
 	var ps = perp_speed
@@ -49,43 +50,51 @@ func get_input(diff):
 	var move_clockwise = Input.is_action_pressed("move_clockwise_p" + str(id))
 	var move_counterclockwise = Input.is_action_pressed("move_counterclockwise_p" + str(id))
 	
-	if Players.settings.invert_controls:
-		var temp = move_clockwise
-		move_clockwise = move_counterclockwise
-		move_counterclockwise = temp
-		
-	
-	var jump = Input.is_action_just_pressed("jump_p" + str(id))
+	var jump_input = Input.is_action_just_pressed("jump_p" + str(id))
 	var fast_fall = Input.is_action_just_pressed("fast_fall_p" + str(id))
 	
 	var cw_xor_ccw = move_clockwise or move_counterclockwise
 	cw_xor_ccw = cw_xor_ccw and not (move_clockwise and move_counterclockwise)
+	
+	jump_input = jump_input and not Players.lock_action
+	fast_fall = fast_fall and not Players.lock_action
+	cw_xor_ccw = cw_xor_ccw and not Players.lock_action
+	
+	var jump_animation_ongoing = anim.animation == "jumping"
 
 	if cw_xor_ccw:
-		if move_clockwise and not Players.lock_action:
+		if move_clockwise:
 			perp_velocity += diff.rotated(PI / 2).normalized() * ps
 			anim.flip_h = true
-		if move_counterclockwise and not Players.lock_action:
+		if move_counterclockwise:
 			perp_velocity += diff.rotated(-PI / 2).normalized() * ps
 			anim.flip_h = false
-		if grounded:
-			if not Players.lock_action:
+		if not jump_animation_ongoing:
+			if grounded:
 				anim.set_animation("running")
-		elif not jump_animation_ongoing:
+			elif fast_falling:
+				anim.set_animation("fastfalling")
+			else:
 				anim.set_animation("falling")
 	else:
-		if grounded:
-			anim.set_animation("default")
-		elif not jump_animation_ongoing:
-			anim.set_animation("falling")
+		if not jump_animation_ongoing:
+			if grounded:
+				anim.set_animation("default")
+			elif fast_falling:
+				anim.set_animation("fastfalling")
+			else:
+				anim.set_animation("falling")
 		
-	if jump and grounded and not Players.lock_action:
-		norm_velocity += -diff * jump_impulse
-		anim.set_animation("jumping")
-		jump_animation_ongoing = false
-		$Jump.play()
+	if grounded and not jump_animation_ongoing:
+		if jump_input:
+			anim.set_animation("jumping")
+			$Jump.play()
 	
-	if not grounded and fast_fall and not Players.lock_action:
+	if grounded and jump_complete:
+			norm_velocity += -diff * jump_impulse
+			jump_complete = false
+	
+	if not grounded and fast_fall:
 		set_fast_falling(true)
 
 func _physics_process(delta):
@@ -98,7 +107,7 @@ func _physics_process(delta):
 
 	var fast_fall_mult = 1
 	
-	if fast_falling and Players.settings.fast_fall_enabled:
+	if fast_falling:
 		fast_fall_mult = 10
 
 #	var old_norm_velocity = norm_velocity
@@ -121,6 +130,7 @@ func _physics_process(delta):
 func set_fast_falling(new_fast_falling):
 	if not fast_falling and new_fast_falling:
 		$FastFall.play()
+		anim.set_animation("fastfalling")
 	elif fast_falling and not new_fast_falling:
 		$FastFall.stop()
 	
@@ -173,6 +183,8 @@ func _on_Overlap_area_exited(area):
 	if ontop_of == []:
 		self.modulate.a = 1
 
-func _on_animated_sprite_2d_animation_finished():
-	if anim.animation == "jump":
-		jump_animation_ongoing = false
+func _on_animated_sprite_2d_frame_changed():
+	if anim.animation == "jumping" and anim.frame == 2:
+		jump_complete = true
+		anim.set_animation("falling")
+		anim.play()

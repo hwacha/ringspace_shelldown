@@ -17,9 +17,6 @@ var star_direction
 var starfield_rotation = 0
 
 const initial_settings = {
-	"fast_fall_enabled": true,
-	"invert_controls": false,
-	"segment_decay_enabled": true,
 }
 
 var settings = initial_settings
@@ -40,9 +37,9 @@ const player_names = [
 
 var elapsed_time = 0
 
+@export var mute_sound : bool = false
+
 func _ready():
-	var master_sound = AudioServer.get_bus_index("Master")
-	AudioServer.set_bus_mute(master_sound, true)
 	killed_ids = []
 	
 func initialize_for_new_round():

@@ -22,20 +22,19 @@ func get_input():
 			
 	var players = get_node("/root/Players")
 	
-	if Input.is_action_just_pressed("settings_toggle_fast_fall"):
-		players.settings["fast_fall_enabled"] = not players.settings["fast_fall_enabled"]
-	if Input.is_action_just_pressed("settings_invert_controls"):
-		players.settings["invert_controls"] = not players.settings["invert_controls"]
-	if Input.is_action_just_pressed("settings_toggle_segment_decay"):
-		players.settings["segment_decay_enabled"] = not players.settings["segment_decay_enabled"]
+	var master_sound = AudioServer.get_bus_index("Master")
+	var is_muted = AudioServer.is_bus_mute(master_sound)
+	if Input.is_action_just_pressed("settings_toggle_mute"):
+		AudioServer.set_bus_mute(master_sound, not is_muted)
 		
-	$Settings.text = "[1] fast_fall_enabled: " + str(Players.settings["fast_fall_enabled"]) + \
-					"\n[2] invert_controls: " + str(Players.settings["invert_controls"]) + \
-					"\n[3] segment_decay_enabled: " + str(Players.settings["segment_decay_enabled"])
-	
+	$Settings.text = "[1] mute: " + str(is_muted) # + \
+#					"\n[2] invert_controls: " + str(Players.settings["invert_controls"]) + \
+#					"\n[3] segment_decay_enabled: " + str(Players.settings["segment_decay_enabled"])
+
 	if Input.is_action_just_pressed("ui_accept"):
 		Players.set_player_ids(registered_players)
 		get_tree().change_scene_to_file("scenes/main.tscn")
+	
 
 func _process(delta):
 	get_input()
