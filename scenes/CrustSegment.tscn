@@ -94,6 +94,18 @@ tracks/6/keys = {
 "method": &"disable_collision"
 }]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, -1]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3l7tr"]
 _data = {
