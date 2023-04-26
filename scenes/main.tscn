@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://ej5761kq0jd1"]
+[gd_scene load_steps=15 format=3 uid="uid://ej5761kq0jd1"]
 
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1_i7osw"]
+[ext_resource type="Shader" path="res://scripts/main.gdshader" id="1_rc03f"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="2"]
 [ext_resource type="Script" path="res://scripts/Starfield.gd" id="3"]
 [ext_resource type="AudioStream" uid="uid://betn3px4wblfd" path="res://assets/ringspace_shelldown_game_music.wav" id="4"]
@@ -105,6 +106,9 @@ _data = {
 "zoom_out": SubResource("Animation_dw41s")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5flmx"]
+shader = ExtResource("1_rc03f")
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(1080, 400)
 
@@ -112,6 +116,7 @@ size = Vector2(1080, 400)
 size = Vector2(400, 1080)
 
 [node name="Main" type="Node2D"]
+metadata/_edit_vertical_guides_ = []
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 540)
@@ -125,6 +130,8 @@ libraries = {
 }
 
 [node name="Starfield" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_5flmx")
 position = Vector2(540, 540)
 scale = Vector2(0.707, 0.707)
 texture = ExtResource("2")

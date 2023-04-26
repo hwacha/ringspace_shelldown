@@ -204,6 +204,7 @@ func die():
 	orb_instance.id = self.id
 	orb_instance.centroid = self.centroid
 	orb_instance.modulate = $DeathParticles.modulate
+	orb_instance.get_node("PointLight2D").color = orb_instance.modulate
 	orb_instance.transform.origin = self.transform.origin
 	
 	get_parent().call_deferred("add_child", orb_instance)
