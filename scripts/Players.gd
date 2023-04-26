@@ -80,6 +80,8 @@ func spawn_players():
 		priorities.erase(priority)
 		player_instance.set_process_priority(priority)
 		
+		player_instance.get_node("AnimatedSprite2D").set_sprite_frames(load("res://animations/SpriteFrames_P" + str(x) + ".tres"))
+		
 		get_node("/root/Main").call_deferred("add_child", player_instance)
 	
 	is_round_ongoing = true

@@ -183,6 +183,9 @@ func _on_HurtBox_area_entered(hitbox):
 		self.die()
 
 func die():
+	if dead:
+		return
+
 	dead = true
 	Players.player_killed(self.id)
 	norm_velocity = Vector2(0, 0)
@@ -198,15 +201,17 @@ func die():
 	var orb_scene = load("res://scenes/Orb.tscn")
 	var orb_instance = orb_scene.instantiate()
 	orb_instance.id = self.id
+	orb_instance.centroid = self.centroid
 	orb_instance.modulate = $DeathParticles.modulate
+	orb_instance.transform.origin = self.transform.origin
 	
-	rand.randomize()
-	var r = 400 * sqrt(rand.randf())
-	var theta = rand.randf() * 2 * PI
-	orb_instance.transform.origin = r * Vector2(sin(theta), cos(theta)) + centroid
-	for orb in $Orbs.get_children():
-		orb.transform.origin = r * Vector2(sin(theta), cos(theta)) + centroid
 	get_parent().call_deferred("add_child", orb_instance)
+	for orb in $Orbs.get_children():
+		orb.claimed = false
+		$Orbs.remove_child(orb)
+		orb.transform.origin = self.transform.origin
+		get_parent().call_deferred("add_child", orb)
+		
 
 func _on_DeathTimer_timeout():
 	hide()
