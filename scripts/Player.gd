@@ -23,6 +23,7 @@ var fast_falling = false: set = set_fast_falling
 var dead = false
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
+var invulnerable = false
 
 var ontop_of = []
 
@@ -63,6 +64,7 @@ func get_input(diff):
 	jump_input = jump_input and not Players.lock_action
 	fast_fall = fast_fall and not Players.lock_action
 	cw_xor_ccw = cw_xor_ccw and not Players.lock_action
+	teleport = teleport and not Players.lock_action
 	
 	var jump_animation_ongoing = anim.animation == "jumping"
 
@@ -116,8 +118,7 @@ func get_input(diff):
 		$Orbs.remove_child($Orbs.get_child(0))
 		
 		# invulnerable
-		$HitBox.monitoring = false
-		$HurtBox.monitorable = false
+		invulnerable = true
 		$TeleportInvulnerability.start()
 		
 		# teleport
@@ -167,7 +168,7 @@ func set_fast_falling(new_fast_falling):
 		
 func _on_HurtBox_area_entered(hitbox):
 	var hitter = hitbox.get_parent()
-	if self.dead or hitter.dead:
+	if self.dead or hitter.dead or self.invulnerable or hitter.invulnerable:
 		return
 	# if the hitbox is moving down or
 	# the hurtbox is moving up, DEATH
@@ -237,5 +238,4 @@ func _on_animated_sprite_2d_frame_changed():
 
 
 func _on_teleport_invulnerability_timeout():
-	$HitBox.set_deferred("monitoring", true)
-	$HurtBox.set_deferred("monitorable", true)
+	invulnerable = false
