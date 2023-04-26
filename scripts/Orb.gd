@@ -15,7 +15,7 @@ func _ready():
 	rand.randomize()
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_body_entered(body):
@@ -44,7 +44,7 @@ func _on_tree_entered():
 		set_new_destination()
 
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	traveling = false
 	$WaitingToTravel.start()
 

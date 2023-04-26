@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbkwurpiev15g"]
+[gd_scene load_steps=9 format=3 uid="uid://djy1ltinuio1p"]
 
 [ext_resource type="Script" path="res://scripts/Orb.gd" id="1_kl67p"]
 [ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="2_4hcc6"]
@@ -6,8 +6,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_e873u"]
 radius = 22.0
 
-[sub_resource type="Animation" id="Animation_84tww"]
+[sub_resource type="Animation" id="Animation_jwhln"]
+resource_name = "travel_to_destination"
 length = 2.0
+step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -21,10 +23,8 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_jwhln"]
-resource_name = "travel_to_destination"
+[sub_resource type="Animation" id="Animation_84tww"]
 length = 2.0
-step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
