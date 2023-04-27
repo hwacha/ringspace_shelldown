@@ -25,7 +25,7 @@ var killer = null
 var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
-var invulnerable = false
+var invulnerable = false : set = _set_invulnerability
 
 var ontop_of = []
 
@@ -47,6 +47,10 @@ func _ready():
 	
 	anim.set_animation("default")
 	anim.play()
+
+func _set_invulnerability(is_invulnerable: bool):
+	invulnerable = is_invulnerable
+	$AnimatedSprite2D.material.set("shader_param/is_invulnerable", is_invulnerable)
 
 func spawn():
 	# randomly select a safe crust segment

@@ -9,7 +9,7 @@ var star_direction
 var is_round_ongoing = false
 var lock_action = false
 
-const play_to = 10
+var play_to = 12
 var score = {}
 
 const spriteframe_data = [
@@ -26,10 +26,17 @@ var orb_loss_numerator = 1
 var orb_loss_denominator = 2
 
 const player_colors = [
-	Color(1, 0, 0),
+	Color(1, 0.1, 0.1),
 	Color(0, 0.5, 1),
 	Color(0, 1, 0),
 	Color(1, 1, 0),
+]
+
+var player_invulnerability_colors = [
+	Color.hex(0xa40909ff),
+	Color.hex(0x0a1ea2ff),
+	Color.hex(0x258e1dff),
+	Color.hex(0xcec645ff),
 ]
 
 const player_names = [
@@ -72,6 +79,7 @@ func player_constructor(id, priority):
 	var player_instance = player_scene.instantiate()
 	player_instance.id = id
 	player_instance.get_node("DeathParticles").modulate = player_colors[id - 1]
+	player_instance.get_node("AnimatedSprite2D").material.set("shader_param/primary_color", player_invulnerability_colors[id - 1])
 	player_instance.starting_theta = 0
 	player_instance.set_process_priority(priority)
 	player_instance.get_node("AnimatedSprite2D").set_sprite_frames(spriteframe_data[id - 1])
