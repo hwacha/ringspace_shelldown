@@ -4,10 +4,9 @@ extends Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rotate(Players.starfield_rotation)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	rotate(Players.star_direction * delta * rotation_speed)
-	pass

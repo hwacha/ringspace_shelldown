@@ -1,23 +1,17 @@
 extends Node2D
 
 var starting_ids = []
-var living_ids = []
-var killed_ids = []
 
 var winner_id = -1
+
+var star_direction
 
 var should_check_round_end = false
 var is_round_ongoing = false
 var lock_action = false
 
-const play_to = 3
+const play_to = 10
 var score = {}
-var star_direction
-
-var starfield_rotation = 0
-
-const initial_settings = {
-}
 
 var spriteframe_data = [
 	preload("res://animations/SpriteFrames_P1.tres"),
@@ -26,7 +20,9 @@ var spriteframe_data = [
 	preload("res://animations/SpriteFrames_P4.tres")
 ]
 
-var settings = initial_settings
+# settings
+var orb_loss_numerator = 1
+var orb_loss_denominator = 1
 
 const player_colors = [
 	Color(1, 0, 0),
@@ -47,13 +43,11 @@ var elapsed_time = 0
 @export var mute_sound : bool = false
 
 func _ready():
-	killed_ids = []
+	pass
 	
 func initialize_for_new_round():
 	winner_id = -1
 	should_check_round_end = false
-	living_ids = []
-	killed_ids = []
 	is_round_ongoing = false
 
 func set_player_ids(x):
@@ -68,7 +62,6 @@ func set_player_ids(x):
 		score[str(id)] = 0
 	
 func spawn_players():
-	living_ids = starting_ids.duplicate()
 	should_check_round_end = true
 	var i = 0
 	var rng = RandomNumberGenerator.new()
@@ -93,31 +86,8 @@ func spawn_players():
 	
 	is_round_ongoing = true
 
-func player_killed(id):
-	if is_round_ongoing:
-		if living_ids.size() > 1 or starting_ids.size() == 1:
-			killed_ids.push_back(id)
-		
-func handle_killed_players():
-	for killed_id in killed_ids:
-		should_check_round_end = true
-		living_ids.erase(killed_id)
-
-	if should_check_round_end:
-		if living_ids.size() == 1 and starting_ids.size() != 1:
-			score[str(living_ids[0])] += 1
-			get_node("/root/Main/Score").queue_redraw()
-#			for player_id in score:
-#				print(player_id +  " -> " + str(score[player_id]))
-		if  living_ids.size() == 0 or \
-			(living_ids.size() == 1 and starting_ids.size() != 1):
-			if $RoundTimer.get_time_left() == 0:
-				$RoundTimer.start()
-
 func _process(delta):
 	elapsed_time += delta
-	handle_killed_players()
-	killed_ids = []
 	should_check_round_end = false
 	
 	if Input.is_action_just_pressed("exit_game"):
@@ -125,10 +95,4 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://scenes/opening_screen.tscn")
 
 func _on_RoundTimer_timeout():
-	if living_ids.size() > 0 and score[str(living_ids[0])] >= play_to:
-		winner_id = living_ids[0]
-		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
-	else:
-		starfield_rotation = get_node("/root/Main/Starfield").rotation
-		initialize_for_new_round()
-		get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/win_screen.tscn")

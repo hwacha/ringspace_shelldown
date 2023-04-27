@@ -188,7 +188,6 @@ func die():
 		return
 
 	dead = true
-	Players.player_killed(self.id)
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.set_animation("dead")
 	$HitBox.set_deferred("monitoring", false)
