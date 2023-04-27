@@ -30,7 +30,6 @@ var invulnerable = false : set = _set_invulnerability
 var ontop_of = []
 
 func _ready():
-	
 	var crust = get_node("../Crust")
 	centroid = crust.transform.origin
 	surface_to_centroid = min(crust.screen_size.x, crust.screen_size.y) / 2 - crust.crust_size
@@ -242,6 +241,7 @@ func die():
 			Players.stored_orbs[self.id - 1].push_back(orb)
 		
 		counter += 1
+	
 	
 	Players.update_score(id, num_kept_orbs)
 

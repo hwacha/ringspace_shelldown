@@ -31,7 +31,7 @@ func _on_body_entered(body):
 		get_parent().call_deferred("remove_child", self)
 		var new_orbs = body.get_node("Orbs")
 		new_orbs.call_deferred("add_child", self)
-		new_orbs.call_deferred("on_add_orb", self)
+		new_orbs.call_deferred("on_add_orb", self, true)
 
 func set_new_destination():
 	traveling = true
@@ -125,7 +125,7 @@ func _on_animation_player_animation_finished(_anim_name):
 	else:
 		get_parent().call_deferred("remove_child", self)
 		next_claimant.get_node("Orbs").call_deferred("add_child", self)
-		next_claimant.get_node("Orbs").call_deferred("on_add_orb", self)
+		next_claimant.get_node("Orbs").call_deferred("on_add_orb", self, true)
 		next_claimant = null
 	
 

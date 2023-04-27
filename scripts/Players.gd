@@ -107,18 +107,17 @@ func respawn_player(player_id, priority):
 	next_player.first_spawn = false
 	
 	var next_player_orbs = next_player.get_node("Orbs")
-	
-	score[str(player_id)] = 0
+
 	for stored_orb in stored_orbs[player_id - 1]:
 		next_player_orbs.add_child(stored_orb)
-		next_player_orbs.on_add_orb(stored_orb)
+		next_player_orbs.on_add_orb(stored_orb, false)
 	
 	stored_orbs[player_id - 1] = []
 	
 	get_node("/root/Main").call_deferred("add_child", next_player)
 
 func update_score(id, new_score):
-	score[str(id)] += new_score
+	score[str(id)] = new_score
 	get_node("/root/Main/Score").queue_redraw()
 	
 func inc_score(id):
