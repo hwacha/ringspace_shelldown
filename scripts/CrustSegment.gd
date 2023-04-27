@@ -13,8 +13,11 @@ var colliders_per_segment
 @export var juttering : bool = false
 @onready var original_position = $Visuals/Ring.transform.origin
 
+var initial_segment_index
+
 func _ready():
 	rand.randomize()
+	initial_segment_index = get_index()
 		
 func destroy():
 	$AnimationPlayer.play("segment_destroy")

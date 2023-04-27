@@ -79,7 +79,7 @@ func player_constructor(id, priority):
 	var player_instance = player_scene.instantiate()
 	player_instance.id = id
 	player_instance.get_node("DeathParticles").modulate = player_colors[id - 1]
-	player_instance.get_node("AnimatedSprite2D").material.set("shader_param/primary_color", player_invulnerability_colors[id - 1])
+	player_instance.get_node("AnimatedSprite2D").material.set("shader_parameter/primary_color", player_invulnerability_colors[id - 1])
 	player_instance.starting_theta = 0
 	player_instance.set_process_priority(priority)
 	player_instance.get_node("AnimatedSprite2D").set_sprite_frames(spriteframe_data[id - 1])
@@ -118,6 +118,7 @@ func respawn_player(player_id, priority):
 	get_node("/root/Main").call_deferred("add_child", next_player)
 
 func update_score(id, new_score):
+	score[str(id)] += new_score
 	get_node("/root/Main/Score").queue_redraw()
 	
 func inc_score(id):

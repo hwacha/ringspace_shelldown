@@ -1,6 +1,14 @@
 extends Node2D
 
 @export var num_segments: int = 16
+@export var num_segments_remaining_at_end : int = 4
+
+var segments_to_keep = [
+	0, 4, 8, 12
+]
+
+var segments_to_decay
+
 var crust_ratio: float = 1.0 / 13.5 # 1 is the length of the screen
 
 var screen_size
@@ -21,7 +29,12 @@ var decay_constant
 
 func _ready():
 	Players.lock_action = true
-	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/num_segments)
+	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
+
+	segments_to_decay = []
+	for ind in range(num_segments):
+		if not ind in segments_to_keep:
+			segments_to_decay.push_back(ind)
 
 	var screen_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 	var screen_height = ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -78,12 +91,18 @@ func _ready():
 #	pass
 
 func _on_CrustDecay_timeout():
-	var rand = rng.randi_range(0, get_child_count() - 1)
-	var segment : CrustSegment = get_child(rand)
-	if segment != null:
-		segment.destroy()
-		crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
-		crust_decay.start()
+	if segments_to_decay.size() == 0:
+		pass
+	else:
+		var rand = rng.randi_range(0, segments_to_decay.size() - 1)
+		var chosen_segment_index = segments_to_decay[rand]
+		for segment in get_children():
+			if segment.initial_segment_index == chosen_segment_index:
+				segment.destroy()
+				crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
+				crust_decay.start()
+				segments_to_decay.erase(chosen_segment_index)
+		
 
 
 func _on_round_begin():

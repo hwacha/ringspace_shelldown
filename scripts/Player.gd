@@ -50,7 +50,7 @@ func _ready():
 
 func _set_invulnerability(is_invulnerable: bool):
 	invulnerable = is_invulnerable
-	$AnimatedSprite2D.material.set("shader_param/is_invulnerable", is_invulnerable)
+	$AnimatedSprite2D.material.set("shader_parameter/is_invulnerable", is_invulnerable)
 
 func spawn():
 	# randomly select a safe crust segment

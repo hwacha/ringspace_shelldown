@@ -168,7 +168,7 @@ z_index = 3
 script = ExtResource("5")
 
 [node name="CrustDecay" type="Timer" parent="."]
-wait_time = 19.03
+wait_time = 27.947
 one_shot = true
 
 [node name="ObstacleTimer" type="Timer" parent="."]
