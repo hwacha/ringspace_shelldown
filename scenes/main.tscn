@@ -151,6 +151,8 @@ script = ExtResource("5")
 wait_time = 8.456
 one_shot = true
 
+[node name="ObstacleTimer" type="Timer" parent="."]
+
 [node name="Round Beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_kni4r")
 
@@ -207,4 +209,5 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 0)
 
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
-[connection signal="body_shape_entered" from="OutOfBounds" to="OutOfBounds" method="_on_OutOfBounds_body_shape_entered"]
+[connection signal="timeout" from="ObstacleTimer" to="Crust" method="_on_obstacle_timeout"]
+[connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]

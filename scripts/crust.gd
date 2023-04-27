@@ -12,6 +12,7 @@ var crust_size
 
 var rng
 @onready var crust_decay = get_node("../CrustDecay")
+@onready var obstacle_timer = get_node("../ObstacleTimer")
 @onready var round_text = get_node("../RoundText")
 
 # decay time
@@ -88,3 +89,9 @@ func _on_CrustDecay_timeout():
 func _on_round_begin():
 	Players.lock_action = false
 	crust_decay.start()
+	obstacle_timer.start()
+
+func _on_obstacle_timeout():
+	var sun = preload("res://scenes/Sun.tscn").instantiate()
+	get_parent().add_child(sun)
+	sun.transform.origin = screen_size / 2
