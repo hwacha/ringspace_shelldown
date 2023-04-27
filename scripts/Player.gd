@@ -21,6 +21,7 @@ var rand = RandomNumberGenerator.new()
 
 var fast_falling = false: set = set_fast_falling
 var dead = false
+var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false
@@ -28,19 +29,44 @@ var invulnerable = false
 var ontop_of = []
 
 func _ready():
+	
 	var crust = get_node("../Crust")
 	centroid = crust.transform.origin
 	surface_to_centroid = min(crust.screen_size.x, crust.screen_size.y) / 2 - crust.crust_size
 	surface_to_centroid_squared = surface_to_centroid * surface_to_centroid
 	
-	transform.origin = centroid + \
-	(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
-		sin(starting_theta) * crust.screen_size.y / 10))
+	if first_spawn:
+		transform.origin = centroid + \
+		(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
+			sin(starting_theta) * crust.screen_size.y / 10))
+	else:
+		spawn()
 	
 	rand.randomize()
 	
 	anim.set_animation("default")
 	anim.play()
+
+func spawn():
+	# randomly select a safe crust segment
+	var crust_segments = get_parent().get_node("Crust").get_children()
+	var crust_index = rand.randi_range(0, crust_segments.size() - 1)
+	var destination_segment = crust_segments[crust_index]
+	if destination_segment.get_node("AnimationPlayer").current_animation == "segment_destroy":
+		var second_crust_index = rand.randi_range(0, crust_segments.size() - 2)
+		if second_crust_index >= crust_index:
+			second_crust_index += 1
+		destination_segment = crust_segments[second_crust_index]
+	
+	# invulnerable
+	invulnerable = true
+	$TeleportInvulnerability.start()
+	
+	# teleport
+	norm_velocity = Vector2(0, 0)
+	perp_velocity = Vector2(0, 0)
+	transform.origin = (get_parent().get_node("Crust").transform.origin + 0.7 * \
+	destination_segment.get_node("Visuals").transform.origin)
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
@@ -103,29 +129,6 @@ func get_input(diff):
 	if not grounded and fast_fall:
 		set_fast_falling(true)
 	
-	if teleport and $Orbs.get_child_count() > 0:
-		# randomly select a safe crust segment
-		var crust_segments = get_parent().get_node("Crust").get_children()
-		var crust_index = rand.randi_range(0, crust_segments.size() - 1)
-		var destination_segment = crust_segments[crust_index]
-		if destination_segment.get_node("AnimationPlayer").current_animation == "segment_destroy":
-			var second_crust_index = rand.randi_range(0, crust_segments.size() - 2)
-			if second_crust_index >= crust_index:
-				second_crust_index += 1
-			destination_segment = crust_segments[second_crust_index]
-		
-		# expend orb
-		$Orbs.remove_child($Orbs.get_child(0))
-		
-		# invulnerable
-		invulnerable = true
-		$TeleportInvulnerability.start()
-		
-		# teleport
-		norm_velocity = Vector2(0, 0)
-		perp_velocity = Vector2(0, 0)
-		transform.origin = (get_parent().get_node("Crust").transform.origin + 0.7 * destination_segment.get_node("Visuals").transform.origin)
-		
 
 func _physics_process(_delta):
 	if lock_physics:
@@ -215,8 +218,12 @@ func die():
 		
 
 func _on_DeathTimer_timeout():
+	Players.respawn_player(self.id, self.get_process_priority())
 	hide()
 	queue_free()
+	
+func on_respawn():
+	spawn()
 
 func _on_Overlap_area_entered(area):
 	var other = area.get_parent()

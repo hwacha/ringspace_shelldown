@@ -22,13 +22,11 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_4hcc6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_e873u")
 
 [node name="WaitingToTravel" type="Timer" parent="."]
-wait_time = 12.0
+wait_time = 10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="timeout" from="WaitingToTravel" to="." method="_on_waiting_to_travel_timeout"]

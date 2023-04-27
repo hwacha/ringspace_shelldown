@@ -35,8 +35,7 @@ func set_new_destination():
 		
 		animation.track_set_key_value(0, i, waypoint)
 		$AnimationPlayer.play("custom/travel_to_destination")
-	
-	$WaitingToTravel.start()
+
 
 func create_animation():
 	var anim = Animation.new()
@@ -55,20 +54,22 @@ func create_animation():
 	anim_player.name = "AnimationPlayer"
 	anim_player.add_animation_library("custom", lib)
 	
+	anim_player.animation_finished.connect(_on_animation_player_animation_finished)
+	
 	add_child(anim_player)
 
 func _on_tree_entered():
-	if get_parent().name == "Main":
+	var anim = get_node_or_null("AnimationPlayer")
+	if anim == null:
 		create_animation()
-	else:
+
+	if get_parent().name == "Main":
 		set_new_destination()
 
 func _on_animation_player_animation_finished(_anim_name):
 	traveling = false
+	$WaitingToTravel.start()
 
 func _on_waiting_to_travel_timeout():
 	if not claimed:
 		set_new_destination()
-
-func _on_child_entered_tree(node):
-	set_new_destination()

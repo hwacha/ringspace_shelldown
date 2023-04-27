@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ej5761kq0jd1"]
+[gd_scene load_steps=16 format=3 uid="uid://ej5761kq0jd1"]
 
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1_i7osw"]
@@ -9,6 +9,25 @@
 [ext_resource type="Script" path="res://scripts/Score.gd" id="5"]
 [ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="5_kni4r"]
 [ext_resource type="Script" path="res://scripts/OutOfBounds.gd" id="6"]
+
+[sub_resource type="GDScript" id="GDScript_dr6nl"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_child_entered_tree(node):
+	if node is Player and not node.first_spawn:
+		node.on_respawn()
+"
 
 [sub_resource type="Animation" id="Animation_dw41s"]
 resource_name = "zoom_out"
@@ -116,6 +135,7 @@ size = Vector2(1080, 400)
 size = Vector2(400, 1080)
 
 [node name="Main" type="Node2D"]
+script = SubResource("GDScript_dr6nl")
 metadata/_edit_vertical_guides_ = []
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -148,11 +168,11 @@ z_index = 3
 script = ExtResource("5")
 
 [node name="CrustDecay" type="Timer" parent="."]
-wait_time = 8.456
+wait_time = 19.03
 one_shot = true
 
 [node name="ObstacleTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 20.0
 
 [node name="Round Beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_kni4r")

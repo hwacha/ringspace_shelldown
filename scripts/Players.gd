@@ -13,12 +13,14 @@ var lock_action = false
 const play_to = 10
 var score = {}
 
-var spriteframe_data = [
+const spriteframe_data = [
 	preload("res://animations/SpriteFrames_P1.tres"),
 	preload("res://animations/SpriteFrames_P2.tres"),
 	preload("res://animations/SpriteFrames_P3.tres"),
 	preload("res://animations/SpriteFrames_P4.tres")
 ]
+
+const player_scene = preload("res://scenes/Player.tscn")
 
 # settings
 var orb_loss_numerator = 1
@@ -61,6 +63,15 @@ func set_player_ids(x):
 	for id in starting_ids:
 		score[str(id)] = 0
 	
+func player_constructor(id, priority):
+	var player_instance = player_scene.instantiate()
+	player_instance.id = id
+	player_instance.get_node("DeathParticles").modulate = player_colors[id - 1]
+	player_instance.starting_theta = 0
+	player_instance.set_process_priority(priority)
+	player_instance.get_node("AnimatedSprite2D").set_sprite_frames(spriteframe_data[id - 1])
+	return player_instance
+	
 func spawn_players():
 	should_check_round_end = true
 	var i = 0
@@ -68,23 +79,21 @@ func spawn_players():
 	rng.randomize()
 	var priorities = range(1, starting_ids.size() + 1)
 	for x in starting_ids:
-		var player_scene = load("res://scenes/Player.tscn")
-		var player_instance = player_scene.instantiate()
-		player_instance.id = int(x)
-		player_instance.get_node("DeathParticles").modulate = player_colors[x - 1]
-		player_instance.starting_theta = ((2 * PI * i / starting_ids.size()) + PI)
-		i += 1
-		
 		# shuffle priorities for breaking ties in collision
 		var priority = priorities[rng.randi_range(0, priorities.size() - 1)]
 		priorities.erase(priority)
-		player_instance.set_process_priority(priority)
-		
-		player_instance.get_node("AnimatedSprite2D").set_sprite_frames(spriteframe_data[x - 1])
+		var player_instance = player_constructor(int(x), priority)
+		player_instance.starting_theta = ((2 * PI * i / starting_ids.size()) + PI)
+		i += 1
 		
 		get_node("/root/Main").call_deferred("add_child", player_instance)
 	
 	is_round_ongoing = true
+	
+func respawn_player(player_id, priority):
+	var next_player = player_constructor(player_id, priority)
+	next_player.first_spawn = false
+	get_node("/root/Main").call_deferred("add_child", next_player)
 
 func _process(delta):
 	elapsed_time += delta
