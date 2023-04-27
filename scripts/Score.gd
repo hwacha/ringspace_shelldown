@@ -18,6 +18,9 @@ func _ready():
 		"3": Vector2(screen_size.x - score_radius, screen_size.y - score_radius),
 		"4": Vector2(screen_size.x - score_radius, score_radius)
 	}
+	
+func _process(_delta):
+	pass
 
 func _draw():
 	var theta = 2 * PI / Players.play_to

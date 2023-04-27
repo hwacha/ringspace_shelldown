@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -23,3 +22,5 @@ func on_add_orb(new_orb):
 	for orb in orbs:
 		orb.transform.origin = r * Vector2(cos(theta), sin(theta))
 		theta += d_theta
+	var player_id = get_parent().id
+	Players.inc_score(player_id)

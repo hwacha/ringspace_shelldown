@@ -6,7 +6,6 @@ var winner_id = -1
 
 var star_direction
 
-var should_check_round_end = false
 var is_round_ongoing = false
 var lock_action = false
 
@@ -24,7 +23,7 @@ const player_scene = preload("res://scenes/Player.tscn")
 
 # settings
 var orb_loss_numerator = 1
-var orb_loss_denominator = 1
+var orb_loss_denominator = 2
 
 const player_colors = [
 	Color(1, 0, 0),
@@ -40,6 +39,13 @@ const player_names = [
 	"Yellow"
 ]
 
+var stored_orbs = [
+	[],
+	[],
+	[],
+	[]
+]
+
 var elapsed_time = 0
 
 @export var mute_sound : bool = false
@@ -49,7 +55,6 @@ func _ready():
 	
 func initialize_for_new_round():
 	winner_id = -1
-	should_check_round_end = false
 	is_round_ongoing = false
 
 func set_player_ids(x):
@@ -73,7 +78,6 @@ func player_constructor(id, priority):
 	return player_instance
 	
 func spawn_players():
-	should_check_round_end = true
 	var i = 0
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -93,11 +97,34 @@ func spawn_players():
 func respawn_player(player_id, priority):
 	var next_player = player_constructor(player_id, priority)
 	next_player.first_spawn = false
+	
+	var next_player_orbs = next_player.get_node("Orbs")
+	
+	score[str(player_id)] = 0
+	for stored_orb in stored_orbs[player_id - 1]:
+		next_player_orbs.add_child(stored_orb)
+		next_player_orbs.on_add_orb(stored_orb)
+	
+	stored_orbs[player_id - 1] = []
+	
 	get_node("/root/Main").call_deferred("add_child", next_player)
+
+func update_score(id, new_score):
+	get_node("/root/Main/Score").queue_redraw()
+	
+func inc_score(id):
+	score[str(id)] += 1
+	get_node("/root/Main/Score").queue_redraw()
 
 func _process(delta):
 	elapsed_time += delta
-	should_check_round_end = false
+	
+	if is_round_ongoing:
+		for id in score.keys():
+			if score[id] >= play_to:
+				is_round_ongoing = false
+				winner_id = int(id)
+				get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 	
 	if Input.is_action_just_pressed("exit_game"):
 		is_round_ongoing = false

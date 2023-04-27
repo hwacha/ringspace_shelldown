@@ -21,6 +21,7 @@ var rand = RandomNumberGenerator.new()
 
 var fast_falling = false: set = set_fast_falling
 var dead = false
+var killer = null
 var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
@@ -184,7 +185,9 @@ func _on_HurtBox_area_entered(hitbox):
 		hitter.norm_velocity = -hurtbox_down * jump_impulse * (surface_to_centroid / hurtbox_down.length())
 		hitter.set_fast_falling(false)
 		# kill
+		self.killer = hitter
 		self.die()
+		
 
 func die():
 	if dead:
@@ -209,13 +212,37 @@ func die():
 	orb_instance.get_node("PointLight2D").color = orb_instance.modulate
 	orb_instance.transform.origin = self.transform.origin
 	
-	get_parent().call_deferred("add_child", orb_instance)
+	if killer == null:
+		get_parent().call_deferred("add_child", orb_instance)
+	else:
+		var killer_orbs = killer.get_node("Orbs")
+		killer_orbs.add_child(orb_instance)
+		killer_orbs.on_add_orb(orb_instance)
+
+	var total_orbs = $Orbs.get_child_count()
+	var num_lost_orbs = int(total_orbs * \
+	float(Players.orb_loss_numerator) / Players.orb_loss_denominator)
+	var num_kept_orbs = total_orbs - num_lost_orbs
+	var counter = 0
 	for orb in $Orbs.get_children():
-		orb.claimed = false
 		$Orbs.remove_child(orb)
 		orb.transform.origin = self.transform.origin
-		get_parent().call_deferred("add_child", orb)
 		
+		if counter < num_lost_orbs:
+			if killer == null:
+				orb.claimed = false
+				get_parent().call_deferred("add_child", orb)
+			else:
+				var killer_orbs = killer.get_node("Orbs")
+				killer_orbs.add_child(orb)
+				killer_orbs.on_add_orb(orb)
+		else:
+			Players.stored_orbs[self.id - 1].push_back(orb)
+		
+		counter += 1
+	
+	print(num_kept_orbs)
+	Players.update_score(id, num_kept_orbs)
 
 func _on_DeathTimer_timeout():
 	Players.respawn_player(self.id, self.get_process_priority())
