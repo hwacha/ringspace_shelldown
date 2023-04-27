@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://4tsvaqdlhhr7" path="res://assets/sun.png" id="2_of66p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ij06p"]
-radius = 88.0909
+radius = 38.0
 
 [node name="Sun" type="Area2D"]
 collision_layer = 0
@@ -12,7 +12,7 @@ collision_mask = 2
 script = ExtResource("1_e1lq8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.08, 0.08)
+scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_of66p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

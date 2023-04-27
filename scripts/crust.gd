@@ -89,7 +89,7 @@ func _on_CrustDecay_timeout():
 func _on_round_begin():
 	Players.lock_action = false
 	crust_decay.start()
-	obstacle_timer.start()
+#	obstacle_timer.start()
 
 func _on_obstacle_timeout():
 	if get_parent().has_node("Sun"):

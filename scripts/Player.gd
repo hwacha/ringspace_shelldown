@@ -212,12 +212,11 @@ func die():
 	orb_instance.get_node("PointLight2D").color = orb_instance.modulate
 	orb_instance.transform.origin = self.transform.origin
 	
-	if killer == null:
-		get_parent().call_deferred("add_child", orb_instance)
-	else:
-		var killer_orbs = killer.get_node("Orbs")
-		killer_orbs.add_child(orb_instance)
-		killer_orbs.on_add_orb(orb_instance)
+	if killer != null:
+		orb_instance.claimed = true
+		orb_instance.next_claimant = killer
+	
+	get_parent().call_deferred("add_child", orb_instance)
 
 	var total_orbs = $Orbs.get_child_count()
 	var num_lost_orbs = int(total_orbs * \
@@ -229,19 +228,17 @@ func die():
 		orb.transform.origin = self.transform.origin
 		
 		if counter < num_lost_orbs:
+			get_parent().call_deferred("add_child", orb)
 			if killer == null:
 				orb.claimed = false
-				get_parent().call_deferred("add_child", orb)
 			else:
-				var killer_orbs = killer.get_node("Orbs")
-				killer_orbs.add_child(orb)
-				killer_orbs.on_add_orb(orb)
+				orb.claimed = true
+				orb.next_claimant = killer
 		else:
 			Players.stored_orbs[self.id - 1].push_back(orb)
 		
 		counter += 1
 	
-	print(num_kept_orbs)
 	Players.update_score(id, num_kept_orbs)
 
 func _on_DeathTimer_timeout():
