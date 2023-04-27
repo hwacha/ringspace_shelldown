@@ -92,6 +92,12 @@ func _on_round_begin():
 	obstacle_timer.start()
 
 func _on_obstacle_timeout():
-	var sun = preload("res://scenes/Sun.tscn").instantiate()
-	get_parent().add_child(sun)
-	sun.transform.origin = screen_size / 2
+	if get_parent().has_node("Sun"):
+		var sun = get_node("../Sun")
+		var col = sun.get_node("CollisionShape2D")
+		col.disabled = not col.disabled
+		sun.visible  = not sun.visible 
+	else:
+		var sun = preload("res://scenes/Sun.tscn").instantiate()
+		get_parent().add_child(sun)
+		sun.transform.origin = screen_size / 2

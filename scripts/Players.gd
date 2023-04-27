@@ -19,6 +19,13 @@ var starfield_rotation = 0
 const initial_settings = {
 }
 
+var spriteframe_data = [
+	preload("res://animations/SpriteFrames_P1.tres"),
+	preload("res://animations/SpriteFrames_P2.tres"),
+	preload("res://animations/SpriteFrames_P3.tres"),
+	preload("res://animations/SpriteFrames_P4.tres")
+]
+
 var settings = initial_settings
 
 const player_colors = [
@@ -80,7 +87,7 @@ func spawn_players():
 		priorities.erase(priority)
 		player_instance.set_process_priority(priority)
 		
-		player_instance.get_node("AnimatedSprite2D").set_sprite_frames(load("res://animations/SpriteFrames_P" + str(x) + ".tres"))
+		player_instance.get_node("AnimatedSprite2D").set_sprite_frames(spriteframe_data[x - 1])
 		
 		get_node("/root/Main").call_deferred("add_child", player_instance)
 	
