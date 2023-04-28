@@ -9,3 +9,4 @@ func _on_body_entered(body):
 		body.die()
 		body.get_node("AnimatedSprite2D").visible = false
 	body.lock_physics = true
+	

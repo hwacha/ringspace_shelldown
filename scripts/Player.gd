@@ -99,6 +99,25 @@ func fast():
 		$FastTimer.start()
 		return true
 	return false
+	
+func comet():
+	var comet_instance = preload("res://scenes/Comet.tscn").instantiate()
+	comet_instance.player_who_shot = self
+	comet_instance.modulate = $DeathParticles.modulate
+	var dir_sign = -1
+	if anim.flip_h:
+		dir_sign *= -1
+	comet_instance.dir_sign = dir_sign
+	comet_instance.centroid = self.centroid
+	var diff = self.transform.origin - centroid
+	var perp = diff.rotated(dir_sign * PI / 2).normalized()
+	
+	comet_instance.rotation = diff.angle()
+	comet_instance.transform.origin = self.transform.origin + 40 * perp
+	
+	get_parent().add_child(comet_instance)
+	
+	return true
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
