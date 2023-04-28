@@ -32,19 +32,56 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
 
-[node name="WinText" type="RichTextLabel" parent="."]
+[node name="Text1" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.375
+theme_override_fonts/normal_font = SubResource("1")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Text2" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.375
+anchor_right = 1.0
+anchor_bottom = 0.5
+theme_override_fonts/normal_font = SubResource("1")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Text3" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
 anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.667
+anchor_bottom = 0.625
+theme_override_fonts/normal_font = SubResource("1")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Text4" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.625
+anchor_right = 1.0
+anchor_bottom = 0.75
 theme_override_fonts/normal_font = SubResource("1")
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 scroll_active = false
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -177,6 +177,12 @@ func _on_HurtBox_area_entered(hitbox):
 	var hitter = hitbox.get_parent()
 	if self.dead or hitter.dead or self.invulnerable or hitter.invulnerable:
 		return
+	
+	var epsilon = 20
+	
+	if self.transform.origin.distance_squared_to(hitter.transform.origin) < (epsilon * epsilon):
+		return
+	
 	# if the hitbox is moving down or
 	# the hurtbox is moving up, DEATH
 	var hitbox_down  = hitter.transform.origin - centroid
@@ -211,8 +217,7 @@ func die():
 	var orb_instance = orb_scene.instantiate()
 	orb_instance.id = self.id
 	orb_instance.centroid = self.centroid
-	orb_instance.modulate = $DeathParticles.modulate
-	orb_instance.get_node("PointLight2D").color = orb_instance.modulate
+	orb_instance.get_node("Sprite2D").texture = load("res://assets/" + Players.player_names[self.id - 1] + "Orb.png")
 	orb_instance.transform.origin = self.transform.origin
 	
 	if killer != null:

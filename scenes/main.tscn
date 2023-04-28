@@ -1,14 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://ej5761kq0jd1"]
+[gd_scene load_steps=15 format=3 uid="uid://ej5761kq0jd1"]
 
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1_i7osw"]
-[ext_resource type="Shader" path="res://scripts/main.gdshader" id="1_rc03f"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="2"]
 [ext_resource type="Script" path="res://scripts/Starfield.gd" id="3"]
 [ext_resource type="AudioStream" uid="uid://betn3px4wblfd" path="res://assets/ringspace_shelldown_game_music.wav" id="4"]
 [ext_resource type="Script" path="res://scripts/Score.gd" id="5"]
 [ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="5_kni4r"]
 [ext_resource type="Script" path="res://scripts/OutOfBounds.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/TimeLeftLabel.gd" id="10_wwi5m"]
 
 [sub_resource type="GDScript" id="GDScript_dr6nl"]
 script/source = "extends Node2D
@@ -125,9 +125,6 @@ _data = {
 "zoom_out": SubResource("Animation_dw41s")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5flmx"]
-shader = ExtResource("1_rc03f")
-
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(1080, 400)
 
@@ -151,7 +148,6 @@ libraries = {
 
 [node name="Starfield" type="Sprite2D" parent="."]
 z_index = -1
-material = SubResource("ShaderMaterial_5flmx")
 position = Vector2(540, 540)
 scale = Vector2(0.707, 0.707)
 texture = ExtResource("2")
@@ -173,6 +169,10 @@ one_shot = true
 
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 20.0
+
+[node name="MatchTimer" type="Timer" parent="."]
+wait_time = 150.0
+one_shot = true
 
 [node name="Round Beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_kni4r")
@@ -229,6 +229,22 @@ offset_right = 1080.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 0)
 
+[node name="TimeLeftLabel" type="RichTextLabel" parent="."]
+visible = false
+z_index = 10
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.3
+offset_left = 220.0
+offset_top = 20.0
+offset_right = 1080.0
+offset_bottom = 100.0
+theme_override_fonts/normal_font = ExtResource("1_i7osw")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+script = ExtResource("10_wwi5m")
+
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
 [connection signal="timeout" from="ObstacleTimer" to="Crust" method="_on_obstacle_timeout"]
+[connection signal="timeout" from="MatchTimer" to="Crust" method="_on_match_timer_timeout"]
 [connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]

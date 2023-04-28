@@ -5,6 +5,7 @@ func _ready():
 	pass
 
 func _on_body_entered(body):
-	body.die()
+	if Players.is_round_ongoing:
+		body.die()
+		body.get_node("AnimatedSprite2D").visible = false
 	body.lock_physics = true
-	body.get_node("AnimatedSprite2D").visible = false

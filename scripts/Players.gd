@@ -2,8 +2,6 @@ extends Node2D
 
 var starting_ids = []
 
-var winner_id = -1
-
 var star_direction
 
 var is_round_ongoing = false
@@ -61,7 +59,6 @@ func _ready():
 	pass
 	
 func initialize_for_new_round():
-	winner_id = -1
 	is_round_ongoing = false
 
 func set_player_ids(x):
@@ -130,13 +127,18 @@ func _process(delta):
 	if is_round_ongoing:
 		for id in score.keys():
 			if score[id] >= play_to:
-				is_round_ongoing = false
-				winner_id = int(id)
-				get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
+				end_game()
 	
 	if Input.is_action_just_pressed("exit_game"):
 		is_round_ongoing = false
 		get_tree().change_scene_to_file("res://scenes/opening_screen.tscn")
+		
+func end_game():
+	Engine.set_time_scale(0.8)
+	is_round_ongoing = false
+	lock_action = true
+	$PostMatchTimer.start()
 
-func _on_RoundTimer_timeout():
+func _on_post_match_timer_timeout():
+	Engine.set_time_scale(1)
 	get_tree().change_scene_to_file("res://scenes/win_screen.tscn")

@@ -108,6 +108,8 @@ func _on_CrustDecay_timeout():
 func _on_round_begin():
 	Players.lock_action = false
 	crust_decay.start()
+	get_node("../MatchTimer").start()
+	get_node("../TimeLeftLabel").visible = true
 #	obstacle_timer.start()
 
 func _on_obstacle_timeout():
@@ -120,3 +122,9 @@ func _on_obstacle_timeout():
 		var sun = preload("res://scenes/Sun.tscn").instantiate()
 		get_parent().add_child(sun)
 		sun.transform.origin = screen_size / 2
+
+
+func _on_match_timer_timeout():
+	Players.end_game()
+	round_text.text = "[center]MATCH[/center]"
+	round_text.modulate.a = 1	
