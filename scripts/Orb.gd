@@ -81,7 +81,7 @@ func create_animation():
 	var anim_claimed = Animation.new()
 	
 	anim_free.length = 2.0
-	anim_free.length = 1.0
+	anim_claimed.length = 0.5
 
 	var track_index_free = anim_free.add_track(Animation.TYPE_VALUE)
 	anim_free.track_set_interpolation_type(track_index_free, Animation.INTERPOLATION_CUBIC)

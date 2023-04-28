@@ -212,43 +212,6 @@ func die():
 	$DeathParticles.emitting = true
 	$Death.play()
 	$DeathTimer.start()
-	# spawn orb
-	var orb_scene = load("res://scenes/Orb.tscn")
-	var orb_instance = orb_scene.instantiate()
-	orb_instance.id = self.id
-	orb_instance.centroid = self.centroid
-	orb_instance.get_node("Sprite2D").texture = load("res://assets/" + Players.player_names[self.id - 1] + "Orb.png")
-	orb_instance.transform.origin = self.transform.origin
-	
-	if killer != null:
-		orb_instance.claimed = true
-		orb_instance.next_claimant = killer
-	
-	get_parent().call_deferred("add_child", orb_instance)
-
-	var total_orbs = $Orbs.get_child_count()
-	var num_lost_orbs = int(total_orbs * \
-	float(Players.orb_loss_numerator) / Players.orb_loss_denominator)
-	var num_kept_orbs = total_orbs - num_lost_orbs
-	var counter = 0
-	for orb in $Orbs.get_children():
-		$Orbs.remove_child(orb)
-		orb.transform.origin = self.transform.origin
-		
-		if counter < num_lost_orbs:
-			get_parent().call_deferred("add_child", orb)
-			if killer == null:
-				orb.claimed = false
-			else:
-				orb.claimed = true
-				orb.next_claimant = killer
-		else:
-			Players.stored_orbs[self.id - 1].push_back(orb)
-		
-		counter += 1
-	
-	
-	Players.update_score(id, num_kept_orbs)
 
 func _on_DeathTimer_timeout():
 	Players.respawn_player(self.id, self.get_process_priority())
@@ -276,6 +239,47 @@ func _on_animated_sprite_2d_frame_changed():
 		anim.set_animation("falling")
 		anim.play()
 
-
 func _on_teleport_invulnerability_timeout():
 	invulnerable = false
+
+
+func _on_animated_sprite_2d_animation_finished():
+	if anim.animation == "dead":
+		# spawn orb
+		var orb_scene = load("res://scenes/Orb.tscn")
+		var orb_instance = orb_scene.instantiate()
+		orb_instance.id = self.id
+		orb_instance.centroid = self.centroid
+		orb_instance.get_node("Sprite2D").texture = load("res://assets/" + Players.player_names[self.id - 1] + "Orb.png")
+		var orb_exit_location = self.transform.origin + 20 * (centroid - transform.origin).normalized()
+		orb_instance.transform.origin = orb_exit_location
+		
+		if killer != null:
+			orb_instance.claimed = true
+			orb_instance.next_claimant = killer
+		
+		get_parent().call_deferred("add_child", orb_instance)
+
+		var total_orbs = $Orbs.get_child_count()
+		var num_lost_orbs = int(total_orbs * \
+		float(Players.orb_loss_numerator) / Players.orb_loss_denominator)
+		var num_kept_orbs = total_orbs - num_lost_orbs
+		var counter = 0
+		for orb in $Orbs.get_children():
+			$Orbs.remove_child(orb)
+			orb.transform.origin = self.transform.origin
+			
+			if counter < num_lost_orbs:
+				get_parent().call_deferred("add_child", orb)
+				if killer == null:
+					orb.claimed = false
+				else:
+					orb.claimed = true
+					orb.next_claimant = killer
+			else:
+				Players.stored_orbs[self.id - 1].push_back(orb)
+			
+			counter += 1
+		
+		Players.update_score(id, num_kept_orbs)
+		anim.set_animation("empty")
