@@ -21,6 +21,7 @@ var crust_size
 var rng
 @onready var crust_decay = get_node("../CrustDecay")
 @onready var obstacle_timer = get_node("../ObstacleTimer")
+@onready var powerup_timer = get_node("../PowerupTimer")
 @onready var round_text = get_node("../RoundText")
 
 # decay time
@@ -110,6 +111,7 @@ func _on_round_begin():
 	crust_decay.start()
 	get_node("../MatchTimer").start()
 	get_node("../TimeLeftLabel").visible = true
+	powerup_timer.start()
 #	obstacle_timer.start()
 
 func _on_obstacle_timeout():
@@ -126,5 +128,11 @@ func _on_obstacle_timeout():
 
 func _on_match_timer_timeout():
 	Players.end_game()
-	round_text.text = "[center]MATCH[/center]"
-	round_text.modulate.a = 1	
+
+
+func _on_powerup_timer_timeout():
+	var new_collectable = preload("res://scenes/Collectable.tscn").instantiate()
+	new_collectable.collectable = "teleport"
+	new_collectable.transform.origin = screen_size / 2
+	get_parent().add_child(new_collectable)
+	pass # Replace with function body.

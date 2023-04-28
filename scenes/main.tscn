@@ -159,6 +159,8 @@ position = Vector2(540, 540)
 collision_mask = 2
 script = ExtResource("1")
 
+[node name="Powerups" type="Node2D" parent="."]
+
 [node name="Score" type="Node2D" parent="."]
 z_index = 3
 script = ExtResource("5")
@@ -166,6 +168,9 @@ script = ExtResource("5")
 [node name="CrustDecay" type="Timer" parent="."]
 wait_time = 27.947
 one_shot = true
+
+[node name="PowerupTimer" type="Timer" parent="."]
+wait_time = 10.0
 
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 20.0
@@ -245,6 +250,7 @@ bbcode_enabled = true
 script = ExtResource("10_wwi5m")
 
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
+[connection signal="timeout" from="PowerupTimer" to="Crust" method="_on_powerup_timer_timeout"]
 [connection signal="timeout" from="ObstacleTimer" to="Crust" method="_on_obstacle_timeout"]
 [connection signal="timeout" from="MatchTimer" to="Crust" method="_on_match_timer_timeout"]
 [connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]

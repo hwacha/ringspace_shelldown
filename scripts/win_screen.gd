@@ -10,8 +10,6 @@ func _ready():
 		
 	arr.sort_custom(sort_by_value)
 	
-	print(arr)
-	
 	var places = ["1st", "2nd", "3rd", "4th"]
 	var place_counter = 0
 	var last_score = 1000000

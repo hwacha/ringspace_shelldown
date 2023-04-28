@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg3v46vj7p1fd"]
+
+[ext_resource type="Script" path="res://scripts/Powerup.gd" id="1_p8mi1"]
+
+[node name="Powerup" type="Node2D"]
+script = ExtResource("1_p8mi1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)

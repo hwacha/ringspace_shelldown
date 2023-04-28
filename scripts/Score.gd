@@ -19,6 +19,12 @@ func _ready():
 		"4": Vector2(screen_size.x - score_radius, score_radius)
 	}
 	
+	for id in Players.starting_ids:
+		var powerup = preload("res://scenes/Powerup.tscn").instantiate()
+		powerup.transform.origin = score_locations[str(id)]
+		powerup.name += str(id)
+		get_node("../Powerups").add_child(powerup)
+	
 func _process(_delta):
 	pass
 
@@ -29,7 +35,7 @@ func _draw():
 		for i in range(0, Players.play_to):
 			var color = Color(0.094, 0.161, 0.204, 0.5)
 			if i + 1 <= Players.score[pn]:
-				color = get_node("/root/Players").player_colors[int(pn) - 1]
+				color = Players.player_colors[int(pn) - 1]
 			draw_arc(score_locations[pn], score_radius * 11 / 16, \
 			(i * theta) + theta_offset + epsilon, ((i + 1) * theta) + theta_offset - epsilon, 100, color, score_radius / 4)
 		

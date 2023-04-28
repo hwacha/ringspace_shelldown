@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal used_powerup(reference)
+
 @export var id: int
 
 var norm_velocity = Vector2(0, 0)
@@ -26,7 +28,7 @@ var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
-
+var spawning = false
 var ontop_of = []
 
 func _ready():
@@ -34,7 +36,6 @@ func _ready():
 	centroid = crust.transform.origin
 	surface_to_centroid = min(crust.screen_size.x, crust.screen_size.y) / 2 - crust.crust_size
 	surface_to_centroid_squared = surface_to_centroid * surface_to_centroid
-	
 	if first_spawn:
 		transform.origin = centroid + \
 		(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
@@ -43,6 +44,9 @@ func _ready():
 		spawn()
 	
 	rand.randomize()
+	
+	var powerup = get_node("../Powerups/Powerup" + str(id))
+	used_powerup.connect(powerup.on_use_powerup)
 	
 	anim.set_animation("default")
 	anim.play()
@@ -71,6 +75,8 @@ func spawn():
 	perp_velocity = Vector2(0, 0)
 	transform.origin = (get_parent().get_node("Crust").transform.origin + 0.7 * \
 	destination_segment.get_node("Visuals").transform.origin)
+	
+	$RespawnTimer.start()
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
@@ -86,7 +92,7 @@ func get_input(diff):
 	
 	var jump_input = Input.is_action_just_pressed("jump_p" + str(id))
 	var fast_fall = Input.is_action_just_pressed("fast_fall_p" + str(id))
-	var teleport = Input.is_action_just_pressed("teleport_p" + str(id))
+	var use = Input.is_action_just_pressed("use_p" + str(id))
 	
 	var cw_xor_ccw = move_clockwise or move_counterclockwise
 	cw_xor_ccw = cw_xor_ccw and not (move_clockwise and move_counterclockwise)
@@ -94,7 +100,7 @@ func get_input(diff):
 	jump_input = jump_input and not Players.lock_action
 	fast_fall = fast_fall and not Players.lock_action
 	cw_xor_ccw = cw_xor_ccw and not Players.lock_action
-	teleport = teleport and not Players.lock_action
+	use = use and not Players.lock_action
 	
 	var jump_animation_ongoing = anim.animation == "jumping"
 
@@ -127,12 +133,14 @@ func get_input(diff):
 			$Jump.play()
 	
 	if grounded and jump_complete:
-			norm_velocity += -diff * jump_impulse
-			jump_complete = false
+		norm_velocity += -diff * jump_impulse
+		jump_complete = false
 	
 	if not grounded and fast_fall:
 		set_fast_falling(true)
 	
+	if use:
+		emit_signal("used_powerup", self)
 
 func _physics_process(_delta):
 	if lock_physics:
@@ -147,10 +155,7 @@ func _physics_process(_delta):
 	if fast_falling:
 		fast_fall_mult = 10
 
-#	var old_norm_velocity = norm_velocity
 	norm_velocity += diff * cf * fast_fall_mult
-#	if not self.is_on_floor() and id == 1:
-#		print(norm_velocity.length() - old_norm_velocity.length())
 	
 	if not dead:
 		get_input(diff)
@@ -283,3 +288,8 @@ func _on_animated_sprite_2d_animation_finished():
 		
 		Players.update_score(id, num_kept_orbs)
 		anim.set_animation("empty")
+
+
+func _on_respawn_timer_timeout():
+	spawning = false
+	pass # Replace with function body.

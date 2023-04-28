@@ -6,7 +6,7 @@
 script = ExtResource("1")
 
 [node name="PostMatchTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 3.0
 one_shot = true
 
 [connection signal="timeout" from="PostMatchTimer" to="." method="_on_post_match_timer_timeout"]
