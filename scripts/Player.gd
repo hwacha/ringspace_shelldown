@@ -14,6 +14,7 @@ var perp_speed = 40 * 0.75
 var jump_impulse = 2.6
 
 var expansion_factor = 2.0
+var fast_increase_factor = 1.5
 
 var starting_theta
 var centroid : Vector2
@@ -32,7 +33,7 @@ var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
 var spawning = false
 var expanded = false
-
+var speedy = false
 var ontop_of = []
 
 func _ready():
@@ -91,15 +92,23 @@ func expand():
 		$ExpandTimer.start()
 		return true
 	return false
-	
+
+func fast():
+	if not speedy:
+		speedy = true
+		$FastTimer.start()
+		return true
+	return false
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
 	var ps = perp_speed
+	
 	var grounded = self.is_on_floor()
-
 	if grounded:
 		ps *= 15
+		if speedy:
+			ps *= fast_increase_factor
 		set_fast_falling(false)
 		
 	var move_clockwise = Input.is_action_pressed("move_clockwise_p" + str(id))
@@ -148,7 +157,10 @@ func get_input(diff):
 			$Jump.play()
 	
 	if grounded and jump_complete:
-		norm_velocity += -diff * jump_impulse
+		var total_impulse = jump_impulse
+		if speedy:
+			total_impulse *= fast_increase_factor * 0.8
+		norm_velocity += -diff * total_impulse
 		jump_complete = false
 	
 	if not grounded and fast_fall:
@@ -256,15 +268,15 @@ func _on_Overlap_area_exited(area):
 func _on_animated_sprite_2d_frame_changed():
 	if anim.animation == "jumping" and anim.frame == 2:
 		jump_complete = true
-		anim.set_animation("falling")
-		anim.play()
 
 func _on_teleport_invulnerability_timeout():
 	invulnerable = false
 
-
 func _on_animated_sprite_2d_animation_finished():
-	if anim.animation == "dead":
+	if anim.animation == "jumping":
+		anim.set_animation("falling")
+		anim.play()
+	elif anim.animation == "dead":
 		# spawn orb
 		var orb_scene = load("res://scenes/Orb.tscn")
 		var orb_instance = orb_scene.instantiate()
@@ -311,10 +323,14 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_respawn_timer_timeout():
 	spawning = false
-	pass # Replace with function body.
 
 
 func _on_expand_timer_timeout():
 	if expanded:
 		scale /= expansion_factor
 		expanded = false
+
+
+func _on_fast_timer_timeout():
+	if speedy:
+		speedy = false

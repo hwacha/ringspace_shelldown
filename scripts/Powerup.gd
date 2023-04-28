@@ -22,6 +22,7 @@ func on_use_powerup(reference):
 			powerup_used = reference.spawn()
 		elif powerup == "expand":
 			powerup_used = reference.expand()
-		
+		elif powerup == "fast":
+			powerup_used = reference.fast()
 		if powerup_used:
 			powerup = null
