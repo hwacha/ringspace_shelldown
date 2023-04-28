@@ -57,7 +57,7 @@ func _set_invulnerability(is_invulnerable: bool):
 
 func spawn():
 	# randomly select a safe crust segment
-	var crust_segments = get_parent().get_node("Crust").get_children()
+	var crust_segments = get_parent().get_node("Crust").get_children().filter(func(segment): return segment.can_spawn_player())
 	var crust_index = rand.randi_range(0, crust_segments.size() - 1)
 	var destination_segment = crust_segments[crust_index]
 	if destination_segment.get_node("AnimationPlayer").current_animation == "segment_destroy":
@@ -73,7 +73,7 @@ func spawn():
 	# teleport
 	norm_velocity = Vector2(0, 0)
 	perp_velocity = Vector2(0, 0)
-	transform.origin = (get_parent().get_node("Crust").transform.origin + 0.7 * \
+	transform.origin = (get_parent().get_node("Crust").transform.origin + 0.85 * \
 	destination_segment.get_node("Visuals").transform.origin)
 	
 	$RespawnTimer.start()

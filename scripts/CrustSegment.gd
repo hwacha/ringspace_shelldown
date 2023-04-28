@@ -13,6 +13,8 @@ var colliders_per_segment
 @export var juttering : bool = false
 @onready var original_position = $Visuals/Ring.transform.origin
 
+var occupying_players = []
+
 var initial_segment_index
 
 func _ready():
@@ -35,3 +37,15 @@ func _process(_delta):
 	if juttering:
 		var mem = rand.randf_range(-PI, PI)
 		$Visuals/Ring.transform.origin = original_position + 5 * Vector2(cos(mem), sin(mem))
+
+func _on_area_2d_body_entered(body):
+	if not body.dead and not body.id in occupying_players:
+		occupying_players.push_back(body.id)
+
+
+func _on_area_2d_body_exited(body):
+	if body.id in occupying_players:
+		occupying_players.erase(body.id)
+		
+func can_spawn_player():
+	return occupying_players.size() == 0

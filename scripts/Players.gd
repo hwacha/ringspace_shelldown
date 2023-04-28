@@ -23,11 +23,11 @@ const player_scene = preload("res://scenes/Player.tscn")
 var orb_loss_numerator = 1
 var orb_loss_denominator = 2
 
-const player_colors = [
-	Color(1, 0.1, 0.1),
-	Color(0, 0.5, 1),
-	Color(0, 1, 0),
-	Color(1, 1, 0),
+var player_colors = [
+	Color.hex(0xa40909ff) + Color(0.2, 0.2, 0.2),
+	Color.hex(0x0a1ea2ff) + Color(0.2, 0.2, 0.2),
+	Color.hex(0x258e1dff) + Color(0.2, 0.2, 0.2),
+	Color.hex(0xcec645ff) + Color(0.2, 0.2, 0.2),
 ]
 
 var player_invulnerability_colors = [
