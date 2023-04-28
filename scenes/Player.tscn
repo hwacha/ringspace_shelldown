@@ -101,6 +101,10 @@ script = ExtResource("4_v8tyi")
 [node name="TeleportInvulnerability" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="ExpandTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0.59845, -18.319)
 emitting = false
@@ -133,5 +137,6 @@ volume_db = -18.0
 [connection signal="area_entered" from="Overlap" to="." method="_on_Overlap_area_entered"]
 [connection signal="area_exited" from="Overlap" to="." method="_on_Overlap_area_exited"]
 [connection signal="timeout" from="TeleportInvulnerability" to="." method="_on_teleport_invulnerability_timeout"]
+[connection signal="timeout" from="ExpandTimer" to="." method="_on_expand_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

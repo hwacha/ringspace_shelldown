@@ -16,7 +16,12 @@ func set_powerup(new_powerup):
 		$Sprite2D.texture = load("res://assets/" + powerup + ".png")
 
 func on_use_powerup(reference):
+	var powerup_used = false
 	if powerup != null:
 		if powerup == "teleport":
-			reference.spawn()
-		powerup = null
+			powerup_used = reference.spawn()
+		elif powerup == "expand":
+			powerup_used = reference.expand()
+		
+		if powerup_used:
+			powerup = null

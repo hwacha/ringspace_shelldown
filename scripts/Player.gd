@@ -13,6 +13,8 @@ var cf = 0.105
 var perp_speed = 40 * 0.75
 var jump_impulse = 2.6
 
+var expansion_factor = 2.0
+
 var starting_theta
 var centroid : Vector2
 var surface_to_centroid
@@ -29,6 +31,8 @@ var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
 var spawning = false
+var expanded = false
+
 var ontop_of = []
 
 func _ready():
@@ -77,6 +81,17 @@ func spawn():
 	destination_segment.get_node("Visuals").transform.origin)
 	
 	$RespawnTimer.start()
+	
+	return true
+	
+func expand():
+	if not expanded:
+		scale *= expansion_factor
+		expanded = true
+		$ExpandTimer.start()
+		return true
+	return false
+	
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
@@ -297,3 +312,9 @@ func _on_animated_sprite_2d_animation_finished():
 func _on_respawn_timer_timeout():
 	spawning = false
 	pass # Replace with function body.
+
+
+func _on_expand_timer_timeout():
+	if expanded:
+		scale /= expansion_factor
+		expanded = false

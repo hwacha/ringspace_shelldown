@@ -132,8 +132,14 @@ func _on_match_timer_timeout():
 
 
 func _on_powerup_timer_timeout():
+	var old_collectable = get_node_or_null("../Collectable")
+	if old_collectable != null:
+		get_parent().remove_child(old_collectable)
+		old_collectable.queue_free()
+
 	var new_collectable = preload("res://scenes/Collectable.tscn").instantiate()
-	new_collectable.collectable = "teleport"
+	var collectable_names = ["teleport", "expand"]
+	var ri = rng.randi_range(0, collectable_names.size() - 1)
+	new_collectable.collectable = collectable_names[ri]
 	new_collectable.transform.origin = screen_size / 2
 	get_parent().add_child(new_collectable)
-	pass # Replace with function body.
