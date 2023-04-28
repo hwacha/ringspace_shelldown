@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bbsblo6724ua2"]
+
+[ext_resource type="Texture2D" uid="uid://f15nqclgc2ow" path="res://assets/GreenOrb_Halo.png" id="1_bcsod"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug2uf"]
+atlas = ExtResource("1_bcsod")
+region = Rect2(0, 0, 842, 835)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_477oq"]
+atlas = ExtResource("1_bcsod")
+region = Rect2(842, 0, 842, 835)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug2uf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_477oq")
+}],
+"loop": true,
+"name": &"grabbable",
+"speed": 5.0
+}]

@@ -28,6 +28,7 @@ func _process(_delta):
 func _on_body_entered(body):
 	if not (claimed or traveling or body.dead):
 		$WaitingToTravel.stop()
+		$AnimatedSprite2D.animation = "default"
 		get_parent().call_deferred("remove_child", self)
 		var new_orbs = body.get_node("Orbs")
 		new_orbs.call_deferred("add_child", self)
@@ -35,6 +36,7 @@ func _on_body_entered(body):
 
 func set_new_destination():
 	traveling = true
+	$AnimatedSprite2D.animation = "default"
 
 	var animation
 	if next_claimant == null:
@@ -122,6 +124,8 @@ func _on_animation_player_animation_finished(_anim_name):
 	
 	if next_claimant == null:
 		$WaitingToTravel.start()
+		if not claimed:
+			$AnimatedSprite2D.animation = "grabbable"
 	else:
 		get_parent().call_deferred("remove_child", self)
 		next_claimant.get_node("Orbs").call_deferred("add_child", self)
@@ -132,3 +136,11 @@ func _on_animation_player_animation_finished(_anim_name):
 func _on_waiting_to_travel_timeout():
 	if not claimed:
 		set_new_destination()
+
+
+func _on_animated_sprite_2d_animation_changed():
+	
+	var anim_sprite = $AnimatedSprite2D
+#	print("animation changed: " + anim_sprite.animation)
+	anim_sprite.material.set("shader_parameter/is_grabbable", \
+		anim_sprite.animation == "grabbable")

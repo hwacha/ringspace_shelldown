@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6ktckxnt6srw"
-path="res://.godot/imported/GreenOrb.png-13f3067a9ef9d55440045041135cfd27.ctex"
+uid="uid://bqh6qd8d4g8so"
+path="res://.godot/imported/BlueOrb_Halo.png-fa5cd658d8b2c41fc2156903dac91638.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GreenOrb.png"
-dest_files=["res://.godot/imported/GreenOrb.png-13f3067a9ef9d55440045041135cfd27.ctex"]
+source_file="res://assets/BlueOrb_Halo.png"
+dest_files=["res://.godot/imported/BlueOrb_Halo.png-fa5cd658d8b2c41fc2156903dac91638.ctex"]
 
 [params]
 

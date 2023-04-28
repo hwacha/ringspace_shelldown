@@ -255,8 +255,12 @@ func _on_animated_sprite_2d_animation_finished():
 		var orb_instance = orb_scene.instantiate()
 		orb_instance.id = self.id
 		orb_instance.centroid = self.centroid
-		orb_instance.get_node("Sprite2D").texture = load("res://assets/" + Players.player_names[self.id - 1] + "Orb.png")
-		var orb_exit_location = self.transform.origin + 20 * (centroid - transform.origin).normalized()
+		var orb_animated_sprite = orb_instance.get_node("AnimatedSprite2D")
+		orb_animated_sprite.sprite_frames = \
+			load("res://animations/SpriteFrames_Orb" + str(self.id) + ".tres")
+		orb_animated_sprite.animation = "default"
+		var orb_exit_location = self.transform.origin + \
+			20 * (centroid - transform.origin).normalized()
 		orb_instance.transform.origin = orb_exit_location
 		
 		if killer != null:

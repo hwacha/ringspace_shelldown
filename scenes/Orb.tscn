@@ -1,20 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://djy1ltinuio1p"]
+[gd_scene load_steps=6 format=3 uid="uid://djy1ltinuio1p"]
 
 [ext_resource type="Script" path="res://scripts/Orb.gd" id="1_kl67p"]
-[ext_resource type="Texture2D" uid="uid://bw272uyo34scv" path="res://assets/BlueOrb.png" id="3_08l6p"]
+[ext_resource type="Shader" path="res://scripts/Orb.gdshader" id="2_5g37w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwnw8"]
+resource_local_to_scene = true
+shader = ExtResource("2_5g37w")
+shader_parameter/is_grabbable = null
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qex5c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e873u"]
-radius = 22.0
+radius = 28.0
 
 [node name="Orb" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_kl67p")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_vwnw8")
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_08l6p")
-offset = Vector2(-7, 10)
+sprite_frames = SubResource("SpriteFrames_qex5c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e873u")
@@ -24,4 +40,5 @@ wait_time = 10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="timeout" from="WaitingToTravel" to="." method="_on_waiting_to_travel_timeout"]

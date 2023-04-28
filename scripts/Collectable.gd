@@ -22,5 +22,5 @@ func _on_body_entered(body):
 
 	get_node("../Powerups/Powerup" + str(body.id)).set_powerup(collectable)
 	claimed = true
-	get_parent().remove_child(self)
+	get_parent().call_deferred("remove_child", self)
 	queue_free()
