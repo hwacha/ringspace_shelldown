@@ -34,7 +34,10 @@ var invulnerable = false : set = _set_invulnerability
 var spawning = false
 var expanded = false
 var speedy = false
+
 var ontop_of = []
+var black_hole = null
+var is_in_event_horizon = false
 
 func _ready():
 	var crust = get_node("../Crust")
@@ -223,7 +226,18 @@ func _physics_process(_delta):
 	if not dead:
 		get_input(diff)
 	
-	set_velocity(norm_velocity + perp_velocity)
+	var total_velocity = norm_velocity + perp_velocity
+	
+	if black_hole != null and not is_on_floor():
+		var black_hole_diff = black_hole.transform.origin - self.transform.origin
+		var black_hole_direction = black_hole_diff.normalized()
+		if is_in_event_horizon:
+			total_velocity = black_hole_direction * 50.0
+			self.rotation = self.transform.origin.angle_to_point(black_hole.transform.origin) - (PI / 2)
+		else:
+			total_velocity += black_hole_direction * 50.0
+	
+	set_velocity(total_velocity)
 	set_up_direction(-diff)
 	move_and_slide()
 	norm_velocity = velocity.normalized() * norm_velocity.length()

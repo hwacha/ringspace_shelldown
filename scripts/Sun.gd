@@ -2,7 +2,7 @@ extends Area2D
 
 
 func _ready():
-	pass
+	$Decay.start()
 
 func _process(_delta):
 	pass
@@ -12,3 +12,8 @@ func _on_body_entered(body):
 		body.die()
 		body.lock_physics = true
 		body.get_node("AnimatedSprite2D").visible = false
+
+
+func _on_decay_timeout():
+	get_parent().remove_child(self)
+	queue_free()

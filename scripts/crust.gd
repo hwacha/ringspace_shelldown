@@ -1,11 +1,12 @@
 extends Node2D
 
 @export var num_segments: int = 16
-@export var num_segments_remaining_at_end : int = 4
 
 var segments_to_keep = [
-	0, 1, 4, 7, 8, 11, 12, 13
+	0, 4, 8, 11, 12, 13
 ]
+
+var num_segments_remaining_at_end
 
 var segments_to_decay
 
@@ -30,7 +31,19 @@ var decay_constant
 
 func _ready():
 	Players.lock_action = true
-#	crust_decay.wait_time = 5.0
+	if Players.star_direction == 1:
+		segments_to_keep.push_back(1)
+		segments_to_keep.push_back(5)
+		segments_to_keep.push_back(9)
+		segments_to_keep.push_back(14)
+	else:
+		segments_to_keep.push_back(15)
+		segments_to_keep.push_back(3)
+		segments_to_keep.push_back(7)
+		segments_to_keep.push_back(10)
+
+	num_segments_remaining_at_end = num_segments - segments_to_keep.size()
+#	crust_decay.wait_time = 3.0
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
 	segments_to_decay = []
@@ -113,19 +126,21 @@ func _on_round_begin():
 	get_node("../MatchTimer").start()
 	get_node("../TimeLeftLabel").visible = true
 	powerup_timer.start()
-#	obstacle_timer.start()
+	obstacle_timer.start()
 
 func _on_obstacle_timeout():
-	if get_parent().has_node("Sun"):
-		var sun = get_node("../Sun")
-		var col = sun.get_node("CollisionShape2D")
-		col.disabled = not col.disabled
-		sun.visible  = not sun.visible 
+	var obstacles = ["Sun", "BlackHole"]
+	var rand = rng.randi_range(0, obstacles.size() - 1)
+	
+	var obstacle = load("res://scenes/" + obstacles[rand] + ".tscn").instantiate()
+	
+	get_parent().add_child(obstacle)
+	obstacle.transform.origin = screen_size / 2
+	if Players.star_direction == 1:
+		obstacle.transform.origin += Vector2(-80, 240)
 	else:
-		var sun = preload("res://scenes/Sun.tscn").instantiate()
-		get_parent().add_child(sun)
-		sun.transform.origin = screen_size / 2
-
+		obstacle.transform.origin += Vector2(80, 240)
+	
 
 func _on_match_timer_timeout():
 	Players.end_game()

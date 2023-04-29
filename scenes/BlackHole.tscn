@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw4r2hihp0tsw"]
+
+[ext_resource type="Script" path="res://scripts/BlackHole.gd" id="1_ol0ty"]
+[ext_resource type="Texture2D" uid="uid://d3ok507r4mdja" path="res://assets/black_hole.png" id="2_6t7dj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyay0"]
+radius = 106.019
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2yvu0"]
+radius = 4.0
+
+[node name="BlackHole" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ol0ty")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_6t7dj")
+
+[node name="Decay" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qyay0")
+
+[node name="Singularity" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Singularity"]
+shape = SubResource("CircleShape2D_2yvu0")
+debug_color = Color(0.152941, 0.113725, 0.27451, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Decay" to="." method="_on_decay_timeout"]
+[connection signal="area_entered" from="Singularity" to="." method="_on_singularity_area_entered"]

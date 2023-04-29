@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vwnw8"]
 resource_local_to_scene = true
 shader = ExtResource("2_5g37w")
-shader_parameter/is_grabbable = null
+shader_parameter/is_grabbable = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qex5c"]
 animations = [{

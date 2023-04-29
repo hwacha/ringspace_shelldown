@@ -9,4 +9,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var time_left = get_node("../MatchTimer").get_time_left()
-	text = str(floor(time_left))
+	text = str(ceil(time_left))
