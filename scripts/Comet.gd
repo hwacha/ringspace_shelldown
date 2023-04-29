@@ -2,9 +2,13 @@ extends Area2D
 
 var centroid
 var dir_sign
-var player_who_shot
+var player_who_shot : set = _set_player_who_shot
 
 @export var speed : float = 1000.0
+
+func _set_player_who_shot(player):
+	player_who_shot = player
+	$Sprite2D.modulate = player.get_node("DeathParticles").modulate
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,7 +29,10 @@ func _on_decay_timeout():
 
 
 func _on_body_entered(body):
-	if body == player_who_shot or body.invulnerable:
+	if body.shielded and not body.dead:
+		player_who_shot = body
+		dir_sign *= -1
+	elif body == player_who_shot or body.invulnerable:
 		return
 	else:
 		body.killer = player_who_shot

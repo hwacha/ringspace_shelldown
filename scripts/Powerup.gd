@@ -24,6 +24,8 @@ func on_use_powerup(reference):
 			powerup_used = reference.expand()
 		elif powerup == "fast":
 			powerup_used = reference.fast()
+		elif powerup == "shield":
+			powerup_used = reference.shield()
 		elif powerup == "comet":
 			powerup_used = reference.comet()
 		elif powerup == "vacuum":

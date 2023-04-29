@@ -170,7 +170,7 @@ wait_time = 31.074
 one_shot = true
 
 [node name="PowerupTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 3.0
 
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 120.0

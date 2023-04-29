@@ -34,6 +34,7 @@ var invulnerable = false : set = _set_invulnerability
 var spawning = false
 var expanded = false
 var speedy = false
+var shielded = false : set = _set_shieldedness
 
 var ontop_of = []
 var black_hole = null
@@ -62,6 +63,10 @@ func _ready():
 func _set_invulnerability(is_invulnerable: bool):
 	invulnerable = is_invulnerable
 	$AnimatedSprite2D.material.set("shader_parameter/is_invulnerable", is_invulnerable)
+
+func _set_shieldedness(is_shielded: bool):
+	shielded = is_shielded
+	$AnimatedSprite2D.material.set("shader_parameter/is_shielded", is_shielded)
 
 func spawn():
 	# randomly select a safe crust segment
@@ -102,11 +107,17 @@ func fast():
 		$FastTimer.start()
 		return true
 	return false
+
+func shield():
+	if not shielded:
+		shielded = true
+		$ShieldTimer.start()
+		return true
+	return false
 	
 func comet():
 	var comet_instance = preload("res://scenes/Comet.tscn").instantiate()
 	comet_instance.player_who_shot = self
-	comet_instance.modulate = $DeathParticles.modulate
 	var dir_sign = -1
 	if anim.flip_h:
 		dir_sign *= -1
@@ -276,8 +287,9 @@ func _on_HurtBox_area_entered(hitbox):
 		hitter.norm_velocity = -hurtbox_down * jump_impulse * (surface_to_centroid / hurtbox_down.length())
 		hitter.set_fast_falling(false)
 		# kill
-		self.killer = hitter
-		self.die()
+		if not shielded:
+			self.killer = hitter
+			self.die()
 		
 
 func die():
@@ -384,3 +396,8 @@ func _on_expand_timer_timeout():
 func _on_fast_timer_timeout():
 	if speedy:
 		speedy = false
+
+
+func _on_shield_timer_timeout():
+	if shielded:
+		shielded = false
