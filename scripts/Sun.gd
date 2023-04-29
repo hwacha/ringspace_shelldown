@@ -9,9 +9,10 @@ func _process(_delta):
 
 func _on_body_entered(body):
 	if not body.invulnerable:
-		body.die()
-		body.lock_physics = true
-		body.get_node("AnimatedSprite2D").visible = false
+		if not body.try_auto_teleport():
+			body.die()
+			body.lock_physics = true
+			body.get_node("AnimatedSprite2D").visible = false
 
 
 func _on_decay_timeout():

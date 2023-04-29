@@ -18,9 +18,7 @@ func set_powerup(new_powerup):
 func on_use_powerup(reference):
 	var powerup_used = false
 	if powerup != null:
-		if powerup == "teleport":
-			powerup_used = reference.spawn()
-		elif powerup == "expand":
+		if powerup == "expand":
 			powerup_used = reference.expand()
 		elif powerup == "fast":
 			powerup_used = reference.fast()
@@ -30,6 +28,8 @@ func on_use_powerup(reference):
 			powerup_used = reference.comet()
 		elif powerup == "vacuum":
 			powerup_used = reference.vacuum()
+		elif powerup == "teleport":
+			powerup_used = reference.spawn(true)
 
 	if powerup_used:
 		powerup = null

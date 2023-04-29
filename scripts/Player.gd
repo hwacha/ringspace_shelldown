@@ -31,7 +31,6 @@ var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
-var spawning = false
 var expanded = false
 var speedy = false
 var shielded = false : set = _set_shieldedness
@@ -50,7 +49,7 @@ func _ready():
 		(Vector2(cos(starting_theta) * crust.screen_size.x / 10, \
 			sin(starting_theta) * crust.screen_size.y / 10))
 	else:
-		spawn()
+		spawn(false)
 	
 	rand.randomize()
 	
@@ -68,7 +67,7 @@ func _set_shieldedness(is_shielded: bool):
 	shielded = is_shielded
 	$AnimatedSprite2D.material.set("shader_parameter/is_shielded", is_shielded)
 
-func spawn():
+func spawn(is_teleport: bool):
 	# randomly select a safe crust segment
 	var crust_segments = get_parent().get_node("Crust").get_children().filter(func(segment): return segment.can_spawn_player())
 	var crust_index = rand.randi_range(0, crust_segments.size() - 1)
@@ -78,6 +77,9 @@ func spawn():
 		if second_crust_index >= crust_index:
 			second_crust_index += 1
 		destination_segment = crust_segments[second_crust_index]
+		
+	var destination_point = (get_parent().get_node("Crust").transform.origin + 0.85 * \
+		destination_segment.get_node("Visuals").transform.origin)
 	
 	# invulnerable
 	invulnerable = true
@@ -86,12 +88,28 @@ func spawn():
 	# teleport
 	norm_velocity = Vector2(0, 0)
 	perp_velocity = Vector2(0, 0)
-	transform.origin = (get_parent().get_node("Crust").transform.origin + 0.85 * \
-	destination_segment.get_node("Visuals").transform.origin)
 	
-	$RespawnTimer.start()
+	if is_teleport:
+		self.visible = false
+		self.lock_physics = true
+		var teleport_animation = preload("res://scenes/TeleportAnimation.tscn").instantiate()
+		teleport_animation.player = self
+		teleport_animation.source = self.transform.origin
+		self.transform.origin = Vector2(-100000, -100000)
+		teleport_animation.destination = destination_point
+		
+		get_parent().add_child(teleport_animation)
+	else:
+		transform.origin = destination_point
 	
 	return true
+
+func try_auto_teleport():
+	var my_powerup = get_node("../Powerups/Powerup" + str(self.id))
+	if my_powerup.powerup == "teleport":
+		emit_signal("used_powerup", self)
+		return true
+	return false
 	
 func expand():
 	if not expanded:
@@ -249,7 +267,7 @@ func _physics_process(_delta):
 			total_velocity += black_hole_direction * 50.0
 	
 	set_velocity(total_velocity)
-	set_up_direction(-diff)
+	set_up_direction((-diff).normalized())
 	move_and_slide()
 	norm_velocity = velocity.normalized() * norm_velocity.length()
 #	velocity -= perp_velocity
@@ -283,8 +301,12 @@ func _on_HurtBox_area_entered(hitbox):
 	
 	if hitter.norm_velocity.dot(hitbox_down) > 0 or \
 	norm_velocity.dot(hurtbox_down) < 0:
+		if not shielded and try_auto_teleport():
+			return
+		
 		# bounce
-		hitter.norm_velocity = -hurtbox_down * jump_impulse * (surface_to_centroid / hurtbox_down.length())
+		hitter.norm_velocity = -hurtbox_down * jump_impulse * \
+		(surface_to_centroid / hurtbox_down.length())
 		hitter.set_fast_falling(false)
 		# kill
 		if not shielded:
@@ -295,8 +317,8 @@ func _on_HurtBox_area_entered(hitbox):
 func die():
 	if dead:
 		return
-
 	dead = true
+	shielded = false # not strictly necessary
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.set_animation("dead")
 	$HitBox.set_deferred("monitoring", false)
@@ -313,7 +335,7 @@ func _on_DeathTimer_timeout():
 	queue_free()
 	
 func on_respawn():
-	spawn()
+	spawn(false)
 
 func _on_Overlap_area_entered(area):
 	var other = area.get_parent()
@@ -381,11 +403,6 @@ func _on_animated_sprite_2d_animation_finished():
 		
 		Players.update_score(id, num_kept_orbs)
 		anim.set_animation("empty")
-
-
-func _on_respawn_timer_timeout():
-	spawning = false
-
 
 func _on_expand_timer_timeout():
 	if expanded:

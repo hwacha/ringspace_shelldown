@@ -151,9 +151,6 @@ explosiveness = 1.0
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 0.1
-
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4")
 volume_db = -21.0
@@ -175,4 +172,3 @@ volume_db = -18.0
 [connection signal="timeout" from="FastTimer" to="." method="_on_fast_timer_timeout"]
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_shield_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
-[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

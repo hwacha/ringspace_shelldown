@@ -102,7 +102,6 @@ func spawn_players():
 func respawn_player(player_id, priority):
 	var next_player = player_constructor(player_id, priority)
 	next_player.first_spawn = false
-	next_player.spawning = true
 	
 	var next_player_orbs = next_player.get_node("Orbs")
 
