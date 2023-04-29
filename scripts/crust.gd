@@ -139,7 +139,6 @@ func _on_powerup_timer_timeout():
 
 	var new_collectable = preload("res://scenes/Collectable.tscn").instantiate()
 	var collectable_names = ["teleport", "expand", "fast", "comet", "vacuum"]
-	collectable_names = ["vacuum"]
 	var ri = rng.randi_range(0, collectable_names.size() - 1)
 	new_collectable.collectable = collectable_names[ri]
 	new_collectable.transform.origin = screen_size / 2
