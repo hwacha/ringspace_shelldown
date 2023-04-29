@@ -118,6 +118,19 @@ func comet():
 	get_parent().add_child(comet_instance)
 	
 	return true
+	
+func vacuum():
+	var vacuum_instance = preload("res://scenes/OrbVacuum.tscn").instantiate()
+	vacuum_instance.player_who_threw = self
+	vacuum_instance.modulate = $DeathParticles.modulate
+	
+	var diff = self.transform.origin - centroid
+	vacuum_instance.velocity = norm_velocity + perp_velocity
+	if vacuum_instance.velocity.length() == 0:
+		vacuum_instance.velocity = -diff
+	vacuum_instance.transform.origin = self.transform.origin
+	get_parent().add_child(vacuum_instance)
+	return true
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)

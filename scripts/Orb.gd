@@ -34,6 +34,14 @@ func _on_body_entered(body):
 		new_orbs.call_deferred("add_child", self)
 		new_orbs.call_deferred("on_add_orb", self, true)
 
+func _on_area_entered(area):
+	if not (claimed or traveling):
+		$WaitingToTravel.stop()
+		$AnimatedSprite2D.animation = "default"
+		next_claimant = area.player_who_threw
+		set_new_destination()
+		
+
 func set_new_destination():
 	traveling = true
 	$AnimatedSprite2D.animation = "default"

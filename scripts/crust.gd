@@ -30,7 +30,7 @@ var decay_constant
 
 func _ready():
 	Players.lock_action = true
-#	crust_decay.wait_time = 5.0
+	crust_decay.wait_time = 5.0
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
 	segments_to_decay = []
@@ -138,8 +138,8 @@ func _on_powerup_timer_timeout():
 		old_collectable.queue_free()
 
 	var new_collectable = preload("res://scenes/Collectable.tscn").instantiate()
-	var collectable_names = ["teleport", "expand", "fast", "comet"]
-	collectable_names = ["comet"]
+	var collectable_names = ["teleport", "expand", "fast", "comet", "vacuum"]
+	collectable_names = ["vacuum"]
 	var ri = rng.randi_range(0, collectable_names.size() - 1)
 	new_collectable.collectable = collectable_names[ri]
 	new_collectable.transform.origin = screen_size / 2
