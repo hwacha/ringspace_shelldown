@@ -4,7 +4,7 @@ extends Node2D
 @export var num_segments_remaining_at_end : int = 4
 
 var segments_to_keep = [
-	0, 4, 8, 12
+	0, 1, 4, 7, 8, 11, 12, 13
 ]
 
 var segments_to_decay
@@ -30,7 +30,7 @@ var decay_constant
 
 func _ready():
 	Players.lock_action = true
-	crust_decay.wait_time = 5.0
+#	crust_decay.wait_time = 5.0
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
 	segments_to_decay = []

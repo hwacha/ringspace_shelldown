@@ -164,9 +164,11 @@ func get_input(diff):
 		if move_clockwise:
 			perp_velocity += diff.rotated(PI / 2).normalized() * ps
 			anim.flip_h = true
+			$LeftArrow.visible = true
 		if move_counterclockwise:
 			perp_velocity += diff.rotated(-PI / 2).normalized() * ps
 			anim.flip_h = false
+			$RightArrow.visible = true
 		if not jump_animation_ongoing:
 			if grounded:
 				anim.set_animation("running")
@@ -202,6 +204,8 @@ func get_input(diff):
 		emit_signal("used_powerup", self)
 
 func _physics_process(_delta):
+	$LeftArrow.visible = false
+	$RightArrow.visible = false
 	if lock_physics:
 		return
 

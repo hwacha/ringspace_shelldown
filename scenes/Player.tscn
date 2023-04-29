@@ -1,12 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=20 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
 [ext_resource type="SpriteFrames" uid="uid://civqu1ibw4bfh" path="res://animations/SpriteFrames_P1.tres" id="2_l3i4t"]
 [ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="3_yudyd"]
 [ext_resource type="AudioStream" uid="uid://dm4vxiqb7oit5" path="res://assets/121645028-video-game-jump-sound-effect-1.wav" id="4"]
+[ext_resource type="Texture2D" uid="uid://bbiopx47rc07b" path="res://assets/icone-fleche-gauche-bleu.png" id="4_jskf2"]
 [ext_resource type="Script" path="res://scripts/Orbs.gd" id="4_v8tyi"]
 [ext_resource type="AudioStream" uid="uid://grfls847bx6u" path="res://assets/ring_game_death_sound.wav" id="5"]
+[ext_resource type="Texture2D" uid="uid://dkgvi6me01b86" path="res://assets/icone-fleche-droite-rouge.png" id="5_qq2a4"]
 [ext_resource type="AudioStream" uid="uid://bgkhlkm6fuxo4" path="res://assets/ring_game_fast_fall.wav" id="6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
@@ -58,6 +60,18 @@ metadata/_edit_group_ = true
 material = SubResource("ShaderMaterial_sc3mh")
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("2_l3i4t")
+
+[node name="LeftArrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-42, -18)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_jskf2")
+
+[node name="RightArrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(42, -18)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_qq2a4")
 
 [node name="CollisionShapeForGround" type="CollisionShape2D" parent="."]
 position = Vector2(4, 0)
