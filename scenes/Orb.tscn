@@ -36,7 +36,8 @@ sprite_frames = SubResource("SpriteFrames_qex5c")
 shape = SubResource("CircleShape2D_e873u")
 
 [node name="WaitingToTravel" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 13.0
+one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

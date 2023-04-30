@@ -43,7 +43,7 @@ func _ready():
 		segments_to_keep.push_back(10)
 
 	num_segments_remaining_at_end = num_segments - segments_to_keep.size()
-#	crust_decay.wait_time = 3.0
+#	crust_decay.wait_time = 10.0
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
 	segments_to_decay = []
@@ -198,7 +198,4 @@ func _on_powerup_timer_timeout():
 			get_parent().add_child(new_collectable)
 			break
 		lower_bound += collectable_probability
-	
-	print(rand)
-	print(greater_bound)
-	print(new_collectable.collectable)
+

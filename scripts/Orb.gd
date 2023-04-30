@@ -11,10 +11,19 @@ var points_to_claimant = 2
 # state
 var traveling : bool = true
 var claimed : bool = false
-var next_claimant : Player = null
+var next_claimant : Player = null : set = set_next_claimant
+var next_claimant_id : int = -1
+
 var claimant_destination_offset = null
 
 var rand = RandomNumberGenerator.new()
+
+func set_next_claimant(new_next_claimant):
+	next_claimant = new_next_claimant
+	if new_next_claimant == null:
+		next_claimant_id = -1
+	else:
+		next_claimant_id = new_next_claimant.id
 
 func _ready():
 	rand.randomize()
@@ -130,15 +139,32 @@ func _on_tree_entered():
 
 func _on_animation_player_animation_finished(_anim_name):
 	traveling = false
-	
 	if next_claimant == null:
-		$WaitingToTravel.start()
-		if not claimed:
+		if claimed:
+			assert(next_claimant_id != -1)
+			get_parent().call_deferred("remove_child", self)
+			var claimed_player_singleton = get_node("/root/Main").get_children().filter(func(node):
+				return node is Player and node.id == next_claimant_id
+			)
+			if claimed_player_singleton.size() > 0:
+				var respawned_claimant = claimed_player_singleton[0]
+				respawned_claimant.get_node("Orbs").call_deferred("add_child", self)
+				respawned_claimant.get_node("Orbs").call_deferred("on_add_orb", self, true)
+			else:
+				Players.stored_orbs[next_claimant_id - 1].push_back(self)
+		else:
+			# unclaimed orbs should be grabbable and move around
 			$AnimatedSprite2D.animation = "grabbable"
+			$WaitingToTravel.start()
 	else:
 		get_parent().call_deferred("remove_child", self)
-		next_claimant.get_node("Orbs").call_deferred("add_child", self)
-		next_claimant.get_node("Orbs").call_deferred("on_add_orb", self, true)
+		if next_claimant.dead:
+			var stored_orbs = Players.stored_orbs
+			stored_orbs[next_claimant.id - 1].push_back(self)
+		else:
+			next_claimant.get_node("Orbs").call_deferred("add_child", self)
+			next_claimant.get_node("Orbs").call_deferred("on_add_orb", self, true)
+		
 		next_claimant = null
 	
 
@@ -148,7 +174,6 @@ func _on_waiting_to_travel_timeout():
 
 
 func _on_animated_sprite_2d_animation_changed():
-	
 	var anim_sprite = $AnimatedSprite2D
 #	print("animation changed: " + anim_sprite.animation)
 	anim_sprite.material.set("shader_parameter/is_grabbable", \

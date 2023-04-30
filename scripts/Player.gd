@@ -27,6 +27,7 @@ var rand = RandomNumberGenerator.new()
 var fast_falling = false: set = set_fast_falling
 var dead = false
 var killer = null
+var killer_id = -1
 var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
@@ -311,6 +312,7 @@ func _on_HurtBox_area_entered(hitbox):
 		# kill
 		if not shielded:
 			self.killer = hitter
+			self.killerid = hitter.id
 			self.die()
 		
 

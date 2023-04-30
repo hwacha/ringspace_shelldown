@@ -3,11 +3,13 @@ extends Area2D
 var centroid
 var dir_sign
 var player_who_shot : set = _set_player_who_shot
+var player_who_shot_id : int
 
 @export var speed : float = 1000.0
 
 func _set_player_who_shot(player):
 	player_who_shot = player
+	player_who_shot_id = player.id
 	$Sprite2D.modulate = player.get_node("DeathParticles").modulate
 
 # Called when the node enters the scene tree for the first time.
@@ -36,4 +38,5 @@ func _on_body_entered(body):
 		return
 	else:
 		body.killer = player_who_shot
+		body.killer_id = player_who_shot_id
 		body.die()
