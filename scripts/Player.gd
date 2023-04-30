@@ -79,6 +79,8 @@ func spawn(is_teleport: bool):
 			second_crust_index += 1
 		destination_segment = crust_segments[second_crust_index]
 		
+	destination_segment.occupying_players.push_back(self.id)
+		
 	var destination_point = (get_parent().get_node("Crust").transform.origin + 0.85 * \
 		destination_segment.get_node("Visuals").transform.origin)
 	
