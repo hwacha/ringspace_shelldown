@@ -154,7 +154,51 @@ func _on_powerup_timer_timeout():
 
 	var new_collectable = preload("res://scenes/Collectable.tscn").instantiate()
 	var collectable_names = ["teleport", "expand", "fast", "shield", "comet", "vacuum"]
-	var ri = rng.randi_range(0, collectable_names.size() - 1)
-	new_collectable.collectable = collectable_names[ri]
-	new_collectable.transform.origin = screen_size / 2
-	get_parent().add_child(new_collectable)
+	
+	# normalize probability of orb vacuum
+	# to number of orbs on field in range [0, 1/3]
+	# where probability maxes out at win score
+	var orb_vac_max_probability = 2.0 / 5.0
+	var num_orbs_on_field = get_parent().get_children().filter(func(node): return node is Orb).size()
+	var orb_vac_probability = float(min(num_orbs_on_field, Players.play_to)) * \
+							(orb_vac_max_probability / Players.play_to)
+	# normalize probability of teleport
+	# to number of decayed crust segments [0, 1/3]
+	var teleport_max_probability = 2.0 / 5.0
+	var max_decayed_segments = num_segments - segments_to_keep.size()
+	var cur_decayed_segments = num_segments - get_children().size()
+	var teleport_probability = teleport_max_probability * (float(cur_decayed_segments) / float(max_decayed_segments))
+	# probability of speedy is pmax(fast) - [pmax(fast)/pmax(teleport)] * p(teleport)
+	var max_fast_probability = 0.25
+	var fast_probability = max_fast_probability * (1.0 - (teleport_probability / teleport_max_probability))
+	# probability of remaining powerups are
+	# equally divided among the remaining probability
+	var remaining_probability = 1.0 - (orb_vac_probability + teleport_probability + fast_probability)
+	var generic_probability = remaining_probability / (collectable_names.size() - 3)
+	
+	var collectable_probabilities = {
+		"vacuum": orb_vac_probability,
+		"teleport": teleport_probability,
+		"fast": fast_probability,
+		"expand": generic_probability,
+		"shield": generic_probability,
+		"comet": generic_probability,
+	}
+	
+	var rand = rng.randf()
+	var lower_bound = 0.0
+	var greater_bound = 0.0
+	for collectable_name in collectable_probabilities:
+		var collectable_probability = collectable_probabilities[collectable_name]
+		greater_bound = lower_bound + collectable_probability
+		if rand > lower_bound and rand <= greater_bound:
+			# spawn collectable
+			new_collectable.collectable = collectable_name
+			new_collectable.transform.origin = screen_size / 2
+			get_parent().add_child(new_collectable)
+			break
+		lower_bound += collectable_probability
+	
+	print(rand)
+	print(greater_bound)
+	print(new_collectable.collectable)

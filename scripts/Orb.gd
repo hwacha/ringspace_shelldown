@@ -1,4 +1,5 @@
 extends Area2D
+class_name Orb
 
 var id
 var centroid
