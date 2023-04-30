@@ -20,10 +20,16 @@ func _ready():
 	}
 	
 	for id in Players.starting_ids:
+		#remove hotjoin text
+		var hotjoin_text = get_node("../HotjoinText/" + str(id))
+		hotjoin_text.get_parent().remove_child(hotjoin_text)
+		hotjoin_text.queue_free()
+		#add powerup
 		var powerup = preload("res://scenes/Powerup.tscn").instantiate()
 		powerup.transform.origin = score_locations[str(id)]
 		powerup.name += str(id)
 		get_node("../Powerups").add_child(powerup)
+	
 	
 func _process(_delta):
 	pass

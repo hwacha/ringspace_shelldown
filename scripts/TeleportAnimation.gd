@@ -42,3 +42,6 @@ func _on_animation_finished(_anim):
 	player.transform.origin = destination
 	player.visible = true
 	player.lock_physics = false
+	
+	get_parent().remove_child(self)
+	queue_free()

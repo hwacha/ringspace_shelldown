@@ -13,20 +13,42 @@
 [sub_resource type="GDScript" id="GDScript_dr6nl"]
 script/source = "extends Node2D
 
+var players_not_playing
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	players_not_playing = [1, 2, 3, 4].filter(func(id): return id not in Players.starting_ids)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if not Players.lock_action:
+		for id in players_not_playing:
+			var button_pressed = Input.is_action_just_pressed(\"jump_p\" + str(id))
+			button_pressed = button_pressed or Input.is_action_just_pressed(\"fast_fall_p\" + str(id))
+			button_pressed = button_pressed or Input.is_action_just_pressed(\"use_p\" + str(id))
+			
+			if button_pressed:
+				players_not_playing.erase(id)
+				# remove join text
+				var hotjoin_text = $HotjoinText.get_node(str(id))
+				$HotjoinText.remove_child(hotjoin_text)
+				hotjoin_text.queue_free()
+				# add score bubble
+				$Score.queue_redraw()
+				# add powerup node
+				var powerup = preload(\"res://scenes/Powerup.tscn\").instantiate()
+				powerup.transform.origin = $Score.score_locations[str(id)]
+				powerup.name += str(id)
+				$Powerups.add_child(powerup)
+				#spawn player
+				Players.starting_ids.push_back(id)
+				Players.score[str(id)] = 0
+				Players.respawn_player(id, Players.starting_ids.size())
 
 
-func _on_child_entered_tree(node):
-	if node is Player and not node.first_spawn:
-		node.on_respawn()
+#func _on_child_entered_tree(node):
+#	if node is Player and not node.first_spawn:
+#		node.on_respawn()
 "
 
 [sub_resource type="Animation" id="Animation_dw41s"]
@@ -170,7 +192,7 @@ wait_time = 31.074
 one_shot = true
 
 [node name="PowerupTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 7.5
 
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 120.0
@@ -207,6 +229,81 @@ shape = SubResource("2")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="OutOfBounds"]
 position = Vector2(1280, 540)
 shape = SubResource("2")
+
+[node name="HotjoinText" type="Node2D" parent="."]
+position = Vector2(0, 476)
+
+[node name="1" type="RichTextLabel" parent="HotjoinText"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 19.0
+offset_top = -436.0
+offset_right = 219.0
+offset_bottom = -336.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_i7osw")
+bbcode_enabled = true
+text = "[center]Press any button to join[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="2" type="RichTextLabel" parent="HotjoinText"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = 511.0
+offset_right = 228.0
+offset_bottom = 563.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_i7osw")
+bbcode_enabled = true
+text = "[center]Press any button to join[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="3" type="RichTextLabel" parent="HotjoinText"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 861.0
+offset_top = 520.0
+offset_right = 1061.0
+offset_bottom = 572.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_i7osw")
+bbcode_enabled = true
+text = "[center]Press any button to join[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="4" type="RichTextLabel" parent="HotjoinText"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 856.0
+offset_top = -426.0
+offset_right = 1056.0
+offset_bottom = -326.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_i7osw")
+bbcode_enabled = true
+text = "[center]Press any button to join[/center]"
+fit_content = true
+scroll_active = false
 
 [node name="RoundText" type="RichTextLabel" parent="."]
 modulate = Color(1, 1, 1, 0)
