@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=6 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="3"]
+[ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="3_rwijt"]
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -31,7 +32,13 @@ position = Vector2(540, 420)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_do112")
 
+[node name="Starfield" type="Sprite2D" parent="."]
+position = Vector2(540, 540)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_rwijt")
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -45,12 +52,12 @@ anchor_right = 0.25
 anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
-text = "[center]Press W to Join[/center]"
+text = "[center]Press to Join[/center]"
 scroll_active = false
 
 [node name="P1Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color(1, 0, 0, 1)
+modulate = Color(0.84, 0.24, 0.24, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.8
@@ -70,12 +77,12 @@ anchor_right = 0.5
 anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
-text = "[center]Press T to Join[/center]"
+text = "[center]Press to Join[/center]"
 scroll_active = false
 
 [node name="P2Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color(0, 0.5, 1, 1)
+modulate = Color(0.2, 0.466667, 0.870588, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -96,12 +103,12 @@ anchor_right = 0.75
 anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
-text = "[center]Press i to Join[/center]"
+text = "[center]Press to Join[/center]"
 scroll_active = false
 
 [node name="P3Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color(0, 1, 0.180392, 1)
+modulate = Color(0.35, 0.76, 0.31, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -122,24 +129,25 @@ anchor_right = 1.0
 anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
-text = "[center]Press UP to Join[/center]"
+text = "[center]Press to Join[/center]"
 scroll_active = false
 
 [node name="P4Registered" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color(1, 0.960784, 0, 1)
+modulate = Color(1.01, 0.98, 0.47, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 1.0
-anchor_bottom = 0.722
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Yellow Joined[/center]"
 scroll_active = false
 
 [node name="Settings" type="Label" parent="."]
+visible = false
 layout_mode = 0
 anchor_left = 0.1
 anchor_top = 0.02

@@ -17,8 +17,10 @@ func set_registered_players(id):
 	
 func get_input():
 	for i in range(1, 5):
-		if Input.is_action_just_pressed("jump_p" + str(i)):
-			set_registered_players(i)
+		for action in ["jump", "fast_fall", "use"]:
+			if Input.is_action_just_pressed(action + "_p" + str(i)):
+				set_registered_players(i)
+				break
 	
 	var master_sound = AudioServer.get_bus_index("Master")
 	var is_muted = AudioServer.is_bus_mute(master_sound)
