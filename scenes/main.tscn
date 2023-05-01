@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://ej5761kq0jd1"]
+[gd_scene load_steps=15 format=3 uid="uid://coltyqvepu4rw"]
 
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_6u6n8"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1_i7osw"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="2"]
 [ext_resource type="Script" path="res://scripts/Starfield.gd" id="3"]
@@ -9,47 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="5_kni4r"]
 [ext_resource type="Script" path="res://scripts/OutOfBounds.gd" id="6"]
 [ext_resource type="Script" path="res://scripts/TimeLeftLabel.gd" id="10_wwi5m"]
-
-[sub_resource type="GDScript" id="GDScript_dr6nl"]
-script/source = "extends Node2D
-
-var players_not_playing
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	players_not_playing = [1, 2, 3, 4].filter(func(id): return id not in Players.starting_ids)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if not Players.lock_action:
-		for id in players_not_playing:
-			var button_pressed = Input.is_action_just_pressed(\"jump_p\" + str(id))
-			button_pressed = button_pressed or Input.is_action_just_pressed(\"fast_fall_p\" + str(id))
-			button_pressed = button_pressed or Input.is_action_just_pressed(\"use_p\" + str(id))
-			
-			if button_pressed:
-				players_not_playing.erase(id)
-				# remove join text
-				var hotjoin_text = $HotjoinText.get_node(str(id))
-				$HotjoinText.remove_child(hotjoin_text)
-				hotjoin_text.queue_free()
-				# add score bubble
-				$Score.queue_redraw()
-				# add powerup node
-				var powerup = preload(\"res://scenes/Powerup.tscn\").instantiate()
-				powerup.transform.origin = $Score.score_locations[str(id)]
-				powerup.name += str(id)
-				$Powerups.add_child(powerup)
-				#spawn player
-				Players.starting_ids.push_back(id)
-				Players.score[str(id)] = 0
-				Players.respawn_player(id, Players.starting_ids.size())
-
-
-#func _on_child_entered_tree(node):
-#	if node is Player and not node.first_spawn:
-#		node.on_respawn()
-"
 
 [sub_resource type="Animation" id="Animation_dw41s"]
 resource_name = "zoom_out"
@@ -154,7 +114,7 @@ size = Vector2(1080, 400)
 size = Vector2(400, 1080)
 
 [node name="Main" type="Node2D"]
-script = SubResource("GDScript_dr6nl")
+script = ExtResource("1_6u6n8")
 metadata/_edit_vertical_guides_ = []
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -307,6 +267,7 @@ scroll_active = false
 
 [node name="RoundText" type="RichTextLabel" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 20
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -346,6 +307,8 @@ theme_override_fonts/normal_font = ExtResource("1_i7osw")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 script = ExtResource("10_wwi5m")
+
+[node name="RiseToPodium" type="AnimationPlayer" parent="."]
 
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
 [connection signal="timeout" from="PowerupTimer" to="Crust" method="_on_powerup_timer_timeout"]

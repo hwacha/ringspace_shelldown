@@ -144,4 +144,4 @@ func end_game():
 
 func _on_post_match_timer_timeout():
 	Engine.set_time_scale(1)
-	get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
+	get_node("/root/Main").on_postround_end()

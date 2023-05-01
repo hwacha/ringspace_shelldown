@@ -314,7 +314,7 @@ func _on_HurtBox_area_entered(hitbox):
 		# kill
 		if not shielded:
 			self.killer = hitter
-			self.killerid = hitter.id
+			self.killer_id = hitter.id
 			self.die()
 		
 
@@ -328,8 +328,8 @@ func die():
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)
 	# death animation
-	$DeathParticles.show()
-	$DeathParticles.emitting = true
+#	$DeathParticles.show()
+#	$DeathParticles.emitting = true
 	$Death.play()
 	$DeathTimer.start()
 
@@ -406,7 +406,8 @@ func _on_animated_sprite_2d_animation_finished():
 			counter += 1
 		
 		Players.update_score(id, num_kept_orbs)
-		anim.set_animation("empty")
+		anim.set_animation("corpse")
+		anim.play()
 
 func _on_expand_timer_timeout():
 	if expanded:
