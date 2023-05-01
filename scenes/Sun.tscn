@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ciol4b2addxhs"]
+[gd_scene load_steps=10 format=3 uid="uid://ciol4b2addxhs"]
 
 [ext_resource type="Script" path="res://scripts/Sun.gd" id="1_e1lq8"]
 [ext_resource type="Texture2D" uid="uid://dqy3uyoopv5lr" path="res://assets/sun_body.png" id="2_35wqw"]
@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://jm5c8xsyqmwq" path="res://assets/ring_game_segment_alarm.wav" id="5_aohj8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ij06p"]
-radius = 112.004
+radius = 182.0
 
 [sub_resource type="Animation" id="Animation_pfrhr"]
 resource_name = "arrival"
@@ -70,12 +70,41 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.04, 0.04), Vector2(0.08, 0.08)]
+"values": [Vector2(0.04, 0.04), Vector2(0.13, 0.13)]
+}
+
+[sub_resource type="Animation" id="Animation_whf03"]
+resource_name = "departure"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sw16j"]
 _data = {
-"arrival": SubResource("Animation_pfrhr")
+"arrival": SubResource("Animation_pfrhr"),
+"departure": SubResource("Animation_whf03")
 }
 
 [node name="Sun" type="Area2D"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw4r2hihp0tsw"]
+[gd_scene load_steps=10 format=3 uid="uid://cw4r2hihp0tsw"]
 
 [ext_resource type="Script" path="res://scripts/BlackHole.gd" id="1_ol0ty"]
 [ext_resource type="Texture2D" uid="uid://c6qtriae5ihne" path="res://assets/black_hole.png" id="2_6t7dj"]
@@ -63,9 +63,38 @@ tracks/3/keys = {
 "values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_unmka"]
+resource_name = "departure"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.08, 0.08), Vector2(0.04, 0.04)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nedl7"]
 _data = {
-"arrival": SubResource("Animation_u13j1")
+"arrival": SubResource("Animation_u13j1"),
+"departure": SubResource("Animation_unmka")
 }
 
 [node name="BlackHole" type="Area2D"]

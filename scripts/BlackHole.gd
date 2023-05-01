@@ -12,8 +12,10 @@ func _on_decay_timeout():
 	for player in players:
 		player.black_hole = null
 		
-	get_parent().remove_child(self)
-	queue_free()
+	$CollisionShape2D.disabled = true
+	$Singularity/CollisionShape2D.disabled = true
+	
+	$AnimationPlayer.play("departure")
 
 
 func _on_body_entered(body):
@@ -29,12 +31,17 @@ func _on_singularity_area_entered(area):
 	player.spawn(false)
 
 
-func _on_animation_player_animation_finished(_anim_name):
-	$CollisionShape2D.disabled = false
-	$Singularity.get_node("CollisionShape2D").disabled = false
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "arrival":
+		$CollisionShape2D.disabled = false
+		$Singularity.get_node("CollisionShape2D").disabled = false
+		
+		var players = get_parent().get_children().filter(func(node): return node is Player)
+		for player in players:
+			player.black_hole = self
+			
+		$Decay.start()
+	else:
+		get_parent().remove_child(self)
+		queue_free()
 	
-	var players = get_parent().get_children().filter(func(node): return node is Player)
-	for player in players:
-		player.black_hole = self
-	
-	$Decay.start()

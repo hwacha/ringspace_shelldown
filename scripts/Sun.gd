@@ -20,10 +20,15 @@ func _on_body_entered(body):
 
 
 func _on_decay_timeout():
-	get_parent().remove_child(self)
-	queue_free()
+	$CollisionShape2D.disabled = true
+	$AnimationPlayer.play("departure")
 
-func _on_animation_player_animation_finished(_anim_name):
-	$CollisionShape2D.disabled = false
-	$Decay.start()
-	is_approaching = false
+
+func _on_animation_player_animation_finished(anim_name):
+	if (anim_name == "arrival"):
+		$CollisionShape2D.disabled = false
+		$Decay.start()
+		is_approaching = false
+	else:
+		get_parent().remove_child(self)
+		queue_free()
