@@ -37,6 +37,7 @@ func _process(_delta):
 func _draw():
 	var theta = 2 * PI / Players.play_to
 	for pn in Players.score:
+		draw_arc(score_locations[pn], score_radius * 0.5, 0, 2 * PI, 100, Players.player_colors[int(pn) - 1] - Color(0.4, 0.4, 0.4, 0.8), 3) 
 		var theta_offset = 7 * PI / 4 + theta - (PI / 2 * int(pn))
 		for i in range(0, Players.play_to):
 			var color = Color(0.094, 0.161, 0.204, 0.5)

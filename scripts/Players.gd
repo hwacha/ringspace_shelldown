@@ -139,6 +139,8 @@ func end_game():
 	var round_text = get_node("/root/Main/RoundText")
 	round_text.text = "[center]MATCH[/center]"
 	round_text.modulate.a = 1
+	get_node("/root/Main/Background Music").stop()
+	get_node("/root/Main/End Stab").play()
 	Engine.set_time_scale(0.6)
 	is_round_ongoing = false
 	lock_action = true

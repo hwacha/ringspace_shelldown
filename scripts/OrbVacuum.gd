@@ -16,7 +16,7 @@ func _ready():
 func _process(delta):
 	transform.origin += velocity * speed * delta
 	scale += Vector2(0.2, 0.2)
-
+	rotate(-2.0 * delta)
 
 func _on_decay_timeout():
 	get_parent().remove_child(self)

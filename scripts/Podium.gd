@@ -101,6 +101,11 @@ func _ready():
 	var rank_index = 0
 	for player in players:
 		player.lock_physics = true
+		player.get_node("CollisionShapeForGround").disabled = true
+		player.get_node("CollisionShapeForOrb").disabled = true
+		player.get_node("HurtBox/CollisionShape2D").disabled = true
+		player.get_node("HitBox/CollisionShape2D").disabled = true
+		player.get_node("Singularity/CollisionShape2D").disabled = true
 		var player_sprite = player.get_node("AnimatedSprite2D")
 		player.expanded = false
 		player_sprite.animation = "fastfalling"

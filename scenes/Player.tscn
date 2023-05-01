@@ -5,10 +5,10 @@
 [ext_resource type="SpriteFrames" uid="uid://civqu1ibw4bfh" path="res://animations/SpriteFrames_P1.tres" id="2_l3i4t"]
 [ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="3_yudyd"]
 [ext_resource type="AudioStream" uid="uid://dm4vxiqb7oit5" path="res://assets/121645028-video-game-jump-sound-effect-1.wav" id="4"]
-[ext_resource type="Texture2D" uid="uid://bbiopx47rc07b" path="res://assets/icone-fleche-gauche-bleu.png" id="4_6qisy"]
+[ext_resource type="Texture2D" uid="uid://cbisq58hs2ijh" path="res://assets/left.png" id="4_t6g85"]
 [ext_resource type="Script" path="res://scripts/Orbs.gd" id="4_v8tyi"]
 [ext_resource type="AudioStream" uid="uid://grfls847bx6u" path="res://assets/ring_game_death_sound.wav" id="5"]
-[ext_resource type="Texture2D" uid="uid://dkgvi6me01b86" path="res://assets/icone-fleche-droite-rouge.png" id="5_pttku"]
+[ext_resource type="Texture2D" uid="uid://32qfsdtyscxi" path="res://assets/right.png" id="5_tvpea"]
 [ext_resource type="AudioStream" uid="uid://bgkhlkm6fuxo4" path="res://assets/ring_game_fast_fall.wav" id="6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
@@ -67,15 +67,15 @@ sprite_frames = ExtResource("2_l3i4t")
 
 [node name="LeftArrow" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-42, -18)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_6qisy")
+position = Vector2(-35, -12)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("4_t6g85")
 
 [node name="RightArrow" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(42, -18)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_pttku")
+position = Vector2(35, -12)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("5_tvpea")
 
 [node name="CollisionShapeForGround" type="CollisionShape2D" parent="."]
 position = Vector2(4, 0)
@@ -158,6 +158,7 @@ volume_db = -21.0
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5")
+volume_db = -6.0
 
 [node name="FastFall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6")

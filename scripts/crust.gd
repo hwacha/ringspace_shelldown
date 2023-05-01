@@ -42,7 +42,7 @@ func _ready():
 		segments_to_keep.push_back(7)
 		segments_to_keep.push_back(10)
 
-	num_segments_remaining_at_end = num_segments - segments_to_keep.size()
+	num_segments_remaining_at_end = segments_to_keep.size()
 #	crust_decay.wait_time = 10.0
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
@@ -106,7 +106,7 @@ func _ready():
 #	pass
 
 func _on_CrustDecay_timeout():
-	if segments_to_decay.size() == 0:
+	if segments_to_decay.size() == 0 or not Players.is_round_ongoing:
 		pass
 	else:
 		var rand = rng.randi_range(0, segments_to_decay.size() - 1)
@@ -129,6 +129,9 @@ func _on_round_begin():
 	obstacle_timer.start()
 
 func _on_obstacle_timeout():
+	if not Players.is_round_ongoing:
+		return
+
 	var obstacles = ["Sun", "BlackHole"]
 	var rand = rng.randi_range(0, obstacles.size() - 1)
 	

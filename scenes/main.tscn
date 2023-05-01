@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://coltyqvepu4rw"]
+[gd_scene load_steps=16 format=3 uid="uid://coltyqvepu4rw"]
 
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6u6n8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/Score.gd" id="5"]
 [ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="5_kni4r"]
 [ext_resource type="Script" path="res://scripts/OutOfBounds.gd" id="6"]
+[ext_resource type="AudioStream" uid="uid://b03rlrx7aq68w" path="res://assets/ring_game_end_stab.wav" id="8_6ncwt"]
 [ext_resource type="Script" path="res://scripts/TimeLeftLabel.gd" id="10_wwi5m"]
 
 [sub_resource type="Animation" id="Animation_dw41s"]
@@ -168,6 +169,10 @@ stream = ExtResource("5_kni4r")
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4")
 volume_db = -12.0
+
+[node name="End Stab" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_6ncwt")
+volume_db = -6.0
 
 [node name="OutOfBounds" type="Area2D" parent="."]
 collision_layer = 0
