@@ -48,5 +48,6 @@ func get_input():
 		get_tree().change_scene_to_file("scenes/main.tscn")
 	
 
-func _process(_delta):
+func _process(delta):
 	get_input()
+	$Title.rotate(-0.1 * delta)

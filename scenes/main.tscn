@@ -159,7 +159,7 @@ wait_time = 120.0
 one_shot = true
 
 [node name="MatchTimer" type="Timer" parent="."]
-wait_time = 150.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Round Beep" type="AudioStreamPlayer" parent="."]

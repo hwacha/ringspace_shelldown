@@ -1,27 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="3"]
-
-[sub_resource type="FontFile" id="1"]
-fallbacks = Array[Font]([ExtResource("3")])
-face_index = null
-embolden = null
-transform = null
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/64/0 = Vector2(0, 0)
-cache/0/64/0/ascent = 0.0
-cache/0/64/0/descent = 0.0
-cache/0/64/0/underline_position = 0.0
-cache/0/64/0/underline_thickness = 0.0
-cache/0/64/0/scale = 1.0
-cache/0/64/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/64/0/kerning_overrides/64/0 = Vector2(0, 0)
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -44,31 +25,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
 
+[node name="Title" type="Sprite2D" parent="."]
+z_index = 4
+position = Vector2(540, 420)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_do112")
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 1)
 
-[node name="Title" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.333
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme_override_fonts/normal_font = SubResource("1")
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "[center]Ringspace
-Shelldown[/center]"
-scroll_active = false
-
 [node name="P1Unregistered" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 0.25
-anchor_bottom = 0.722
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Press W to Join[/center]"
@@ -79,9 +53,9 @@ visible = false
 modulate = Color(1, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 0.25
-anchor_bottom = 0.722
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Red Joined[/center]"
@@ -91,9 +65,9 @@ scroll_active = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 0.5
-anchor_bottom = 0.722
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Press T to Join[/center]"
@@ -105,9 +79,9 @@ modulate = Color(0, 0.5, 1, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 0.5
-anchor_bottom = 0.773
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Blue Joined[/center]"
@@ -117,9 +91,9 @@ scroll_active = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 0.75
-anchor_bottom = 0.722
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Press i to Join[/center]"
@@ -131,9 +105,9 @@ modulate = Color(0, 1, 0.180392, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 0.75
-anchor_bottom = 0.722
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Green Joined[/center]"
@@ -143,9 +117,9 @@ scroll_active = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
-anchor_top = 0.662
+anchor_top = 0.8
 anchor_right = 1.0
-anchor_bottom = 0.722
+anchor_bottom = 0.9
 theme_override_fonts/normal_font = SubResource("2")
 bbcode_enabled = true
 text = "[center]Press UP to Join[/center]"

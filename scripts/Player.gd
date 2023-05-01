@@ -4,6 +4,7 @@ extends CharacterBody2D
 signal used_powerup(reference)
 
 @export var id: int
+var color : Color
 
 var norm_velocity = Vector2(0, 0)
 var perp_velocity = Vector2(0, 0)
@@ -32,7 +33,7 @@ var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
-var expanded = false
+var expanded = false : set = _set_expansion
 var speedy = false
 var shielded = false : set = _set_shieldedness
 
@@ -67,6 +68,14 @@ func _set_invulnerability(is_invulnerable: bool):
 func _set_shieldedness(is_shielded: bool):
 	shielded = is_shielded
 	$AnimatedSprite2D.material.set("shader_parameter/is_shielded", is_shielded)
+
+func _set_expansion(new_expanded: bool):
+	if not expanded and new_expanded:
+		scale *= expansion_factor
+	elif expanded and not new_expanded:
+		scale /= expansion_factor
+		
+	expanded = new_expanded
 
 func spawn(is_teleport: bool):
 	# randomly select a safe crust segment
@@ -116,7 +125,6 @@ func try_auto_teleport():
 	
 func expand():
 	if not expanded:
-		scale *= expansion_factor
 		expanded = true
 		$ExpandTimer.start()
 		return true
@@ -157,7 +165,7 @@ func comet():
 func vacuum():
 	var vacuum_instance = preload("res://scenes/OrbVacuum.tscn").instantiate()
 	vacuum_instance.player_who_threw = self
-	vacuum_instance.modulate = $DeathParticles.modulate
+	vacuum_instance.modulate = color
 	
 	var diff = self.transform.origin - centroid
 	vacuum_instance.velocity = norm_velocity + perp_velocity
@@ -328,8 +336,8 @@ func die():
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)
 	# death animation
-#	$DeathParticles.show()
-#	$DeathParticles.emitting = true
+	$DeathParticles.show()
+	$DeathParticles.emitting = true
 	$Death.play()
 	$DeathTimer.start()
 
@@ -411,7 +419,6 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_expand_timer_timeout():
 	if expanded:
-		scale /= expansion_factor
 		expanded = false
 
 

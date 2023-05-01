@@ -193,7 +193,7 @@ func _on_powerup_timer_timeout():
 		greater_bound = lower_bound + collectable_probability
 		if rand > lower_bound and rand <= greater_bound:
 			# spawn collectable
-			new_collectable.collectable = collectable_name
+			new_collectable.collectable = "expand" # collectable_name
 			new_collectable.transform.origin = screen_size / 2
 			get_parent().add_child(new_collectable)
 			break

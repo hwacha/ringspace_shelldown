@@ -17,7 +17,8 @@ func set_collectable(new_collectable):
 	$Sprite2D.texture = load("res://assets/" + new_collectable + ".png")
 
 func _on_body_entered(body):
-	get_node("../Powerups/Powerup" + str(body.id)).set_powerup(collectable)
-	claimed = true
-	get_parent().call_deferred("remove_child", self)
-	queue_free()
+	if not claimed:
+		get_node("../Powerups/Powerup" + str(body.id)).set_powerup(collectable)
+		get_parent().call_deferred("remove_child", self)
+		queue_free()
+		claimed = true

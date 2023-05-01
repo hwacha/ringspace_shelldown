@@ -3,6 +3,8 @@ extends Node2D
 @export var focus : Vector2 = Vector2(0, 270)
 var arc_radius : float = 540.0
 
+var accepting_input = false
+
 var colors_by_rank = {
 	'1': Color(0.83, 0.69, 0.22), # gold,
 	'2': Color(0.67, 0.66, 0.68), # silver,
@@ -151,16 +153,19 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if accepting_input and Input.is_anything_pressed():
+		$Timer.stop()
+		$AnimationPlayer.play("fadeout")
 
 func _on_animation_finished(_anim):
 	for player in players:
 		var player_sprite = player.get_node("AnimatedSprite2D")
 		if ranks_by_player[str(player.id)] == 1:
-			player_sprite.animation = "default" # change to victory jump
+			player_sprite.animation = "victory" # change to victory jump
 		else:
 			player_sprite.animation = "default"
 	
+	accepting_input = true
 	$Timer.start()
 #		spawn_firework()
 
@@ -174,4 +179,8 @@ func _on_animation_finished(_anim):
 
 
 func _on_timer_timeout():
+	$AnimationPlayer.play("fadeout")
+
+
+func _on_animation_player_animation_finished(_anim_name):
 	get_tree().change_scene_to_file("res://scenes/opening_screen.tscn")

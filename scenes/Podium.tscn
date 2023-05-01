@@ -1,12 +1,63 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2msnbyhjjr1v"]
+[gd_scene load_steps=5 format=3 uid="uid://c2msnbyhjjr1v"]
 
 [ext_resource type="Script" path="res://scripts/Podium.gd" id="1_l7k1u"]
+[ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="2_83oer"]
+
+[sub_resource type="Animation" id="Animation_mrkc5"]
+resource_name = "fadeout"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkisj"]
+_data = {
+"fadeout": SubResource("Animation_mrkc5")
+}
 
 [node name="Podium" type="Node2D"]
 script = ExtResource("1_l7k1u")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 50
+offset_left = -540.0
+offset_top = -540.0
+offset_right = 540.0
+offset_bottom = 540.0
+color = Color(0, 0, 0, 0)
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 30.0
 one_shot = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = 200.0
+offset_right = 540.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_83oer")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Thanks for playing![/center]"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jkisj")
+}
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

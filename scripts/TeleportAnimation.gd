@@ -8,7 +8,7 @@ var destination : Vector2
 var animation_player : AnimationPlayer
 
 func _ready():
-	color = player.get_node("DeathParticles").modulate + Color(0.2, 0.2, 0.2, -0.3)
+	color = player.color + Color(0.2, 0.2, 0.2, -0.3)
 	var animation = Animation.new()
 	animation.length = 0.5
 	var track_index_source = animation.add_track(Animation.TYPE_VALUE)
