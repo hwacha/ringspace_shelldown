@@ -97,8 +97,7 @@ func _ready():
 	
 	players = get_parent().get_children().filter(func(node): return node is Player)
 	
-	var prev_rank = 0
-	var rank_index = 0
+	var rank_indeces = {}
 	for player in players:
 		player.lock_physics = true
 		player.get_node("CollisionShapeForGround").disabled = true
@@ -118,12 +117,11 @@ func _ready():
 		animation.track_set_path(track_index_position, player.name + ":position")
 		
 		var rank = ranks_by_player[str(player.id)]
-		if rank == prev_rank:
+		var rank_index = 0
+		if rank_indeces.has(str(rank)):
 			rank_index = switch_stepper(rank_index)
-		else:
-			rank_index = 0
-			
-		prev_rank = rank
+		
+		rank_indeces[str(rank)] = rank_index
 
 		var num_others_in_rank = players_by_rank[rank].size()
 		
