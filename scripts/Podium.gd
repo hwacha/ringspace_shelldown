@@ -119,9 +119,9 @@ func _ready():
 		var rank = ranks_by_player[str(player.id)]
 		var rank_index = 0
 		if rank_indeces.has(str(rank)):
-			rank_index = switch_stepper(rank_index)
+			rank_index = rank_indeces[str(rank)]
 		
-		rank_indeces[str(rank)] = rank_index
+		rank_indeces[str(rank)] = switch_stepper(rank_index)
 
 		var num_others_in_rank = players_by_rank[rank].size()
 		
