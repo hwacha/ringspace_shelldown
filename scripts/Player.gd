@@ -275,7 +275,8 @@ func _physics_process(_delta):
 			total_velocity = black_hole_direction * 50.0
 			self.rotation = self.transform.origin.angle_to_point(black_hole.transform.origin) - (PI / 2)
 		else:
-			total_velocity += black_hole_direction * 50.0
+			var inverse_r = 1.0 / black_hole_diff.length()
+			total_velocity += black_hole_direction * 25000.0 * inverse_r
 	
 	set_velocity(total_velocity)
 	set_up_direction((-diff).normalized())

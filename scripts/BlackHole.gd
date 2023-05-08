@@ -1,6 +1,11 @@
 extends Node2D
 
+@onready var lensing = get_parent().get_node("BlackHoleLensing")
+
 func _ready():
+	lensing.material.set("shader_parameter/is_black_hole_active", true)
+	lensing.material.set("shader_parameter/black_hole_center", self.global_position)
+	
 	$AnimationPlayer.play("arrival")
 	
 
@@ -42,6 +47,7 @@ func _on_animation_player_animation_finished(anim_name):
 			
 		$Decay.start()
 	else:
+		lensing.material.set("shader_parameter/is_black_hole_active", false)
 		get_parent().remove_child(self)
 		queue_free()
 	

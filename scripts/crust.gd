@@ -43,7 +43,6 @@ func _ready():
 		segments_to_keep.push_back(10)
 
 	num_segments_remaining_at_end = segments_to_keep.size()
-#	crust_decay.wait_time = 10.0
 	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
 	segments_to_decay = []
@@ -137,14 +136,14 @@ func _on_obstacle_timeout():
 	
 	var obstacle = load("res://scenes/" + obstacles[rand] + ".tscn").instantiate()
 	
-	get_parent().add_child(obstacle)
-	
 	obstacle.transform.origin = screen_size / 2
 	
 	var rand_r = 200.0 * sqrt(rng.randf())
 	var rand_theta = rng.randf() * 2 * PI
 	
 	obstacle.transform.origin += rand_r * Vector2(cos(rand_theta), sin(rand_theta))
+	
+	get_parent().add_child(obstacle)
 	
 
 func _on_match_timer_timeout():
