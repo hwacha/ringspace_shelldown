@@ -2,11 +2,9 @@ shader_type canvas_item;
 
 uniform bool is_black_hole_active = false;
 uniform vec2 black_hole_center = vec2(540.0, 540.0);
-uniform float black_hole_radius = 0.5;
-uniform float effect_radius = 0.15;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, repeat_disable, filter_nearest;
 
-uniform float m = 0.02;
+uniform float m = 0.008;
 
 void fragment() {
 	if (is_black_hole_active) {
@@ -14,16 +12,15 @@ void fragment() {
 		vec2 screen_uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
 		vec2 black_hole_center_uv = black_hole_center * SCREEN_PIXEL_SIZE;
 		float d = distance(screen_uv, black_hole_center_uv);
-		if (d > black_hole_radius && d < effect_radius) {
-			float pull_theta = m / (d * d);
 		
-			float _cos = cos(pull_theta * PI);
-			
-			vec2 diff = screen_uv - black_hole_center_uv;
-			
-			vec2 rot = vec2(_cos * diff.x + black_hole_center_uv.x, _cos * diff.y + black_hole_center_uv.y);
-			COLOR = texture(SCREEN_TEXTURE, rot);
-		}
+		float pull_theta = m / (d * d);
+	
+		float _cos = cos(pull_theta * PI);
+		
+		vec2 diff = screen_uv - black_hole_center_uv;
+		
+		vec2 rot = vec2(_cos * diff.x + black_hole_center_uv.x, _cos * diff.y + black_hole_center_uv.y);
+		COLOR = texture(SCREEN_TEXTURE, rot);
 	}
 	
 }

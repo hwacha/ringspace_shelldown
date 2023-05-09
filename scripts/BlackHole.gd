@@ -1,16 +1,17 @@
 extends Node2D
 
 @onready var lensing = get_parent().get_node("BlackHoleLensing")
+@export var _m : float = 0.0
 
 func _ready():
 	lensing.material.set("shader_parameter/is_black_hole_active", true)
 	lensing.material.set("shader_parameter/black_hole_center", self.global_position)
-	
 	$AnimationPlayer.play("arrival")
 	
 
 func _process(_delta):
-	pass
+	lensing.material.set("shader_parameter/black_hole_center", self.global_position)
+	lensing.material.set("shader_parameter/m", _m)
 
 func _on_decay_timeout():
 	var players = get_parent().get_children().filter(func(node): return node is Player)

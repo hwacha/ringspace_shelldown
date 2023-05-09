@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://coltyqvepu4rw"]
+[gd_scene load_steps=18 format=3 uid="uid://coltyqvepu4rw"]
 
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6u6n8"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1_i7osw"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="2"]
 [ext_resource type="Shader" path="res://scripts/starfield.gdshader" id="2_oiaqm"]
+[ext_resource type="Script" path="res://scripts/Starfield.gd" id="3_gu52u"]
 [ext_resource type="AudioStream" uid="uid://betn3px4wblfd" path="res://assets/ringspace_shelldown_game_music.wav" id="4"]
 [ext_resource type="Script" path="res://scripts/Score.gd" id="5"]
 [ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="5_kni4r"]
@@ -112,9 +113,7 @@ _data = {
 shader = ExtResource("2_oiaqm")
 shader_parameter/is_black_hole_active = false
 shader_parameter/black_hole_center = Vector2(540, 540)
-shader_parameter/black_hole_radius = 0.0
-shader_parameter/effect_radius = 0.15
-shader_parameter/m = 0.02
+shader_parameter/m = 0.008
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(1080, 400)
@@ -138,13 +137,14 @@ libraries = {
 }
 
 [node name="Starfield" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -2
 position = Vector2(540, 540)
 scale = Vector2(0.707, 0.707)
 texture = ExtResource("2")
+script = ExtResource("3_gu52u")
 
 [node name="BlackHoleLensing" type="ColorRect" parent="."]
-z_index = 4
+z_index = -1
 material = SubResource("ShaderMaterial_vwpex")
 anchors_preset = 15
 anchor_right = 1.0

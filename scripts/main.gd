@@ -4,6 +4,8 @@ var players_not_playing
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+#	var bus_idx = AudioServer.get_bus_index("Master")
+#	AudioServer.set_bus_mute(bus_idx, true)
 	players_not_playing = [1, 2, 3, 4].filter(func(id): return id not in Players.starting_ids)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
