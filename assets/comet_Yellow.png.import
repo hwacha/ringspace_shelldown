@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6f2i7h3ndn5d"
-path="res://.godot/imported/comet_for_scene.png-64ae68504d588bf640137fbace59f8c7.ctex"
+uid="uid://cmwj1hq50fyiq"
+path="res://.godot/imported/comet_Yellow.png-8479586c3aba14bdcb6ae449b9950b0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/comet_for_scene.png"
-dest_files=["res://.godot/imported/comet_for_scene.png-64ae68504d588bf640137fbace59f8c7.ctex"]
+source_file="res://assets/comet_Yellow.png"
+dest_files=["res://.godot/imported/comet_Yellow.png-8479586c3aba14bdcb6ae449b9950b0b.ctex"]
 
 [params]
 

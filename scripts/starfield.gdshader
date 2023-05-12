@@ -8,9 +8,10 @@ uniform float m = 0.008;
 
 void fragment() {
 	if (is_black_hole_active) {
+		float pixel_size_proportion = 1.0 / (1080.0 * SCREEN_PIXEL_SIZE.x);
 		// get distance to black hole center in screen space
 		vec2 screen_uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
-		vec2 black_hole_center_uv = black_hole_center * SCREEN_PIXEL_SIZE;
+		vec2 black_hole_center_uv = black_hole_center * pixel_size_proportion * SCREEN_PIXEL_SIZE;
 		float d = distance(screen_uv, black_hole_center_uv);
 		
 		float pull_theta = m / (d * d);

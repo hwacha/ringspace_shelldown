@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl2l325yhxb17"
-path="res://.godot/imported/sun_body.png-fb030406c23860e70808b808feebc1de.ctex"
+uid="uid://c40y6unnr1m6m"
+path="res://.godot/imported/comet_Red.png-9d98867c69bd117e37632caf954e244a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sun_body.png"
-dest_files=["res://.godot/imported/sun_body.png-fb030406c23860e70808b808feebc1de.ctex"]
+source_file="res://assets/comet_Red.png"
+dest_files=["res://.godot/imported/comet_Red.png-9d98867c69bd117e37632caf954e244a.ctex"]
 
 [params]
 

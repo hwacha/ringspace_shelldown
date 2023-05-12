@@ -4,6 +4,7 @@ extends Node2D
 @export var _m : float = 0.0
 
 func _ready():
+	print()
 	lensing.material.set("shader_parameter/is_black_hole_active", true)
 	lensing.material.set("shader_parameter/black_hole_center", self.global_position)
 	$AnimationPlayer.play("arrival")

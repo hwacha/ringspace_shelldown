@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl2l325yhxb17"
-path="res://.godot/imported/sun_body.png-fb030406c23860e70808b808feebc1de.ctex"
+uid="uid://c3st2svoy0plk"
+path="res://.godot/imported/comet_Blue.png-e0b42e4254c1e504c8f9f7d6d021b953.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sun_body.png"
-dest_files=["res://.godot/imported/sun_body.png-fb030406c23860e70808b808feebc1de.ctex"]
+source_file="res://assets/comet_Blue.png"
+dest_files=["res://.godot/imported/comet_Blue.png-e0b42e4254c1e504c8f9f7d6d021b953.ctex"]
 
 [params]
 

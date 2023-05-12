@@ -10,7 +10,7 @@ var player_who_shot_id : int
 func _set_player_who_shot(player):
 	player_who_shot = player
 	player_who_shot_id = player.id
-	$Sprite2D.modulate = player.color
+	$Sprite2D.texture = load("res://assets/comet_" + Players.player_names[player.id - 1] + ".png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
