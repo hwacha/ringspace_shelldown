@@ -6,6 +6,9 @@ signal used_powerup(reference)
 @export var id: int
 var color : Color
 
+var coyote_threshold : int = 5
+var frames_in_air : int = 0
+
 var norm_velocity = Vector2(0, 0)
 var perp_velocity = Vector2(0, 0)
 
@@ -190,6 +193,9 @@ func get_input(diff):
 		if speedy:
 			ps *= fast_increase_factor
 		set_fast_falling(false)
+		frames_in_air = 0
+	else:
+		frames_in_air += 1
 		
 	var analog_h_movement = Input.get_axis("move_left_analog_p" + str(id), "move_right_analog_p" + str(id))
 	var analog_v_movement = Input.get_axis("move_up_analog_p" + str(id), "move_down_analog_p" + str(id))
@@ -258,12 +264,12 @@ func get_input(diff):
 			else:
 				anim.set_animation("falling")
 		
-	if grounded and not jump_animation_ongoing:
+	if (grounded or frames_in_air < coyote_threshold) and not jump_animation_ongoing:
 		if jump_input:
 			anim.set_animation("jumping")
 			$Jump.play()
 	
-	if grounded and jump_complete:
+	if jump_complete:
 		var total_impulse = jump_impulse
 		if speedy:
 			total_impulse *= fast_increase_factor * 0.8
@@ -347,8 +353,7 @@ func _on_HurtBox_area_entered(hitbox):
 			return
 		
 		# bounce
-		hitter.norm_velocity = -hurtbox_down * jump_impulse * \
-		(surface_to_centroid / hurtbox_down.length())
+		hitter.norm_velocity = -hurtbox_down * jump_impulse
 		hitter.set_fast_falling(false)
 		# kill
 		if not shielded:
