@@ -24,7 +24,7 @@ radius = 28.0
 
 [node name="Orb" type="Area2D"]
 collision_layer = 0
-collision_mask = 514
+collision_mask = 768
 script = ExtResource("1_kl67p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -40,7 +40,6 @@ wait_time = 13.0
 one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="timeout" from="WaitingToTravel" to="." method="_on_waiting_to_travel_timeout"]

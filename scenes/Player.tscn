@@ -22,8 +22,8 @@ shader_parameter/is_shielded = false
 size = Vector2(26.377, 62)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pkqgv"]
-radius = 24.0
-height = 52.0
+radius = 23.0
+height = 74.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7vnx"]
 size = Vector2(41.5, 16.5)
@@ -81,8 +81,12 @@ texture = ExtResource("5_tvpea")
 position = Vector2(4, 0)
 shape = SubResource("18")
 
-[node name="CollisionShapeForOrb" type="CollisionShape2D" parent="."]
-position = Vector2(1, -3)
+[node name="OrbBox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrbBox"]
+position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_pkqgv")
 
 [node name="HitBox" type="Area2D" parent="."]

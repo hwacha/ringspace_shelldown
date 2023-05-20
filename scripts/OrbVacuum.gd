@@ -1,4 +1,5 @@
 extends Area2D
+class_name OrbVacuum
 
 var player_who_threw
 var velocity

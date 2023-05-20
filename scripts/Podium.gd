@@ -101,7 +101,7 @@ func _ready():
 	for player in players:
 		player.lock_physics = true
 		player.get_node("CollisionShapeForGround").disabled = true
-		player.get_node("CollisionShapeForOrb").disabled = true
+		player.get_node("OrbBox/CollisionShape2D").disabled = true
 		player.get_node("HurtBox/CollisionShape2D").disabled = true
 		player.get_node("HitBox/CollisionShape2D").disabled = true
 		player.get_node("Singularity/CollisionShape2D").disabled = true

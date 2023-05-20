@@ -35,21 +35,22 @@ func _process(_delta):
 		.track_set_key_value(0, 1, next_claimant.transform.origin + claimant_destination_offset)
 	pass
 
-func _on_body_entered(body):
-	if not (claimed or traveling or body.dead):
-		$WaitingToTravel.stop()
-		$AnimatedSprite2D.animation = "default"
-		get_parent().call_deferred("remove_child", self)
-		var new_orbs = body.get_node("Orbs")
-		new_orbs.call_deferred("add_child", self)
-		new_orbs.call_deferred("on_add_orb", self, true)
-
 func _on_area_entered(area):
-	if not (claimed or traveling):
-		$WaitingToTravel.stop()
-		$AnimatedSprite2D.animation = "default"
-		next_claimant = area.player_who_threw
-		set_new_destination()
+	if area is OrbVacuum:
+		if not (claimed or traveling):
+			$WaitingToTravel.stop()
+			$AnimatedSprite2D.animation = "default"
+			next_claimant = area.player_who_threw
+			set_new_destination()
+	else: # it's the player
+		var player = area.get_parent()
+		if not (claimed or traveling or player.dead):
+			$WaitingToTravel.stop()
+			$AnimatedSprite2D.animation = "default"
+			get_parent().call_deferred("remove_child", self)
+			var new_orbs = player.get_node("Orbs")
+			new_orbs.call_deferred("add_child", self)
+			new_orbs.call_deferred("on_add_orb", self, true)
 		
 
 func set_new_destination():
