@@ -21,6 +21,7 @@ var cf = 0.105
 
 var perp_speed = 40 * 0.75
 var jump_impulse = 2.6
+var double_jump_impulse = 1.8
 
 var expansion_factor = 2.0
 var fast_increase_factor = 1.5
@@ -34,6 +35,7 @@ var surface_to_centroid_squared
 var rand = RandomNumberGenerator.new()
 
 var fast_falling = false: set = set_fast_falling
+var fastfall_depleted = false
 var dead = false
 var killer = null
 var killer_id = -1
@@ -194,6 +196,7 @@ func get_input(diff):
 			ps *= fast_increase_factor
 		set_fast_falling(false)
 		frames_in_air = 0
+		fastfall_depleted = false
 	else:
 		frames_in_air += 1
 		
@@ -276,8 +279,12 @@ func get_input(diff):
 		norm_velocity += -diff * total_impulse
 		jump_complete = false
 	
-	if not grounded and fast_fall:
-		set_fast_falling(true)
+	if fast_fall:
+		if not (fast_falling or fastfall_depleted):
+			if not grounded:
+				set_fast_falling(true)
+		else:
+			set_fast_falling(false)
 	
 	if use:
 		emit_signal("used_powerup", self)
@@ -329,7 +336,12 @@ func set_fast_falling(new_fast_falling):
 		anim.set_animation("fastfalling")
 	elif fast_falling and not new_fast_falling:
 		$FastFall.stop()
-	
+		if not is_on_floor():
+			var diff = self.transform.origin - centroid
+			var normalized_diff = diff.normalized()
+			norm_velocity += -normalized_diff * norm_velocity.dot(normalized_diff)
+			norm_velocity += -normalized_diff * max(diff.length(), 200) * double_jump_impulse
+			fastfall_depleted = true
 	fast_falling = new_fast_falling
 		
 func _on_HurtBox_area_entered(hitbox):
@@ -371,6 +383,8 @@ func die():
 	$AnimatedSprite2D.set_animation("dead")
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)
+	if $FastFall.playing:
+		$FastFall.stop()
 	# death animation
 	$DeathParticles.show()
 	$DeathParticles.emitting = true
