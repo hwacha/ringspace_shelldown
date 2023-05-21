@@ -148,7 +148,7 @@ func fast():
 	return false
 
 func shield():
-	if shielded < 6:
+	if shielded < 4:
 		shielded += 2
 		return true
 	return false
@@ -366,11 +366,16 @@ func _on_HurtBox_area_entered(hitbox):
 		hitter.set_fast_falling(false)
 		# kill
 		if shielded > 0:
-			shielded -= 1
-		else:
-			self.killer = hitter
-			self.killer_id = hitter.id
-			self.die()
+			if hitter.expanded:
+				shielded -= 3
+			else:
+				shielded -= 1
+			if shielded >= 0:
+				return
+		
+		self.killer = hitter
+		self.killer_id = hitter.id
+		self.die()
 		
 
 func die():
