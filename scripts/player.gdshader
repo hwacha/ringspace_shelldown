@@ -2,9 +2,9 @@ shader_type canvas_item;
 
 uniform vec4 primary_color : source_color;
 uniform bool is_invulnerable = false;
-uniform bool is_shielded = false;
+uniform int num_shields = 0;
 
-const float intensity = 900.0;
+const float intensity = 450.0;
 const float precision = 0.1;
 
 varying vec2 o;
@@ -12,7 +12,7 @@ varying vec2 f;
 
 void fragment() {
 	// shield outline
-	if (is_shielded) {
+	if (num_shields > 0) {
 		ivec2 t = textureSize(TEXTURE, 0);
 		vec2 regular_uv;
 		regular_uv.x = UV.x + (f.x - o.x)/float(t.x);
@@ -23,7 +23,7 @@ void fragment() {
 			regular_color = vec4(0.0); 
 		}
 		
-		vec2 ps = TEXTURE_PIXEL_SIZE * float(intensity) * precision;
+		vec2 ps = TEXTURE_PIXEL_SIZE * intensity * float(num_shields) * precision;
 		
 		vec4 final_color = regular_color;
 		if (regular_color.a <= 0.0)

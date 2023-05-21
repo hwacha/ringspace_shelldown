@@ -45,7 +45,7 @@ var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
 var expanded = false : set = _set_expansion
 var speedy = false
-var shielded = false : set = _set_shieldedness
+var shielded = 0 : set = _set_shieldedness
 
 var ontop_of = []
 var black_hole = null
@@ -75,9 +75,9 @@ func _set_invulnerability(is_invulnerable: bool):
 	invulnerable = is_invulnerable
 	$AnimatedSprite2D.material.set("shader_parameter/is_invulnerable", is_invulnerable)
 
-func _set_shieldedness(is_shielded: bool):
-	shielded = is_shielded
-	$AnimatedSprite2D.material.set("shader_parameter/is_shielded", is_shielded)
+func _set_shieldedness(num_shields: int):
+	shielded = num_shields
+	$AnimatedSprite2D.material.set("shader_parameter/num_shields", num_shields)
 
 func _set_expansion(new_expanded: bool):
 	if not expanded and new_expanded:
@@ -148,9 +148,8 @@ func fast():
 	return false
 
 func shield():
-	if not shielded:
-		shielded = true
-		$ShieldTimer.start()
+	if shielded < 6:
+		shielded += 2
 		return true
 	return false
 	
@@ -366,7 +365,9 @@ func _on_HurtBox_area_entered(hitbox):
 		hitter.norm_velocity = -hurtbox_down * jump_impulse
 		hitter.set_fast_falling(false)
 		# kill
-		if not shielded:
+		if shielded > 0:
+			shielded -= 1
+		else:
 			self.killer = hitter
 			self.killer_id = hitter.id
 			self.die()
@@ -376,7 +377,7 @@ func die():
 	if dead:
 		return
 	dead = true
-	shielded = false # not strictly necessary
+	shielded = 0 # not strictly necessary
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.set_animation("dead")
 	$HitBox.set_deferred("monitoring", false)
@@ -473,8 +474,3 @@ func _on_expand_timer_timeout():
 func _on_fast_timer_timeout():
 	if speedy:
 		speedy = false
-
-
-func _on_shield_timer_timeout():
-	if shielded:
-		shielded = false

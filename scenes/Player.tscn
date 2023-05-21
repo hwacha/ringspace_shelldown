@@ -16,7 +16,7 @@ resource_local_to_scene = true
 shader = ExtResource("2_isd1j")
 shader_parameter/primary_color = Color(1, 1, 1, 1)
 shader_parameter/is_invulnerable = false
-shader_parameter/is_shielded = false
+shader_parameter/num_shields = 0
 
 [sub_resource type="RectangleShape2D" id="18"]
 size = Vector2(26.377, 62)
@@ -139,10 +139,6 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 
-[node name="ShieldTimer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0.59845, -18.319)
 emitting = false
@@ -176,5 +172,4 @@ volume_db = -18.0
 [connection signal="timeout" from="TeleportInvulnerability" to="." method="_on_teleport_invulnerability_timeout"]
 [connection signal="timeout" from="ExpandTimer" to="." method="_on_expand_timer_timeout"]
 [connection signal="timeout" from="FastTimer" to="." method="_on_fast_timer_timeout"]
-[connection signal="timeout" from="ShieldTimer" to="." method="_on_shield_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
