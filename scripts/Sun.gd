@@ -2,11 +2,15 @@ extends Area2D
 
 @export var is_approaching = true
 
+var rotation_speed = 2 * PI / 15
+
 func _ready():
 	$AnimationPlayer.play("arrival")
 
-func _process(_delta):
-	pass
+func _process(delta):
+	if not is_approaching:
+		var centroid = Vector2(540, 540)
+		self.transform.origin = (self.transform.origin - centroid).rotated(-Players.star_direction * rotation_speed * delta) + centroid
 
 func _on_body_entered(body):
 	if is_approaching:

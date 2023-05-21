@@ -30,6 +30,7 @@ var starting_theta
 var centroid : Vector2
 var surface_to_centroid
 var surface_to_centroid_squared
+var spawn_ratio
 
 @onready var anim = $AnimatedSprite2D
 var rand = RandomNumberGenerator.new()
@@ -43,6 +44,7 @@ var first_spawn = true
 var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
+var spawning = 0 # 0 if not spawning, n if n frames till black hole available
 var expanded = false : set = _set_expansion
 var speedy = false
 var shielded = 0 : set = _set_shieldedness
@@ -88,6 +90,7 @@ func _set_expansion(new_expanded: bool):
 	expanded = new_expanded
 
 func spawn(is_teleport: bool):
+	spawning = 2
 	# randomly select a safe crust segment
 	var crust_segments = get_parent().get_node("Crust").get_children().filter(func(segment): return segment.can_spawn_player())
 	var crust_index = rand.randi_range(0, crust_segments.size() - 1)
@@ -99,9 +102,11 @@ func spawn(is_teleport: bool):
 		destination_segment = crust_segments[second_crust_index]
 		
 	destination_segment.occupying_players.push_back(self.id)
+	
+	var destination_segment_position = destination_segment.get_node("Visuals").transform.origin
 		
-	var destination_point = (get_parent().get_node("Crust").transform.origin + 0.85 * \
-		destination_segment.get_node("Visuals").transform.origin)
+	var destination_point = (get_parent().get_node("Crust").transform.origin +
+		(1 - (48 / destination_segment_position.length())) * destination_segment_position)
 	
 	# invulnerable
 	invulnerable = true
@@ -197,6 +202,8 @@ func get_input(diff):
 		frames_in_air = 0
 		fastfall_depleted = false
 		$BounceTimer.stop()
+		if spawning > 0:
+			spawning -= 1
 	else:
 		frames_in_air += 1
 		
@@ -278,8 +285,10 @@ func get_input(diff):
 			total_impulse *= fast_increase_factor * 0.8
 		norm_velocity += -diff * total_impulse
 		jump_complete = false
+		spawning = 0
 	
 	if fast_fall:
+		spawning = 0
 		if not (fast_falling or fastfall_depleted):
 			if not grounded:
 				set_fast_falling(true)
@@ -315,15 +324,15 @@ func _physics_process(_delta):
 	
 	var total_velocity = norm_velocity + perp_velocity
 	
-	if black_hole != null and not is_on_floor():
+	if black_hole != null and not (is_on_floor() or spawning):
 		var black_hole_diff = black_hole.transform.origin - self.transform.origin
 		var black_hole_direction = black_hole_diff.normalized()
 		if is_in_event_horizon:
-			total_velocity = black_hole_direction * 50.0
+			total_velocity = black_hole_direction * 100.0
 			self.rotation = self.transform.origin.angle_to_point(black_hole.transform.origin) - (PI / 2)
 		else:
 			var inverse_r2 = 1.0 / black_hole_diff.length_squared()
-			total_velocity += black_hole_direction * 25000.0 * inverse_r2
+			total_velocity += black_hole_direction * 1600000.0 * inverse_r2
 	
 	set_velocity(total_velocity)
 	set_up_direction((-diff).normalized())

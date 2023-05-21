@@ -3,16 +3,22 @@ extends Node2D
 @onready var lensing = get_parent().get_node("BlackHoleLensing")
 @export var _m : float = 0.0
 
+var rotation_speed = PI / 15
+
+var active = false
+
 func _ready():
-	print()
 	lensing.material.set("shader_parameter/is_black_hole_active", true)
 	lensing.material.set("shader_parameter/black_hole_center", self.global_position)
 	$AnimationPlayer.play("arrival")
 	
 
-func _process(_delta):
-	lensing.material.set("shader_parameter/black_hole_center", self.global_position)
-	lensing.material.set("shader_parameter/m", _m)
+func _process(delta):
+	if active:
+		var centroid = Vector2(540, 540)
+		self.transform.origin = (self.transform.origin - centroid).rotated(-Players.star_direction * rotation_speed * delta) + centroid
+		lensing.material.set("shader_parameter/black_hole_center", self.global_position)
+		lensing.material.set("shader_parameter/m", _m)
 
 func _on_decay_timeout():
 	var players = get_parent().get_children().filter(func(node): return node is Player)
@@ -40,6 +46,7 @@ func _on_singularity_area_entered(area):
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "arrival":
+		active = true
 		$CollisionShape2D.disabled = false
 		$Singularity.get_node("CollisionShape2D").disabled = false
 		

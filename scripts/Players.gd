@@ -113,7 +113,12 @@ func respawn_player(player_id, priority):
 	
 	stored_orbs[player_id - 1] = []
 	
-	get_node("/root/Main").call_deferred("add_child", next_player)
+	var main = get_node("/root/Main")
+	
+	if main.has_node("BlackHole"):
+		next_player.black_hole = main.get_node("BlackHole")
+		
+	main.call_deferred("add_child", next_player)
 
 func update_score(id, new_score):
 	score[str(id)] = new_score

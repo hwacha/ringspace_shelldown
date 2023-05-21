@@ -138,7 +138,7 @@ func _on_obstacle_timeout():
 	
 	obstacle.transform.origin = screen_size / 2
 	
-	var rand_r = 200.0 * sqrt(rng.randf())
+	var rand_r = 350.0 * sqrt(rng.randf())
 	var rand_theta = rng.randf() * 2 * PI
 	
 	obstacle.transform.origin += rand_r * Vector2(cos(rand_theta), sin(rand_theta))
