@@ -306,7 +306,7 @@ func _physics_process(_delta):
 	var fast_fall_mult = 1
 	
 	if fast_falling:
-		fast_fall_mult = 8
+		fast_fall_mult = 5
 
 	norm_velocity += diff * cf * fast_fall_mult
 	
@@ -322,8 +322,8 @@ func _physics_process(_delta):
 			total_velocity = black_hole_direction * 50.0
 			self.rotation = self.transform.origin.angle_to_point(black_hole.transform.origin) - (PI / 2)
 		else:
-			var inverse_r = 1.0 / black_hole_diff.length()
-			total_velocity += black_hole_direction * 25000.0 * inverse_r
+			var inverse_r2 = 1.0 / black_hole_diff.length_squared()
+			total_velocity += black_hole_direction * 25000.0 * inverse_r2
 	
 	set_velocity(total_velocity)
 	set_up_direction((-diff).normalized())
