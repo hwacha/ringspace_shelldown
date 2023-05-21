@@ -284,8 +284,12 @@ func get_input(diff):
 			if not grounded:
 				set_fast_falling(true)
 		else:
+			if fast_falling:
+				var normalized_diff = diff.normalized()
+				norm_velocity += -normalized_diff * norm_velocity.dot(normalized_diff)
+				norm_velocity += -normalized_diff * max(diff.length(), 200) * double_jump_impulse
+				fastfall_depleted = true
 			set_fast_falling(false)
-	
 	if use:
 		emit_signal("used_powerup", self)
 
@@ -302,7 +306,7 @@ func _physics_process(_delta):
 	var fast_fall_mult = 1
 	
 	if fast_falling:
-		fast_fall_mult = 10
+		fast_fall_mult = 8
 
 	norm_velocity += diff * cf * fast_fall_mult
 	
@@ -336,12 +340,6 @@ func set_fast_falling(new_fast_falling):
 		anim.set_animation("fastfalling")
 	elif fast_falling and not new_fast_falling:
 		$FastFall.stop()
-		if not is_on_floor():
-			var diff = self.transform.origin - centroid
-			var normalized_diff = diff.normalized()
-			norm_velocity += -normalized_diff * norm_velocity.dot(normalized_diff)
-			norm_velocity += -normalized_diff * max(diff.length(), 200) * double_jump_impulse
-			fastfall_depleted = true
 	fast_falling = new_fast_falling
 		
 func _on_HurtBox_area_entered(hitbox):
