@@ -131,10 +131,10 @@ func _on_obstacle_timeout():
 	if not Players.is_round_ongoing:
 		return
 
-	var obstacles = ["Sun", "BlackHole"]
+	var obstacles = [preload("res://scenes/Sun.tscn"), preload("res://scenes/BlackHole.tscn")]
 	var rand = rng.randi_range(0, obstacles.size() - 1)
 	
-	var obstacle = load("res://scenes/" + obstacles[rand] + ".tscn").instantiate()
+	var obstacle = obstacles[rand].instantiate()
 	
 	obstacle.transform.origin = screen_size / 2
 	
