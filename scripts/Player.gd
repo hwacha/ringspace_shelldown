@@ -196,6 +196,7 @@ func get_input(diff):
 		set_fast_falling(false)
 		frames_in_air = 0
 		fastfall_depleted = false
+		$BounceTimer.stop()
 	else:
 		frames_in_air += 1
 		
@@ -328,7 +329,6 @@ func _physics_process(_delta):
 	set_up_direction((-diff).normalized())
 	move_and_slide()
 	norm_velocity = velocity.normalized() * norm_velocity.length()
-#	velocity -= perp_velocity
 	
 	if is_on_floor():
 		norm_velocity = Vector2(0, 0)
@@ -364,6 +364,8 @@ func _on_HurtBox_area_entered(hitbox):
 		# bounce
 		hitter.norm_velocity = -hurtbox_down * jump_impulse
 		hitter.set_fast_falling(false)
+		hitter.fastfall_depleted = true
+		hitter.get_node("BounceTimer").start()
 		# kill
 		if shielded > 0:
 			if hitter.expanded:
@@ -479,3 +481,7 @@ func _on_expand_timer_timeout():
 func _on_fast_timer_timeout():
 	if speedy:
 		speedy = false
+
+
+func _on_bounce_timer_timeout():
+	fastfall_depleted = false

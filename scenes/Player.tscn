@@ -139,6 +139,10 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 
+[node name="BounceTimer" type="Timer" parent="."]
+wait_time = 0.12
+one_shot = true
+
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0.59845, -18.319)
 emitting = false
@@ -172,4 +176,5 @@ volume_db = -18.0
 [connection signal="timeout" from="TeleportInvulnerability" to="." method="_on_teleport_invulnerability_timeout"]
 [connection signal="timeout" from="ExpandTimer" to="." method="_on_expand_timer_timeout"]
 [connection signal="timeout" from="FastTimer" to="." method="_on_fast_timer_timeout"]
+[connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
