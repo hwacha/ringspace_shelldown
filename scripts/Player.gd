@@ -268,19 +268,17 @@ func get_input(diff):
 		norm_velocity += -diff * total_impulse
 		jump_complete = false
 		spawning = 0
-	
-	if fast_fall:
-		spawning = 0
-		if not (fast_falling or fastfall_depleted):
-			if not grounded:
-				set_fast_falling(true)
-		else:
-			if fast_falling:
-				var normalized_diff = diff.normalized()
-				norm_velocity += -normalized_diff * norm_velocity.dot(normalized_diff)
-				norm_velocity += -normalized_diff * max(diff.length(), 200) * double_jump_impulse
-				fastfall_depleted = true
-			set_fast_falling(false)
+		
+	if jump_input and diff.dot(norm_velocity) > 0 and not (jump_animation_ongoing or grounded or fastfall_depleted):
+		var normalized_diff = diff.normalized()
+		norm_velocity += -normalized_diff * norm_velocity.dot(normalized_diff)
+		norm_velocity += -normalized_diff * max(diff.length(), 200) * double_jump_impulse
+		fastfall_depleted = true
+		set_fast_falling(false)
+
+	if fast_fall and not (grounded or fast_falling or fastfall_depleted):
+		set_fast_falling(true)
+			
 	if use:
 		emit_signal("used_powerup", self)
 
