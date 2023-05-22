@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://g4ceojc7bl7r"]
 
 [ext_resource type="Script" path="res://scripts/CrustSegment.gd" id="1_15q0q"]
-[ext_resource type="Texture2D" uid="uid://be7f25jo1583g" path="res://assets/warning-28-xxl.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://c4cht2hegqlgq" path="res://assets/RingSegment.png" id="2_ie5c3"]
 [ext_resource type="AudioStream" uid="uid://jm5c8xsyqmwq" path="res://assets/ring_game_segment_alarm.wav" id="3"]
+[ext_resource type="Texture2D" uid="uid://u3ddp8gf6ism" path="res://assets/alert.png" id="4_c3v3f"]
 
 [sub_resource type="Animation" id="Animation_i00f3"]
 resource_name = "RESET"
@@ -240,8 +240,8 @@ visible = false
 modulate = Color(1, 0.7, 1, 1)
 position = Vector2(-104, -1.19209e-07)
 rotation = -1.5708
-scale = Vector2(0.3, 0.298438)
-texture = ExtResource("2")
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_c3v3f")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="Visuals/Area2D" to="." method="_on_area_2d_body_entered"]

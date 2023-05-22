@@ -461,7 +461,6 @@ func _on_animated_sprite_2d_animation_finished():
 		var total_orbs = $Orbs.get_child_count()
 		var num_lost_orbs = int(total_orbs * \
 		float(Players.orb_loss_numerator) / Players.orb_loss_denominator)
-		var num_kept_orbs = total_orbs - num_lost_orbs
 		var counter = 0
 		for orb in $Orbs.get_children():
 			$Orbs.remove_child(orb)

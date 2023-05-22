@@ -22,4 +22,3 @@ func on_add_orb(new_orb):
 	for orb in orbs:
 		orb.transform.origin = r * Vector2(cos(theta), sin(theta))
 		theta += d_theta
-	var player_id = get_parent().id
