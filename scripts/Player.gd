@@ -12,9 +12,6 @@ var frames_in_air : int = 0
 var norm_velocity = Vector2(0, 0)
 var perp_velocity = Vector2(0, 0)
 
-var last_sign = 0 # 1 for clockwise, -1 for counterclockwise
-var last_analog_input = null
-
 var analog_dead_zone = 0.05
 #var velocity = Vector2(0, 0)
 var cf = 0.105
@@ -205,32 +202,17 @@ func get_input(diff):
 		if spawning > 0:
 			spawning -= 1
 	else:
+		ps *= max(1, sqrt(norm_velocity.length()) / 10)
 		frames_in_air += 1
 		
 	var analog_h_movement = Input.get_axis("move_left_analog_p" + str(id), "move_right_analog_p" + str(id))
 	var analog_v_movement = Input.get_axis("move_up_analog_p" + str(id), "move_down_analog_p" + str(id))
 	
 	var total_movement = Vector2(analog_h_movement, analog_v_movement)
-	var analog_move_clockwise = false
-	var analog_move_counterclockwise = false
-	if total_movement == last_analog_input:
-		if last_sign == 1:
-			analog_move_clockwise = true
-		elif last_sign == -1:
-			analog_move_counterclockwise = true
-	
-	last_analog_input = total_movement
-	
-	if not (analog_move_clockwise or analog_move_counterclockwise):
-		var horizontal_sign = total_movement.dot(diff.rotated(PI / 2).normalized())
-		analog_move_clockwise = horizontal_sign > analog_dead_zone
-		analog_move_counterclockwise = horizontal_sign < -analog_dead_zone
-	
-	last_sign = 0
-	if analog_move_clockwise:
-		last_sign += 1
-	if analog_move_counterclockwise:
-		last_sign -= 1
+
+	var horizontal_sign = total_movement.dot(diff.rotated(PI / 2).normalized())
+	var analog_move_clockwise = horizontal_sign > analog_dead_zone
+	var analog_move_counterclockwise = horizontal_sign < -analog_dead_zone
 	
 	var move_clockwise = analog_move_clockwise or Input.is_action_pressed("move_clockwise_p" + str(id))
 	var move_counterclockwise = analog_move_counterclockwise or Input.is_action_pressed("move_counterclockwise_p" + str(id))
