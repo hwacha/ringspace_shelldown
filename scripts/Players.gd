@@ -74,6 +74,7 @@ func set_player_ids(x):
 	
 func player_constructor(id, priority):
 	var player_instance = player_scene.instantiate()
+	player_instance.name = str(id)
 	player_instance.id = id
 	player_instance.color = player_colors[id - 1]
 	player_instance.get_node("DeathParticles").modulate = player_instance.color
@@ -97,7 +98,7 @@ func spawn_players():
 		player_instance.starting_theta = ((2 * PI * i / starting_ids.size()) + PI)
 		i += 1
 		
-		get_node("/root/Main").call_deferred("add_child", player_instance)
+		get_node("/root/Main/PlayersOnField").call_deferred("add_child", player_instance)
 	
 	is_round_ongoing = true
 	
@@ -109,7 +110,7 @@ func respawn_player(player_id, priority):
 
 	for stored_orb in stored_orbs[player_id - 1]:
 		next_player_orbs.add_child(stored_orb)
-		next_player_orbs.on_add_orb(stored_orb, false)
+		next_player_orbs.on_add_orb(stored_orb)
 	
 	stored_orbs[player_id - 1] = []
 	
@@ -118,23 +119,26 @@ func respawn_player(player_id, priority):
 	if main.has_node("BlackHole"):
 		next_player.black_hole = main.get_node("BlackHole")
 		
-	main.call_deferred("add_child", next_player)
+	main.get_node("PlayersOnField").call_deferred("add_child", next_player)
 
-func update_score(id, new_score):
-	score[str(id)] = new_score
-	get_node("/root/Main/Score").queue_redraw()
-	
-func inc_score(id):
-	score[str(id)] += 1
-	get_node("/root/Main/Score").queue_redraw()
 
 func _process(delta):
 	elapsed_time += delta
 	
 	if is_round_ongoing:
 		for id in score.keys():
+			var old_score = score[id]
+			var player_node = get_node_or_null("/root/Main/PlayersOnField/" + id)
+			if player_node == null:
+				player_node = get_node("/root/Main/PlayersOnField/" + id + "_(dead)")
+			var new_score = player_node.get_node("Orbs").get_child_count()
+			new_score += stored_orbs[int(id) - 1].size()
+			if old_score != new_score:
+				score[id] = new_score
+				get_node("/root/Main/Score").queue_redraw()
 			if score[id] >= play_to:
 				end_game()
+			
 	
 	if Input.is_action_just_pressed("exit_game"):
 		is_round_ongoing = false

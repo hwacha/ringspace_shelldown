@@ -50,7 +50,7 @@ func _on_area_entered(area):
 			get_parent().call_deferred("remove_child", self)
 			var new_orbs = player.get_node("Orbs")
 			new_orbs.call_deferred("add_child", self)
-			new_orbs.call_deferred("on_add_orb", self, true)
+			new_orbs.call_deferred("on_add_orb", self)
 		
 
 func set_new_destination():
@@ -150,7 +150,7 @@ func _on_animation_player_animation_finished(_anim_name):
 			if claimed_player_singleton.size() > 0:
 				var respawned_claimant = claimed_player_singleton[0]
 				respawned_claimant.get_node("Orbs").call_deferred("add_child", self)
-				respawned_claimant.get_node("Orbs").call_deferred("on_add_orb", self, true)
+				respawned_claimant.get_node("Orbs").call_deferred("on_add_orb", self)
 			else:
 				Players.stored_orbs[next_claimant_id - 1].push_back(self)
 		else:
@@ -164,7 +164,7 @@ func _on_animation_player_animation_finished(_anim_name):
 			stored_orbs[next_claimant.id - 1].push_back(self)
 		else:
 			next_claimant.get_node("Orbs").call_deferred("add_child", self)
-			next_claimant.get_node("Orbs").call_deferred("on_add_orb", self, true)
+			next_claimant.get_node("Orbs").call_deferred("on_add_orb", self)
 		
 		next_claimant = null
 	

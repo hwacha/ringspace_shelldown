@@ -10,7 +10,7 @@ func _process(delta):
 	rotate(delta)
 	pass
 
-func on_add_orb(new_orb, should_affect_score):
+func on_add_orb(new_orb):
 	new_orb.claimed = true
 	var orbs = get_children()
 	var num_orbs = orbs.size()
@@ -23,6 +23,3 @@ func on_add_orb(new_orb, should_affect_score):
 		orb.transform.origin = r * Vector2(cos(theta), sin(theta))
 		theta += d_theta
 	var player_id = get_parent().id
-	
-	if should_affect_score:
-		Players.inc_score(player_id)

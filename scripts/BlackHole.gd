@@ -21,7 +21,7 @@ func _process(delta):
 		lensing.material.set("shader_parameter/m", _m)
 
 func _on_decay_timeout():
-	var players = get_parent().get_children().filter(func(node): return node is Player)
+	var players = get_parent().get_node("PlayersOnField").get_children()
 	for player in players:
 		player.black_hole = null
 		
@@ -50,7 +50,7 @@ func _on_animation_player_animation_finished(anim_name):
 		$CollisionShape2D.disabled = false
 		$Singularity.get_node("CollisionShape2D").disabled = false
 		
-		var players = get_parent().get_children().filter(func(node): return node is Player)
+		var players = get_parent().get_node("PlayersOnField").get_children()
 		for player in players:
 			player.black_hole = self
 			

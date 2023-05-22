@@ -95,7 +95,7 @@ func _ready():
 	animation.track_insert_key(track_index_camera, 0.0, get_parent().get_node("Camera2D").transform.origin)
 	animation.track_insert_key(track_index_camera, 3.0, my_position_in_main)
 	
-	players = get_parent().get_children().filter(func(node): return node is Player)
+	players = get_parent().get_node("PlayersOnField").get_children()
 	
 	var rank_indeces = {}
 	for player in players:
@@ -113,8 +113,8 @@ func _ready():
 		
 		var track_index_rotation = animation.add_track(Animation.TYPE_VALUE)
 		var track_index_position = animation.add_track(Animation.TYPE_VALUE)
-		animation.track_set_path(track_index_rotation, player.name + ":rotation")
-		animation.track_set_path(track_index_position, player.name + ":position")
+		animation.track_set_path(track_index_rotation, "PlayersOnField/" + player.name + ":rotation")
+		animation.track_set_path(track_index_position, "PlayersOnField/" + player.name + ":position")
 		
 		var rank = ranks_by_player[str(player.id)]
 		var rank_index = 0

@@ -54,7 +54,7 @@ var black_hole = null
 var is_in_event_horizon = false
 
 func _ready():
-	var crust = get_node("../Crust")
+	var crust = get_node("../../Crust")
 	centroid = crust.transform.origin
 	surface_to_centroid = min(crust.screen_size.x, crust.screen_size.y) / 2 - crust.crust_size
 	surface_to_centroid_squared = surface_to_centroid * surface_to_centroid
@@ -67,7 +67,7 @@ func _ready():
 	
 	rand.randomize()
 	
-	var powerup = get_node("../Powerups/Powerup" + str(id))
+	var powerup = get_node("../../Powerups/Powerup" + str(id))
 	used_powerup.connect(powerup.on_use_powerup)
 	
 	anim.set_animation("default")
@@ -92,7 +92,7 @@ func _set_expansion(new_expanded: bool):
 func spawn(is_teleport: bool):
 	spawning = 2
 	# randomly select a safe crust segment
-	var crust_segments = get_parent().get_node("Crust").get_children().filter(func(segment): return segment.can_spawn_player())
+	var crust_segments = get_node("../../Crust").get_children().filter(func(segment): return segment.can_spawn_player())
 	var crust_index = rand.randi_range(0, crust_segments.size() - 1)
 	var destination_segment = crust_segments[crust_index]
 	if destination_segment.get_node("AnimationPlayer").current_animation == "segment_destroy":
@@ -105,7 +105,7 @@ func spawn(is_teleport: bool):
 	
 	var destination_segment_position = destination_segment.get_node("Visuals").transform.origin
 		
-	var destination_point = (get_parent().get_node("Crust").transform.origin +
+	var destination_point = (get_node("../../Crust").transform.origin +
 		(1 - (48 / destination_segment_position.length())) * destination_segment_position)
 	
 	# invulnerable
@@ -132,7 +132,7 @@ func spawn(is_teleport: bool):
 	return true
 
 func try_auto_teleport():
-	var my_powerup = get_node("../Powerups/Powerup" + str(self.id))
+	var my_powerup = get_node("../../Powerups/Powerup" + str(self.id))
 	if my_powerup.powerup == "teleport":
 		emit_signal("used_powerup", self)
 		return true
@@ -393,6 +393,7 @@ func die():
 	if dead:
 		return
 	dead = true
+	name += "_(dead)"
 	shielded = 0 # not strictly necessary
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.set_animation("dead")
@@ -455,7 +456,7 @@ func _on_animated_sprite_2d_animation_finished():
 			orb_instance.claimed = true
 			orb_instance.next_claimant = killer
 		
-		get_parent().call_deferred("add_child", orb_instance)
+		get_parent().get_parent().call_deferred("add_child", orb_instance)
 
 		var total_orbs = $Orbs.get_child_count()
 		var num_lost_orbs = int(total_orbs * \
@@ -467,7 +468,7 @@ func _on_animated_sprite_2d_animation_finished():
 			orb.transform.origin = self.transform.origin
 			
 			if counter < num_lost_orbs:
-				get_parent().call_deferred("add_child", orb)
+				get_parent().get_parent().call_deferred("add_child", orb)
 				if killer == null:
 					orb.claimed = false
 				else:
@@ -477,8 +478,7 @@ func _on_animated_sprite_2d_animation_finished():
 				Players.stored_orbs[self.id - 1].push_back(orb)
 			
 			counter += 1
-		
-		Players.update_score(id, num_kept_orbs)
+			
 		anim.set_animation("corpse")
 		anim.play()
 
