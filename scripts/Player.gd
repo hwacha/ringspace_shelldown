@@ -202,8 +202,22 @@ func get_input(diff):
 		if spawning > 0:
 			spawning -= 1
 	else:
-		ps *= 1.5 * norm_velocity.length_squared() / surface_to_centroid_squared
+		# frame timer
 		frames_in_air += 1
+		
+		# uncomment this for logistic speed curve
+		var inflection_point = surface_to_centroid / 3
+		var steepness = 1.0 / 120
+		var max_multiplier = 3.0
+		ps *= max_multiplier * (1 + steepness * tanh(diff.length() - inflection_point))
+
+#		# uncomment this for quadratic speed curve
+#		var max_multiplier = 10.0
+#		ps *= max_multiplier * (diff.length_squared() / surface_to_centroid_squared)
+		
+##		# uncomment this for linear speed curve
+#		var max_multiplier = 7.0
+#		ps *= max_multiplier * (diff.length() / surface_to_centroid)
 		
 	var analog_h_movement = Input.get_axis("move_left_analog_p" + str(id), "move_right_analog_p" + str(id))
 	var analog_v_movement = Input.get_axis("move_up_analog_p" + str(id), "move_down_analog_p" + str(id))
@@ -269,7 +283,11 @@ func get_input(diff):
 		jump_complete = false
 		spawning = 0
 		
-	if jump_input and diff.dot(norm_velocity) > 0 and not (jump_animation_ongoing or grounded or fastfall_depleted):
+	if jump_input and diff.dot(norm_velocity) > 0 and \
+		not (jump_animation_ongoing or \
+			grounded or \
+			frames_in_air < coyote_threshold or \
+			fastfall_depleted):
 		var normalized_diff = diff.normalized()
 		norm_velocity += -normalized_diff * norm_velocity.dot(normalized_diff)
 		norm_velocity += -normalized_diff * max(diff.length(), 200) * double_jump_impulse
