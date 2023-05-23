@@ -202,7 +202,7 @@ func get_input(diff):
 		if spawning > 0:
 			spawning -= 1
 	else:
-		ps *= max(1, sqrt(norm_velocity.length()) / 10)
+		ps *= 1.5 * norm_velocity.length_squared() / surface_to_centroid_squared
 		frames_in_air += 1
 		
 	var analog_h_movement = Input.get_axis("move_left_analog_p" + str(id), "move_right_analog_p" + str(id))
