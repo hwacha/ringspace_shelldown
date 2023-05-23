@@ -297,12 +297,12 @@ func _physics_process(_delta):
 	if fast_falling:
 		fast_fall_mult = 5
 
-	norm_velocity += diff * cf * fast_fall_mult
+	norm_velocity += diff * cf * fast_fall_mult * Engine.time_scale
 	
 	if not dead:
 		get_input(diff)
 	
-	var total_velocity = norm_velocity + perp_velocity
+	var total_velocity = norm_velocity + (perp_velocity * Engine.time_scale)
 	
 	if black_hole != null and not (is_on_floor() or spawning):
 		var black_hole_diff = black_hole.transform.origin - self.transform.origin
