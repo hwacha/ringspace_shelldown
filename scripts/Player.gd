@@ -206,19 +206,24 @@ func get_input(diff):
 		frames_in_air += 1
 		
 		# uncomment this for logistic speed curve
-		var inflection_point = surface_to_centroid / 3
-		var steepness = 1.0 / 120
-		var max_multiplier = 3.0
-		ps *= max_multiplier * (1 + steepness * tanh(diff.length() - inflection_point))
+		#var inflection_point = surface_to_centroid / 3
+		#var steepness = 1.0 / 120
+		#var max_multiplier = 3.0
+		#ps *= max_multiplier * (1 + steepness * tanh(diff.length() - inflection_point))
 
 #		# uncomment this for quadratic speed curve
 #		var max_multiplier = 10.0
 #		ps *= max_multiplier * (diff.length_squared() / surface_to_centroid_squared)
 		
-##		# uncomment this for linear speed curve
+#		# uncomment this for linear speed curve
 #		var max_multiplier = 7.0
 #		ps *= max_multiplier * (diff.length() / surface_to_centroid)
 		
+		# uncomment this for angular speed that decreases slightly superlinearlly from a maximum at the origin to zero somewhere outside the ring
+		var dist_frac = diff.length() / surface_to_centroid
+		var x = (1 - dist_frac + 0.2)
+		ps *= 7 * dist_frac * 0.5 * (x + x*x)
+
 	var analog_h_movement = Input.get_axis("move_left_analog_p" + str(id), "move_right_analog_p" + str(id))
 	var analog_v_movement = Input.get_axis("move_up_analog_p" + str(id), "move_down_analog_p" + str(id))
 	
