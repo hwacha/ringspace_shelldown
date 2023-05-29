@@ -6,6 +6,8 @@ signal used_powerup(reference)
 @export var id: int
 var color : Color
 
+var double_jump_animation = preload("res://scenes/double_jump_animation.tscn")
+
 var coyote_threshold : int = 5
 var frames_in_air : int = 0
 
@@ -249,10 +251,12 @@ func get_input(diff):
 		if move_clockwise:
 			perp_velocity += diff.rotated(PI / 2).normalized() * ps
 			anim.flip_h = true
+			$FastfallAnimation.flip_h = false
 			$LeftArrow.visible = true
 		if move_counterclockwise:
 			perp_velocity += diff.rotated(-PI / 2).normalized() * ps
 			anim.flip_h = false
+			$FastfallAnimation.flip_h = true
 			$RightArrow.visible = true
 		if not jump_animation_ongoing:
 			if grounded:
@@ -293,6 +297,15 @@ func get_input(diff):
 		norm_velocity += -normalized_diff * max(diff.length(), 200) * double_jump_impulse
 		fastfall_depleted = true
 		set_fast_falling(false)
+		
+		var double_jump_animation_instance = double_jump_animation.instantiate()
+		get_parent().get_parent().add_child(double_jump_animation_instance)
+		double_jump_animation_instance.scale = scale * Vector2(0.1, 0.1)
+		double_jump_animation_instance.rotation = self.rotation
+		double_jump_animation_instance.transform.origin = self.transform.origin -\
+			30 * Vector2(cos(self.rotation + PI/2), sin(self.rotation + PI/2))
+		
+		double_jump_animation_instance.play()
 
 	if fast_fall and not (grounded or fast_falling or fastfall_depleted):
 		set_fast_falling(true)
@@ -344,8 +357,12 @@ func set_fast_falling(new_fast_falling):
 	if not fast_falling and new_fast_falling:
 		$FastFall.play()
 		anim.set_animation("fastfalling")
+		$FastfallAnimation.visible = true
+		$FastfallAnimation.play()
 	elif fast_falling and not new_fast_falling:
 		$FastFall.stop()
+		$FastfallAnimation.stop()
+		$FastfallAnimation.visible = false
 	fast_falling = new_fast_falling
 		
 func _on_HurtBox_area_entered(hitbox):

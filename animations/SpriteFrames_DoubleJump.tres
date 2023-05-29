@@ -1,0 +1,49 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://d4lek7i57h1hx"]
+
+[ext_resource type="Texture2D" uid="uid://d12mocjcwfu4x" path="res://assets/Double Jump Sprite Sheet.png" id="1_w1rmg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7mja"]
+atlas = ExtResource("1_w1rmg")
+region = Rect2(0, 0, 1638, 1944)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e4ta"]
+atlas = ExtResource("1_w1rmg")
+region = Rect2(1638, 0, 1638, 1944)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdeqe"]
+atlas = ExtResource("1_w1rmg")
+region = Rect2(3276, 0, 1638, 1944)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tiwl"]
+atlas = ExtResource("1_w1rmg")
+region = Rect2(4914, 0, 1638, 1944)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40g7g"]
+atlas = ExtResource("1_w1rmg")
+region = Rect2(6552, 0, 1638, 1944)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7mja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4e4ta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdeqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tiwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40g7g")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]

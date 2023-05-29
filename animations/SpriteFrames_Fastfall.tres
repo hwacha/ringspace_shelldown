@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cfmjxgo5aubws"]
+
+[ext_resource type="Texture2D" uid="uid://mt6l35ncu6qr" path="res://assets/Fast Fall Sprite Sheet.png" id="1_p10f6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy6cn"]
+atlas = ExtResource("1_p10f6")
+region = Rect2(0, 0, 1638, 1944)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a38sj"]
+atlas = ExtResource("1_p10f6")
+region = Rect2(1638, 0, 1638, 1944)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bulls"]
+atlas = ExtResource("1_p10f6")
+region = Rect2(3276, 0, 1638, 1944)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy6cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a38sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bulls")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
