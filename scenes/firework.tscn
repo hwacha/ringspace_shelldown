@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbxijbnvpxfkh"]
+
+[ext_resource type="Script" path="res://scripts/Firework.gd" id="1_t4gpf"]
+[ext_resource type="Texture2D" uid="uid://bpmar6l4jk3xg" path="res://assets/WhiteOrb_Halo.png" id="2_ylm8u"]
+
+[sub_resource type="Curve2D" id="Curve2D_bg3mo"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -248, -39)
+}
+point_count = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl685"]
+resource_local_to_scene = true
+atlas = ExtResource("2_ylm8u")
+region = Rect2(0, 0, 892, 835)
+
+[sub_resource type="Gradient" id="Gradient_a75ke"]
+offsets = PackedFloat32Array(0.616327, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t5ao4"]
+gradient = SubResource("Gradient_a75ke")
+
+[sub_resource type="Curve" id="Curve_2o4fc"]
+_data = [Vector2(0, 1), 0.0, -0.0549184, 0, 0, Vector2(1, 0.284615), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_io3sr"]
+curve = SubResource("Curve_2o4fc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yp7d8"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 75.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.04
+scale_max = 0.06
+scale_curve = SubResource("CurveTexture_io3sr")
+color_ramp = SubResource("GradientTexture1D_t5ao4")
+
+[node name="Firework" type="Path2D"]
+curve = SubResource("Curve2D_bg3mo")
+script = ExtResource("1_t4gpf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(0, 675)
+rotation = -1.50625
+loop = false
+
+[node name="Bomb" type="Sprite2D" parent="PathFollow2D"]
+scale = Vector2(0.2, 0.2)
+texture = SubResource("AtlasTexture_sl685")
+
+[node name="Explosion" type="GPUParticles2D" parent="PathFollow2D"]
+modulate = Color(1, 1, 1, 0.8)
+emitting = false
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_yp7d8")
+texture = SubResource("AtlasTexture_sl685")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(69.8179, -368.353, 924, 924)
+trail_lifetime = 0.05

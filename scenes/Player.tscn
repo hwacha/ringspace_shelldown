@@ -137,7 +137,7 @@ debug_color = Color(0.415686, 0.392157, 0.701961, 0.419608)
 script = ExtResource("4_v8tyi")
 
 [node name="TeleportInvulnerability" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.5
 
 [node name="ExpandTimer" type="Timer" parent="."]
 wait_time = 10.0

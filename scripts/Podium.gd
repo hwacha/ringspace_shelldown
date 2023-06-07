@@ -153,12 +153,37 @@ func _ready():
 		animation_player.animation_finished.connect(_on_animation_finished)
 		
 		add_child(animation_player)
+		
+		# color fireworks according to winners
+		var winners = players_by_rank[1]
+		var num_winners = winners.size()
+		
+		if num_winners == 1:
+			for firework in [$Firework1, $Firework2, $Firework3, $Firework4]:
+				var sprite = load("assets/" + Players.player_names[int(winners[0]) - 1] + "Orb_Halo.png")
+				firework.get_node("PathFollow2D/Bomb").texture.atlas = sprite
+		elif num_winners == 2:
+			for firework in [$Firework1, $Firework3]:
+				var sprite = load("assets/" + Players.player_names[int(winners[0]) - 1] + "Orb_Halo.png")
+				firework.get_node("PathFollow2D/Bomb").texture.atlas = sprite
+			for firework in [$Firework2, $Firework4]:
+				var sprite = load("assets/" + Players.player_names[int(winners[1]) - 1] + "Orb_Halo.png")
+				firework.get_node("PathFollow2D/Bomb").texture.atlas = sprite
+		else:
+			var counter = 1
+			for winner in winners:
+				var sprite = load("assets/" + Players.player_names[int(winner) - 1] + "Orb_Halo.png")
+				var firework = get_node("Firework" + str(counter))
+				firework.get_node("PathFollow2D/Bomb").texture.atlas = sprite
+				counter += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if accepting_input and Input.is_anything_pressed():
-		$Timer.stop()
-		$AnimationPlayer.play("fadeout")
+	if accepting_input:
+		$Prompt.modulate.a = sin($Timeout.time_left / 2 * PI) + 1
+		if Input.is_anything_pressed():
+			$Timeout.stop()
+			$Fadeout.play("fadeout")
 
 func _on_animation_finished(_anim):
 	for player in players:
@@ -167,23 +192,17 @@ func _on_animation_finished(_anim):
 			player_sprite.animation = "victory" # change to victory jump
 		else:
 			player_sprite.animation = "default"
-	
+
+	$LaunchFireworks.play("launch_fireworks")
+	$InputTimer.start()
+
+func _on_input_timer_timeout():
 	accepting_input = true
-	$Timer.start()
-#		spawn_firework()
-
-#func spawn_firework():
-#	var winners = players_by_rank[1]
-#
-#	for winner in winners:
-#		var firework = get_node(Players.player_names[winner - 1] + "Firework")
-#		firework.visible = true
-#		firework.get_node("AnimationPlayer").play("firework")
-
-
-func _on_timer_timeout():
-	$AnimationPlayer.play("fadeout")
-
+	$Prompt.visible = true
+	$Timeout.start()
+	
+func _on_timeout_timeout():
+	$Fadeout.play("fadeout")
 
 func _on_animation_player_animation_finished(_anim_name):
 	get_tree().change_scene_to_file("res://scenes/opening_screen.tscn")

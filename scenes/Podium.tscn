@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2msnbyhjjr1v"]
+[gd_scene load_steps=12 format=3 uid="uid://c2msnbyhjjr1v"]
 
 [ext_resource type="Script" path="res://scripts/Podium.gd" id="1_l7k1u"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="2_83oer"]
+[ext_resource type="PackedScene" uid="uid://bbxijbnvpxfkh" path="res://scenes/firework.tscn" id="3_x7tq7"]
 
 [sub_resource type="Animation" id="Animation_mrkc5"]
 resource_name = "fadeout"
@@ -24,6 +25,92 @@ _data = {
 "fadeout": SubResource("Animation_mrkc5")
 }
 
+[sub_resource type="Animation" id="Animation_6agsq"]
+resource_name = "launch_fireworks"
+length = 7.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Firework1:active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Firework2:active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Firework3:active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Firework4:active")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ptg1x"]
+_data = {
+"launch_fireworks": SubResource("Animation_6agsq")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_6npmj"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -263, 151)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_btxat"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -74, 52)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_a0jy3"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, 127, 58)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_syafy"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, 304, 150)
+}
+point_count = 2
+
 [node name="Podium" type="Node2D"]
 script = ExtResource("1_l7k1u")
 
@@ -35,11 +122,15 @@ offset_right = 540.0
 offset_bottom = 540.0
 color = Color(0, 0, 0, 0)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
+[node name="InputTimer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Timeout" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+
+[node name="Thanks" type="RichTextLabel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,10 +145,48 @@ theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center]Thanks for playing![/center]"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Prompt" type="RichTextLabel" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = 318.0
+offset_right = 540.0
+offset_bottom = 368.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_83oer")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Press any button to continue[/center]"
+
+[node name="Fadeout" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_jkisj")
 }
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="LaunchFireworks" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ptg1x")
+}
+
+[node name="Firework1" parent="." instance=ExtResource("3_x7tq7")]
+visible = false
+curve = SubResource("Curve2D_6npmj")
+
+[node name="Firework2" parent="." instance=ExtResource("3_x7tq7")]
+visible = false
+curve = SubResource("Curve2D_btxat")
+
+[node name="Firework3" parent="." instance=ExtResource("3_x7tq7")]
+visible = false
+curve = SubResource("Curve2D_a0jy3")
+
+[node name="Firework4" parent="." instance=ExtResource("3_x7tq7")]
+visible = false
+curve = SubResource("Curve2D_syafy")
+
+[connection signal="timeout" from="InputTimer" to="." method="_on_input_timer_timeout"]
+[connection signal="timeout" from="Timeout" to="." method="_on_timeout_timeout"]
+[connection signal="animation_finished" from="Fadeout" to="." method="_on_animation_player_animation_finished"]
