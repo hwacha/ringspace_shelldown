@@ -67,4 +67,3 @@ lifetime = 1.5
 one_shot = true
 explosiveness = 1.0
 visibility_rect = Rect2(69.8179, -368.353, 924, 924)
-trail_lifetime = 0.05
