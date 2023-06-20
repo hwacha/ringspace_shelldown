@@ -146,6 +146,9 @@ func _process(delta):
 		
 func end_game():
 	if is_round_ongoing:
+		var round_timer = get_node("/root/Main/MatchTimer")
+		if round_timer.time_left > 0:
+			round_timer.stop()
 		var round_text = get_node("/root/Main/RoundText")
 		round_text.text = "[center]MATCH[/center]"
 		round_text.modulate.a = 1

@@ -75,12 +75,14 @@ sprite_frames = ExtResource("4_gf6m5")
 
 [node name="LeftArrow" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(-35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("4_t6g85")
 
 [node name="RightArrow" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("5_tvpea")

@@ -8,5 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var time_left = get_node("../MatchTimer").get_time_left()
-	text = str(ceil(time_left))
+	var timer = get_node("../MatchTimer")
+	var time_left = timer.get_time_left()
+	if not timer.is_stopped():
+		text = str(ceil(time_left))
