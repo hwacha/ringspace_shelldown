@@ -66,6 +66,9 @@ func _ready():
 	
 	rand.randomize()
 	
+	$ShadowSprite.modulate = $DeathParticles.modulate
+	$ShadowSprite.modulate.a = 1
+	
 	var powerup = get_node("../../Powerups/Powerup" + str(id))
 	used_powerup.connect(powerup.on_use_powerup)
 	
@@ -317,6 +320,39 @@ func get_input(diff):
 func _physics_process(_delta):
 	$LeftArrow.visible = false
 	$RightArrow.visible = false
+	
+	$ShadowSprite.visible = true
+	
+	if is_on_floor():
+		$ShadowSprite.visible = false
+	else:
+		var shadow_target  = $Shadow.get_collider()
+		var shadow_target_right = $ShadowRight.get_collider()
+		var shadow_target_left = $ShadowLeft.get_collider()
+		if shadow_target == null and shadow_target_left == null and shadow_target_right == null:
+			$ShadowSprite.visible = false
+		else:
+			var center_pos = $Shadow.get_collision_point()
+			var right_pos = $ShadowRight.get_collision_point()
+			var left_pos = $ShadowLeft.get_collision_point()
+			
+			var center_distance = (self.transform.origin + $Shadow.transform.origin).distance_to(center_pos)
+			var right_distance = (self.transform.origin + $ShadowRight.transform.origin).distance_to(right_pos)
+			var left_distance = (self.transform.origin + $ShadowLeft.transform.origin).distance_to(left_pos)
+			
+			if right_distance + 30 < center_distance and right_distance < left_distance:
+				$ShadowSprite.transform.origin = right_pos
+				$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - right_distance / 540, 0, 1))
+			elif left_distance + 30 < center_distance and left_distance < right_distance:
+				$ShadowSprite.transform.origin = left_pos
+				$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - left_distance / 540, 0, 1))
+			else:
+				$ShadowSprite.transform.origin = center_pos
+				$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - center_distance / 540, 0, 1))
+	
+			$ShadowSprite.rotation = self.rotation
+			$ShadowSprite.visible = true
+
 	if lock_physics:
 		return
 

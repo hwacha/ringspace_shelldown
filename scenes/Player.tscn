@@ -87,6 +87,30 @@ position = Vector2(35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("5_tvpea")
 
+[node name="Shadow" type="RayCast2D" parent="."]
+position = Vector2(0, 32)
+target_position = Vector2(0, 600)
+collision_mask = 5
+collide_with_areas = true
+
+[node name="ShadowRight" type="RayCast2D" parent="."]
+position = Vector2(20, 32)
+target_position = Vector2(0, 600)
+collision_mask = 5
+collide_with_areas = true
+
+[node name="ShadowLeft" type="RayCast2D" parent="."]
+position = Vector2(-17, 32)
+target_position = Vector2(0, 600)
+collision_mask = 5
+collide_with_areas = true
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+visible = false
+top_level = true
+scale = Vector2(0.06, 0.01)
+texture = ExtResource("3_yudyd")
+
 [node name="CollisionShapeForGround" type="CollisionShape2D" parent="."]
 position = Vector2(4, 0)
 shape = SubResource("18")
