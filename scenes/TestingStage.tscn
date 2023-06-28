@@ -20,6 +20,7 @@ process_priority = 1
 [node name="Powerup1" parent="Powerups" instance=ExtResource("3_rfags")]
 
 [node name="Input" type="Sprite2D" parent="."]
+visible = false
 z_index = 100
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("4_lok8o")
