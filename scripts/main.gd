@@ -4,17 +4,13 @@ var players_not_playing
 
 var rng = RandomNumberGenerator.new()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Players.lock_action = true
 #	var bus_idx = AudioServer.get_bus_index("Master")
 #	AudioServer.set_bus_mute(bus_idx, true)
 	players_not_playing = [1, 2, 3, 4].filter(func(id): return id not in Players.starting_ids)
-	
-	
 	rng.randomize()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if not Players.lock_action:
 		for id in players_not_playing:

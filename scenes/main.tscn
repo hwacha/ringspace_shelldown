@@ -1,6 +1,5 @@
 [gd_scene load_steps=18 format=3 uid="uid://coltyqvepu4rw"]
 
-[ext_resource type="Script" path="res://scripts/crust.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_6u6n8"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="1_i7osw"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="2"]
@@ -8,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/Starfield.gd" id="3_gu52u"]
 [ext_resource type="AudioStream" uid="uid://betn3px4wblfd" path="res://assets/ringspace_shelldown_game_music.wav" id="4"]
 [ext_resource type="Script" path="res://scripts/Score.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://41h5xgc8b0ff" path="res://scenes/Crust.tscn" id="5_53dgm"]
 [ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="5_kni4r"]
 [ext_resource type="Script" path="res://scripts/OutOfBounds.gd" id="6"]
 [ext_resource type="AudioStream" uid="uid://b03rlrx7aq68w" path="res://assets/ring_game_end_stab.wav" id="8_6ncwt"]
@@ -155,11 +155,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Crust" type="StaticBody2D" parent="."]
-z_index = 1
-position = Vector2(540, 540)
-collision_mask = 2
-script = ExtResource("1")
+[node name="Crust" parent="." instance=ExtResource("5_53dgm")]
 
 [node name="PlayersOnField" type="Node2D" parent="."]
 

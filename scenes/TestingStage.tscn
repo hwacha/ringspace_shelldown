@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmda76pbmte8a"]
+
+[ext_resource type="PackedScene" uid="uid://41h5xgc8b0ff" path="res://scenes/Crust.tscn" id="1_r3f1d"]
+[ext_resource type="Script" path="res://scripts/TestingStage.gd" id="1_w8bcj"]
+[ext_resource type="PackedScene" uid="uid://cg3v46vj7p1fd" path="res://scenes/Powerup.tscn" id="3_rfags"]
+[ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="4_lok8o"]
+
+[node name="TestingStage" type="Node2D"]
+process_priority = 3
+script = ExtResource("1_w8bcj")
+is_replay = true
+
+[node name="Crust" parent="." instance=ExtResource("1_r3f1d")]
+process_priority = 1
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Powerups" type="Node2D" parent="."]
+
+[node name="Powerup1" parent="Powerups" instance=ExtResource("3_rfags")]
+
+[node name="Input" type="Sprite2D" parent="."]
+z_index = 100
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("4_lok8o")
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

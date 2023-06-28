@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://41h5xgc8b0ff"]
+
+[ext_resource type="Script" path="res://scripts/crust.gd" id="1_7kl40"]
+
+[node name="Crust" type="StaticBody2D"]
+z_index = 1
+position = Vector2(540, 540)
+collision_mask = 2
+script = ExtResource("1_7kl40")

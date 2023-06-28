@@ -31,6 +31,8 @@ var surface_to_centroid
 var surface_to_centroid_squared
 var spawn_ratio
 
+var segment_spawn_index = -1
+
 @onready var anim = $AnimatedSprite2D
 var rand = RandomNumberGenerator.new()
 
@@ -94,8 +96,10 @@ func _set_expansion(new_expanded: bool):
 func spawn(is_teleport: bool):
 	spawning = 2
 	# randomly select a safe crust segment
+	var crust_index = segment_spawn_index
 	var crust_segments = get_node("../../Crust").get_children().filter(func(segment): return segment.can_spawn_player())
-	var crust_index = rand.randi_range(0, crust_segments.size() - 1)
+	if crust_index == -1:
+		crust_index = rand.randi_range(0, crust_segments.size() - 1)
 	var destination_segment = crust_segments[crust_index]
 	if destination_segment.get_node("AnimationPlayer").current_animation == "segment_destroy":
 		var second_crust_index = rand.randi_range(0, crust_segments.size() - 2)
@@ -111,8 +115,9 @@ func spawn(is_teleport: bool):
 		(1 - (48 / destination_segment_position.length())) * destination_segment_position)
 	
 	# invulnerable
-	invulnerable = true
-	$TeleportInvulnerability.start()
+	if segment_spawn_index == -1:
+		invulnerable = true
+		$TeleportInvulnerability.start()
 	
 	# teleport
 	norm_velocity = Vector2(0, 0)

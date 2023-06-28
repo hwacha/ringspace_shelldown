@@ -20,34 +20,32 @@ var midpoint_radius
 var crust_size
 
 var rng
-@onready var crust_decay = get_node("../CrustDecay")
-@onready var obstacle_timer = get_node("../ObstacleTimer")
-@onready var powerup_timer = get_node("../PowerupTimer")
-@onready var round_text = get_node("../RoundText")
+@onready var crust_decay = get_node_or_null("../CrustDecay")
 
 # decay time
 @export var minimum_decay_period: float = 3.0  # seconds
 var decay_constant
 
 func _ready():
-	if Players.star_direction == 1:
-		segments_to_keep.push_back(1)
-		segments_to_keep.push_back(5)
-		segments_to_keep.push_back(9)
-		segments_to_keep.push_back(14)
-	else:
-		segments_to_keep.push_back(15)
-		segments_to_keep.push_back(3)
-		segments_to_keep.push_back(7)
-		segments_to_keep.push_back(10)
+	if crust_decay != null:
+		if Players.star_direction == 1:
+			segments_to_keep.push_back(1)
+			segments_to_keep.push_back(5)
+			segments_to_keep.push_back(9)
+			segments_to_keep.push_back(14)
+		else:
+			segments_to_keep.push_back(15)
+			segments_to_keep.push_back(3)
+			segments_to_keep.push_back(7)
+			segments_to_keep.push_back(10)
 
-	num_segments_remaining_at_end = segments_to_keep.size()
-	decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
+		num_segments_remaining_at_end = segments_to_keep.size()
+		decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
-	segments_to_decay = []
-	for ind in range(num_segments):
-		if not ind in segments_to_keep:
-			segments_to_decay.push_back(ind)
+		segments_to_decay = []
+		for ind in range(num_segments):
+			if not ind in segments_to_keep:
+				segments_to_decay.push_back(ind)
 
 	var screen_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 	var screen_height = ProjectSettings.get_setting("display/window/size/viewport_height")
