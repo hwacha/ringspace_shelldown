@@ -105,7 +105,7 @@ func spawn(is_teleport: bool):
 		
 	destination_segment.occupying_players.push_back(self.id)
 	
-	var destination_segment_position = destination_segment.get_node("Visuals").transform.origin
+	var destination_segment_position = destination_segment.transform.origin
 		
 	var destination_point = (get_node("../../Crust").transform.origin +
 		(1 - (48 / destination_segment_position.length())) * destination_segment_position)

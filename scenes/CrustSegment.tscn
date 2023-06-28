@@ -1,9 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://g4ceojc7bl7r"]
+[gd_scene load_steps=10 format=3 uid="uid://g4ceojc7bl7r"]
 
 [ext_resource type="Script" path="res://scripts/CrustSegment.gd" id="1_15q0q"]
 [ext_resource type="Texture2D" uid="uid://c4cht2hegqlgq" path="res://assets/RingSegment.png" id="2_ie5c3"]
 [ext_resource type="AudioStream" uid="uid://jm5c8xsyqmwq" path="res://assets/ring_game_segment_alarm.wav" id="3"]
 [ext_resource type="Texture2D" uid="uid://u3ddp8gf6ism" path="res://assets/alert.png" id="4_c3v3f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_em16b"]
+radius = 98.0051
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5qqn"]
+resource_local_to_scene = true
+size = Vector2(40, 40)
 
 [sub_resource type="Animation" id="Animation_i00f3"]
 resource_name = "RESET"
@@ -201,20 +208,8 @@ _data = {
 "segment_destroy": SubResource("1")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_em16b"]
-radius = 98.0051
-
 [node name="CrustSegment" type="StaticBody2D"]
 script = ExtResource("1_15q0q")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_3l7tr")
-}
-
-[node name="Alarm" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3")
-volume_db = -9.0
 
 [node name="Visuals" type="Node2D" parent="."]
 position = Vector2(-1, 0)
@@ -243,6 +238,41 @@ rotation = -1.5708
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("4_c3v3f")
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[node name="Floor" type="CollisionShape2D" parent="."]
+position = Vector2(-7.402, -81.346)
+rotation = 1.41372
+shape = SubResource("RectangleShape2D_d5qqn")
+
+[node name="Floor2" type="CollisionShape2D" parent="."]
+position = Vector2(-2.603, -40.799)
+rotation = 1.49226
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_d5qqn")
+
+[node name="Floor3" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_d5qqn")
+
+[node name="Floor4" type="CollisionShape2D" parent="."]
+position = Vector2(-2.603, 40.799)
+rotation = 1.64934
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_d5qqn")
+
+[node name="Floor5" type="CollisionShape2D" parent="."]
+position = Vector2(-7.402, 81.346)
+rotation = 1.72788
+shape = SubResource("RectangleShape2D_d5qqn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3l7tr")
+}
+
+[node name="Alarm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3")
+volume_db = -9.0
+
 [connection signal="body_entered" from="Visuals/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Visuals/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
