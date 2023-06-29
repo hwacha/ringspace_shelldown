@@ -26,6 +26,17 @@ func get_input():
 		Players.set_player_ids(registered_players)
 		get_tree().change_scene_to_file("scenes/main.tscn")
 	
+	if Input.is_action_just_pressed("debug_toggle_play"):
+		var test_scene = preload("res://scenes/TestingStage.tscn").instantiate()
+		test_scene.is_replay = false
+		get_tree().get_root().add_child(test_scene)
+		get_node("/root/OpeningScreen").queue_free()
+		
+	if Input.is_action_just_pressed("debug_toggle_pause"):
+		var test_scene = preload("res://scenes/TestingStage.tscn").instantiate()
+		test_scene.is_replay = true
+		get_tree().get_root().add_child(test_scene)
+		get_node("/root/OpeningScreen").queue_free()
 
 func _process(delta):
 	get_input()

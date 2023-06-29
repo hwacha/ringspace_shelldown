@@ -144,6 +144,10 @@ func _process(delta):
 		is_round_ongoing = false
 		get_tree().change_scene_to_file("res://scenes/opening_screen.tscn")
 		
+		var testing_stage = get_node_or_null("/root/TestingStage")
+		if testing_stage != null:
+			get_tree().get_root().remove_child(testing_stage)
+		
 func end_game():
 	if is_round_ongoing:
 		var round_timer = get_node("/root/Main/MatchTimer")

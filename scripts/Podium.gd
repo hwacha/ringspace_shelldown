@@ -181,9 +181,14 @@ func _ready():
 func _process(_delta):
 	if accepting_input:
 		$Prompt.modulate.a = sin($Timeout.time_left / 2 * PI) + 1
-		if Input.is_anything_pressed():
-			$Timeout.stop()
-			$Fadeout.play("fadeout")
+		for i in range(1, 5):
+			if Input.is_action_just_pressed("jump_p" + str(i)) or \
+			Input.is_action_just_pressed("fast_fall_p" + str(i)) or \
+			Input.is_action_just_pressed("use_p" + str(i)):
+				$Timeout.stop()
+				$Fadeout.play("fadeout")
+				accepting_input = false
+				break
 
 func _on_animation_finished(_anim):
 	for player in players:

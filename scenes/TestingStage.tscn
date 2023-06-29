@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmda76pbmte8a"]
+[gd_scene load_steps=7 format=3 uid="uid://bmda76pbmte8a"]
 
 [ext_resource type="PackedScene" uid="uid://41h5xgc8b0ff" path="res://scenes/Crust.tscn" id="1_r3f1d"]
 [ext_resource type="Script" path="res://scripts/TestingStage.gd" id="1_w8bcj"]
 [ext_resource type="PackedScene" uid="uid://cg3v46vj7p1fd" path="res://scenes/Powerup.tscn" id="3_rfags"]
 [ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="4_lok8o"]
+[ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="5_4xv5w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bkx0h"]
 
 [node name="TestingStage" type="Node2D"]
 process_priority = 3
 script = ExtResource("1_w8bcj")
-is_replay = true
 
 [node name="Crust" parent="." instance=ExtResource("1_r3f1d")]
 process_priority = 1
@@ -24,5 +26,25 @@ visible = false
 z_index = 100
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("4_lok8o")
+
+[node name="Task" type="RichTextLabel" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+anchors_preset = -1
+offset_top = 530.0
+offset_right = 1080.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("5_4xv5w")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]Go to the blue platform [color=cyan]without[/color] jumping[/center]"
+scroll_active = false
+
+[node name="PlaybackStatus" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "▶️"
+label_settings = SubResource("LabelSettings_bkx0h")
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
