@@ -29,7 +29,6 @@ texture = ExtResource("4_lok8o")
 
 [node name="Task" type="RichTextLabel" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
-anchors_preset = -1
 offset_top = 530.0
 offset_right = 1080.0
 offset_bottom = 1080.0
