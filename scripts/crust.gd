@@ -3,7 +3,7 @@ extends Node2D
 @export var num_segments: int = 16
 
 var segments_to_keep = [
-	0, 4, 8, 11, 12, 13
+	0, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15
 ]
 
 var num_segments_remaining_at_end
@@ -29,18 +29,13 @@ var decay_constant
 func _ready():
 	if crust_decay != null:
 		if Players.star_direction == 1:
-			segments_to_keep.push_back(1)
-			segments_to_keep.push_back(5)
-			segments_to_keep.push_back(9)
-			segments_to_keep.push_back(14)
-		else:
-			segments_to_keep.push_back(15)
-			segments_to_keep.push_back(3)
+			segments_to_keep.push_back(2)
 			segments_to_keep.push_back(7)
-			segments_to_keep.push_back(10)
+		else:
+			segments_to_keep.push_back(1)
+			segments_to_keep.push_back(6)
 
 		num_segments_remaining_at_end = segments_to_keep.size()
-		decay_constant = pow(minimum_decay_period / crust_decay.wait_time, 1.0/(num_segments - num_segments_remaining_at_end))
 
 		segments_to_decay = []
 		for ind in range(num_segments):
@@ -88,7 +83,6 @@ func _on_CrustDecay_timeout():
 		for segment in get_children():
 			if segment.initial_segment_index == chosen_segment_index:
 				segment.destroy()
-				crust_decay.set_wait_time(crust_decay.wait_time * decay_constant)
 				crust_decay.start()
 				segments_to_decay.erase(chosen_segment_index)
 		

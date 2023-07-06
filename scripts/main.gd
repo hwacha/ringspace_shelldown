@@ -72,15 +72,15 @@ func _on_powerup_timer_timeout():
 	var collectable_names = ["teleport", "expand", "fast", "shield", "comet", "vacuum"]
 	
 	# normalize probability of orb vacuum
-	# to number of orbs on field in range [0, 1/3]
+	# to number of orbs on field in range [0, 2/5]
 	# where probability maxes out at win score
 	var orb_vac_max_probability = 2.0 / 5.0
 	var num_orbs_on_field = get_children().filter(func(node): return node is Orb).size()
 	var orb_vac_probability = float(min(num_orbs_on_field, Players.play_to)) * \
 							(orb_vac_max_probability / Players.play_to)
 	# normalize probability of teleport
-	# to number of decayed crust segments [0, 1/3]
-	var teleport_max_probability = 2.0 / 5.0
+	# to number of decayed crust segments [0, 1/4]
+	var teleport_max_probability = 1.0 / 4.0
 	var max_decayed_segments = $Crust.num_segments - $Crust.segments_to_keep.size()
 	var cur_decayed_segments = $Crust.num_segments - $Crust.get_children().size()
 	var teleport_probability = teleport_max_probability * (float(cur_decayed_segments) / float(max_decayed_segments))
