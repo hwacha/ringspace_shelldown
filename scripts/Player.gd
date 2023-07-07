@@ -51,8 +51,9 @@ var speedy = false
 var shielded = 0 : set = _set_shieldedness
 
 var ontop_of = []
+var old_reticle = null
 var black_hole = null
-var is_in_event_horizon = false
+var is_in_event_horizon = false : set = _set_is_in_event_horizon
 
 func _ready():
 	var crust = get_node("../../Crust")
@@ -374,6 +375,38 @@ func _physics_process(_delta):
 	
 	if not dead:
 		get_input(diff)
+		
+	if fast_falling:	
+		for player in get_parent().get_children():
+			if player == self:
+				continue
+			
+			var self_theta = centroid.angle_to_point(self.transform.origin)
+			var them_theta = self.transform.origin.angle_to_point(player.transform.origin)
+				
+			var d_theta = abs(self_theta - them_theta)
+			d_theta = min(2*PI - d_theta, d_theta)
+			
+			var lockon_threshold = PI / 4
+			
+			if d_theta < lockon_threshold:
+				var ratio = diff.length() / surface_to_centroid
+				perp_velocity = ratio * 150 * diff.normalized().rotated(PI/2) * (centroid.angle_to_point(player.transform.origin) - self_theta)
+				if old_reticle == null:
+					var reticle = preload("res://scenes/Reticle.tscn").instantiate()
+					var alpha = reticle.modulate.a
+					reticle.modulate = $DeathParticles.modulate
+					reticle.modulate.a = alpha
+					reticle.name = "Reticle" + str(id)
+					player.add_child(reticle)
+					old_reticle = reticle
+			elif old_reticle != null and old_reticle.get_parent() == player:
+				player.remove_child(old_reticle)
+				old_reticle.queue_free()
+	else:
+		if old_reticle != null:
+			old_reticle.get_parent().remove_child(old_reticle)
+			old_reticle.queue_free()
 	
 	var total_velocity = norm_velocity + (perp_velocity * Engine.time_scale)
 	
@@ -395,18 +428,24 @@ func _physics_process(_delta):
 	if is_on_floor():
 		norm_velocity = Vector2(0, 0)
 
+func _set_is_in_event_horizon(new_is_in_event_horizon):
+	if new_is_in_event_horizon:
+		fast_falling = false
+	is_in_event_horizon = new_is_in_event_horizon
+
 func set_fast_falling(new_fast_falling):
 	if not fast_falling and new_fast_falling:
-		$FastFall.play()
-		anim.set_animation("fastfalling")
-		$FastfallAnimation.visible = true
-		$FastfallAnimation.play()
+		if not is_in_event_horizon:
+			$FastFall.play()
+			anim.set_animation("fastfalling")
+			$FastfallAnimation.visible = true
+			$FastfallAnimation.play()
 	elif fast_falling and not new_fast_falling:
 		$FastFall.stop()
 		$FastfallAnimation.stop()
 		$FastfallAnimation.visible = false
 	fast_falling = new_fast_falling
-		
+
 func _on_HurtBox_area_entered(hitbox):
 	var hitter = hitbox.get_parent()
 	if self.dead or hitter.dead or self.invulnerable or hitter.invulnerable:
@@ -458,6 +497,10 @@ func die():
 	$HurtBox.set_deferred("monitorable", false)
 	if $FastFall.playing:
 		$FastFall.stop()
+		
+	if old_reticle != null:
+		old_reticle.get_parent().remove_child(old_reticle)
+		old_reticle.queue_free()
 	# death animation
 	$DeathParticles.show()
 	$DeathParticles.emitting = true

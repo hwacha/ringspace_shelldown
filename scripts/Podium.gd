@@ -107,6 +107,9 @@ func _ready():
 		player.get_node("Singularity/CollisionShape2D").disabled = true
 		var player_sprite = player.get_node("AnimatedSprite2D")
 		player.expanded = false
+		if player.old_reticle != null:
+			player.old_reticle.get_parent().remove_child(player.old_reticle)
+			player.old_reticle.queue_free()
 		player_sprite.animation = "fastfalling"
 		player_sprite.material.set("shader_parameter/is_invulnerable", false)
 		player_sprite.material.set("shader_parameter/is_shielded", false)

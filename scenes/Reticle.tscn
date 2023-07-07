@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbkvi1ukt2rxg"]
+
+[ext_resource type="Texture2D" uid="uid://d3vaqvqd6e0je" path="res://assets/reticle.png" id="1_n6d1s"]
+
+[node name="Reticle" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_n6d1s")
