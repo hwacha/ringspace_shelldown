@@ -52,7 +52,7 @@ var shielded = 0 : set = _set_shieldedness
 
 var ontop_of = []
 var black_hole = null
-var is_in_event_horizon = false
+var is_in_event_horizon = false : set = _set_is_in_event_horizon
 
 func _ready():
 	var crust = get_node("../../Crust")
@@ -270,17 +270,13 @@ func get_input(diff):
 		if not jump_animation_ongoing:
 			if grounded:
 				anim.set_animation("running")
-			elif fast_falling:
-				anim.set_animation("fastfalling")
-			else:
+			elif not fast_falling:
 				anim.set_animation("falling")
 	else:
 		if not jump_animation_ongoing:
 			if grounded:
 				anim.set_animation("default")
-			elif fast_falling:
-				anim.set_animation("fastfalling")
-			else:
+			elif not fast_falling:
 				anim.set_animation("falling")
 		
 	if (grounded or frames_in_air < coyote_threshold) and not jump_animation_ongoing:
@@ -394,13 +390,19 @@ func _physics_process(_delta):
 	
 	if is_on_floor():
 		norm_velocity = Vector2(0, 0)
+		
+func _set_is_in_event_horizon(new_is_in_event_horizon):
+	if new_is_in_event_horizon:
+		fast_falling = false
+	is_in_event_horizon = new_is_in_event_horizon
 
 func set_fast_falling(new_fast_falling):
 	if not fast_falling and new_fast_falling:
-		$FastFall.play()
-		anim.set_animation("fastfalling")
-		$FastfallAnimation.visible = true
-		$FastfallAnimation.play()
+		if not is_in_event_horizon:
+			$FastFall.play()
+			anim.set_animation("fastfalling")
+			$FastfallAnimation.visible = true
+			$FastfallAnimation.play()
 	elif fast_falling and not new_fast_falling:
 		$FastFall.stop()
 		$FastfallAnimation.stop()
