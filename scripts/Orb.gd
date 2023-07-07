@@ -10,6 +10,8 @@ var points_to_claimant = 2
 
 # state
 var traveling : bool = true
+var black_hole = null
+var just_had_black_hole : bool = false
 var claimed : bool = false
 var next_claimant : Player = null : set = set_next_claimant
 var next_claimant_id : int = -1
@@ -28,30 +30,50 @@ func set_next_claimant(new_next_claimant):
 func _ready():
 	rand.randomize()
 
-
 func _process(_delta):
 	if traveling and next_claimant != null:
 		$AnimationPlayer.get_animation("custom/travel_to_claimant")\
 		.track_set_key_value(0, 1, next_claimant.transform.origin + claimant_destination_offset)
-	pass
-
+	elif black_hole == null:
+		if just_had_black_hole:
+			if not claimed:
+				set_new_destination()
+			just_had_black_hole = false
+	else:
+		transform.origin += black_hole.difference_from_last_position
+		transform.origin += transform.origin.direction_to(black_hole.transform.origin) * _delta * 10
+	
 func _on_area_entered(area):
 	if area is OrbVacuum:
 		if not (claimed or traveling):
+			claimed = true
+			black_hole = null
 			$WaitingToTravel.stop()
 			$AnimatedSprite2D.animation = "default"
 			next_claimant = area.player_who_threw
 			set_new_destination()
-	else: # it's the player
+	elif area.name == "OrbBox": # it's the player
 		var player = area.get_parent()
 		if not (claimed or traveling or player.dead):
+			claimed = true
+			black_hole = null
 			$WaitingToTravel.stop()
 			$AnimatedSprite2D.animation = "default"
 			get_parent().call_deferred("remove_child", self)
 			var new_orbs = player.get_node("Orbs")
 			new_orbs.call_deferred("add_child", self)
 			new_orbs.call_deferred("on_add_orb", self)
-		
+	
+	else: # it's the event horizon of the black hole
+		if area.active and not claimed:
+			black_hole = area
+			just_had_black_hole = true
+			$WaitingToTravel.stop()
+			traveling = false
+			var cur_position = transform.origin
+			$AnimationPlayer.stop()
+			transform.origin = cur_position
+			$AnimatedSprite2D.animation = "grabbable"
 
 func set_new_destination():
 	traveling = true
@@ -144,15 +166,13 @@ func _on_animation_player_animation_finished(_anim_name):
 		if claimed:
 			assert(next_claimant_id != -1)
 			get_parent().call_deferred("remove_child", self)
-			var claimed_player_singleton = get_node("/root/Main").get_children().filter(func(node):
-				return node is Player and node.id == next_claimant_id
-			)
-			if claimed_player_singleton.size() > 0:
-				var respawned_claimant = claimed_player_singleton[0]
-				respawned_claimant.get_node("Orbs").call_deferred("add_child", self)
-				respawned_claimant.get_node("Orbs").call_deferred("on_add_orb", self)
-			else:
+			var claimed_player = get_node_or_null("/root/Main/Players/" + str(next_claimant_id))
+			if claimed_player == null: # yet to respawn
 				Players.stored_orbs[next_claimant_id - 1].push_back(self)
+			else: # respawned
+				claimed_player.get_node("Orbs").call_deferred("add_child", self)
+				claimed_player.get_node("Orbs").call_deferred("on_add_orb", self)
+				
 		else:
 			# unclaimed orbs should be grabbable and move around
 			$AnimatedSprite2D.animation = "grabbable"

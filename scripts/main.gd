@@ -49,7 +49,7 @@ func _on_round_begin():
 	$ObstacleTimer.start()
 
 func _on_match_timer_timeout():
-	Players.end_game()
+	Players.end_game(false)
 
 func on_postround_end():
 	# make a podium

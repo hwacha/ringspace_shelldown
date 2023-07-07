@@ -1,5 +1,6 @@
 extends RichTextLabel
 
+var final_time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,5 +11,7 @@ func _ready():
 func _process(_delta):
 	var timer = get_node("../MatchTimer")
 	var time_left = timer.get_time_left()
-	if not timer.is_stopped():
+	if timer.is_stopped():
+		text = str(ceil(final_time))
+	else:
 		text = str(ceil(time_left))

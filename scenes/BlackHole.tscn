@@ -123,7 +123,7 @@ _data = {
 
 [node name="BlackHole" type="Area2D"]
 z_index = 2
-collision_layer = 0
+collision_layer = 1024
 collision_mask = 2
 script = ExtResource("1_ol0ty")
 

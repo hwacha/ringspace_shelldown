@@ -318,7 +318,7 @@ func get_input(diff):
 	if use:
 		emit_signal("used_powerup", self)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	$LeftArrow.visible = false
 	$RightArrow.visible = false
 	
@@ -377,11 +377,13 @@ func _physics_process(_delta):
 		var black_hole_diff = black_hole.transform.origin - self.transform.origin
 		var black_hole_direction = black_hole_diff.normalized()
 		if is_in_event_horizon:
-			total_velocity = black_hole_direction * 100.0
+			self.transform.origin += black_hole.difference_from_last_position
+			self.transform.origin += transform.origin.direction_to(black_hole.transform.origin) * delta * 30
+			total_velocity = Vector2(0, 0)
 			self.rotation = self.transform.origin.angle_to_point(black_hole.transform.origin) - (PI / 2)
 		else:
 			var inverse_r2 = 1.0 / black_hole_diff.length_squared()
-			total_velocity += black_hole_direction * 1600000.0 * inverse_r2
+			total_velocity += black_hole_direction * 1_600_000.0 * inverse_r2
 	
 	set_velocity(total_velocity)
 	set_up_direction((-diff).normalized())

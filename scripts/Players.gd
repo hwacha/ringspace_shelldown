@@ -137,7 +137,7 @@ func _process(delta):
 				score[id] = new_score
 				get_node("/root/Main/Score").queue_redraw()
 			if score[id] >= play_to:
-				end_game()
+				end_game(true)
 			
 	
 	if Input.is_action_just_pressed("exit_game"):
@@ -148,11 +148,14 @@ func _process(delta):
 		if testing_stage != null:
 			get_tree().get_root().remove_child(testing_stage)
 		
-func end_game():
+func end_game(is_max_score: bool):
 	if is_round_ongoing:
 		var round_timer = get_node("/root/Main/MatchTimer")
-		if round_timer.time_left > 0:
-			round_timer.stop()
+		var time_left_label = get_node("/root/Main/TimeLeftLabel")
+		if is_max_score:
+			time_left_label.final_time = round_timer.time_left
+		round_timer.stop()
+		
 		var round_text = get_node("/root/Main/RoundText")
 		round_text.text = "[center]MATCH[/center]"
 		round_text.modulate.a = 1
