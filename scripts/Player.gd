@@ -48,7 +48,7 @@ var invulnerable = false : set = _set_invulnerability
 var spawning = 0 # 0 if not spawning, n if n frames till black hole available
 var expanded = false : set = _set_expansion
 var speedy = false
-var shielded = 0 : set = _set_shieldedness
+var shields : Array[Timer] = []
 
 var ontop_of = []
 var black_hole = null
@@ -81,10 +81,32 @@ func _set_invulnerability(is_invulnerable: bool):
 	invulnerable = is_invulnerable
 	$AnimatedSprite2D.material.set("shader_parameter/is_invulnerable", is_invulnerable)
 
-func _set_shieldedness(num_shields: int):
-	shielded = num_shields
-	$AnimatedSprite2D.material.set("shader_parameter/num_shields", num_shields)
+func add_shields(num_shields: int):
+	for i in range(num_shields):
+		var shield_timer = Timer.new()
+		shield_timer.wait_time = 5
+		shield_timer.timeout.connect(_on_shield_timer_timeout)
+		get_parent().get_parent().add_child(shield_timer)
+		shield_timer.start()
+		shields.push_back(shield_timer)
 
+	$AnimatedSprite2D.material.set("shader_parameter/num_shields", shields.size())
+
+func remove_shields(num_shields: int) -> bool:
+	var excess_shield_break = false
+	for i in range(num_shields):
+		var cur_timer = shields.pop_front()
+		if cur_timer == null:
+			excess_shield_break = true
+			break
+		else:
+			cur_timer.stop()
+			get_parent().get_parent().remove_child(cur_timer)
+			cur_timer.queue_free()
+
+	$AnimatedSprite2D.material.set("shader_parameter/num_shields", shields.size())
+	return excess_shield_break
+	
 func _set_expansion(new_expanded: bool):
 	if not expanded and new_expanded:
 		scale *= expansion_factor
@@ -160,8 +182,8 @@ func fast():
 	return false
 
 func shield():
-	if shielded < 2:
-		shielded += 1
+	if shields.size() < 2:
+		add_shields(1)
 		return true
 	return false
 	
@@ -428,7 +450,7 @@ func _on_HurtBox_area_entered(hitbox):
 	
 	if hitter.norm_velocity.dot(hitbox_down) > 0 or \
 	norm_velocity.dot(hurtbox_down) < 0:
-		if not shielded and try_auto_teleport():
+		if shields.size() == 0 and try_auto_teleport():
 			return
 		
 		# bounce
@@ -437,12 +459,13 @@ func _on_HurtBox_area_entered(hitbox):
 		hitter.fastfall_depleted = true
 		hitter.get_node("BounceTimer").start()
 		# kill
-		if shielded > 0:
+		if shields.size() > 0:
+			var excess_hits = false
 			if hitter.expanded:
-				shielded -= 3
+				excess_hits = remove_shields(3)
 			else:
-				shielded -= 1
-			if shielded >= 0:
+				excess_hits = remove_shields(1)
+			if not excess_hits:
 				return
 		
 		self.killer = hitter
@@ -455,7 +478,7 @@ func die():
 		return
 	dead = true
 	name += "_(dead)"
-	shielded = 0 # not strictly necessary
+	remove_shields(shields.size()) # not strictly necessary
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.set_animation("dead")
 	$HitBox.set_deferred("monitoring", false)
@@ -551,6 +574,8 @@ func _on_fast_timer_timeout():
 	if speedy:
 		speedy = false
 
+func _on_shield_timer_timeout():
+	remove_shields(1)
 
 func _on_bounce_timer_timeout():
 	fastfall_depleted = false

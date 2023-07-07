@@ -172,6 +172,14 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 
+[node name="ShieldTimer1" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="ShieldTimer2" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [node name="BounceTimer" type="Timer" parent="."]
 wait_time = 0.12
 one_shot = true
@@ -209,5 +217,7 @@ volume_db = -18.0
 [connection signal="timeout" from="TeleportInvulnerability" to="." method="_on_teleport_invulnerability_timeout"]
 [connection signal="timeout" from="ExpandTimer" to="." method="_on_expand_timer_timeout"]
 [connection signal="timeout" from="FastTimer" to="." method="_on_fast_timer_timeout"]
+[connection signal="timeout" from="ShieldTimer1" to="." method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="ShieldTimer2" to="." method="_on_shield_timer_timeout"]
 [connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

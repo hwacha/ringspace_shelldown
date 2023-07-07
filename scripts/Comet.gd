@@ -33,10 +33,10 @@ func _on_decay_timeout():
 func _on_body_entered(body):
 	if body == player_who_shot or body.id == player_who_shot_id or body.invulnerable:
 		return
-	elif body.shielded > 0 and not body.dead:
+	elif body.shields.size() > 0 and not body.dead:
 		player_who_shot = body
 		dir_sign *= -1
-		body.shielded -= 1	
+		body.remove_shields(1)
 	else:
 		body.killer = player_who_shot
 		body.killer_id = player_who_shot_id
