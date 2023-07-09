@@ -53,6 +53,8 @@ var shields : Array[Timer] = []
 var ontop_of = []
 var black_hole = null
 var is_in_event_horizon = false : set = _set_is_in_event_horizon
+var event_horizon_entry_point = null
+var time_in_event_horizon : float = 0 # seconds
 
 func _ready():
 	var crust = get_node("../../Crust")
@@ -399,10 +401,11 @@ func _physics_process(delta):
 		var black_hole_diff = black_hole.transform.origin - self.transform.origin
 		var black_hole_direction = black_hole_diff.normalized()
 		if is_in_event_horizon:
-			self.transform.origin += black_hole.difference_from_last_position
-			self.transform.origin += transform.origin.direction_to(black_hole.transform.origin) * delta * 30
+			var period = 2.5 # seconds it takes to get to center
+			self.transform.origin = black_hole.transform.origin + lerp(event_horizon_entry_point, Vector2(0, 0), time_in_event_horizon / period)
 			total_velocity = Vector2(0, 0)
 			self.rotation = self.transform.origin.angle_to_point(black_hole.transform.origin) - (PI / 2)
+			time_in_event_horizon += delta
 		else:
 			var inverse_r2 = 1.0 / black_hole_diff.length_squared()
 			total_velocity += black_hole_direction * 1_600_000.0 * inverse_r2
@@ -418,6 +421,11 @@ func _physics_process(delta):
 func _set_is_in_event_horizon(new_is_in_event_horizon):
 	if new_is_in_event_horizon:
 		fast_falling = false
+		if event_horizon_entry_point == null:
+			event_horizon_entry_point = transform.origin - black_hole.transform.origin
+	else:
+		event_horizon_entry_point = null
+		time_in_event_horizon = 0
 	is_in_event_horizon = new_is_in_event_horizon
 
 func set_fast_falling(new_fast_falling):

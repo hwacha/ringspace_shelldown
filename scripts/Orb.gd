@@ -11,6 +11,8 @@ var points_to_claimant = 2
 # state
 var traveling : bool = true
 var black_hole = null
+var event_horizon_entry_point = null
+var time_in_event_horizon : float = 0 # seconds
 var just_had_black_hole : bool = false
 var claimed : bool = false
 var next_claimant : Player = null : set = set_next_claimant
@@ -30,7 +32,7 @@ func set_next_claimant(new_next_claimant):
 func _ready():
 	rand.randomize()
 
-func _process(_delta):
+func _process(delta):
 	if traveling and next_claimant != null:
 		$AnimationPlayer.get_animation("custom/travel_to_claimant")\
 		.track_set_key_value(0, 1, next_claimant.transform.origin + claimant_destination_offset)
@@ -38,11 +40,19 @@ func _process(_delta):
 		if just_had_black_hole:
 			if not claimed:
 				set_new_destination()
+			event_horizon_entry_point = null
+			time_in_event_horizon = 0
 			just_had_black_hole = false
 	else:
-		transform.origin += black_hole.difference_from_last_position
-		transform.origin += transform.origin.direction_to(black_hole.transform.origin) * _delta * 10
-	
+		var period : float = 7.5
+		if event_horizon_entry_point == null:
+			event_horizon_entry_point = transform.origin - black_hole.transform.origin
+		var dest = 25 * event_horizon_entry_point.normalized()
+		var pos = lerp(event_horizon_entry_point, dest, time_in_event_horizon / period)
+		transform.origin = black_hole.transform.origin + pos
+		time_in_event_horizon += delta
+		time_in_event_horizon = clampf(time_in_event_horizon, 0.0, period)
+
 func _on_area_entered(area):
 	if area is OrbVacuum:
 		if not (claimed or traveling):

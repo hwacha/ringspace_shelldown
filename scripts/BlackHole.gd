@@ -7,8 +7,6 @@ var rotation_speed = PI / 15
 
 var active = false
 
-var difference_from_last_position = Vector2(0, 0)
-
 func _ready():
 	lensing.material.set("shader_parameter/is_black_hole_active", true)
 	lensing.material.set("shader_parameter/black_hole_center", self.global_position)
@@ -18,9 +16,7 @@ func _ready():
 func _process(delta):
 	if active:
 		var centroid = Vector2(540, 540)
-		var last_position = self.transform.origin
 		self.transform.origin = (self.transform.origin - centroid).rotated(-Players.star_direction * rotation_speed * delta) + centroid
-		difference_from_last_position = self.transform.origin - last_position
 		lensing.material.set("shader_parameter/black_hole_center", self.global_position)
 		lensing.material.set("shader_parameter/m", _m)
 
