@@ -55,7 +55,7 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area is OrbVacuum:
-		if not (claimed or traveling):
+		if not claimed:
 			claimed = true
 			black_hole = null
 			$WaitingToTravel.stop()

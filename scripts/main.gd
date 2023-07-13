@@ -75,7 +75,9 @@ func _on_powerup_timer_timeout():
 	# to number of orbs on field in range [0, 2/5]
 	# where probability maxes out at win score
 	var orb_vac_max_probability = 2.0 / 5.0
-	var num_orbs_on_field = get_children().filter(func(node): return node is Orb).size()
+	var is_unclaimed_orb = func(node):
+		return node is Orb and not node.claimed and node.next_claimant == null
+	var num_orbs_on_field = get_children().filter(is_unclaimed_orb).size()
 	var orb_vac_probability = float(min(num_orbs_on_field, Players.play_to)) * \
 							(orb_vac_max_probability / Players.play_to)
 	# normalize probability of teleport
