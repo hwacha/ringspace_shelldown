@@ -47,6 +47,7 @@ func _on_round_begin():
 	$TimeLeftLabel.visible = true
 	$PowerupTimer.start()
 	$ObstacleTimer.start()
+	$CapsuleTimer.start()
 
 func _on_match_timer_timeout():
 	Players.end_game(false)
@@ -129,9 +130,28 @@ func _on_obstacle_timeout():
 	
 	obstacle.transform.origin = Vector2(540, 540)
 	
-	var rand_r = 350.0 * sqrt(rng.randf())
+	var min_radius = 50.0
+	var r_range = 300.0
+	var rand_r = min_radius + r_range * sqrt(rng.randf())
 	var rand_theta = rng.randf() * 2 * PI
 	
 	obstacle.transform.origin += rand_r * Vector2(cos(rand_theta), sin(rand_theta))
 	
 	add_child(obstacle)
+
+
+func _on_capsule_timer_timeout():
+	if not Players.is_round_ongoing:
+		return
+	
+	var capsule = preload("res://scenes/NeutralOrbCapsule.tscn").instantiate()
+	capsule.transform.origin = Vector2(540, 540)
+	
+	var min_radius = 80.0
+	var r_range = 350.0
+	var rand_r = min_radius + r_range * sqrt(rng.randf())
+	var rand_theta = rng.randf() * 2 * PI
+	
+	capsule.transform.origin += rand_r * Vector2(cos(rand_theta), sin(rand_theta))
+	capsule.rotation = capsule.transform.origin.angle_to_point(Vector2(540, 540)) + PI/2
+	add_child(capsule)
