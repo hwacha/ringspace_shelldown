@@ -2,7 +2,7 @@ extends Node2D
 
 
 var score_radius
-var epsilon = 0.1
+var epsilon = 0.05
 var score_locations = {}
 
 func _ready():

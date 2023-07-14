@@ -41,3 +41,12 @@ func _on_body_entered(body):
 		body.killer = player_who_shot
 		body.killer_id = player_who_shot_id
 		body.die()
+
+
+func _on_area_entered(area):
+	assert(area is NeutralOrbCapsule)
+	# player is next orb claimant
+	for orb in area.get_node("Orbs").get_children():
+		orb.next_claimant = player_who_shot
+		orb.next_claimant_id = player_who_shot_id
+	area.call_deferred("release_orbs_and_destruct")

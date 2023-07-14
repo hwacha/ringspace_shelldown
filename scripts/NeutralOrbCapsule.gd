@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name NeutralOrbCapsule
+
 var t : float = 0
 
 @onready var original_position : Vector2
@@ -57,17 +59,22 @@ func _on_area_entered(area):
 	hitter.set_fast_falling(false)
 	hitter.fastfall_depleted = true
 	hitter.get_node("BounceTimer").start()
+	
+func release_orbs_and_destruct():
+	for orb in $Orbs.get_children():
+		$Orbs.remove_child(orb)
+		orb.transform.origin += self.transform.origin + $Orbs.transform.origin
+		get_parent().add_child(orb)
+		orb.set_new_destination()
+	
+	is_opening = false
+	get_parent().remove_child(self)
+	queue_free()
 
 func _on_animated_sprite_2d_animation_finished():
 	if $AnimatedSprite2D.animation == "open":
-		for orb in $Orbs.get_children():
-			$Orbs.remove_child(orb)
-			orb.transform.origin += self.transform.origin + $Orbs.transform.origin
-			get_parent().add_child(orb)
-			orb.set_new_destination()
-		is_opening = false
-		get_parent().remove_child(self)
-		queue_free()
+		release_orbs_and_destruct()
+
 
 func _on_animated_sprite_2d_animation_changed():
 	if $AnimatedSprite2D.animation == "open":

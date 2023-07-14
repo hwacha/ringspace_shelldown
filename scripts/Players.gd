@@ -7,7 +7,7 @@ var star_direction
 var is_round_ongoing = false
 var lock_action = false
 
-var play_to = 12
+var play_to = 18
 var score = {}
 
 const spriteframe_data = [
