@@ -203,7 +203,7 @@ func comet():
 	comet_instance.rotation = diff.angle()
 	comet_instance.transform.origin = self.transform.origin + 40 * perp
 	
-	get_parent().add_child(comet_instance)
+	get_parent().get_parent().add_child(comet_instance)
 	
 	return true
 	
@@ -217,7 +217,20 @@ func vacuum():
 	if vacuum_instance.velocity.length() == 0:
 		vacuum_instance.velocity = -diff
 	vacuum_instance.transform.origin = self.transform.origin
-	get_parent().add_child(vacuum_instance)
+	get_parent().get_parent().add_child(vacuum_instance)
+	return true
+	
+func bomb():
+	var bomb_instance = preload("res://scenes/Bomb.tscn").instantiate()
+	bomb_instance.player_who_dropped = self
+	bomb_instance.modulate = color
+	
+	var drop_speed = 3
+	bomb_instance.velocity = drop_speed * -self.transform.origin.direction_to(centroid)
+	
+	bomb_instance.transform.origin = self.transform.origin
+	
+	get_parent().get_parent().add_child(bomb_instance)
 	return true
 
 func get_input(diff):

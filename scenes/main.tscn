@@ -167,13 +167,12 @@ script = ExtResource("5")
 
 [node name="CrustDecay" type="Timer" parent="."]
 wait_time = 30.0
-one_shot = true
 
 [node name="PowerupTimer" type="Timer" parent="."]
 wait_time = 7.5
 
 [node name="CapsuleTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 
 [node name="ObstacleTimer" type="Timer" parent="."]
 wait_time = 107.0

@@ -26,6 +26,7 @@ func destroy():
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	get_parent().remove_child(self)
+	self.queue_free()
 	
 func disable_collision():
 	var children = get_children()
@@ -39,8 +40,9 @@ func _process(_delta):
 		$Visuals/Ring.transform.origin = original_position + 5 * Vector2(cos(mem), sin(mem))
 
 func _on_area_2d_body_entered(body):
-	if not body.dead and not body.id in occupying_players:
-		occupying_players.push_back(body.id)
+	if body is Player:
+		if not body.dead and not body.id in occupying_players:
+			occupying_players.push_back(body.id)
 
 
 func _on_area_2d_body_exited(body):

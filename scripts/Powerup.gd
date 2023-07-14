@@ -30,6 +30,8 @@ func on_use_powerup(reference):
 			powerup_used = reference.vacuum()
 		elif powerup == "teleport":
 			powerup_used = reference.spawn(true)
+		elif powerup == "bomb":
+			powerup_used = reference.bomb()
 
 	if powerup_used:
 		powerup = null

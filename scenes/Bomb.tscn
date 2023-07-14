@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://vl6qontniasx"]
+
+[ext_resource type="Script" path="res://scripts/Bomb.gd" id="1_0goo4"]
+[ext_resource type="Texture2D" uid="uid://tejxg8q3ygb0" path="res://assets/bomb_object.png" id="2_kp7sw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ove10"]
+radius = 22.0
+
+[sub_resource type="Animation" id="Animation_xp5yk"]
+resource_name = "tick"
+length = 3.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(3, 3, 3, 1), Color(1, 1, 1, 1), Color(3, 3, 3, 1), Color(1, 1, 1, 1), Color(3, 3, 3, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4sank"]
+_data = {
+"tick": SubResource("Animation_xp5yk")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8hmqa"]
+radius = 83.006
+
+[node name="Bomb" type="RigidBody2D"]
+modulate = Color(5, 5, 5, 1)
+collision_layer = 0
+script = ExtResource("1_0goo4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(3, 3, 3, 1)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_kp7sw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ove10")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4sank")
+}
+
+[node name="InnerBlastRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8388608
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerBlastRadius"]
+shape = SubResource("CircleShape2D_8hmqa")
+debug_color = Color(0.203922, 0.0941176, 0.0627451, 0.419608)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

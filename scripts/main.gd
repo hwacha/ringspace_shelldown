@@ -42,7 +42,7 @@ func on_crust_ready():
 
 func _on_round_begin():
 	Players.lock_action = false
-	$CrustDecay.start()
+#	$CrustDecay.start()
 	$MatchTimer.start()
 	$TimeLeftLabel.visible = true
 	$PowerupTimer.start()
@@ -70,7 +70,15 @@ func _on_powerup_timer_timeout():
 		old_collectable.queue_free()
 			
 	var new_collectable = preload("res://scenes/Collectable.tscn").instantiate()
-	var collectable_names = ["teleport", "expand", "fast", "shield", "comet", "vacuum"]
+	var collectable_names = [
+		"teleport",
+		"expand",
+		"fast",
+		"shield",
+		"comet",
+		"vacuum",
+		"bomb"
+	]
 	
 	# normalize probability of orb vacuum
 	# to number of orbs on field in range [0, 2/5]
@@ -102,6 +110,7 @@ func _on_powerup_timer_timeout():
 		"expand": generic_probability,
 		"shield": generic_probability,
 		"comet": generic_probability,
+		"bomb": generic_probability
 	}
 	
 	var rand = rng.randf()

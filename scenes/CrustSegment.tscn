@@ -209,6 +209,7 @@ _data = {
 }
 
 [node name="CrustSegment" type="StaticBody2D"]
+collision_layer = 8388609
 script = ExtResource("1_15q0q")
 
 [node name="Visuals" type="Node2D" parent="."]

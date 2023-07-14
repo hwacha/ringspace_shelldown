@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=24 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://grfls847bx6u" path="res://assets/ring_game_death_sound.wav" id="5"]
 [ext_resource type="Texture2D" uid="uid://32qfsdtyscxi" path="res://assets/right.png" id="5_tvpea"]
 [ext_resource type="AudioStream" uid="uid://bgkhlkm6fuxo4" path="res://assets/ring_game_fast_fall.wav" id="6"]
+[ext_resource type="Texture2D" uid="uid://m2x4jue20ggv" path="res://assets/Stun.png" id="7_cq5ab"]
+[ext_resource type="Script" path="res://scenes/Stun.gd" id="8_hd46e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
 resource_local_to_scene = true
@@ -57,7 +59,7 @@ scale_curve = SubResource("CurveTexture_m1t1k")
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
 position = Vector2(-3791, -2186)
-collision_layer = 2
+collision_layer = 8388610
 script = ExtResource("1")
 metadata/_edit_group_ = true
 
@@ -85,6 +87,12 @@ z_index = 1
 position = Vector2(35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("5_tvpea")
+
+[node name="Stun" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.12, 0.06)
+texture = ExtResource("7_cq5ab")
+script = ExtResource("8_hd46e")
 
 [node name="Shadow" type="RayCast2D" parent="."]
 position = Vector2(0, 32)
