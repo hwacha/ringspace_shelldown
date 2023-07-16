@@ -51,8 +51,7 @@ func _process(delta):
 						closest_distance = cur_distance
 				
 				if closest_segment != null:
-					closest_segment.get_parent().remove_child(closest_segment)
-					closest_segment.queue_free()
+					closest_segment.destroy()
 					has_destroyed_one_crust_segment = true
 		
 		var affected_players = affected_bodies.filter(func (body): return body is Player)
