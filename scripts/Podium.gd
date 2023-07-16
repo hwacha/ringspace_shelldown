@@ -107,6 +107,8 @@ func _ready():
 		player.get_node("Singularity/CollisionShape2D").disabled = true
 		var player_sprite = player.get_node("AnimatedSprite2D")
 		player.expanded = false
+		player.stunned = false
+		player.get_node("ShadowSprite").visible = false
 		player_sprite.animation = "fastfalling"
 		player_sprite.material.set("shader_parameter/is_invulnerable", false)
 		player_sprite.material.set("shader_parameter/is_shielded", false)

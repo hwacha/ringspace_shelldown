@@ -10,6 +10,7 @@ var double_jump_animation = preload("res://scenes/double_jump_animation.tscn")
 
 var coyote_threshold : int = 5
 var frames_in_air : int = 0
+var was_grounded_last_frame : bool = false
 
 var norm_velocity = Vector2(0, 0)
 var perp_velocity = Vector2(0, 0)
@@ -46,6 +47,7 @@ var lock_physics = false
 var jump_complete = false # true on the last frame of the jump animation
 var invulnerable = false : set = _set_invulnerability
 var spawning = 0 # 0 if not spawning, n if n frames till black hole available
+var stunned = false : set = _set_stun
 var expanded = false : set = _set_expansion
 var speedy = false
 var shields : Array[Timer] = []
@@ -82,6 +84,15 @@ func _ready():
 func _set_invulnerability(is_invulnerable: bool):
 	invulnerable = is_invulnerable
 	$AnimatedSprite2D.material.set("shader_parameter/is_invulnerable", is_invulnerable)
+
+func _set_stun(is_stunned: bool):
+	if is_stunned:
+		$StunTimer.start()
+	elif not $StunTimer.is_stopped():
+		$StunTimer.stop()
+	
+	$Stun.visible = is_stunned
+	stunned = is_stunned
 
 func add_shields(num_shields: int):
 	for i in range(num_shields):
@@ -286,10 +297,10 @@ func get_input(diff):
 	var cw_xor_ccw = move_clockwise or move_counterclockwise
 	cw_xor_ccw = cw_xor_ccw and not (move_clockwise and move_counterclockwise)
 	
-	jump_input = jump_input and not Players.lock_action
-	fast_fall = fast_fall and not Players.lock_action
-	cw_xor_ccw = cw_xor_ccw and not Players.lock_action
-	use = use and not Players.lock_action
+	jump_input = jump_input and not Players.lock_action and not stunned
+	fast_fall = fast_fall and not Players.lock_action and not stunned
+	cw_xor_ccw = cw_xor_ccw and not Players.lock_action and not stunned
+	use = use and not Players.lock_action and not stunned
 	
 	var jump_animation_ongoing = anim.animation == "jumping"
 
@@ -361,9 +372,30 @@ func _physics_process(delta):
 	
 	$ShadowSprite.visible = true
 	
-	if is_on_floor():
-		$ShadowSprite.visible = false
+	if stunned:
+		var rand_theta = rand.randf_range(0, 2 * PI)
+		$AnimatedSprite2D.offset = 20 * Vector2(cos(rand_theta), sin(rand_theta))
 	else:
+		$AnimatedSprite2D.offset = Vector2(0, 0)
+
+	if is_on_floor():
+		
+		$ShadowSprite.visible = false
+		
+		# big stuns nearby players
+		if not was_grounded_last_frame and expanded and fast_falling:
+			for player in get_parent().get_children():
+				if player == self:
+					continue
+				
+				var stun_threshold = 200
+				var st2 = stun_threshold * stun_threshold
+				if player.transform.origin.distance_squared_to(self.transform.origin) <= st2:
+					player.stunned = true
+		
+		was_grounded_last_frame = true
+	else:
+		was_grounded_last_frame = false
 		var shadow_target  = $Shadow.get_collider()
 		var shadow_target_right = $ShadowRight.get_collider()
 		var shadow_target_left = $ShadowLeft.get_collider()
@@ -432,6 +464,9 @@ func _physics_process(delta):
 		norm_velocity = Vector2(0, 0)
 		
 func _set_is_in_event_horizon(new_is_in_event_horizon):
+	stunned = new_is_in_event_horizon
+	if not $StunTimer.is_stopped():
+		$StunTimer.stop()
 	if new_is_in_event_horizon:
 		fast_falling = false
 		if event_horizon_entry_point == null:
@@ -499,6 +534,7 @@ func die():
 		return
 	dead = true
 	name += "_(dead)"
+	stunned = false
 	remove_shields(shields.size()) # not strictly necessary
 	norm_velocity = Vector2(0, 0)
 	$AnimatedSprite2D.set_animation("dead")
@@ -600,3 +636,7 @@ func _on_shield_timer_timeout():
 
 func _on_bounce_timer_timeout():
 	fastfall_depleted = false
+
+
+func _on_stun_timer_timeout():
+	stunned = false

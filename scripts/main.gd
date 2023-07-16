@@ -73,7 +73,7 @@ func _on_powerup_timer_timeout():
 	var collectable_names = [
 		"teleport",
 		"expand",
-		"fast",
+#		"fast",
 		"shield",
 		"comet",
 		"vacuum",
@@ -95,18 +95,18 @@ func _on_powerup_timer_timeout():
 	var max_decayed_segments = $Crust.num_segments - $Crust.segments_to_keep.size()
 	var cur_decayed_segments = $Crust.num_segments - $Crust.get_children().size()
 	var teleport_probability = teleport_max_probability * (float(cur_decayed_segments) / float(max_decayed_segments))
-	# probability of speedy is pmax(fast) - [pmax(fast)/pmax(teleport)] * p(teleport)
-	var max_fast_probability = 0.25
-	var fast_probability = max_fast_probability * (1.0 - (teleport_probability / teleport_max_probability))
+#	# probability of speedy is pmax(fast) - [pmax(fast)/pmax(teleport)] * p(teleport)
+#	var max_fast_probability = 0.25
+#	var fast_probability = max_fast_probability * (1.0 - (teleport_probability / teleport_max_probability))
 	# probability of remaining powerups are
 	# equally divided among the remaining probability
-	var remaining_probability = 1.0 - (orb_vac_probability + teleport_probability + fast_probability)
-	var generic_probability = remaining_probability / (collectable_names.size() - 3)
+	var remaining_probability = 1.0 - (orb_vac_probability + teleport_probability)
+	var generic_probability = remaining_probability / 4
 	
 	var collectable_probabilities = {
 		"vacuum": orb_vac_probability,
 		"teleport": teleport_probability,
-		"fast": fast_probability,
+#		"fast": fast_probability,
 		"expand": generic_probability,
 		"shield": generic_probability,
 		"comet": generic_probability,
@@ -132,7 +132,10 @@ func _on_obstacle_timeout():
 	if not Players.is_round_ongoing:
 		return
 
-	var obstacles = [preload("res://scenes/Sun.tscn"), preload("res://scenes/BlackHole.tscn")]
+	var obstacles = [
+		preload("res://scenes/Sun.tscn"),
+		preload("res://scenes/BlackHole.tscn")
+	]
 	var rand = rng.randi_range(0, obstacles.size() - 1)
 	
 	var obstacle = obstacles[rand].instantiate()

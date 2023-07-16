@@ -2,7 +2,7 @@ extends Area2D
 class_name Orb
 
 var id
-var centroid
+var centroid = Vector2(540, 540)
 
 # parameters
 var points_to_free_destination = 5
