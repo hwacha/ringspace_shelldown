@@ -7,7 +7,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	rotate(rotation_speed * delta)
+	rotate(Players.star_direction * rotation_speed * delta)
 
 func on_add_orb(new_orb):
 	new_orb.claimed = true

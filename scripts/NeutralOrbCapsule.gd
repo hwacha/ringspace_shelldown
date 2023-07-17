@@ -35,30 +35,32 @@ func _process(_delta):
 
 
 func _on_area_entered(area):
-	var hitter = area.get_parent()
-	var centroid = Vector2(540, 540)
-	# check if player is above
-	if hitter.transform.origin.distance_squared_to(centroid) >= self.transform.origin.distance_squared_to(centroid):
-		return
-	
-	# check if player is moving downward
-	var hurtbox_down = self.transform.origin - centroid
-	
-	if hitter.norm_velocity.dot(hitter.transform.origin - centroid) < 0:
-		return
+	if not is_opening:
+		var hitter = area.get_parent()
+		var centroid = Vector2(540, 540)
+		# check if player is above
+		if hitter.transform.origin.distance_squared_to(centroid) >= self.transform.origin.distance_squared_to(centroid):
+			return
 		
-	# open the capsule
-	$AnimatedSprite2D.animation = "open"
-	
-	# player is next orb claimant
-	for orb in $Orbs.get_children():
-		orb.next_claimant = hitter
-	
-	# bounce
-	hitter.norm_velocity = -hurtbox_down * hitter.jump_impulse
-	hitter.set_fast_falling(false)
-	hitter.fastfall_depleted = true
-	hitter.get_node("BounceTimer").start()
+		# check if player is moving downward
+		var hurtbox_down = self.transform.origin - centroid
+		
+		if hitter.norm_velocity.dot(hitter.transform.origin - centroid) < 0:
+			return
+			
+		# open the capsule
+		$Release.stop()
+		$AnimatedSprite2D.animation = "open"
+		
+		# player is next orb claimant
+		for orb in $Orbs.get_children():
+			orb.next_claimant = hitter
+		
+		# bounce
+		hitter.norm_velocity = -hurtbox_down * hitter.jump_impulse
+		hitter.set_fast_falling(false)
+		hitter.fastfall_depleted = true
+		hitter.get_node("BounceTimer").start()
 	
 func release_orbs_and_destruct():
 	for orb in $Orbs.get_children():
@@ -79,3 +81,11 @@ func _on_animated_sprite_2d_animation_finished():
 func _on_animated_sprite_2d_animation_changed():
 	if $AnimatedSprite2D.animation == "open":
 		is_opening = true
+
+
+func _on_release_timeout():
+	$AnimatedSprite2D.animation = "open"
+	for orb in $Orbs.get_children():
+		orb.traveling = true
+		orb.claimed = false
+	

@@ -56,12 +56,13 @@ func _process(delta):
 		
 		var affected_players = affected_bodies.filter(func (body): return body is Player)
 		for player in affected_players:
-			if status == BombStatus.BLASTING:
-				player.killer = player_who_dropped
-				player.killer_id = player_who_dropped_id
-				player.die()
-			elif status == BombStatus.STUNNING:
-				player.stunned = true
+			if not player.dead:
+				if status == BombStatus.BLASTING:
+					player.killer = player_who_dropped
+					player.killer_id = player_who_dropped_id
+					player.die()
+				elif status == BombStatus.STUNNING:
+					player.stunned = true
 		
 
 

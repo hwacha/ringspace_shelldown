@@ -171,6 +171,8 @@ func spawn(is_teleport: bool):
 	else:
 		transform.origin = destination_point
 	
+	stunned = false
+	
 	return true
 
 func try_auto_teleport():
@@ -388,6 +390,10 @@ func _physics_process(delta):
 				if player == self:
 					continue
 				
+				# don't restun
+				if player.stunned:
+					continue
+				
 				var stun_threshold = 200
 				var st2 = stun_threshold * stun_threshold
 				if player.transform.origin.distance_squared_to(self.transform.origin) <= st2:
@@ -464,7 +470,8 @@ func _physics_process(delta):
 		norm_velocity = Vector2(0, 0)
 		
 func _set_is_in_event_horizon(new_is_in_event_horizon):
-	stunned = new_is_in_event_horizon
+	if not is_on_floor() and new_is_in_event_horizon:
+		stunned = true
 	if not $StunTimer.is_stopped():
 		$StunTimer.stop()
 	if new_is_in_event_horizon:

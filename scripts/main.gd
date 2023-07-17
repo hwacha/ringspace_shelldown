@@ -92,25 +92,25 @@ func _on_powerup_timer_timeout():
 	# normalize probability of teleport
 	# to number of decayed crust segments [0, 1/4]
 	var teleport_max_probability = 1.0 / 4.0
-	var max_decayed_segments = $Crust.num_segments - $Crust.segments_to_keep.size()
+	var max_decayed_segments = 4
 	var cur_decayed_segments = $Crust.num_segments - $Crust.get_children().size()
 	var teleport_probability = teleport_max_probability * (float(cur_decayed_segments) / float(max_decayed_segments))
-#	# probability of speedy is pmax(fast) - [pmax(fast)/pmax(teleport)] * p(teleport)
-#	var max_fast_probability = 0.25
-#	var fast_probability = max_fast_probability * (1.0 - (teleport_probability / teleport_max_probability))
+#	# probability of bomb is pmax(fast) - [pmax(bomb)/pmax(teleport)] * p(teleport)
+	var max_bomb_probability = 1.0 / 4.0
+	var bomb_probability = max_bomb_probability * (1.0 - (teleport_probability / teleport_max_probability))
 	# probability of remaining powerups are
 	# equally divided among the remaining probability
-	var remaining_probability = 1.0 - (orb_vac_probability + teleport_probability)
-	var generic_probability = remaining_probability / 4
+	var remaining_probability = 1.0 - (orb_vac_probability + teleport_probability + bomb_probability)
+	var generic_probability = remaining_probability / 3
 	
 	var collectable_probabilities = {
 		"vacuum": orb_vac_probability,
 		"teleport": teleport_probability,
 #		"fast": fast_probability,
+		"bomb": bomb_probability,
 		"expand": generic_probability,
 		"shield": generic_probability,
 		"comet": generic_probability,
-		"bomb": generic_probability
 	}
 	
 	var rand = rng.randf()
@@ -121,7 +121,7 @@ func _on_powerup_timer_timeout():
 		greater_bound = lower_bound + collectable_probability
 		if rand > lower_bound and rand <= greater_bound:
 			# spawn collectable
-			new_collectable.collectable = collectable_name
+			new_collectable.collectable = "expand" # collectable_name
 			new_collectable.transform.origin = Vector2(540, 540)
 			add_child(new_collectable)
 			break
@@ -154,6 +154,19 @@ func _on_obstacle_timeout():
 
 func _on_capsule_timer_timeout():
 	if not Players.is_round_ongoing:
+		return
+		
+	var current_potential_score : int = 0
+	var max_total_score : int = 0
+	for p in Players.score:
+		current_potential_score += Players.score[p]
+		max_total_score += Players.play_to
+		
+	current_potential_score += get_children().filter(func (node): return node is Orb).size()
+	
+	# only spawn release capsules if there are
+	# fewer than half total orbs in play
+	if current_potential_score * 2 > max_total_score:
 		return
 	
 	var capsule = preload("res://scenes/NeutralOrbCapsule.tscn").instantiate()
