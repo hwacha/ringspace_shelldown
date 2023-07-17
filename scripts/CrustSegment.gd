@@ -11,7 +11,6 @@ var colliders_per_segment
 
 # state
 @export var juttering : bool = false
-@onready var original_position = $Visuals/Ring.transform.origin
 
 var occupying_players = []
 
@@ -25,19 +24,27 @@ func destroy():
 	$AnimationPlayer.play("segment_destroy")
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
-	get_parent().remove_child(self)
-	self.queue_free()
+	if _anim_name == "segment_destroy":
+		$Repair.start()
+#	get_parent().remove_child(self)
+#	self.queue_free()
+
+func repair():
+	z_index = 0
+	$AnimationPlayer.play("segment_repair")
 	
-func disable_collision():
+func set_collision(enabled):
 	var children = get_children()
 	for child in children:
 		if child is CollisionShape2D:
-			child.disabled = true
+			child.disabled = not enabled
 	
 func _process(_delta):
 	if juttering:
 		var mem = rand.randf_range(-PI, PI)
-		$Visuals/Ring.transform.origin = original_position + 5 * Vector2(cos(mem), sin(mem))
+		$Visuals/Ring.offset = 40 * Vector2(cos(mem), sin(mem))
+	else:
+		$Visuals/Ring.offset = Vector2(0, 0)
 
 func _on_area_2d_body_entered(body):
 	if body is Player:

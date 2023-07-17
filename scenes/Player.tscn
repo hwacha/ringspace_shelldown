@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://32qfsdtyscxi" path="res://assets/right.png" id="5_tvpea"]
 [ext_resource type="AudioStream" uid="uid://bgkhlkm6fuxo4" path="res://assets/ring_game_fast_fall.wav" id="6"]
 [ext_resource type="Texture2D" uid="uid://m2x4jue20ggv" path="res://assets/Stun.png" id="7_cq5ab"]
-[ext_resource type="Script" path="res://scenes/Stun.gd" id="8_hd46e"]
+[ext_resource type="Script" path="res://scripts/Stun.gd" id="8_edg5s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
 resource_local_to_scene = true
@@ -92,7 +92,7 @@ texture = ExtResource("5_tvpea")
 visible = false
 scale = Vector2(0.12, 0.06)
 texture = ExtResource("7_cq5ab")
-script = ExtResource("8_hd46e")
+script = ExtResource("8_edg5s")
 
 [node name="Shadow" type="RayCast2D" parent="."]
 position = Vector2(0, 32)

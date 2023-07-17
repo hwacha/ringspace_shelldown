@@ -125,13 +125,17 @@ func respawn_player(player_id, priority):
 func _process(delta):
 	elapsed_time += delta
 	
-	if is_round_ongoing:
+	var main = get_node_or_null("/root/Main")
+	
+	if main != null:
 		for id in score.keys():
 			var old_score = score[id]
 			var player_node = get_node_or_null("/root/Main/PlayersOnField/" + id)
 			if player_node == null:
 				player_node = get_node("/root/Main/PlayersOnField/" + id + "_(dead)")
-			var new_score = player_node.get_node("Orbs").get_child_count()
+			var new_score = 0
+			if player_node != null:
+				new_score = player_node.get_node("Orbs").get_child_count()
 			new_score += stored_orbs[int(id) - 1].size()
 			if old_score != new_score:
 				score[id] = new_score

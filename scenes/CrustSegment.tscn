@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://g4ceojc7bl7r"]
+[gd_scene load_steps=11 format=3 uid="uid://g4ceojc7bl7r"]
 
 [ext_resource type="Script" path="res://scripts/CrustSegment.gd" id="1_15q0q"]
 [ext_resource type="Texture2D" uid="uid://c4cht2hegqlgq" path="res://assets/RingSegment.png" id="2_ie5c3"]
@@ -100,8 +100,8 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"disable_collision"
+"args": [false],
+"method": &"set_collision"
 }]
 }
 tracks/3/type = "value"
@@ -129,10 +129,64 @@ tracks/4/keys = {
 "values": [Color(1, 1, 1, 0.8), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_6cpss"]
+resource_name = "segment_repair"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(100, 100, 100, 0.5), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:juttering")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"set_collision"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3l7tr"]
 _data = {
 "RESET": SubResource("Animation_i00f3"),
-"segment_destroy": SubResource("1")
+"segment_destroy": SubResource("1"),
+"segment_repair": SubResource("Animation_6cpss")
 }
 
 [node name="CrustSegment" type="StaticBody2D"]
@@ -199,6 +253,11 @@ libraries = {
 stream = ExtResource("3")
 volume_db = -9.0
 
+[node name="Repair" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
 [connection signal="body_entered" from="Visuals/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Visuals/Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Repair" to="." method="repair"]
