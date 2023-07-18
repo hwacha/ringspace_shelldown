@@ -20,8 +20,11 @@ const spriteframe_data = [
 const player_scene = preload("res://scenes/Player.tscn")
 
 # settings
-var orb_loss_numerator = 1
-var orb_loss_denominator = 2
+var orb_loss_numerator_kill     = 1
+var orb_loss_denominator_kill   = 2
+
+var orb_loss_numerator_hazard   = 1
+var orb_loss_denominator_hazard = 4
 
 var player_colors = [
 	Color.hex(0xa40909ff) + Color(0.2, 0.2, 0.2),

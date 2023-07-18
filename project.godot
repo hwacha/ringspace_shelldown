@@ -29,6 +29,10 @@ window/size/mode=3
 window/stretch/mode="canvas_items"
 window/size/fullscreen=true
 
+[editor]
+
+movie_writer/movie_file="/Users/billmarcy/ws/godot/ring_game/clips/clip.avi"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

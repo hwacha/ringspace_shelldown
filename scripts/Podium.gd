@@ -65,7 +65,7 @@ func _ready():
 		crust_segment.rotation = theta
 		var unit_position = Vector2(cos(theta), sin(theta))
 		crust_segment.transform.origin = focus + arc_radius * unit_position
-		crust_segment.transform.origin += (rank - 1) * 120.0 * Vector2(0, 1)
+		crust_segment.transform.origin += pow(rank - 1, 0.8) * 100.0 * Vector2(0, 1)
 		crust_segment.get_node("Visuals/Ring").texture = preload("res://assets/PodiumSegment.png")
 		crust_segment.modulate = colors_by_rank[str(rank)]
 		crust_segment.name = str(rank)
@@ -100,15 +100,15 @@ func _ready():
 	var rank_indeces = {}
 	for player in players:
 		player.lock_physics = true
+		player.expanded = false
+		player.stunned = false
 		player.get_node("CollisionShapeForGround").disabled = true
 		player.get_node("OrbBox/CollisionShape2D").disabled = true
 		player.get_node("HurtBox/CollisionShape2D").disabled = true
 		player.get_node("HitBox/CollisionShape2D").disabled = true
 		player.get_node("Singularity/CollisionShape2D").disabled = true
-		var player_sprite = player.get_node("AnimatedSprite2D")
-		player.expanded = false
-		player.stunned = false
 		player.get_node("ShadowSprite").visible = false
+		var player_sprite = player.get_node("AnimatedSprite2D")
 		player_sprite.animation = "fastfalling"
 		player_sprite.material.set("shader_parameter/is_invulnerable", false)
 		player_sprite.material.set("shader_parameter/is_shielded", false)
@@ -139,7 +139,9 @@ func _ready():
 		var destination_position = my_position_in_main + focus + \
 		(arc_radius + 50.0) * Vector2(cos(-PI/2 + destination_rotation), sin(-PI/2 + destination_rotation))
 		
-		destination_position += (rank - 1) * 120.0 * Vector2(0, 1)
+		destination_position += pow(rank - 1, 0.8) * 100.0 * Vector2(0, 1)
+		
+		player_sprite.flip_h = destination_position.x > 540
 		
 		animation.track_insert_key(track_index_position, 0.0, player.transform.origin)
 		animation.track_insert_key(track_index_position, 3.0, destination_position)

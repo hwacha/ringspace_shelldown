@@ -301,9 +301,9 @@ func get_input(diff):
 	var cw_xor_ccw = move_clockwise or move_counterclockwise
 	cw_xor_ccw = cw_xor_ccw and not (move_clockwise and move_counterclockwise)
 	
-	jump_input = jump_input and not Players.lock_action and not stunned
-	fast_fall = fast_fall and not Players.lock_action and not stunned
-	cw_xor_ccw = cw_xor_ccw and not Players.lock_action and not stunned
+	jump_input = jump_input and not Players.lock_action and not spawning > 1 and not stunned
+	fast_fall = fast_fall and not Players.lock_action and not spawning > 1 and not stunned
+	cw_xor_ccw = cw_xor_ccw and not Players.lock_action and not spawning > 1 and not stunned
 	use = use and not Players.lock_action and not stunned
 	
 	var jump_animation_ongoing = anim.animation == "jumping"
@@ -619,15 +619,18 @@ func _on_animated_sprite_2d_animation_finished():
 			20 * (centroid - transform.origin).normalized()
 		orb_instance.transform.origin = orb_exit_location
 		
-		if killer != null:
+		var orb_loss_fraction = float(Players.orb_loss_numerator_hazard) / Players.orb_loss_denominator_hazard
+		
+		if killer != null or killer_id != -1:
+			orb_loss_fraction = float(Players.orb_loss_numerator_kill) / Players.orb_loss_denominator_kill
 			orb_instance.claimed = true
 			orb_instance.next_claimant = killer
+			orb_instance.next_claimant_id = killer_id
 		
 		get_parent().get_parent().call_deferred("add_child", orb_instance)
 
 		var total_orbs = $Orbs.get_child_count()
-		var num_lost_orbs = int(total_orbs * \
-		float(Players.orb_loss_numerator) / Players.orb_loss_denominator)
+		var num_lost_orbs = int(total_orbs * orb_loss_fraction)
 		var counter = 0
 		for orb in $Orbs.get_children():
 			$Orbs.remove_child(orb)
