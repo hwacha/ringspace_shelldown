@@ -37,6 +37,8 @@ var segment_spawn_index = -1
 @onready var anim = $AnimatedSprite2D
 var rand = RandomNumberGenerator.new()
 
+var t = 0
+
 var fast_falling = false: set = set_fast_falling
 var fastfall_depleted = false
 var dead = false
@@ -72,8 +74,8 @@ func _ready():
 	
 	rand.randomize()
 	
-	$ShadowSprite.modulate = $DeathParticles.modulate
-	$ShadowSprite.modulate.a = 1
+	$ShadowSprite.modulate = color
+	$TrailingPowerup.modulate = color.lightened(0.5)
 	
 	var powerup = get_node("../../Powerups/Powerup" + str(id))
 	used_powerup.connect(powerup.on_use_powerup)
@@ -369,6 +371,22 @@ func get_input(diff):
 		emit_signal("used_powerup", self)
 
 func _physics_process(delta):
+	if lock_physics:
+		return
+
+	t += delta
+	var powerup = get_node("/root/Main/Powerups/Powerup" + str(self.id))
+	var powerup_sprite = powerup.get_node("Sprite2D")
+	$TrailingPowerup.texture = powerup_sprite.texture
+	$TrailingPowerup.offset = 40 * Vector2(0, sin(t * 5))
+	
+	var destination = $TrailRightDestination if $AnimatedSprite2D.flip_h else $TrailLeftDestination
+	
+	$TrailingPowerup.position = $TrailingPowerup.position.lerp(destination.global_transform.origin, delta * 8.0)
+	$TrailingPowerup.rotation = $TrailingPowerup.position.angle_to_point(Vector2(540,540)) + PI/2
+	$TrailingPowerup.scale = 0.05 * powerup.scale * ((expansion_factor * 0.75) if expanded else 1.0)
+	$TrailingPowerup.modulate = powerup.modulate * powerup_sprite.modulate
+	
 	$LeftArrow.visible = false
 	$RightArrow.visible = false
 	
@@ -426,11 +444,11 @@ func _physics_process(delta):
 				$ShadowSprite.transform.origin = center_pos
 				$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - center_distance / 540, 0, 1))
 	
+			if expanded:
+					$ShadowSprite.scale.x *= expansion_factor
+
 			$ShadowSprite.rotation = self.rotation
 			$ShadowSprite.visible = true
-
-	if lock_physics:
-		return
 
 	var diff = self.transform.origin - centroid
 	
@@ -481,6 +499,7 @@ func _set_is_in_event_horizon(new_is_in_event_horizon):
 	else:
 		event_horizon_entry_point = null
 		time_in_event_horizon = 0
+		stunned = false
 	is_in_event_horizon = new_is_in_event_horizon
 
 func set_fast_falling(new_fast_falling):

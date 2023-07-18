@@ -24,6 +24,7 @@ func _on_decay_timeout():
 	var players = get_parent().get_node("PlayersOnField").get_children()
 	for player in players:
 		player.black_hole = null
+		player.is_in_event_horizon = false
 		
 	$CollisionShape2D.disabled = true
 	$Singularity/CollisionShape2D.disabled = true

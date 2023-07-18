@@ -167,7 +167,19 @@ shape = SubResource("CircleShape2D_w2wj8")
 debug_color = Color(0.415686, 0.392157, 0.701961, 0.419608)
 
 [node name="Orbs" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.5)
 script = ExtResource("4_v8tyi")
+
+[node name="TrailingPowerup" type="Sprite2D" parent="."]
+show_behind_parent = true
+top_level = true
+scale = Vector2(0.05, 0.05)
+
+[node name="TrailLeftDestination" type="Node2D" parent="."]
+position = Vector2(-50, 0)
+
+[node name="TrailRightDestination" type="Node2D" parent="."]
+position = Vector2(50, 0)
 
 [node name="TeleportInvulnerability" type="Timer" parent="."]
 wait_time = 1.5

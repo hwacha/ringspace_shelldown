@@ -28,6 +28,7 @@ func _ready():
 		var powerup = preload("res://scenes/Powerup.tscn").instantiate()
 		powerup.transform.origin = score_locations[str(id)]
 		powerup.name += str(id)
+		powerup.modulate = Players.player_colors[id - 1].lightened(0.5)
 		get_node("../Powerups").add_child(powerup)
 	
 	

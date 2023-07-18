@@ -11,7 +11,7 @@ var colliders_per_segment
 
 # state
 @export var juttering : bool = false
-
+var intact : bool = true
 var occupying_players = []
 
 var initial_segment_index
@@ -21,16 +21,19 @@ func _ready():
 	initial_segment_index = get_index()
 		
 func destroy():
+	intact = false
 	$AnimationPlayer.play("segment_destroy")
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	if _anim_name == "segment_destroy":
+		$Visuals/Ring.offset = Vector2(0, 0)
 		$Repair.start()
 #	get_parent().remove_child(self)
 #	self.queue_free()
 
 func repair():
 	z_index = 0
+	intact = true
 	$AnimationPlayer.play("segment_repair")
 	
 func set_collision(enabled):
@@ -42,9 +45,7 @@ func set_collision(enabled):
 func _process(_delta):
 	if juttering:
 		var mem = rand.randf_range(-PI, PI)
-		$Visuals/Ring.offset = 40 * Vector2(cos(mem), sin(mem))
-	else:
-		$Visuals/Ring.offset = Vector2(0, 0)
+		$Visuals/Ring.offset = 25 * Vector2(cos(mem), sin(mem))
 
 func _on_area_2d_body_entered(body):
 	if body is Player:
@@ -57,4 +58,4 @@ func _on_area_2d_body_exited(body):
 		occupying_players.erase(body.id)
 		
 func can_spawn_player():
-	return occupying_players.size() == 0
+	return intact and occupying_players.size() == 0
