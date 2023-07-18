@@ -75,7 +75,7 @@ func _ready():
 	rand.randomize()
 	
 	$ShadowSprite.modulate = color
-	$TrailingPowerup.modulate = color.lightened(0.5)
+	$TrailingPowerup.position = $TrailRightDestination.global_transform.origin if $AnimatedSprite2D.flip_h else $TrailLeftDestination.global_transform.origin
 	
 	var powerup = get_node("../../Powerups/Powerup" + str(id))
 	used_powerup.connect(powerup.on_use_powerup)

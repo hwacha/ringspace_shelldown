@@ -70,15 +70,6 @@ func _on_powerup_timer_timeout():
 		old_collectable.queue_free()
 			
 	var new_collectable = preload("res://scenes/Collectable.tscn").instantiate()
-	var collectable_names = [
-		"teleport",
-		"expand",
-#		"fast",
-		"shield",
-		"comet",
-		"vacuum",
-		"bomb"
-	]
 	
 	# normalize probability of orb vacuum
 	# to number of orbs on field in range [0, 2/5]
@@ -142,8 +133,8 @@ func _on_obstacle_timeout():
 	
 	obstacle.transform.origin = Vector2(540, 540)
 	
-	var min_radius = 50.0
-	var r_range = 300.0
+	var min_radius = 172
+	var r_range = 128
 	var rand_r = min_radius + r_range * sqrt(rng.randf())
 	var rand_theta = rng.randf() * 2 * PI
 	
