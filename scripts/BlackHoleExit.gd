@@ -11,8 +11,10 @@ func _ready():
 
 func _process(delta):
 	$Line2D.clear_points()
-	for point in self.curve.get_baked_points():
+	for point in self.curve.get_baked_points().slice(0, int(min(1, t) * self.curve.get_baked_length())):
 		$Line2D.add_point(point + self.position)
+		
+
 	var black_hole = get_node_or_null("/root/Main/BlackHole")
 	if black_hole != null:
 		curve.set_point_position(0, black_hole.position)

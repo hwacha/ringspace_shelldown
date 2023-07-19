@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/BlackHoleExit.gd" id="1_y0csx"]
 [ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="2_4xxkk"]
-[ext_resource type="Texture2D" uid="uid://bvn7mq8qml6ge" path="res://assets/white_lining.png" id="3_35163"]
+[ext_resource type="Texture2D" path="res://assets/white_lining.png" id="3_35163"]
 
 [sub_resource type="Curve2D" id="Curve2D_i8n25"]
 _data = {
