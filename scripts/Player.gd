@@ -130,22 +130,21 @@ func _set_expansion(new_expanded: bool):
 		
 	expanded = new_expanded
 
+
+func find_crust_segment_to_spawn() -> CrustSegment:
+	var crust_index = segment_spawn_index
+	var crust_segments = get_node("../../Crust").get_children()
+	if crust_index == -1:
+		crust_segments = crust_segments.filter(func(segment): return segment.can_spawn_player())
+		# randomly select a safe crust segment
+		crust_index = rand.randi_range(0, crust_segments.size() - 1)
+	return crust_segments[crust_index]
+
 func spawn(is_teleport: bool):
 	spawning = 2
-	# randomly select a safe crust segment
-	var crust_index = segment_spawn_index
-	var crust_segments = get_node("../../Crust").get_children().filter(func(segment): return segment.can_spawn_player())
-	if crust_index == -1:
-		crust_index = rand.randi_range(0, crust_segments.size() - 1)
-	var destination_segment = crust_segments[crust_index]
-	if destination_segment.get_node("AnimationPlayer").current_animation == "segment_destroy":
-		var second_crust_index = rand.randi_range(0, crust_segments.size() - 2)
-		if second_crust_index >= crust_index:
-			second_crust_index += 1
-		destination_segment = crust_segments[second_crust_index]
-		
-	destination_segment.occupying_players.push_back(self.id)
 	
+	var destination_segment = find_crust_segment_to_spawn()
+	destination_segment.occupying_players.push_back(self.id)
 	var destination_segment_position = destination_segment.transform.origin
 		
 	var destination_point = (get_node("../../Crust").transform.origin +
