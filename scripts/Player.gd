@@ -372,6 +372,11 @@ func get_input(diff):
 func _physics_process(delta):
 	if lock_physics:
 		return
+		
+	var stuck_in_crust = move_and_collide(Vector2(0, 0), true)
+	if stuck_in_crust != null:
+		spawn(false)
+		return
 
 	t += delta
 	var powerup = get_node("/root/Main/Powerups/Powerup" + str(self.id))
