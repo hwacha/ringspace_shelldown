@@ -99,9 +99,22 @@ func _ready():
 	
 	var rank_indeces = {}
 	for player in players:
+		if player.dead:
+			player.get_node("DeathTimer").stop()
+			for stored_orb in Players.stored_orbs[player.id - 1]:
+				player.get_node("Orbs").add_child(stored_orb)
+				player.get_node("Orbs").on_add_orb(stored_orb)
+			Players.stored_orbs[player.id - 1] = []
+			
+		for orb in player.get_node("Orbs").get_children():
+			orb.monitoring = false
+			orb.monitorable = false
+
+		player.dead = false
 		player.lock_physics = true
 		player.expanded = false
 		player.stunned = false
+			
 		player.get_node("CollisionShapeForGround").disabled = true
 		player.get_node("OrbBox/CollisionShape2D").disabled = true
 		player.get_node("HurtBox/CollisionShape2D").disabled = true

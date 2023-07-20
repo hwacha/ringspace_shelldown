@@ -11,6 +11,7 @@ var double_jump_animation = preload("res://scenes/double_jump_animation.tscn")
 var coyote_threshold : int = 5
 var frames_in_air : int = 0
 var was_grounded_last_frame : bool = false
+var frames_stuck : int = 0
 
 var norm_velocity = Vector2(0, 0)
 var perp_velocity = Vector2(0, 0)
@@ -372,9 +373,18 @@ func get_input(diff):
 func _physics_process(delta):
 	if lock_physics:
 		return
+	
+	if spawning < 2:
+		var stuck_in_crust = move_and_collide(Vector2(0, 0), true)
+		if stuck_in_crust != null:
+			frames_stuck += 1
+		else:
+			frames_stuck = 0
+	else:
+		frames_stuck += 1
 		
-	var stuck_in_crust = move_and_collide(Vector2(0, 0), true)
-	if stuck_in_crust != null:
+	if frames_stuck > 3:
+		frames_stuck = 0
 		spawn(false)
 		return
 
