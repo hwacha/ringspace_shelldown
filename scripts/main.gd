@@ -6,8 +6,8 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	Players.lock_action = true
-	var bus_idx = AudioServer.get_bus_index("Master")
-	AudioServer.set_bus_mute(bus_idx, true)
+#	var bus_idx = AudioServer.get_bus_index("Master")
+#	AudioServer.set_bus_mute(bus_idx, true)
 	players_not_playing = [1, 2, 3, 4].filter(func(id): return id not in Players.starting_ids)
 	rng.randomize()
 
