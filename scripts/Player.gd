@@ -434,35 +434,39 @@ func _physics_process(delta):
 		was_grounded_last_frame = true
 	else:
 		was_grounded_last_frame = false
-		var shadow_target  = $Shadow.get_collider()
-		var shadow_target_right = $ShadowRight.get_collider()
-		var shadow_target_left = $ShadowLeft.get_collider()
-		if shadow_target == null and shadow_target_left == null and shadow_target_right == null:
+		
+		if is_in_event_horizon:
 			$ShadowSprite.visible = false
 		else:
-			var center_pos = $Shadow.get_collision_point()
-			var right_pos = $ShadowRight.get_collision_point()
-			var left_pos = $ShadowLeft.get_collision_point()
-			
-			var center_distance = (self.transform.origin + $Shadow.transform.origin).distance_to(center_pos)
-			var right_distance = (self.transform.origin + $ShadowRight.transform.origin).distance_to(right_pos)
-			var left_distance = (self.transform.origin + $ShadowLeft.transform.origin).distance_to(left_pos)
-			
-			if right_distance + 30 < center_distance and right_distance < left_distance:
-				$ShadowSprite.transform.origin = right_pos
-				$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - right_distance / 540, 0, 1))
-			elif left_distance + 30 < center_distance and left_distance < right_distance:
-				$ShadowSprite.transform.origin = left_pos
-				$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - left_distance / 540, 0, 1))
+			var shadow_target  = $Shadow.get_collider()
+			var shadow_target_right = $ShadowRight.get_collider()
+			var shadow_target_left = $ShadowLeft.get_collider()
+			if shadow_target == null and shadow_target_left == null and shadow_target_right == null:
+				$ShadowSprite.visible = false
 			else:
-				$ShadowSprite.transform.origin = center_pos
-				$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - center_distance / 540, 0, 1))
-	
-			if expanded:
+				var center_pos = $Shadow.get_collision_point()
+				var right_pos = $ShadowRight.get_collision_point()
+				var left_pos = $ShadowLeft.get_collision_point()
+				
+				var center_distance = (self.transform.origin + $Shadow.transform.origin).distance_to(center_pos)
+				var right_distance = (self.transform.origin + $ShadowRight.transform.origin).distance_to(right_pos)
+				var left_distance = (self.transform.origin + $ShadowLeft.transform.origin).distance_to(left_pos)
+				
+				if right_distance + 30 < center_distance and right_distance < left_distance:
+					$ShadowSprite.transform.origin = right_pos
+					$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - right_distance / 540, 0, 1))
+				elif left_distance + 30 < center_distance and left_distance < right_distance:
+					$ShadowSprite.transform.origin = left_pos
+					$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - left_distance / 540, 0, 1))
+				else:
+					$ShadowSprite.transform.origin = center_pos
+					$ShadowSprite.scale.x = lerpf(0.02, 0.1, clampf(1 - center_distance / 540, 0, 1))
+		
+				if expanded:
 					$ShadowSprite.scale.x *= expansion_factor
 
-			$ShadowSprite.rotation = self.rotation
-			$ShadowSprite.visible = true
+				$ShadowSprite.rotation = self.rotation
+				$ShadowSprite.visible = true
 
 	var diff = self.transform.origin - centroid
 	
@@ -577,6 +581,7 @@ func die():
 	stunned = false
 	remove_shields(shields.size()) # not strictly necessary
 	norm_velocity = Vector2(0, 0)
+	$TrailingPowerup.visible = false
 	$AnimatedSprite2D.set_animation("dead")
 	$HitBox.set_deferred("monitoring", false)
 	$HurtBox.set_deferred("monitorable", false)

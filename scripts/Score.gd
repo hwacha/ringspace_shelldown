@@ -2,7 +2,7 @@ extends Node2D
 
 
 var score_radius
-var epsilon = 0.05
+var epsilon = 0.03
 var score_locations = {}
 
 func _ready():
@@ -38,7 +38,9 @@ func _process(_delta):
 func _draw():
 	var theta = 2 * PI / Players.play_to
 	for pn in Players.score:
-		draw_arc(score_locations[pn], score_radius * 0.5, 0, 2 * PI, 100, Players.player_colors[int(pn) - 1].darkened(0.4) - Color(0, 0, 0, 0.5), 3) 
+		var circle_color = Players.player_colors[int(pn) - 1].darkened(0.4)
+		circle_color.a = 0.5
+		draw_arc(score_locations[pn], score_radius * 0.5, 0, 2 * PI, 100, circle_color, 3) 
 		var theta_offset = 7 * PI / 4 + theta - (PI / 2 * int(pn))
 		for i in range(0, Players.play_to):
 			var color = Color(0.094, 0.161, 0.204, 0.5)
