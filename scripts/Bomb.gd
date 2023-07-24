@@ -8,8 +8,7 @@ var cf = 0.105
 
 enum BombStatus {
 	TICKING,
-	BLASTING,
-	STUNNING
+	BLASTING
 }
 
 @export var status : BombStatus = BombStatus.TICKING
@@ -58,11 +57,12 @@ func _process(delta):
 		for player in affected_players:
 			if not player.dead:
 				if status == BombStatus.BLASTING:
-					player.killer = player_who_dropped
-					player.killer_id = player_who_dropped_id
-					player.die()
-				elif status == BombStatus.STUNNING:
-					player.stunned = true
+					if self.position.distance_to(player.position) < 80:
+						player.killer = player_who_dropped
+						player.killer_id = player_who_dropped_id
+						player.die()
+					else:
+						player.stunned = true
 		
 
 
