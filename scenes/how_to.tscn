@@ -1,0 +1,630 @@
+[gd_scene load_steps=48 format=3 uid="uid://bcqi1dwvih6h5"]
+
+[ext_resource type="SpriteFrames" uid="uid://civqu1ibw4bfh" path="res://animations/SpriteFrames_P1.tres" id="1_p8i6v"]
+[ext_resource type="Texture2D" uid="uid://dj6p03c4r5vyu" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Left.png" id="1_sns0p"]
+[ext_resource type="Script" path="res://scenes/Controls.gd" id="1_xbunr"]
+[ext_resource type="Texture2D" uid="uid://cbho27pntam46" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Up Left.png" id="2_216ol"]
+[ext_resource type="Texture2D" uid="uid://chekv01hh0kgm" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L.png" id="2_pr1dr"]
+[ext_resource type="Texture2D" uid="uid://bwpk2v3vqybqk" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Up.png" id="3_k8f10"]
+[ext_resource type="Texture2D" uid="uid://dtfjomahi2ymp" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Up Right.png" id="4_l475t"]
+[ext_resource type="Texture2D" uid="uid://uh335do2ed8y" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Right.png" id="5_dklao"]
+[ext_resource type="Texture2D" uid="uid://iohege1ksan6" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Down Right.png" id="6_2l618"]
+[ext_resource type="Texture2D" uid="uid://c67vl3hhgy1lk" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Down.png" id="7_ss8bl"]
+[ext_resource type="Texture2D" uid="uid://ubnkauypgh2u" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Down Left.png" id="8_nx802"]
+[ext_resource type="Texture2D" uid="uid://dy6yfkpf5ss50" path="res://assets/PS4 BUTTONS - Premium Assets/Directional Arrows/Button - PS Directional Arrows Left 2.png" id="10_ew320"]
+[ext_resource type="Texture2D" uid="uid://cilquho0txofn" path="res://assets/PS4 BUTTONS - Premium Assets/Directional Arrows/Button - PS Directional Arrows Right 2.png" id="11_ko1uh"]
+[ext_resource type="Texture2D" uid="uid://cy4ylaa1c3grm" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Cross 1.png" id="12_i024o"]
+[ext_resource type="SpriteFrames" uid="uid://bcnvggjm2vmxk" path="res://animations/SpriteFrames_P2.tres" id="12_upxir"]
+[ext_resource type="Texture2D" uid="uid://cvdvctld6f78v" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Cross 2.png" id="13_ameg7"]
+[ext_resource type="Texture2D" uid="uid://ddxmrdmtubdlg" path="res://assets/PS4 BUTTONS - Premium Assets/Directional Arrows/Button - PS Directional Arrows 2.png" id="13_yn4kf"]
+[ext_resource type="Texture2D" uid="uid://5s6aavdmgyt1" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Circle 1.png" id="14_eg3yu"]
+[ext_resource type="Texture2D" uid="uid://s8wwxw4yd7tu" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Circle 2.png" id="15_uvkj0"]
+[ext_resource type="SpriteFrames" uid="uid://cfmjxgo5aubws" path="res://animations/SpriteFrames_Fastfall.tres" id="17_pw3dp"]
+[ext_resource type="Texture2D" uid="uid://cvyek5n4toufx" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS L2 – 2.png" id="17_uokaf"]
+[ext_resource type="Texture2D" uid="uid://ci4rs1v7ryn0q" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS L2.png" id="18_42xvc"]
+[ext_resource type="SpriteFrames" uid="uid://k1ump0j1pjx3" path="res://animations/SpriteFrames_P3.tres" id="18_ajrve"]
+[ext_resource type="Texture2D" uid="uid://1c0terdhjq2s" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS R2 – 2.png" id="19_nkhgk"]
+[ext_resource type="Texture2D" uid="uid://1kb7mafq3d5a" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS R2.png" id="20_85ub7"]
+[ext_resource type="Texture2D" uid="uid://dn88qni10lw3" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Square 1.png" id="23_6fuqs"]
+[ext_resource type="Shader" path="res://scripts/player.gdshader" id="23_86abl"]
+[ext_resource type="SpriteFrames" uid="uid://cd0y1l6t3vi0v" path="res://animations/SpriteFrames_P4.tres" id="23_io15b"]
+[ext_resource type="Texture2D" uid="uid://dg6mapy85psyq" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Square 2.png" id="24_1kivn"]
+[ext_resource type="Texture2D" uid="uid://dww070nlibqdr" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Triangle 1.png" id="25_4wqwj"]
+[ext_resource type="Texture2D" uid="uid://drgarrrgy84r6" path="res://assets/shield.png" id="25_stkxg"]
+[ext_resource type="Texture2D" uid="uid://ck7d5rj7vwucs" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Triangle 2.png" id="26_nvg3h"]
+[ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="33_wkclh"]
+[ext_resource type="Texture2D" uid="uid://bpmar6l4jk3xg" path="res://assets/WhiteOrb_Halo.png" id="34_bxugn"]
+[ext_resource type="Texture2D" uid="uid://nu8e2crp7leb" path="res://assets/RedOrb_Halo.png" id="35_cio6b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3nu8n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pr1dr")
+}, {
+"duration": 6.0,
+"texture": ExtResource("1_sns0p")
+}, {
+"duration": 6.0,
+"texture": ExtResource("2_216ol")
+}, {
+"duration": 6.0,
+"texture": ExtResource("3_k8f10")
+}, {
+"duration": 6.0,
+"texture": ExtResource("4_l475t")
+}, {
+"duration": 6.0,
+"texture": ExtResource("5_dklao")
+}, {
+"duration": 6.0,
+"texture": ExtResource("6_2l618")
+}, {
+"duration": 6.0,
+"texture": ExtResource("7_ss8bl")
+}, {
+"duration": 6.0,
+"texture": ExtResource("8_nx802")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kljr0"]
+animations = [{
+"frames": [{
+"duration": 48.0,
+"texture": ExtResource("10_ew320")
+}, {
+"duration": 48.0,
+"texture": ExtResource("11_ko1uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_yn4kf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m0umk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_i024o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ameg7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_71h8n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_eg3yu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_uvkj0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u0vq4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_uokaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_42xvc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ei0yb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_nkhgk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_85ub7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0y01h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_6fuqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_1kivn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6n0of"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_4wqwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_nvg3h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rreuv"]
+shader = ExtResource("23_86abl")
+shader_parameter/primary_color = Color(0.921569, 0.878431, 0.313726, 1)
+shader_parameter/is_invulnerable = false
+shader_parameter/num_shields = 0
+
+[sub_resource type="Animation" id="Animation_cn8ba"]
+resource_name = "controls"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RunAnimation/AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 5, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 6.28319, 3.48787e-16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RunAnimation/AnimatedSprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RunControl1/AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.5001, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 1, 2, 3, 4, 5, 6, 7, 8, 0, 5, 4, 3, 2, 1, 8, 7, 6, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RunControl2/AnimatedSprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4, 5, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RunAnimation/AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 4, 5, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [&"running", &"default", &"running", &"default"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("JumpControl1/AnimatedSprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("JumpAnimation/AnimatedSprite2D:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 2, 3, 3.2, 4, 5, 5.2, 6, 7, 7.2, 8, 9, 9.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [&"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("JumpControl2/AnimatedSprite2D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FastfallControl1/AnimatedSprite2D:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FastfallControl2/AnimatedSprite2D:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FastfallAnimation/AnimatedSprite2D:animation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [&"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling"]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("FastfallAnimation/AnimatedSprite2D2:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("UseControl1/AnimatedSprite2D:frame")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("UseControl2/AnimatedSprite2D:frame")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("UseAnimation/AnimatedSprite2D:material:shader_parameter/num_shields")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("UseAnimation/Sprite2D:self_modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 1.984, 2, 2.0001, 3, 3.2, 3.983, 3.9983, 4, 5, 5.2, 5.9801, 6, 7, 7.2, 7.9847, 8, 9, 9.2, 9.9697),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("JumpAnimation/AnimatedSprite2D:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(1, 1.4, 1.6, 2, 3, 3.4, 3.6, 4, 5, 5.4, 5.6, 6, 7, 7.4, 7.6, 8, 9, 9.4, 9.6, 10),
+"transitions": PackedFloat32Array(2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tsxag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UseAnimation/AnimatedSprite2D:material:shader_parameter/num_shields")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifcmt"]
+_data = {
+"RESET": SubResource("Animation_tsxag"),
+"controls": SubResource("Animation_cn8ba")
+}
+
+[node name="how_to" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Controls" type="GridContainer" parent="."]
+layout_mode = 0
+offset_top = 270.0
+offset_right = 540.0
+offset_bottom = 810.0
+columns = 3
+script = ExtResource("1_xbunr")
+
+[node name="RunControl1" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/RunControl1"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_3nu8n")
+frame = 8
+
+[node name="RunControl2" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/RunControl2"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_kljr0")
+
+[node name="RunAnimation" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/RunAnimation"]
+rotation = 5.7554
+scale = Vector2(0.05, 0.05)
+sprite_frames = ExtResource("1_p8i6v")
+animation = &"running"
+flip_h = true
+
+[node name="JumpControl1" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/JumpControl1"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_m0umk")
+
+[node name="JumpControl2" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/JumpControl2"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_71h8n")
+
+[node name="JumpAnimation" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/JumpAnimation"]
+scale = Vector2(0.05, 0.05)
+sprite_frames = ExtResource("12_upxir")
+animation = &"falling"
+flip_h = true
+
+[node name="FastfallControl1" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/FastfallControl1"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_u0vq4")
+
+[node name="FastfallControl2" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/FastfallControl2"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_ei0yb")
+
+[node name="FastfallAnimation" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Controls/FastfallAnimation"]
+position = Vector2(-2, -4)
+scale = Vector2(0.05, 0.05)
+sprite_frames = ExtResource("17_pw3dp")
+flip_h = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/FastfallAnimation"]
+scale = Vector2(0.05, 0.05)
+sprite_frames = ExtResource("18_ajrve")
+animation = &"fastfalling"
+flip_h = true
+
+[node name="UseControl1" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/UseControl1"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_0y01h")
+
+[node name="UseControl2" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/UseControl2"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_6n0of")
+
+[node name="UseAnimation" type="Container" parent="Controls"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/UseAnimation"]
+material = SubResource("ShaderMaterial_rreuv")
+scale = Vector2(0.05, 0.05)
+sprite_frames = ExtResource("23_io15b")
+flip_h = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Controls/UseAnimation"]
+modulate = Color(0.988235, 0.964706, 0.635294, 1)
+position = Vector2(45, 2.08165e-12)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("25_stkxg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Controls"]
+libraries = {
+"": SubResource("AnimationLibrary_ifcmt")
+}
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 641.0
+offset_top = 270.0
+offset_right = 1080.0
+offset_bottom = 810.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 24
+text = "
+
+Collect            to win"
+scroll_active = false
+
+[node name="Orb" type="Sprite2D" parent="Container/RichTextLabel"]
+position = Vector2(151, 97)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("34_bxugn")
+region_enabled = true
+region_rect = Rect2(897, 49, 733, 733)
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 24
+text = "
+
+Dying loses"
+
+[node name="Orb" type="Sprite2D" parent="Container/RichTextLabel2"]
+position = Vector2(207, 96)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("34_bxugn")
+region_enabled = true
+region_rect = Rect2(897, 49, 733, 733)
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 24
+text = "
+
+Kill            to get"
+
+[node name="Orb" type="Sprite2D" parent="Container/RichTextLabel3"]
+position = Vector2(244, 95)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("35_cio6b")
+region_enabled = true
+region_rect = Rect2(897, 49, 733, 733)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Container/RichTextLabel3"]
+position = Vector2(72, 92)
+scale = Vector2(0.04, 0.04)
+sprite_frames = ExtResource("1_p8i6v")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="Controls" method="_on_timer_timeout"]

@@ -169,6 +169,7 @@ script = ExtResource("5")
 wait_time = 30.0
 
 [node name="PowerupTimer" type="Timer" parent="."]
+wait_time = 7.5
 
 [node name="CapsuleTimer" type="Timer" parent="."]
 wait_time = 10.0

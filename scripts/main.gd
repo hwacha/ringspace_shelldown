@@ -112,7 +112,7 @@ func _on_powerup_timer_timeout():
 		greater_bound = lower_bound + collectable_probability
 		if rand > lower_bound and rand <= greater_bound:
 			# spawn collectable
-			new_collectable.collectable = "bomb" # collectable_name
+			new_collectable.collectable = collectable_name
 			new_collectable.transform.origin = Vector2(540, 540)
 			add_child(new_collectable)
 			break

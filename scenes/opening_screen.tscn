@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=7 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
@@ -16,6 +16,18 @@ cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r44yr"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="OpeningScreen" type="Control"]
 layout_mode = 3
@@ -153,3 +165,34 @@ anchor_left = 0.1
 anchor_top = 0.02
 anchor_right = 0.95
 anchor_bottom = 0.2
+
+[node name="StartPrompt" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 339.0
+offset_top = 375.0
+offset_right = 739.0
+offset_bottom = 475.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r44yr")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartPrompt"]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 100.0
+theme_override_fonts/normal_font = ExtResource("3")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Press START to play[/center]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="StartPrompt"]
+layout_mode = 0
+offset_top = 73.0
+offset_right = 400.0
+offset_bottom = 143.0
+theme_override_fonts/normal_font = ExtResource("3")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center]Hold for how-to[/center]"
+scroll_active = false
+visible_characters_behavior = 4
