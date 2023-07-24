@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://cy4ylaa1c3grm" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Cross 1.png" id="12_i024o"]
 [ext_resource type="SpriteFrames" uid="uid://bcnvggjm2vmxk" path="res://animations/SpriteFrames_P2.tres" id="12_upxir"]
 [ext_resource type="Texture2D" uid="uid://cvdvctld6f78v" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Cross 2.png" id="13_ameg7"]
-[ext_resource type="Texture2D" uid="uid://ddxmrdmtubdlg" path="res://assets/PS4 BUTTONS - Premium Assets/Directional Arrows/Button - PS Directional Arrows 2.png" id="13_yn4kf"]
 [ext_resource type="Texture2D" uid="uid://5s6aavdmgyt1" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Circle 1.png" id="14_eg3yu"]
 [ext_resource type="Texture2D" uid="uid://s8wwxw4yd7tu" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Circle 2.png" id="15_uvkj0"]
 [ext_resource type="SpriteFrames" uid="uid://cfmjxgo5aubws" path="res://animations/SpriteFrames_Fastfall.tres" id="17_pw3dp"]
@@ -71,6 +70,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s4fu2"]
+load_path = "res://.godot/imported/Button - PS Directional Arrows 2.png-cfdd2640d4f9c95440537a9e6445a421.ctex"
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_kljr0"]
 animations = [{
 "frames": [{
@@ -81,7 +83,7 @@ animations = [{
 "texture": ExtResource("11_ko1uh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_yn4kf")
+"texture": SubResource("CompressedTexture2D_s4fu2")
 }],
 "loop": true,
 "name": &"default",
