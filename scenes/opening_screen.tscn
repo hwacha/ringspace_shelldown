@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=9 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="3"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="3_rwijt"]
+[ext_resource type="Texture2D" uid="uid://b8q8ywxu7ysev" path="res://assets/PS4 BUTTONS - Premium Assets/Button - PS Options.png" id="5_c5ba6"]
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -24,6 +25,13 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmrnq"]
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -56,108 +64,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 1)
 
-[node name="P1Unregistered" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.8
-anchor_right = 0.25
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Press to Join[/center]"
-scroll_active = false
-
-[node name="P1Registered" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color(0.84, 0.24, 0.24, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.8
-anchor_right = 0.25
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Red Joined[/center]"
-scroll_active = false
-
-[node name="P2Unregistered" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.8
-anchor_right = 0.5
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Press to Join[/center]"
-scroll_active = false
-
-[node name="P2Registered" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color(0.2, 0.466667, 0.870588, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.8
-anchor_right = 0.5
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Blue Joined[/center]"
-scroll_active = false
-
-[node name="P3Unregistered" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.8
-anchor_right = 0.75
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Press to Join[/center]"
-scroll_active = false
-
-[node name="P3Registered" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color(0.35, 0.76, 0.31, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.8
-anchor_right = 0.75
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Green Joined[/center]"
-scroll_active = false
-
-[node name="P4Unregistered" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.75
-anchor_top = 0.8
-anchor_right = 1.0
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Press to Join[/center]"
-scroll_active = false
-
-[node name="P4Registered" type="RichTextLabel" parent="."]
-visible = false
-modulate = Color(1.01, 0.98, 0.47, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.75
-anchor_top = 0.8
-anchor_right = 1.0
-anchor_bottom = 0.9
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Yellow Joined[/center]"
-scroll_active = false
-
 [node name="Settings" type="Label" parent="."]
 visible = false
 layout_mode = 0
@@ -166,33 +72,179 @@ anchor_top = 0.02
 anchor_right = 0.95
 anchor_bottom = 0.2
 
-[node name="StartPrompt" type="Panel" parent="."]
+[node name="PlayerRegister" type="GridContainer" parent="."]
+layout_mode = 2
+offset_top = 750.0
+offset_right = 1080.0
+offset_bottom = 1080.0
+columns = 3
+
+[node name="P1" type="CenterContainer" parent="PlayerRegister"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P1"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Press to Join[/center]"
+scroll_active = false
+
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P1"]
 visible = false
-layout_mode = 0
-offset_left = 339.0
-offset_top = 375.0
-offset_right = 739.0
-offset_bottom = 475.0
+modulate = Color(0.84, 0.24, 0.24, 1)
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Red Joined[/center]"
+scroll_active = false
+
+[node name="TopCenter" type="CenterContainer" parent="PlayerRegister"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StartPrompt" type="Panel" parent="PlayerRegister/TopCenter"]
+visible = false
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r44yr")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="StartPrompt"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerRegister/TopCenter/StartPrompt"]
 layout_mode = 0
-offset_top = 30.0
-offset_right = 400.0
-offset_bottom = 100.0
+offset_left = -21.0
+offset_top = 32.2
+offset_right = 379.0
+offset_bottom = 102.2
 theme_override_fonts/normal_font = ExtResource("3")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "[center]Press START to play[/center]"
+text = "[center]Press        to play[/center]"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="StartPrompt"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/TopCenter/StartPrompt"]
+position = Vector2(166, 46.2002)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("5_c5ba6")
+
+[node name="P4" type="CenterContainer" parent="PlayerRegister"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P4"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Press to Join[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P4"]
+visible = false
+modulate = Color(1.01, 0.98, 0.47, 1)
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Yellow Joined[/center]"
+scroll_active = false
+
+[node name="P2" type="CenterContainer" parent="PlayerRegister"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P2"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Press to Join[/center]"
+scroll_active = false
+
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P2"]
+visible = false
+modulate = Color(0.2, 0.466667, 0.870588, 1)
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Blue Joined[/center]"
+scroll_active = false
+
+[node name="BottomCenter" type="CenterContainer" parent="PlayerRegister"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HowToPrompt" type="Panel" parent="PlayerRegister/BottomCenter"]
+visible = false
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r44yr")
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerRegister/BottomCenter/HowToPrompt"]
 layout_mode = 0
-offset_top = 73.0
-offset_right = 400.0
-offset_bottom = 143.0
+offset_right = 200.0
+offset_bottom = 60.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_kmrnq")
+show_percentage = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerRegister/BottomCenter/HowToPrompt"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 21.0
+offset_right = 175.0
+offset_bottom = 41.0
 theme_override_fonts/normal_font = ExtResource("3")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "[center]Hold for how-to[/center]"
+text = "[center]Hold        for how-to[/center]"
 scroll_active = false
 visible_characters_behavior = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/BottomCenter/HowToPrompt"]
+position = Vector2(75, 28)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("5_c5ba6")
+
+[node name="P3" type="CenterContainer" parent="PlayerRegister"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P3"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Press to Join[/center]"
+scroll_active = false
+
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P3"]
+visible = false
+modulate = Color(0.35, 0.76, 0.31, 1)
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+bbcode_enabled = true
+text = "[center]Green Joined[/center]"
+scroll_active = false

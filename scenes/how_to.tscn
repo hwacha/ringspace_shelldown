@@ -1,8 +1,8 @@
-[gd_scene load_steps=48 format=3 uid="uid://bcqi1dwvih6h5"]
+[gd_scene load_steps=57 format=3 uid="uid://bcqi1dwvih6h5"]
 
+[ext_resource type="Script" path="res://scripts/how_to.gd" id="1_7ft2m"]
 [ext_resource type="SpriteFrames" uid="uid://civqu1ibw4bfh" path="res://animations/SpriteFrames_P1.tres" id="1_p8i6v"]
 [ext_resource type="Texture2D" uid="uid://dj6p03c4r5vyu" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Left.png" id="1_sns0p"]
-[ext_resource type="Script" path="res://scenes/Controls.gd" id="1_xbunr"]
 [ext_resource type="Texture2D" uid="uid://cbho27pntam46" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Up Left.png" id="2_216ol"]
 [ext_resource type="Texture2D" uid="uid://chekv01hh0kgm" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L.png" id="2_pr1dr"]
 [ext_resource type="Texture2D" uid="uid://bwpk2v3vqybqk" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Up.png" id="3_k8f10"]
@@ -34,6 +34,23 @@
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="33_wkclh"]
 [ext_resource type="Texture2D" uid="uid://bpmar6l4jk3xg" path="res://assets/WhiteOrb_Halo.png" id="34_bxugn"]
 [ext_resource type="Texture2D" uid="uid://nu8e2crp7leb" path="res://assets/RedOrb_Halo.png" id="35_cio6b"]
+[ext_resource type="Script" path="res://scripts/Orbs.gd" id="35_u3pv3"]
+[ext_resource type="Texture2D" uid="uid://b8q8ywxu7ysev" path="res://assets/PS4 BUTTONS - Premium Assets/Button - PS Options.png" id="35_xcj3v"]
+[ext_resource type="PackedScene" uid="uid://djy1ltinuio1p" path="res://scenes/Orb.tscn" id="36_wkj43"]
+[ext_resource type="Shader" path="res://scripts/Orb.gdshader" id="37_sr4kg"]
+[ext_resource type="SpriteFrames" uid="uid://bvg2631fpxs54" path="res://animations/SpriteFrames_Orb5.tres" id="38_iotmw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8ndh"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3nu8n"]
 animations = [{
@@ -179,6 +196,21 @@ shader = ExtResource("23_86abl")
 shader_parameter/primary_color = Color(0.921569, 0.878431, 0.313726, 1)
 shader_parameter/is_invulnerable = false
 shader_parameter/num_shields = 0
+
+[sub_resource type="Animation" id="Animation_tsxag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UseAnimation/AnimatedSprite2D:material:shader_parameter/num_shields")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_cn8ba"]
 resource_name = "controls"
@@ -389,26 +421,40 @@ tracks/16/keys = {
 "values": [Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_tsxag"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UseAnimation/AnimatedSprite2D:material:shader_parameter/num_shields")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ifcmt"]
 _data = {
 "RESET": SubResource("Animation_tsxag"),
 "controls": SubResource("Animation_cn8ba")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k705f"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqsr2"]
+resource_local_to_scene = true
+shader = ExtResource("37_sr4kg")
+shader_parameter/is_grabbable = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vch60"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="how_to" type="Control"]
 layout_mode = 3
@@ -417,216 +463,473 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7ft2m")
 
-[node name="Controls" type="GridContainer" parent="."]
+[node name="ControlsTitle" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_top = 270.0
+offset_top = 742.0
 offset_right = 540.0
-offset_bottom = 810.0
-columns = 3
-script = ExtResource("1_xbunr")
+offset_bottom = 877.0
 
-[node name="RunControl1" type="Container" parent="Controls"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsTitle"]
+custom_minimum_size = Vector2(540, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Controls[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_top = 202.0
+offset_right = 540.0
+offset_bottom = 742.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s8ndh")
+
+[node name="Controls" type="GridContainer" parent="Panel"]
+layout_mode = 2
+columns = 5
+
+[node name="RunControl1" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/RunControl1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/RunControl1"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_3nu8n")
 frame = 8
 
-[node name="RunControl2" type="Container" parent="Controls"]
+[node name="Slash" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash"]
+custom_minimum_size = Vector2(80, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]or[center]"
+fit_content = true
+scroll_active = false
+
+[node name="RunControl2" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/RunControl2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/RunControl2"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_kljr0")
 
-[node name="RunAnimation" type="Container" parent="Controls"]
+[node name="Arrow" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow"]
+custom_minimum_size = Vector2(50, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]⮕[center]"
+fit_content = true
+scroll_active = false
+
+[node name="RunAnimation" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/RunAnimation"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/RunAnimation"]
 rotation = 5.7554
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("1_p8i6v")
 animation = &"running"
 flip_h = true
 
-[node name="JumpControl1" type="Container" parent="Controls"]
+[node name="JumpControl1" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/JumpControl1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/JumpControl1"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_m0umk")
 
-[node name="JumpControl2" type="Container" parent="Controls"]
+[node name="Slash2" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash2"]
+custom_minimum_size = Vector2(80, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]or[center]"
+fit_content = true
+scroll_active = false
+
+[node name="JumpControl2" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/JumpControl2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/JumpControl2"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_71h8n")
 
-[node name="JumpAnimation" type="Container" parent="Controls"]
+[node name="Arrow2" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow2"]
+custom_minimum_size = Vector2(50, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]⮕[center]"
+fit_content = true
+scroll_active = false
+
+[node name="JumpAnimation" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/JumpAnimation"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/JumpAnimation"]
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("12_upxir")
 animation = &"falling"
 flip_h = true
 
-[node name="FastfallControl1" type="Container" parent="Controls"]
+[node name="FastfallControl1" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/FastfallControl1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/FastfallControl1"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_u0vq4")
 
-[node name="FastfallControl2" type="Container" parent="Controls"]
+[node name="Slash3" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash3"]
+custom_minimum_size = Vector2(80, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]or[center]"
+fit_content = true
+scroll_active = false
+
+[node name="FastfallControl2" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/FastfallControl2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/FastfallControl2"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_ei0yb")
 
-[node name="FastfallAnimation" type="Container" parent="Controls"]
+[node name="Arrow3" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow3"]
+custom_minimum_size = Vector2(50, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]⮕[center]"
+fit_content = true
+scroll_active = false
+
+[node name="FastfallAnimation" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Controls/FastfallAnimation"]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Panel/Controls/FastfallAnimation"]
 position = Vector2(-2, -4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("17_pw3dp")
 flip_h = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/FastfallAnimation"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/FastfallAnimation"]
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("18_ajrve")
 animation = &"fastfalling"
 flip_h = true
 
-[node name="UseControl1" type="Container" parent="Controls"]
+[node name="UseControl1" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/UseControl1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/UseControl1"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_0y01h")
 
-[node name="UseControl2" type="Container" parent="Controls"]
+[node name="Slash4" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash4"]
+custom_minimum_size = Vector2(80, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]or[center]"
+fit_content = true
+scroll_active = false
+
+[node name="UseControl2" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/UseControl2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/UseControl2"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_6n0of")
 
-[node name="UseAnimation" type="Container" parent="Controls"]
+[node name="Arrow4" type="CenterContainer" parent="Panel/Controls"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow4"]
+custom_minimum_size = Vector2(50, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]⮕[center]"
+fit_content = true
+scroll_active = false
+
+[node name="UseAnimation" type="Container" parent="Panel/Controls"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Controls/UseAnimation"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/UseAnimation"]
 material = SubResource("ShaderMaterial_rreuv")
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("23_io15b")
 flip_h = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Controls/UseAnimation"]
+[node name="Sprite2D" type="Sprite2D" parent="Panel/Controls/UseAnimation"]
 modulate = Color(0.988235, 0.964706, 0.635294, 1)
 position = Vector2(45, 2.08165e-12)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("25_stkxg")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Controls"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Controls"]
 libraries = {
 "": SubResource("AnimationLibrary_ifcmt")
 }
 
-[node name="Container" type="VBoxContainer" parent="."]
+[node name="HowToPlayTitle" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_left = 641.0
-offset_top = 270.0
+offset_left = 540.0
+offset_top = 202.0
 offset_right = 1080.0
-offset_bottom = 810.0
+offset_bottom = 337.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Container"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlayTitle"]
+custom_minimum_size = Vector2(540, 2.08165e-12)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 24
-text = "
-
-Collect            to win"
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]How to Play[/center]"
+fit_content = true
 scroll_active = false
 
-[node name="Orb" type="Sprite2D" parent="Container/RichTextLabel"]
-position = Vector2(151, 97)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("34_bxugn")
-region_enabled = true
-region_rect = Rect2(897, 49, 733, 733)
+[node name="Panel2" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 540.0
+offset_top = 337.0
+offset_right = 1080.0
+offset_bottom = 877.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k705f")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Container"]
+[node name="HowToPlay" type="VBoxContainer" parent="Panel2"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CenterContainer2" type="CenterContainer" parent="Panel2/HowToPlay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Collect" type="RichTextLabel" parent="Panel2/HowToPlay/CenterContainer2"]
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
 theme_override_font_sizes/normal_font_size = 24
 text = "
+Collect            to win"
+fit_content = true
+scroll_active = false
 
-Dying loses"
-
-[node name="Orb" type="Sprite2D" parent="Container/RichTextLabel2"]
-position = Vector2(207, 96)
+[node name="Orb" type="Sprite2D" parent="Panel2/HowToPlay/CenterContainer2/Collect"]
+position = Vector2(151, 57.3252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("34_bxugn")
 region_enabled = true
 region_rect = Rect2(897, 49, 733, 733)
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Container"]
+[node name="CenterContainer" type="CenterContainer" parent="Panel2/HowToPlay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Dying" type="RichTextLabel" parent="Panel2/HowToPlay/CenterContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 24
+text = "
+Dying loses"
+fit_content = true
+scroll_active = false
+
+[node name="Orb" type="Sprite2D" parent="Panel2/HowToPlay/CenterContainer/Dying"]
+position = Vector2(207, 58.3252)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("34_bxugn")
+region_enabled = true
+region_rect = Rect2(897, 49, 733, 733)
+
+[node name="CenterContainer3" type="CenterContainer" parent="Panel2/HowToPlay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Kill" type="RichTextLabel" parent="Panel2/HowToPlay/CenterContainer3"]
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
 theme_override_font_sizes/normal_font_size = 24
 text = "
+Kill              to get         +          / 2"
+fit_content = true
+scroll_active = false
 
-Kill            to get"
-
-[node name="Orb" type="Sprite2D" parent="Container/RichTextLabel3"]
-position = Vector2(244, 95)
+[node name="Orb" type="Sprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+position = Vector2(247, 57)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("35_cio6b")
 region_enabled = true
 region_rect = Rect2(897, 49, 733, 733)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Container/RichTextLabel3"]
-position = Vector2(72, 92)
+[node name="Player" type="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+position = Vector2(80.7598, 53.9004)
 scale = Vector2(0.04, 0.04)
 sprite_frames = ExtResource("1_p8i6v")
 
+[node name="Orbs" type="Node2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(80.7605, 54.576)
+script = ExtResource("35_u3pv3")
+
+[node name="Orb" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
+[node name="Orb2" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb2" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
+[node name="Orb3" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb3" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
+[node name="Orb4" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb4" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
+[node name="Orbs2" type="Node2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(319, 57)
+script = ExtResource("35_u3pv3")
+
+[node name="Orb" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
+[node name="Orb2" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb2" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
+[node name="Orb3" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb3" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
+[node name="Orb4" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+
+[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb4" index="0"]
+material = SubResource("ShaderMaterial_hqsr2")
+sprite_frames = ExtResource("38_iotmw")
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="Controls" method="_on_timer_timeout"]
+[node name="StartPrompt" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(350, 100)
+offset_left = 365.0
+offset_top = 928.0
+offset_right = 715.0
+offset_bottom = 1028.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vch60")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartPrompt"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 32.2
+offset_right = 379.0
+offset_bottom = 102.2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Press        to play[/center]"
+
+[node name="Sprite2D" type="Sprite2D" parent="StartPrompt"]
+position = Vector2(166, 46.2002)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("35_xcj3v")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb"]
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb2"]
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb3"]
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb4"]
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb"]
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb2"]
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb3"]
+[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb4"]

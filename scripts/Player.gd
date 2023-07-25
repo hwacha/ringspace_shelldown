@@ -587,6 +587,7 @@ func die():
 	$HurtBox.set_deferred("monitorable", false)
 	if $FastFall.playing:
 		$FastFall.stop()
+	$FastfallAnimation.visible = false
 	# death animation
 	$DeathParticles.show()
 	$DeathParticles.emitting = true
