@@ -901,6 +901,7 @@ autostart = true
 [node name="StartPrompt" type="Panel" parent="."]
 visible = false
 custom_minimum_size = Vector2(350, 100)
+layout_mode = 0
 offset_left = 365.0
 offset_top = 928.0
 offset_right = 715.0

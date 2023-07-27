@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=8 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
@@ -17,6 +17,24 @@ cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/36/0 = Vector2(0, 0)
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/36/0 = Vector2(0, 0)
+cache/0/36/0/ascent = 0.0
+cache/0/36/0/descent = 0.0
+cache/0/36/0/underline_position = 0.0
+cache/0/36/0/underline_thickness = 0.0
+cache/0/36/0/scale = 1.0
+cache/0/36/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/36/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/36/0/kerning_overrides/36/0 = Vector2(0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r44yr"]
 bg_color = Color(0, 0, 0, 0)
@@ -25,17 +43,10 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmrnq"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [node name="OpeningScreen" type="Control"]
 layout_mode = 3
@@ -72,179 +83,166 @@ anchor_top = 0.02
 anchor_right = 0.95
 anchor_bottom = 0.2
 
-[node name="PlayerRegister" type="GridContainer" parent="."]
+[node name="PlayerRegister" type="HBoxContainer" parent="."]
 layout_mode = 2
 offset_top = 750.0
 offset_right = 1080.0
 offset_bottom = 1080.0
-columns = 3
 
-[node name="P1" type="CenterContainer" parent="PlayerRegister"]
+[node name="Left" type="VBoxContainer" parent="PlayerRegister"]
+layout_mode = 2
+
+[node name="P1" type="CenterContainer" parent="PlayerRegister/Left"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P1"]
-custom_minimum_size = Vector2(150, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Press to Join[/center]"
-scroll_active = false
-
-[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P1"]
-visible = false
-modulate = Color(0.84, 0.24, 0.24, 1)
-custom_minimum_size = Vector2(150, 20)
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Left/P1"]
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
-bbcode_enabled = true
-text = "[center]Red Joined[/center]"
-scroll_active = false
-
-[node name="TopCenter" type="CenterContainer" parent="PlayerRegister"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="StartPrompt" type="Panel" parent="PlayerRegister/TopCenter"]
-visible = false
-custom_minimum_size = Vector2(350, 100)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_r44yr")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayerRegister/TopCenter/StartPrompt"]
-layout_mode = 0
-offset_left = -21.0
-offset_top = 32.2
-offset_right = 379.0
-offset_bottom = 102.2
-theme_override_fonts/normal_font = ExtResource("3")
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center]Press        to play[/center]"
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/TopCenter/StartPrompt"]
-position = Vector2(166, 46.2002)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("5_c5ba6")
-
-[node name="P4" type="CenterContainer" parent="PlayerRegister"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P4"]
-custom_minimum_size = Vector2(150, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "[center]Press to Join[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P4"]
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/Left/P1"]
 visible = false
-modulate = Color(1.01, 0.98, 0.47, 1)
-custom_minimum_size = Vector2(150, 20)
+modulate = Color(0.84, 0.24, 0.24, 1)
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Yellow Joined[/center]"
+text = "[center]Red Joined[/center]"
+fit_content = true
 scroll_active = false
 
-[node name="P2" type="CenterContainer" parent="PlayerRegister"]
+[node name="P2" type="CenterContainer" parent="PlayerRegister/Left"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P2"]
-custom_minimum_size = Vector2(150, 20)
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Left/P2"]
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "[center]Press to Join[/center]"
+fit_content = true
 scroll_active = false
 
-[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P2"]
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/Left/P2"]
 visible = false
 modulate = Color(0.2, 0.466667, 0.870588, 1)
-custom_minimum_size = Vector2(150, 20)
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "[center]Blue Joined[/center]"
+fit_content = true
 scroll_active = false
 
-[node name="BottomCenter" type="CenterContainer" parent="PlayerRegister"]
+[node name="Center" type="CenterContainer" parent="PlayerRegister"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HowToPrompt" type="Panel" parent="PlayerRegister/BottomCenter"]
-visible = false
-custom_minimum_size = Vector2(200, 60)
+[node name="StartPrompt" type="Panel" parent="PlayerRegister/Center"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r44yr")
 
-[node name="ProgressBar" type="ProgressBar" parent="PlayerRegister/BottomCenter/HowToPrompt"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerRegister/Center/StartPrompt"]
 layout_mode = 0
-offset_right = 200.0
-offset_bottom = 60.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_kmrnq")
-show_percentage = false
-
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayerRegister/BottomCenter/HowToPrompt"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 21.0
-offset_right = 175.0
-offset_bottom = 41.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 197.0
+offset_bottom = 199.0
 theme_override_fonts/normal_font = ExtResource("3")
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "[center]Hold        for how-to[/center]"
-scroll_active = false
-visible_characters_behavior = 4
+text = "[center]
+Press
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/BottomCenter/HowToPrompt"]
-position = Vector2(75, 28)
-scale = Vector2(0.04, 0.04)
+to play[/center]"
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Center/StartPrompt"]
+position = Vector2(99, 100)
+scale = Vector2(0.12, 0.12)
 texture = ExtResource("5_c5ba6")
 
-[node name="P3" type="CenterContainer" parent="PlayerRegister"]
+[node name="Right" type="VBoxContainer" parent="PlayerRegister"]
+layout_mode = 2
+
+[node name="P4" type="CenterContainer" parent="PlayerRegister/Right"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/P3"]
-custom_minimum_size = Vector2(150, 20)
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Right/P4"]
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "[center]Press to Join[/center]"
+fit_content = true
 scroll_active = false
 
-[node name="Registered" type="RichTextLabel" parent="PlayerRegister/P3"]
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/Right/P4"]
 visible = false
-modulate = Color(0.35, 0.76, 0.31, 1)
-custom_minimum_size = Vector2(150, 20)
+modulate = Color(1.01, 0.98, 0.47, 1)
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]Yellow Joined[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="P3" type="CenterContainer" parent="PlayerRegister/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Right/P3"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]Press to Join[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Registered" type="RichTextLabel" parent="PlayerRegister/Right/P3"]
+visible = false
+modulate = Color(0.35, 0.76, 0.31, 1)
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("2")
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "[center]Green Joined[/center]"
+fit_content = true
 scroll_active = false
