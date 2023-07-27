@@ -45,7 +45,7 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("1_p8mi1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(3, 3, 3, 0)
+modulate = Color(4, 4, 4, 0)
 scale = Vector2(0.1, 0.1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

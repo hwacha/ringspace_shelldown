@@ -42,6 +42,7 @@ func on_crust_ready():
 
 func _on_round_begin():
 	Players.lock_action = false
+	$HotjoinText.visible = true
 #	$CrustDecay.start()
 	$MatchTimer.start()
 	$TimeLeftLabel.visible = true

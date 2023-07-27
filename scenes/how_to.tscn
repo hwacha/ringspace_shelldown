@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bcqi1dwvih6h5"]
+[gd_scene load_steps=47 format=3 uid="uid://bcqi1dwvih6h5"]
 
 [ext_resource type="Script" path="res://scripts/how_to.gd" id="1_7ft2m"]
 [ext_resource type="SpriteFrames" uid="uid://civqu1ibw4bfh" path="res://animations/SpriteFrames_P1.tres" id="1_p8i6v"]
@@ -11,16 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://iohege1ksan6" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Down Right.png" id="6_2l618"]
 [ext_resource type="Texture2D" uid="uid://c67vl3hhgy1lk" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Down.png" id="7_ss8bl"]
 [ext_resource type="Texture2D" uid="uid://ubnkauypgh2u" path="res://assets/PS4 BUTTONS - Premium Assets/Analogue L Inputs/Button - PS Analogue L Down Left.png" id="8_nx802"]
-[ext_resource type="Texture2D" uid="uid://dy6yfkpf5ss50" path="res://assets/PS4 BUTTONS - Premium Assets/Directional Arrows/Button - PS Directional Arrows Left 2.png" id="10_ew320"]
-[ext_resource type="Texture2D" uid="uid://cilquho0txofn" path="res://assets/PS4 BUTTONS - Premium Assets/Directional Arrows/Button - PS Directional Arrows Right 2.png" id="11_ko1uh"]
 [ext_resource type="Texture2D" uid="uid://cy4ylaa1c3grm" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Cross 1.png" id="12_i024o"]
 [ext_resource type="SpriteFrames" uid="uid://bcnvggjm2vmxk" path="res://animations/SpriteFrames_P2.tres" id="12_upxir"]
 [ext_resource type="Texture2D" uid="uid://cvdvctld6f78v" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Cross 2.png" id="13_ameg7"]
-[ext_resource type="Texture2D" uid="uid://5s6aavdmgyt1" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Circle 1.png" id="14_eg3yu"]
-[ext_resource type="Texture2D" uid="uid://s8wwxw4yd7tu" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Circle 2.png" id="15_uvkj0"]
 [ext_resource type="SpriteFrames" uid="uid://cfmjxgo5aubws" path="res://animations/SpriteFrames_Fastfall.tres" id="17_pw3dp"]
-[ext_resource type="Texture2D" uid="uid://cvyek5n4toufx" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS L2 – 2.png" id="17_uokaf"]
-[ext_resource type="Texture2D" uid="uid://ci4rs1v7ryn0q" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS L2.png" id="18_42xvc"]
 [ext_resource type="SpriteFrames" uid="uid://k1ump0j1pjx3" path="res://animations/SpriteFrames_P3.tres" id="18_ajrve"]
 [ext_resource type="Texture2D" uid="uid://1c0terdhjq2s" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS R2 – 2.png" id="19_nkhgk"]
 [ext_resource type="Texture2D" uid="uid://1kb7mafq3d5a" path="res://assets/PS4 BUTTONS - Premium Assets/R and L Inputs/Button - PS R2.png" id="20_85ub7"]
@@ -28,9 +22,10 @@
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="23_86abl"]
 [ext_resource type="SpriteFrames" uid="uid://cd0y1l6t3vi0v" path="res://animations/SpriteFrames_P4.tres" id="23_io15b"]
 [ext_resource type="Texture2D" uid="uid://dg6mapy85psyq" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Square 2.png" id="24_1kivn"]
-[ext_resource type="Texture2D" uid="uid://dww070nlibqdr" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Triangle 1.png" id="25_4wqwj"]
 [ext_resource type="Texture2D" uid="uid://drgarrrgy84r6" path="res://assets/shield.png" id="25_stkxg"]
-[ext_resource type="Texture2D" uid="uid://ck7d5rj7vwucs" path="res://assets/PS4 BUTTONS - Premium Assets/Main Buttons/Button - PS Triangle 2.png" id="26_nvg3h"]
+[ext_resource type="Texture2D" uid="uid://bqh6qd8d4g8so" path="res://assets/BlueOrb_Halo.png" id="26_fcfms"]
+[ext_resource type="Texture2D" uid="uid://f15nqclgc2ow" path="res://assets/GreenOrb_Halo.png" id="27_2x78x"]
+[ext_resource type="Texture2D" uid="uid://cw3ug7s7kiblt" path="res://assets/YellowOrb_Halo.png" id="28_5b8s3"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="33_wkclh"]
 [ext_resource type="Texture2D" uid="uid://bpmar6l4jk3xg" path="res://assets/WhiteOrb_Halo.png" id="34_bxugn"]
 [ext_resource type="Texture2D" uid="uid://nu8e2crp7leb" path="res://assets/RedOrb_Halo.png" id="35_cio6b"]
@@ -87,26 +82,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s4fu2"]
-load_path = "res://.godot/imported/Button - PS Directional Arrows 2.png-cfdd2640d4f9c95440537a9e6445a421.ctex"
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kljr0"]
-animations = [{
-"frames": [{
-"duration": 48.0,
-"texture": ExtResource("10_ew320")
-}, {
-"duration": 48.0,
-"texture": ExtResource("11_ko1uh")
-}, {
-"duration": 1.0,
-"texture": SubResource("CompressedTexture2D_s4fu2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 12.0
-}]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_m0umk"]
 animations = [{
 "frames": [{
@@ -121,35 +96,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_71h8n"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("14_eg3yu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_uvkj0")
-}],
-"loop": true,
-"name": &"default",
-"speed": 12.0
-}]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_u0vq4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("17_uokaf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_42xvc")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ei0yb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -177,23 +124,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6n0of"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("25_4wqwj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_nvg3h")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rreuv"]
+resource_local_to_scene = true
 shader = ExtResource("23_86abl")
-shader_parameter/primary_color = Color(0.921569, 0.878431, 0.313726, 1)
+shader_parameter/primary_color = Color(0.807843, 0.776471, 0.270588, 1)
 shader_parameter/is_invulnerable = false
 shader_parameter/num_shields = 0
 
@@ -202,7 +136,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UseAnimation/AnimatedSprite2D:material:shader_parameter/num_shields")
+tracks/0/path = NodePath("Use/UseAnimation/UseAnimation:material:shader_parameter/num_shields")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -211,31 +145,44 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Run/RunAnimation/RunAnimation:sprite_frames")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_p8i6v")]
+}
 
 [sub_resource type="Animation" id="Animation_cn8ba"]
 resource_name = "controls"
-length = 10.0
+length = 8.0
 loop_mode = 1
+step = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RunAnimation/AnimatedSprite2D:rotation")
+tracks/0/path = NodePath("Run/RunAnimation/RunAnimation:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 4, 5, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 6.28319, 6.28319, 3.48787e-16]
+"values": [0.0, 6.28319]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RunAnimation/AnimatedSprite2D:flip_h")
+tracks/1/path = NodePath("Run/RunAnimation/RunAnimation:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -243,182 +190,229 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("RunControl1/AnimatedSprite2D:frame")
+tracks/2/path = NodePath("Run/RunControl1/AnimatedSprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.5001, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.5001, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 1, 2, 3, 4, 5, 6, 7, 8, 0, 5, 4, 3, 2, 1, 8, 7, 6, 0]
+"values": [1, 1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 3, 2, 1, 8, 7, 6]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RunControl2/AnimatedSprite2D:frame")
+tracks/3/path = NodePath("Jump/JumpControl1/AnimatedSprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 4, 5, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 2, 1, 2]
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RunAnimation/AnimatedSprite2D:animation")
+tracks/4/path = NodePath("Jump/JumpAnimation/JumpAnimation:animation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 4, 5, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 1.2, 2, 3, 3.2, 4, 5, 5.2, 6, 7, 7.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [&"running", &"default", &"running", &"default"]
+"values": [&"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling"]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("JumpControl1/AnimatedSprite2D:frame")
+tracks/5/path = NodePath("Fastfall/FastfallAnimation/FastfallAnimation:animation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+"values": [&"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling"]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("JumpAnimation/AnimatedSprite2D:animation")
+tracks/6/path = NodePath("Use/UseControl1/AnimatedSprite2D:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 2, 3, 3.2, 4, 5, 5.2, 6, 7, 7.2, 8, 9, 9.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [&"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling", &"default", &"jumping", &"falling"]
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("JumpControl2/AnimatedSprite2D:frame")
+tracks/7/path = NodePath("Use/UseAnimation/UseAnimation:material:shader_parameter/num_shields")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+"values": [0, 1, 0, 1, 0, 1, 0, 1]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("FastfallControl1/AnimatedSprite2D:frame")
+tracks/8/path = NodePath("Use/UseAnimation/Powerup:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+"times": PackedFloat32Array(0, 1, 1.2, 1.984, 2, 2.0001, 3, 3.2, 3.983, 3.9983, 4, 5, 5.2, 5.9801, 6, 7, 7.2, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("FastfallControl2/AnimatedSprite2D:frame")
+tracks/9/path = NodePath("Fastfall/FastfallAnimation/Lines:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+"values": [false, true, false, true, false, true, false, true]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("FastfallAnimation/AnimatedSprite2D:animation")
+tracks/10/path = NodePath("Jump/JumpAnimation/JumpAnimation:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [&"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling", &"falling", &"fastfalling"]
+"times": PackedFloat32Array(0, 1, 1.3, 2, 3, 3.4, 4, 5, 5.3, 6, 7, 7.3),
+"transitions": PackedFloat32Array(1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -30), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -30), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -30), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -30)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("FastfallAnimation/AnimatedSprite2D2:visible")
+tracks/11/path = NodePath("Fastfall/FastfallControl1/AnimatedSprite2D:frame")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 1.2, 3, 3.2, 5, 5.2, 7, 7.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true]
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("UseControl1/AnimatedSprite2D:frame")
+tracks/12/path = NodePath("Run/RunAnimation/RunAnimation:sprite_frames")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+"values": [ExtResource("1_p8i6v"), ExtResource("12_upxir"), ExtResource("18_ajrve"), ExtResource("23_io15b")]
 }
-tracks/13/type = "value"
+tracks/13/type = "method"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("UseControl2/AnimatedSprite2D:frame")
+tracks/13/path = NodePath("../../..")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 2, 3, 3.2, 5, 5.2, 7, 7.2, 9, 9.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"start_animations_and_set_shield_color"
+}, {
+"args": [1],
+"method": &"start_animations_and_set_shield_color"
+}, {
+"args": [2],
+"method": &"start_animations_and_set_shield_color"
+}, {
+"args": [3],
+"method": &"start_animations_and_set_shield_color"
+}]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("UseAnimation/AnimatedSprite2D:material:shader_parameter/num_shields")
+tracks/14/path = NodePath("Jump/JumpAnimation/JumpAnimation:sprite_frames")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+"values": [ExtResource("1_p8i6v"), ExtResource("12_upxir"), ExtResource("18_ajrve"), ExtResource("23_io15b")]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("UseAnimation/Sprite2D:self_modulate")
+tracks/15/path = NodePath("Fastfall/FastfallAnimation/FastfallAnimation:sprite_frames")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 1.984, 2, 2.0001, 3, 3.2, 3.983, 3.9983, 4, 5, 5.2, 5.9801, 6, 7, 7.2, 7.9847, 8, 9, 9.2, 9.9697),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(6, 6, 6, 0), Color(0, 0, 0, 0)]
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_p8i6v"), ExtResource("12_upxir"), ExtResource("18_ajrve"), ExtResource("23_io15b")]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("JumpAnimation/AnimatedSprite2D:position")
+tracks/16/path = NodePath("Use/UseAnimation/UseAnimation:sprite_frames")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(1, 1.4, 1.6, 2, 3, 3.4, 3.6, 4, 5, 5.4, 5.6, 6, 7, 7.4, 7.6, 8, 9, 9.4, 9.6, 10),
-"transitions": PackedFloat32Array(2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1, 2.63902, 2.63902, 2.63902, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0), Vector2(0, 0), Vector2(2.08165e-12, -20), Vector2(2.08165e-12, -20), Vector2(0, 0)]
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_p8i6v"), ExtResource("12_upxir"), ExtResource("18_ajrve"), ExtResource("23_io15b")]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Use/UseAnimation/Powerup:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.92, 0.62, 0.62, 1), Color(0.619608, 0.658824, 0.921569, 1), Color(0.67, 0.88, 0.66, 1), Color(0.988235, 0.964706, 0.635294, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../../../HowToPanel/HowToPlay/CenterContainer3/Kill/Player:sprite_frames")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_p8i6v"), ExtResource("12_upxir"), ExtResource("18_ajrve"), ExtResource("23_io15b")]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("../../../HowToPanel/HowToPlay/CenterContainer3/Kill/Orb:texture")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("35_cio6b"), ExtResource("26_fcfms"), ExtResource("27_2x78x"), ExtResource("28_5b8s3")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ifcmt"]
@@ -481,53 +475,51 @@ text = "[center]Controls[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="ControlsPanel" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_top = 202.0
 offset_right = 540.0
 offset_bottom = 742.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s8ndh")
 
-[node name="Controls" type="GridContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="ControlsPanel"]
 layout_mode = 2
-columns = 5
+theme_override_constants/margin_bottom = 30
 
-[node name="RunControl1" type="Container" parent="Panel/Controls"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/RunControl1"]
-scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_3nu8n")
-frame = 8
-
-[node name="Slash" type="CenterContainer" parent="Panel/Controls"]
+[node name="Controls" type="VBoxContainer" parent="ControlsPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash"]
-custom_minimum_size = Vector2(80, 2.08165e-12)
+[node name="MarginContainer" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 23
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]or[center]"
+theme_override_font_sizes/normal_font_size = 20
+text = "Run"
 fit_content = true
-scroll_active = false
 
-[node name="RunControl2" type="Container" parent="Panel/Controls"]
+[node name="Run" type="HBoxContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RunControl1" type="Container" parent="ControlsPanel/MarginContainer/Controls/Run"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/RunControl2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Run/RunControl1"]
 scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_kljr0")
+sprite_frames = SubResource("SpriteFrames_3nu8n")
+frame = 1
 
-[node name="Arrow" type="CenterContainer" parent="Panel/Controls"]
+[node name="Arrow" type="CenterContainer" parent="ControlsPanel/MarginContainer/Controls/Run"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/Run/Arrow"]
 custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
@@ -537,53 +529,47 @@ text = "[center]⮕[center]"
 fit_content = true
 scroll_active = false
 
-[node name="RunAnimation" type="Container" parent="Panel/Controls"]
+[node name="RunAnimation" type="Container" parent="ControlsPanel/MarginContainer/Controls/Run"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/RunAnimation"]
-rotation = 5.7554
+[node name="RunAnimation" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Run/RunAnimation"]
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("1_p8i6v")
 animation = &"running"
 flip_h = true
 
-[node name="JumpControl1" type="Container" parent="Panel/Controls"]
+[node name="MarginContainer2" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 23
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer2"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 20
+text = "Jump"
+fit_content = true
+
+[node name="Jump" type="HBoxContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JumpControl1" type="Container" parent="ControlsPanel/MarginContainer/Controls/Jump"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/JumpControl1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Jump/JumpControl1"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_m0umk")
 
-[node name="Slash2" type="CenterContainer" parent="Panel/Controls"]
+[node name="Arrow2" type="CenterContainer" parent="ControlsPanel/MarginContainer/Controls/Jump"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash2"]
-custom_minimum_size = Vector2(80, 2.08165e-12)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]or[center]"
-fit_content = true
-scroll_active = false
-
-[node name="JumpControl2" type="Container" parent="Panel/Controls"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/JumpControl2"]
-scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_71h8n")
-
-[node name="Arrow2" type="CenterContainer" parent="Panel/Controls"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/Jump/Arrow2"]
 custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
@@ -593,52 +579,46 @@ text = "[center]⮕[center]"
 fit_content = true
 scroll_active = false
 
-[node name="JumpAnimation" type="Container" parent="Panel/Controls"]
+[node name="JumpAnimation" type="Container" parent="ControlsPanel/MarginContainer/Controls/Jump"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/JumpAnimation"]
+[node name="JumpAnimation" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Jump/JumpAnimation"]
 scale = Vector2(0.05, 0.05)
-sprite_frames = ExtResource("12_upxir")
-animation = &"falling"
+sprite_frames = ExtResource("1_p8i6v")
 flip_h = true
 
-[node name="FastfallControl1" type="Container" parent="Panel/Controls"]
+[node name="MarginContainer3" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 23
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer3"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 20
+text = "Fastfall"
+fit_content = true
+
+[node name="Fastfall" type="HBoxContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FastfallControl1" type="Container" parent="ControlsPanel/MarginContainer/Controls/Fastfall"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/FastfallControl1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Fastfall/FastfallControl1"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_u0vq4")
 
-[node name="Slash3" type="CenterContainer" parent="Panel/Controls"]
+[node name="Arrow3" type="CenterContainer" parent="ControlsPanel/MarginContainer/Controls/Fastfall"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash3"]
-custom_minimum_size = Vector2(80, 2.08165e-12)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]or[center]"
-fit_content = true
-scroll_active = false
-
-[node name="FastfallControl2" type="Container" parent="Panel/Controls"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/FastfallControl2"]
-scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_ei0yb")
-
-[node name="Arrow3" type="CenterContainer" parent="Panel/Controls"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/Fastfall/Arrow3"]
 custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
@@ -648,58 +628,54 @@ text = "[center]⮕[center]"
 fit_content = true
 scroll_active = false
 
-[node name="FastfallAnimation" type="Container" parent="Panel/Controls"]
+[node name="FastfallAnimation" type="Container" parent="ControlsPanel/MarginContainer/Controls/Fastfall"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Panel/Controls/FastfallAnimation"]
+[node name="Lines" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Fastfall/FastfallAnimation"]
+visible = false
 position = Vector2(-2, -4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("17_pw3dp")
 flip_h = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/FastfallAnimation"]
+[node name="FastfallAnimation" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Fastfall/FastfallAnimation"]
 scale = Vector2(0.05, 0.05)
-sprite_frames = ExtResource("18_ajrve")
-animation = &"fastfalling"
+sprite_frames = ExtResource("1_p8i6v")
+animation = &"falling"
 flip_h = true
 
-[node name="UseControl1" type="Container" parent="Panel/Controls"]
+[node name="MarginContainer4" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 23
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer4"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 20
+text = "Powerup"
+fit_content = true
+
+[node name="Use" type="HBoxContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UseControl1" type="Container" parent="ControlsPanel/MarginContainer/Controls/Use"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/UseControl1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Use/UseControl1"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_0y01h")
 
-[node name="Slash4" type="CenterContainer" parent="Panel/Controls"]
+[node name="Arrow4" type="CenterContainer" parent="ControlsPanel/MarginContainer/Controls/Use"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Slash4"]
-custom_minimum_size = Vector2(80, 2.08165e-12)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]or[center]"
-fit_content = true
-scroll_active = false
-
-[node name="UseControl2" type="Container" parent="Panel/Controls"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/UseControl2"]
-scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_6n0of")
-
-[node name="Arrow4" type="CenterContainer" parent="Panel/Controls"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Controls/Arrow4"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/Use/Arrow4"]
 custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
@@ -709,24 +685,24 @@ text = "[center]⮕[center]"
 fit_content = true
 scroll_active = false
 
-[node name="UseAnimation" type="Container" parent="Panel/Controls"]
+[node name="UseAnimation" type="Container" parent="ControlsPanel/MarginContainer/Controls/Use"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/Controls/UseAnimation"]
+[node name="UseAnimation" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Use/UseAnimation"]
 material = SubResource("ShaderMaterial_rreuv")
 scale = Vector2(0.05, 0.05)
-sprite_frames = ExtResource("23_io15b")
+sprite_frames = ExtResource("1_p8i6v")
 flip_h = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Panel/Controls/UseAnimation"]
+[node name="Powerup" type="Sprite2D" parent="ControlsPanel/MarginContainer/Controls/Use/UseAnimation"]
 modulate = Color(0.988235, 0.964706, 0.635294, 1)
 position = Vector2(45, 2.08165e-12)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("25_stkxg")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Controls"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlsPanel/MarginContainer/Controls"]
 libraries = {
 "": SubResource("AnimationLibrary_ifcmt")
 }
@@ -748,7 +724,7 @@ text = "[center]How to Play[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="Panel2" type="PanelContainer" parent="."]
+[node name="HowToPanel" type="PanelContainer" parent="."]
 layout_mode = 2
 offset_left = 540.0
 offset_top = 337.0
@@ -756,17 +732,17 @@ offset_right = 1080.0
 offset_bottom = 877.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k705f")
 
-[node name="HowToPlay" type="VBoxContainer" parent="Panel2"]
+[node name="HowToPlay" type="VBoxContainer" parent="HowToPanel"]
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="CenterContainer2" type="CenterContainer" parent="Panel2/HowToPlay"]
+[node name="CenterContainer2" type="CenterContainer" parent="HowToPanel/HowToPlay"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Collect" type="RichTextLabel" parent="Panel2/HowToPlay/CenterContainer2"]
+[node name="Collect" type="RichTextLabel" parent="HowToPanel/HowToPlay/CenterContainer2"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -778,18 +754,18 @@ Collect            to win"
 fit_content = true
 scroll_active = false
 
-[node name="Orb" type="Sprite2D" parent="Panel2/HowToPlay/CenterContainer2/Collect"]
+[node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer2/Collect"]
 position = Vector2(151, 57.3252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("34_bxugn")
 region_enabled = true
 region_rect = Rect2(897, 49, 733, 733)
 
-[node name="CenterContainer" type="CenterContainer" parent="Panel2/HowToPlay"]
+[node name="CenterContainer" type="CenterContainer" parent="HowToPanel/HowToPlay"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Dying" type="RichTextLabel" parent="Panel2/HowToPlay/CenterContainer"]
+[node name="Dying" type="RichTextLabel" parent="HowToPanel/HowToPlay/CenterContainer"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -801,18 +777,18 @@ Dying loses"
 fit_content = true
 scroll_active = false
 
-[node name="Orb" type="Sprite2D" parent="Panel2/HowToPlay/CenterContainer/Dying"]
+[node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer/Dying"]
 position = Vector2(207, 58.3252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("34_bxugn")
 region_enabled = true
 region_rect = Rect2(897, 49, 733, 733)
 
-[node name="CenterContainer3" type="CenterContainer" parent="Panel2/HowToPlay"]
+[node name="CenterContainer3" type="CenterContainer" parent="HowToPanel/HowToPlay"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Kill" type="RichTextLabel" parent="Panel2/HowToPlay/CenterContainer3"]
+[node name="Kill" type="RichTextLabel" parent="HowToPanel/HowToPlay/CenterContainer3"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_vertical = 3
@@ -823,73 +799,73 @@ Kill              to get         +          / 2"
 fit_content = true
 scroll_active = false
 
-[node name="Orb" type="Sprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+[node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 position = Vector2(247, 57)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("35_cio6b")
 region_enabled = true
 region_rect = Rect2(897, 49, 733, 733)
 
-[node name="Player" type="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+[node name="Player" type="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 position = Vector2(80.7598, 53.9004)
 scale = Vector2(0.04, 0.04)
 sprite_frames = ExtResource("1_p8i6v")
 
-[node name="Orbs" type="Node2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+[node name="Orbs" type="Node2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 modulate = Color(1, 1, 1, 0.5)
 position = Vector2(80.7605, 54.576)
 script = ExtResource("35_u3pv3")
 
-[node name="Orb" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+[node name="Orb" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Orb2" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+[node name="Orb2" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb2" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb2" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Orb3" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+[node name="Orb3" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb3" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb3" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Orb4" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
+[node name="Orb4" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb4" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb4" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Orbs2" type="Node2D" parent="Panel2/HowToPlay/CenterContainer3/Kill"]
+[node name="Orbs2" type="Node2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 modulate = Color(1, 1, 1, 0.5)
 position = Vector2(319, 57)
 script = ExtResource("35_u3pv3")
 
-[node name="Orb" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+[node name="Orb" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Orb2" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+[node name="Orb2" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb2" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb2" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Orb3" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+[node name="Orb3" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb3" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb3" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Orb4" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
+[node name="Orb4" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
 
-[node name="AnimatedSprite2D" parent="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb4" index="0"]
+[node name="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb4" index="0"]
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
@@ -926,11 +902,11 @@ texture = ExtResource("35_xcj3v")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb"]
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb2"]
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb3"]
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs/Orb4"]
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb"]
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb2"]
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb3"]
-[editable path="Panel2/HowToPlay/CenterContainer3/Kill/Orbs2/Orb4"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb2"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb3"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb4"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb2"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb3"]
+[editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2/Orb4"]
