@@ -1,5 +1,7 @@
 extends Path2D
 
+class_name BlackHoleExit
+
 var player
 
 var t = 0

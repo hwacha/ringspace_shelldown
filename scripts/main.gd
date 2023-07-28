@@ -54,6 +54,12 @@ func _on_match_timer_timeout():
 	Players.end_game(false)
 
 func on_postround_end():
+	var black_hole_exits = get_children().filter(func (node): return node is BlackHoleExit)
+	
+	for black_hole_exit in black_hole_exits:
+		if black_hole_exit.player != null:
+			black_hole_exit.player.position = black_hole_exit.position + black_hole_exit.get_node("PathFollow2D").position
+	
 	# make a podium
 	var podium = preload("res://scenes/Podium.tscn").instantiate()
 	podium.transform.origin = Vector2(540, -1080)
