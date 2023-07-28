@@ -43,10 +43,17 @@ func _on_singularity_area_entered(area):
 	var player = area.get_parent()
 	player.position = Vector2(-10000, -10000)
 	var black_hole_exit = preload("res://scenes/BlackHoleExit.tscn").instantiate()
+	black_hole_exit.name = "blackhole_exit_" + str(player.id)
 	black_hole_exit.get_node("PathFollow2D").modulate = player.color.lightened(0.2)
 	black_hole_exit.player = player
 	
 	var destination_segment = player.find_crust_segment_to_spawn()
+	black_hole_exit.destination_segment = destination_segment
+	black_hole_exit.player_id = player.id
+	
+	if not player.id in destination_segment.occupying_players:
+		destination_segment.occupying_players.push_back(player.id)
+		
 	var destination_position = Vector2(540, 540) + (1 - (48 / destination_segment.position.length())) * destination_segment.position
 	black_hole_exit.curve.set_point_position(0, self.position)
 	black_hole_exit.curve.set_point_position(1, destination_position)
@@ -55,9 +62,13 @@ func _on_singularity_area_entered(area):
 	var o = a if a.distance_to(Vector2(540, 540)) > b.distance_to(Vector2(540, 540)) else b
 	black_hole_exit.curve.set_point_out(0, o)
 	
-	get_parent().add_child(black_hole_exit)
 	player.is_in_event_horizon = false
 	player.segment_spawn_index = destination_segment.initial_segment_index
+	
+	player.expanded = false
+	
+	get_parent().add_child(black_hole_exit)
+	
 
 
 func _on_animation_player_animation_finished(anim_name):

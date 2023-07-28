@@ -49,8 +49,8 @@ func get_input():
 
 func _process(delta):
 	get_input()
-	for c in Input.get_connected_joypads():
-		print(Input.get_joy_name(c))
+#	for c in Input.get_connected_joypads():
+#		print(Input.get_joy_name(c))
 
 	$Title.rotate(-0.1 * delta)
 	

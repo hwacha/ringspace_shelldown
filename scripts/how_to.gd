@@ -5,7 +5,7 @@ var orb_scale
 var t = 0
 var t2 = 0
 
-var can_start = false : set = set_can_start
+var can_start = true : set = set_can_start
 
 var run_last_frame = 0
 

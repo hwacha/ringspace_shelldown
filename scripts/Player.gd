@@ -128,6 +128,8 @@ func _set_expansion(new_expanded: bool):
 		scale *= expansion_factor
 	elif expanded and not new_expanded:
 		scale /= expansion_factor
+		if not $ExpandTimer.is_stopped():
+			$ExpandTimer.stop()
 		
 	expanded = new_expanded
 
@@ -152,9 +154,8 @@ func spawn(is_teleport: bool):
 		(1 - (48 / destination_segment_position.length())) * destination_segment_position)
 	
 	# invulnerable
-	if segment_spawn_index == -1:
-		invulnerable = true
-		$TeleportInvulnerability.start()
+	invulnerable = true
+	$TeleportInvulnerability.start()
 	
 	# teleport
 	norm_velocity = Vector2(0, 0)
@@ -174,6 +175,7 @@ func spawn(is_teleport: bool):
 		transform.origin = destination_point
 	
 	stunned = false
+	segment_spawn_index = -1
 	
 	return true
 

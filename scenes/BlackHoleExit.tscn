@@ -5,12 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://bvn7mq8qml6ge" path="res://assets/white_lining.png" id="3_35163"]
 
 [sub_resource type="Curve2D" id="Curve2D_i8n25"]
+resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-538.125, -0.863079, 540, 2.08165e-12, 0, 0, 2.08165e-12, 2.08165e-12, 0, 0, 540, 540)
 }
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_ie68x"]
+resource_local_to_scene = true
 _data = [Vector2(0, 0.0500182), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
