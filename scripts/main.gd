@@ -125,7 +125,7 @@ func _on_obstacle_timeout():
 		return
 
 	var obstacles = [
-#		preload("res://scenes/Sun.tscn"),
+		preload("res://scenes/Sun.tscn"),
 		preload("res://scenes/BlackHole.tscn")
 	]
 	var rand = rng.randi_range(0, obstacles.size() - 1)

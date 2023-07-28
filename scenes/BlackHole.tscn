@@ -134,7 +134,7 @@ scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_6t7dj")
 
 [node name="Decay" type="Timer" parent="."]
-wait_time = 90.0
+wait_time = 15.0
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

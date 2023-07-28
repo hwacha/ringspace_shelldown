@@ -158,6 +158,7 @@ scale_curve = SubResource("CurveTexture_m2gdi")
 color_ramp = SubResource("GradientTexture1D_xe6no")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8hmqa"]
+resource_local_to_scene = true
 radius = 20.0
 
 [node name="Bomb" type="AnimatableBody2D"]

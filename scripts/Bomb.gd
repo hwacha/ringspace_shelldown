@@ -39,7 +39,6 @@ func _process(delta):
 		if status == BombStatus.BLASTING:
 			if not has_destroyed_one_crust_segment:
 				var blasted_crust = affected_bodies.filter(func (body): return body is CrustSegment)
-				
 				var closest_segment = null
 				var closest_distance = INF
 
