@@ -552,9 +552,6 @@ func _on_HurtBox_area_entered(hitbox):
 	
 	if hitter.norm_velocity.dot(hitbox_down) > 0 or \
 	norm_velocity.dot(hurtbox_down) < 0:
-		if shields.size() == 0 and try_auto_teleport():
-			return
-		
 		# bounce
 		hitter.norm_velocity = -hurtbox_down * jump_impulse
 		hitter.set_fast_falling(false)

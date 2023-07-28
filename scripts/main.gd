@@ -89,10 +89,10 @@ func _on_powerup_timer_timeout():
 							(orb_vac_max_probability / Players.play_to)
 	# normalize probability of teleport
 	# to number of decayed crust segments [0, 1/4]
-	var teleport_max_probability = 1.0 / 4.0
+	var teleport_max_probability = 2.0 / 5.0
 	var max_decayed_segments = 4
-	var cur_decayed_segments = $Crust.num_segments - $Crust.get_children().size()
-	var teleport_probability = teleport_max_probability * (float(cur_decayed_segments) / float(max_decayed_segments))
+	var cur_decayed_segments = $Crust.get_children().filter(func (segment): return not segment.intact).size()
+	var teleport_probability = teleport_max_probability * max(0, (float(cur_decayed_segments) / float(max_decayed_segments)))
 #	# probability of bomb is pmax(fast) - [pmax(bomb)/pmax(teleport)] * p(teleport)
 	var max_bomb_probability = 1.0 / 4.0
 	var bomb_probability = max_bomb_probability * (1.0 - (teleport_probability / teleport_max_probability))
