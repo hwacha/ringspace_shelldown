@@ -149,6 +149,8 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("exit_game"):
 		is_round_ongoing = false
+		$PostMatchTimer.stop()
+		Engine.set_time_scale(1)
 		get_tree().change_scene_to_file("res://scenes/opening_screen.tscn")
 		
 		var testing_stage = get_node_or_null("/root/TestingStage")
