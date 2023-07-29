@@ -186,6 +186,7 @@ top_level = true
 scale = Vector2(0.05, 0.05)
 
 [node name="PowerupWhiff" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.4)
 position = Vector2(-50, 0)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_aim78")

@@ -16,7 +16,6 @@
 [sub_resource type="Animation" id="Animation_dw41s"]
 resource_name = "zoom_out"
 length = 2.5
-step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,6 +102,54 @@ tracks/6/keys = {
 "method": &"_on_round_begin"
 }]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Camera2D/LeftPillarbox:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-480, -270), Vector2(-960, -540)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Camera2D/LeftPillarbox:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Camera2D/RightPillarbox:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(270, -270), Vector2(540, -540)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Camera2D/RightPillarbox:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kyhoo"]
 _data = {
@@ -135,6 +182,22 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_kyhoo")
 }
+
+[node name="LeftPillarbox" type="ColorRect" parent="Camera2D"]
+z_index = 50
+offset_left = -480.0
+offset_top = -270.0
+offset_right = -270.0
+offset_bottom = 270.0
+color = Color(0, 0, 0, 1)
+
+[node name="RightPillarbox" type="ColorRect" parent="Camera2D"]
+z_index = 50
+offset_left = 270.0
+offset_top = -270.0
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0, 0, 0, 1)
 
 [node name="Starfield" type="Sprite2D" parent="."]
 z_index = -2
@@ -335,14 +398,14 @@ script = ExtResource("10_wwi5m")
 
 [node name="RiseToPodium" type="AnimationPlayer" parent="."]
 
-[node name="LeftPostbox" type="ColorRect" parent="."]
+[node name="LeftPillarbox" type="ColorRect" parent="."]
 top_level = true
 offset_left = -420.0
 offset_top = -2160.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
-[node name="RightPostbox" type="ColorRect" parent="."]
+[node name="RightPillarbox" type="ColorRect" parent="."]
 top_level = true
 offset_left = 1080.0
 offset_top = -2160.0
