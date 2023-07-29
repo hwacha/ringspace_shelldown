@@ -6,9 +6,9 @@ var arc_radius : float = 540.0
 var accepting_input = false
 
 var colors_by_rank = {
-	'1': Color(0.83, 0.69, 0.22), # gold,
-	'2': Color(0.67, 0.66, 0.68), # silver,
-	'3': Color(0.60, 0.45, 0.29), # bronze,
+	'1': Color(0.83, 0.69, 0.22) * Color(2, 2, 2), # gold,
+	'2': Color(0.67, 0.66, 0.68) * Color(2, 2, 2), # silver,
+	'3': Color(0.60, 0.45, 0.29) * Color(2, 2, 2), # bronze,
 	'4': Color(0.86, 0.85, 0.81), # pewter,
 }
 

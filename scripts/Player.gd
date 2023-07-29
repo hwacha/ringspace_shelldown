@@ -370,6 +370,12 @@ func get_input(diff):
 			
 	if use:
 		emit_signal("used_powerup", self)
+		
+func whiff_powerup():
+	var src = $TrailRightDestination if $AnimatedSprite2D.flip_h else $TrailLeftDestination
+	$PowerupWhiff.position = src.position
+	$PowerupWhiff.restart()
+	$PowerupWhiff.emitting = true
 
 func _physics_process(delta):
 	if lock_physics:

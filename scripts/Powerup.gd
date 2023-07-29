@@ -41,6 +41,8 @@ func on_use_powerup(reference):
 	if powerup_used:
 		lock_use_powerup = true
 		$AnimationPlayer.play("deplete")
+	else:
+		reference.whiff_powerup()
 
 
 func _on_animation_player_animation_finished(anim_name):
