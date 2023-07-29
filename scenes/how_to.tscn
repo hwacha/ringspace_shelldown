@@ -477,8 +477,9 @@ scroll_active = false
 
 [node name="ControlsPanel" type="PanelContainer" parent="."]
 layout_mode = 0
+offset_left = 60.0
 offset_top = 270.0
-offset_right = 540.0
+offset_right = 480.0
 offset_bottom = 810.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s8ndh")
 
@@ -726,9 +727,9 @@ scroll_active = false
 
 [node name="HowToPanel" type="PanelContainer" parent="."]
 layout_mode = 2
-offset_left = 540.0
+offset_left = 600.0
 offset_top = 270.0
-offset_right = 1080.0
+offset_right = 1020.0
 offset_bottom = 810.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k705f")
 
@@ -743,19 +744,19 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Collect" type="RichTextLabel" parent="HowToPanel/HowToPlay/CenterContainer2"]
-custom_minimum_size = Vector2(400, 100)
+custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 22
 text = "
 Collect            to win"
 fit_content = true
 scroll_active = false
 
 [node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer2/Collect"]
-position = Vector2(151, 57.3252)
+position = Vector2(134, 57)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("34_bxugn")
 region_enabled = true
@@ -766,19 +767,19 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Dying" type="RichTextLabel" parent="HowToPanel/HowToPlay/CenterContainer"]
-custom_minimum_size = Vector2(400, 100)
+custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 22
 text = "
-Lose            when you de"
+Lose            when you die"
 fit_content = true
 scroll_active = false
 
 [node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer/Dying"]
-position = Vector2(109, 58.3252)
+position = Vector2(97, 58.3252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("34_bxugn")
 region_enabled = true
@@ -790,31 +791,31 @@ size_flags_vertical = 3
 
 [node name="Kill" type="RichTextLabel" parent="HowToPanel/HowToPlay/CenterContainer3"]
 clip_contents = false
-custom_minimum_size = Vector2(400, 100)
+custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 22
 text = "
 Kill              to get        + half"
 fit_content = true
 scroll_active = false
 
 [node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
-position = Vector2(247, 57)
+position = Vector2(215, 57)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("35_cio6b")
 region_enabled = true
 region_rect = Rect2(897, 49, 733, 733)
 
 [node name="Player" type="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
-position = Vector2(80.7598, 53.9004)
+position = Vector2(69.7598, 53.9004)
 scale = Vector2(0.04, 0.04)
 sprite_frames = ExtResource("1_p8i6v")
 
 [node name="Orbs" type="Node2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 modulate = Color(1, 1, 1, 0.5)
-position = Vector2(80.7605, 54.576)
+position = Vector2(69.7607, 54.576)
 script = ExtResource("35_u3pv3")
 
 [node name="Orb" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
@@ -843,7 +844,7 @@ sprite_frames = ExtResource("38_iotmw")
 
 [node name="Orbs2" type="Node2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 modulate = Color(1, 1, 1, 0.5)
-position = Vector2(375, 57)
+position = Vector2(332, 57)
 script = ExtResource("35_u3pv3")
 
 [node name="Orb" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
