@@ -15,8 +15,8 @@ var rng
 @onready var crust_decay = get_node_or_null("../CrustDecay")
 
 func _ready():
-	var screen_width = ProjectSettings.get_setting("display/window/size/viewport_width")
-	var screen_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+	var screen_width = 1080
+	var screen_height = 1080
 	screen_size = Vector2(screen_width, screen_height)
 	outer_radius = min(screen_size.x, screen_size.y) / 2
 	crust_size = outer_radius * crust_ratio

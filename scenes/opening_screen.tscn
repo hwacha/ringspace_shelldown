@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=9 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="3"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="3_rwijt"]
 [ext_resource type="Texture2D" uid="uid://b8q8ywxu7ysev" path="res://assets/PS4 BUTTONS - Premium Assets/Button - PS Options.png" id="5_c5ba6"]
+[ext_resource type="PackedScene" uid="uid://bcqi1dwvih6h5" path="res://scenes/how_to.tscn" id="6_emi4r"]
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -53,6 +54,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 420.0
+offset_right = -420.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
@@ -247,3 +250,8 @@ bbcode_enabled = true
 text = "[center]Player 3 Joined[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="how_to" parent="." instance=ExtResource("6_emi4r")]
+layout_mode = 1
+offset_left = -420.0
+dir = 1

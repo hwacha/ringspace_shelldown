@@ -335,6 +335,21 @@ script = ExtResource("10_wwi5m")
 
 [node name="RiseToPodium" type="AnimationPlayer" parent="."]
 
+[node name="LeftPostbox" type="ColorRect" parent="."]
+top_level = true
+offset_left = -420.0
+offset_top = -2160.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="RightPostbox" type="ColorRect" parent="."]
+top_level = true
+offset_left = 1080.0
+offset_top = -2160.0
+offset_right = 1500.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
 [connection signal="timeout" from="CrustDecay" to="Crust" method="_on_CrustDecay_timeout"]
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
 [connection signal="timeout" from="CapsuleTimer" to="." method="_on_capsule_timer_timeout"]

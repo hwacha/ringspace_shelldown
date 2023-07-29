@@ -33,7 +33,7 @@ func get_input():
 	if Input.is_action_just_pressed("ui_accept"):
 		if registered_players.size() > 0:
 			Players.set_player_ids(registered_players)
-			get_tree().change_scene_to_file("scenes/how_to.tscn")
+			get_tree().change_scene_to_file("scenes/main.tscn")
 	
 #	if Input.is_action_just_pressed("debug_toggle_play"):
 #		var test_scene = preload("res://scenes/TestingStage.tscn").instantiate()

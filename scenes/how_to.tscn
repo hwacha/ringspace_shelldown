@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bcqi1dwvih6h5"]
+[gd_scene load_steps=45 format=3 uid="uid://bcqi1dwvih6h5"]
 
 [ext_resource type="Script" path="res://scripts/how_to.gd" id="1_7ft2m"]
 [ext_resource type="SpriteFrames" uid="uid://civqu1ibw4bfh" path="res://animations/SpriteFrames_P1.tres" id="1_p8i6v"]
@@ -30,17 +30,12 @@
 [ext_resource type="Texture2D" uid="uid://bpmar6l4jk3xg" path="res://assets/WhiteOrb_Halo.png" id="34_bxugn"]
 [ext_resource type="Texture2D" uid="uid://nu8e2crp7leb" path="res://assets/RedOrb_Halo.png" id="35_cio6b"]
 [ext_resource type="Script" path="res://scripts/Orbs.gd" id="35_u3pv3"]
-[ext_resource type="Texture2D" uid="uid://b8q8ywxu7ysev" path="res://assets/PS4 BUTTONS - Premium Assets/Button - PS Options.png" id="35_xcj3v"]
 [ext_resource type="PackedScene" uid="uid://djy1ltinuio1p" path="res://scenes/Orb.tscn" id="36_wkj43"]
 [ext_resource type="Shader" path="res://scripts/Orb.gdshader" id="37_sr4kg"]
 [ext_resource type="SpriteFrames" uid="uid://bvg2631fpxs54" path="res://animations/SpriteFrames_Orb5.tres" id="38_iotmw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8ndh"]
 bg_color = Color(0, 0, 0, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -423,10 +418,6 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k705f"]
 bg_color = Color(0, 0, 0, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -438,38 +429,28 @@ resource_local_to_scene = true
 shader = ExtResource("37_sr4kg")
 shader_parameter/is_grabbable = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vch60"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
 [node name="how_to" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1500.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7ft2m")
 
 [node name="ControlsTitle" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_top = 135.0
-offset_right = 540.0
-offset_bottom = 270.0
+offset_left = -76.0
+offset_top = 245.0
+offset_right = 344.0
+offset_bottom = 380.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ControlsTitle"]
-custom_minimum_size = Vector2(540, 2.08165e-12)
+custom_minimum_size = Vector2(420, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[center]Controls[/center]"
 fit_content = true
@@ -477,10 +458,9 @@ scroll_active = false
 
 [node name="ControlsPanel" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 270.0
-offset_right = 480.0
-offset_bottom = 810.0
+offset_top = 337.5
+offset_right = 420.0
+offset_bottom = 877.5
 theme_override_styles/panel = SubResource("StyleBoxFlat_s8ndh")
 
 [node name="MarginContainer" type="MarginContainer" parent="ControlsPanel"]
@@ -493,7 +473,7 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 100
+theme_override_constants/margin_left = 70
 theme_override_constants/margin_top = 23
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer"]
@@ -544,7 +524,7 @@ flip_h = true
 [node name="MarginContainer2" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 100
+theme_override_constants/margin_left = 70
 theme_override_constants/margin_top = 23
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer2"]
@@ -593,7 +573,7 @@ flip_h = true
 [node name="MarginContainer3" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 100
+theme_override_constants/margin_left = 70
 theme_override_constants/margin_top = 23
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer3"]
@@ -650,7 +630,7 @@ flip_h = true
 [node name="MarginContainer4" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 100
+theme_override_constants/margin_left = 70
 theme_override_constants/margin_top = 23
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/MarginContainer4"]
@@ -710,16 +690,16 @@ libraries = {
 
 [node name="HowToPlayTitle" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_left = 540.0
-offset_top = 135.0
-offset_right = 1080.0
-offset_bottom = 270.0
+offset_left = 1365.0
+offset_top = 245.0
+offset_right = 1905.0
+offset_bottom = 380.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HowToPlayTitle"]
 custom_minimum_size = Vector2(540, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[center]How to Play[/center]"
 fit_content = true
@@ -727,14 +707,14 @@ scroll_active = false
 
 [node name="HowToPanel" type="PanelContainer" parent="."]
 layout_mode = 2
-offset_left = 600.0
-offset_top = 270.0
-offset_right = 1020.0
-offset_bottom = 810.0
+offset_left = 1504.0
+offset_top = 310.0
+offset_right = 1924.0
+offset_bottom = 850.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k705f")
 
 [node name="HowToPlay" type="VBoxContainer" parent="HowToPanel"]
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(400, 500)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -749,14 +729,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 20
 text = "
 Collect            to win"
 fit_content = true
 scroll_active = false
 
 [node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer2/Collect"]
-position = Vector2(134, 57)
+position = Vector2(125, 50.3252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("34_bxugn")
 region_enabled = true
@@ -772,14 +752,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 20
 text = "
 Lose            when you die"
 fit_content = true
 scroll_active = false
 
 [node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer/Dying"]
-position = Vector2(97, 58.3252)
+position = Vector2(89, 50.3252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("34_bxugn")
 region_enabled = true
@@ -795,27 +775,27 @@ custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 20
 text = "
 Kill              to get        + half"
 fit_content = true
 scroll_active = false
 
 [node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
-position = Vector2(215, 57)
+position = Vector2(204, 47.8252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("35_cio6b")
 region_enabled = true
 region_rect = Rect2(897, 49, 733, 733)
 
 [node name="Player" type="AnimatedSprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
-position = Vector2(69.7598, 53.9004)
+position = Vector2(68.7617, 49.2256)
 scale = Vector2(0.04, 0.04)
 sprite_frames = ExtResource("1_p8i6v")
 
 [node name="Orbs" type="Node2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 modulate = Color(1, 1, 1, 0.5)
-position = Vector2(69.7607, 54.576)
+position = Vector2(68.758, 49.9003)
 script = ExtResource("35_u3pv3")
 
 [node name="Orb" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs" instance=ExtResource("36_wkj43")]
@@ -844,7 +824,7 @@ sprite_frames = ExtResource("38_iotmw")
 
 [node name="Orbs2" type="Node2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 modulate = Color(1, 1, 1, 0.5)
-position = Vector2(332, 57)
+position = Vector2(311, 48.825)
 script = ExtResource("35_u3pv3")
 
 [node name="Orb" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
@@ -871,40 +851,21 @@ sprite_frames = ExtResource("38_iotmw")
 material = SubResource("ShaderMaterial_hqsr2")
 sprite_frames = ExtResource("38_iotmw")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-autostart = true
+[node name="CenterContainer4" type="CenterContainer" parent="HowToPanel/HowToPlay"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="StartPrompt" type="Panel" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 440.0
-offset_top = 846.0
-offset_right = 640.0
-offset_bottom = 1046.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_vch60")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="StartPrompt"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 200.0
+[node name="Kill" type="RichTextLabel" parent="HowToPanel/HowToPlay/CenterContainer4"]
+clip_contents = false
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center]
-Press
-
-to play[/center]"
+theme_override_font_sizes/normal_font_size = 20
+text = "
+First to      24      wins"
 fit_content = true
 scroll_active = false
-
-[node name="Sprite2D" type="Sprite2D" parent="StartPrompt"]
-position = Vector2(100, 100)
-scale = Vector2(0.12, 0.12)
-texture = ExtResource("35_xcj3v")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb"]
 [editable path="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs/Orb2"]
