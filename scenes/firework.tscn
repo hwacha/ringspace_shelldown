@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Firework.gd" id="1_t4gpf"]
 [ext_resource type="Texture2D" uid="uid://bpmar6l4jk3xg" path="res://assets/WhiteOrb_Halo.png" id="2_ylm8u"]
 
-[sub_resource type="Curve2D" id="Curve2D_bg3mo"]
+[sub_resource type="Curve2D" id="Curve2D_d6x1f"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -248, -39)
@@ -45,7 +45,7 @@ scale_curve = SubResource("CurveTexture_io3sr")
 color_ramp = SubResource("GradientTexture1D_t5ao4")
 
 [node name="Firework" type="Path2D"]
-curve = SubResource("Curve2D_bg3mo")
+curve = SubResource("Curve2D_d6x1f")
 script = ExtResource("1_t4gpf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]

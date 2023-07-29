@@ -240,7 +240,6 @@ func vacuum():
 func bomb():
 	var bomb_instance = preload("res://scenes/Bomb.tscn").instantiate()
 	bomb_instance.player_who_dropped = self
-	bomb_instance.modulate = color
 	
 	var drop_speed = 3
 	bomb_instance.velocity = drop_speed * -self.transform.origin.direction_to(centroid)

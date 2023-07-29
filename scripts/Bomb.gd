@@ -1,6 +1,6 @@
 extends AnimatableBody2D
 
-var player_who_dropped : Player
+var player_who_dropped : Player : set = set_player_who_dropped 
 var player_who_dropped_id : int
 var velocity : Vector2
 
@@ -17,9 +17,12 @@ var has_destroyed_one_crust_segment : bool = false
 func set_player_who_dropped(player):
 	player_who_dropped = player
 	player_who_dropped_id = player.id
+	$Bomb.animation = str(player.id)
+	$Blast.modulate = player.color.lightened(0.2)
 
 func _ready():
 	rotation = self.transform.origin.angle_to_point(Vector2(540, 540)) + PI/2
+	$Bomb.play()
 	$AnimationPlayer.play("tickboom")
 	
 

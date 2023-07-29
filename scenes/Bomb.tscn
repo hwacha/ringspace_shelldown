@@ -1,11 +1,175 @@
-[gd_scene load_steps=14 format=3 uid="uid://vl6qontniasx"]
+[gd_scene load_steps=35 format=3 uid="uid://vl6qontniasx"]
 
 [ext_resource type="Script" path="res://scripts/Bomb.gd" id="1_0goo4"]
-[ext_resource type="Texture2D" uid="uid://tejxg8q3ygb0" path="res://assets/bomb_object.png" id="2_kp7sw"]
+[ext_resource type="Texture2D" uid="uid://hvdqvimfpgob" path="res://assets/Bomb Sprite.png" id="2_nt4ev"]
 [ext_resource type="Texture2D" uid="uid://bwlrdwotfb8xv" path="res://assets/hero-2-circle.png" id="3_woyly"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4g3x"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(0, 3750, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2fsg"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(1250, 3750, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol5qa"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(2500, 3750, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ugq8"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(3750, 3750, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bulhp"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(5000, 3750, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4j1c"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(0, 1250, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e284s"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(1250, 1250, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulx4s"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(2500, 1250, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elhpm"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(3750, 1250, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi781"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(5000, 1250, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hsvo"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(0, 2500, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvyho"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(1250, 2500, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1tbk"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(2500, 2500, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtkaw"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(3750, 2500, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w54nn"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(5000, 2500, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7utlf"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(0, 0, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu5dd"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(1250, 0, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x8a5"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(2500, 0, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8u10d"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(3750, 0, 1250, 1250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x1hx"]
+atlas = ExtResource("2_nt4ev")
+region = Rect2(5000, 0, 1250, 1250)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l8fca"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_b4g3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2fsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol5qa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ugq8")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_bulhp")
+}],
+"loop": true,
+"name": &"1",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_i4j1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e284s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulx4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elhpm")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_fi781")
+}],
+"loop": true,
+"name": &"2",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_5hsvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvyho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1tbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtkaw")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_w54nn")
+}],
+"loop": true,
+"name": &"3",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_7utlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu5dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x8a5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8u10d")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_6x1hx")
+}],
+"loop": true,
+"name": &"4",
+"speed": 12.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ove10"]
-radius = 22.0
+radius = 21.0
 
 [sub_resource type="Animation" id="Animation_tx7c4"]
 length = 0.001
@@ -24,22 +188,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bomb:modulate")
+tracks/1/path = NodePath("Bomb:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(3, 3, 3, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Bomb:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -52,70 +204,58 @@ length = 3.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Bomb:modulate")
+tracks/0/path = NodePath("BlastRadius/CollisionShape2D:shape:radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Color(3, 3, 3, 1), Color(1, 1, 1, 1), Color(3, 3, 3, 1), Color(1, 1, 1, 1), Color(3, 3, 3, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BlastRadius/CollisionShape2D:shape:radius")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(3, 3.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [20.0, 160.0]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BlastRadius:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlastRadius:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 3, 3.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Bomb:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bomb:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 3, 3.0001),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, false]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Blast:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blast:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".:status")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:status")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -135,8 +275,8 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_yvvey")
 
 [sub_resource type="Curve" id="Curve_pm1dv"]
-min_value = 0.1
-_data = [Vector2(0, 0.99676), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+min_value = 0.2
+_data = [Vector2(0, 0.99676), 0.0, 0.0, 0, 0, Vector2(0.980724, 0.2), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_m2gdi"]
@@ -149,7 +289,7 @@ particle_flag_disable_z = true
 spread = 180.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 initial_velocity_min = 100.0
-initial_velocity_max = 250.0
+initial_velocity_max = 275.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_min = 0.08
@@ -162,19 +302,17 @@ resource_local_to_scene = true
 radius = 20.0
 
 [node name="Bomb" type="AnimatableBody2D"]
-modulate = Color(5, 5, 5, 1)
 collision_layer = 0
 sync_to_physics = false
 script = ExtResource("1_0goo4")
 status = 1
 
-[node name="Bomb" type="Sprite2D" parent="."]
-modulate = Color(3, 3, 3, 1)
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("2_kp7sw")
+[node name="Bomb" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.035, 0.035)
+sprite_frames = SubResource("SpriteFrames_l8fca")
+animation = &"4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_ove10")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -183,6 +321,7 @@ libraries = {
 }
 
 [node name="Blast" type="GPUParticles2D" parent="."]
+z_index = 1
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_ayyeg")
@@ -194,7 +333,6 @@ explosiveness = 1.0
 [node name="BlastRadius" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8388608
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlastRadius"]
 shape = SubResource("CircleShape2D_8hmqa")
