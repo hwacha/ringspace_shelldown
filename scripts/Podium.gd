@@ -114,6 +114,8 @@ func _ready():
 		player.lock_physics = true
 		player.expanded = false
 		player.stunned = false
+		
+		player.get_node("AnimatedSprite2D").visible = true
 			
 		player.get_node("CollisionShapeForGround").disabled = true
 		player.get_node("OrbBox/CollisionShape2D").disabled = true
