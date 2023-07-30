@@ -549,6 +549,8 @@ func _set_is_in_event_horizon(new_is_in_event_horizon):
 	is_in_event_horizon = new_is_in_event_horizon
 
 func set_prepping_fastfall(new_prepping_fastfall):
+	if new_prepping_fastfall:
+		$AnimatedSprite2D.animation = "default"
 	prepping_fastfall = new_prepping_fastfall
 
 func set_fast_falling(new_fast_falling):

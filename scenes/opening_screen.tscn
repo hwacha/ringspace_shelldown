@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=10 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="3"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="3_rwijt"]
-[ext_resource type="Texture2D" uid="uid://b8q8ywxu7ysev" path="res://assets/PS4 BUTTONS - Premium Assets/Button - PS Options.png" id="5_c5ba6"]
+[ext_resource type="Texture2D" uid="uid://d31o8ytnyi25e" path="res://assets/Xbox Series/Bottom_Action.png" id="5_22x1w"]
+[ext_resource type="Texture2D" uid="uid://u6ldt35i7cuo" path="res://assets/Keys/3/Start.png" id="6_68qrk"]
 [ext_resource type="PackedScene" uid="uid://bcqi1dwvih6h5" path="res://scenes/how_to.tscn" id="6_emi4r"]
 
 [sub_resource type="FontFile" id="2"]
@@ -44,10 +45,10 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
 
 [node name="OpeningScreen" type="Control"]
 layout_mode = 3
@@ -100,29 +101,44 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Left/P1"]
-custom_minimum_size = Vector2(400, 50)
+[node name="Unregistered" type="HBoxContainer" parent="PlayerRegister/Left/P1"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerRegister/Left/P1/Unregistered"]
+layout_mode = 2
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Left/P1/Unregistered/CenterContainer"]
+custom_minimum_size = Vector2(160, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Press to Join[/center]"
+text = "[center]Press[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="Container" type="Container" parent="PlayerRegister/Left/P1/Unregistered"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Left/P1/Unregistered/Container"]
+texture = ExtResource("5_22x1w")
+centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Left/P1"]
 visible = false
 modulate = Color(0.84, 0.24, 0.24, 1)
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(264, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Player 1 Joined[/center]"
+text = "[center]P1 Joined[/center]"
 fit_content = true
 scroll_active = false
 
@@ -131,29 +147,44 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Left/P2"]
-custom_minimum_size = Vector2(400, 50)
+[node name="Unregistered" type="HBoxContainer" parent="PlayerRegister/Left/P2"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerRegister/Left/P2/Unregistered"]
+layout_mode = 2
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Left/P2/Unregistered/CenterContainer"]
+custom_minimum_size = Vector2(160, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Press to Join[/center]"
+text = "[center]Press[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="Container" type="Container" parent="PlayerRegister/Left/P2/Unregistered"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Left/P2/Unregistered/Container"]
+texture = ExtResource("5_22x1w")
+centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Left/P2"]
 visible = false
 modulate = Color(0.2, 0.466667, 0.870588, 1)
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(264, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Player 2 Joined[/center]"
+text = "[center]P2 Joined[/center]"
 fit_content = true
 scroll_active = false
 
@@ -163,28 +194,31 @@ size_flags_horizontal = 3
 
 [node name="StartPrompt" type="Panel" parent="PlayerRegister/Center"]
 visible = false
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_r44yr")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayerRegister/Center/StartPrompt"]
+[node name="CenterContainer" type="CenterContainer" parent="PlayerRegister/Center/StartPrompt"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 2.0
-offset_right = 197.0
-offset_bottom = 199.0
+offset_right = 300.0
+offset_bottom = 300.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerRegister/Center/StartPrompt/CenterContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("3")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[center]
-Press
+text = "[center]Press
+
+
 
 to play[/center]"
+fit_content = true
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Center/StartPrompt"]
-position = Vector2(99, 100)
-scale = Vector2(0.12, 0.12)
-texture = ExtResource("5_c5ba6")
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Center/StartPrompt/CenterContainer"]
+position = Vector2(150, 150)
+texture = ExtResource("6_68qrk")
 
 [node name="Right" type="VBoxContainer" parent="PlayerRegister"]
 layout_mode = 2
@@ -194,29 +228,44 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Right/P4"]
-custom_minimum_size = Vector2(400, 50)
+[node name="Unregistered" type="HBoxContainer" parent="PlayerRegister/Right/P4"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerRegister/Right/P4/Unregistered"]
+layout_mode = 2
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Right/P4/Unregistered/CenterContainer"]
+custom_minimum_size = Vector2(160, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Press to Join[/center]"
+text = "[center]Press[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="Container" type="Container" parent="PlayerRegister/Right/P4/Unregistered"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Right/P4/Unregistered/Container"]
+texture = ExtResource("5_22x1w")
+centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Right/P4"]
 visible = false
 modulate = Color(1.01, 0.98, 0.47, 1)
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(264, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Player 4 Joined[/center]"
+text = "[center]P4 Joined[/center]"
 fit_content = true
 scroll_active = false
 
@@ -225,29 +274,44 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Right/P3"]
-custom_minimum_size = Vector2(400, 50)
+[node name="Unregistered" type="HBoxContainer" parent="PlayerRegister/Right/P3"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerRegister/Right/P3/Unregistered"]
+layout_mode = 2
+
+[node name="Unregistered" type="RichTextLabel" parent="PlayerRegister/Right/P3/Unregistered/CenterContainer"]
+custom_minimum_size = Vector2(160, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Press to Join[/center]"
+text = "[center]Press[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="Container" type="Container" parent="PlayerRegister/Right/P3/Unregistered"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Right/P3/Unregistered/Container"]
+texture = ExtResource("5_22x1w")
+centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Right/P3"]
 visible = false
 modulate = Color(0.35, 0.76, 0.31, 1)
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(264, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("2")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Player 3 Joined[/center]"
+text = "[center]P3 Joined[/center]"
 fit_content = true
 scroll_active = false
 

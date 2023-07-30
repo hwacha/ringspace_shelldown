@@ -5,7 +5,29 @@ var registered_players = []
 var t = 0
 
 func _ready():
-	pass
+	for i in range(4):
+		var joy_name = Input.get_joy_name(i)
+		var path = "res://assets/"
+		
+		var some_controller_matched = true
+		
+		if joy_name == "PS4 Controller":
+			path += "PS4/"
+		elif joy_name == "PS5 Controller":
+			path += "PS5/"
+		elif joy_name.begins_with("Xbox"):
+			path += "Xbox Series/"
+		elif joy_name == "Joy-Con (L)":
+			path += "Switch_Left/"
+		elif joy_name == "Joy-Con (R)":
+			path += "Switch_Right/"
+		else:
+			path += "Keys/" + str(i) + "/"
+			some_controller_matched = false
+		
+		var sprite = load(path + "Bottom_Action.png") if some_controller_matched else load(path + "Up.png")
+		var col = $PlayerRegister/Left if i < 2 else $PlayerRegister/Right
+		col.get_node("P" + str(i + 1) + "/Unregistered/Container/Sprite2D").texture = sprite
 	
 func set_registered_players(id):
 	var container = $PlayerRegister/Left if id in [1, 2] else $PlayerRegister/Right
@@ -55,6 +77,6 @@ func _process(delta):
 	$Title.rotate(-0.1 * delta)
 	
 	var flash_t = 1 + cos(t * 3)
-	$PlayerRegister/Center/StartPrompt/RichTextLabel.modulate.a = flash_t
-	$PlayerRegister/Center/StartPrompt/Sprite2D.modulate.a = flash_t
+	$PlayerRegister/Center/StartPrompt/CenterContainer/RichTextLabel.modulate.a = flash_t
+	$PlayerRegister/Center/StartPrompt/CenterContainer/Sprite2D.modulate.a = flash_t
 	t += delta
