@@ -4,7 +4,15 @@ var players_not_playing
 
 var rng = RandomNumberGenerator.new()
 
+func update_controls(controller_id):
+	var hjt = $HotjoinText.get_node_or_null(str(controller_id + 1))
+	if hjt != null:
+		hjt.get_node("Container/Container/Sprite2D").texture = Players.control_icons[controller_id]["jump"]
+
 func _ready():
+	for i in range(4):
+		update_controls(i)
+
 	Players.lock_action = true
 #	var bus_idx = AudioServer.get_bus_index("Master")
 #	AudioServer.set_bus_mute(bus_idx, true)

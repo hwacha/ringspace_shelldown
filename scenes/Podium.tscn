@@ -83,28 +83,28 @@ _data = {
 "launch_fireworks": SubResource("Animation_6agsq")
 }
 
-[sub_resource type="Curve2D" id="Curve2D_s8cer"]
+[sub_resource type="Curve2D" id="Curve2D_khlr0"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -263, 151)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_mxt2o"]
+[sub_resource type="Curve2D" id="Curve2D_s3bsg"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -74, 52)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_bcada"]
+[sub_resource type="Curve2D" id="Curve2D_ueyuf"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, 127, 58)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_xvcok"]
+[sub_resource type="Curve2D" id="Curve2D_jd307"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, 304, 150)
@@ -173,19 +173,19 @@ libraries = {
 
 [node name="Firework1" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_s8cer")
+curve = SubResource("Curve2D_khlr0")
 
 [node name="Firework2" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_mxt2o")
+curve = SubResource("Curve2D_s3bsg")
 
 [node name="Firework3" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_bcada")
+curve = SubResource("Curve2D_ueyuf")
 
 [node name="Firework4" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_xvcok")
+curve = SubResource("Curve2D_jd307")
 
 [connection signal="timeout" from="InputTimer" to="." method="_on_input_timer_timeout"]
 [connection signal="timeout" from="Timeout" to="." method="_on_timeout_timeout"]

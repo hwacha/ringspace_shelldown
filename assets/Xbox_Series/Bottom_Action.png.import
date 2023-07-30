@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chkpkapgfvi8t"
-path="res://.godot/imported/Right_Action.png-955d1c6ebcbe1e127f68c8c5d68bb8f4.ctex"
+uid="uid://d31o8ytnyi25e"
+path="res://.godot/imported/Bottom_Action.png-7c030d21ed7ac03950207639a74fc30d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Xbox Series/Right_Action.png"
-dest_files=["res://.godot/imported/Right_Action.png-955d1c6ebcbe1e127f68c8c5d68bb8f4.ctex"]
+source_file="res://assets/Xbox_Series/Bottom_Action.png"
+dest_files=["res://.godot/imported/Bottom_Action.png-7c030d21ed7ac03950207639a74fc30d.ctex"]
 
 [params]
 

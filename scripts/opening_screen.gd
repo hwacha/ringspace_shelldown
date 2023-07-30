@@ -5,29 +5,12 @@ var registered_players = []
 var t = 0
 
 func _ready():
-	for i in range(4):
-		var joy_name = Input.get_joy_name(i)
-		var path = "res://assets/"
-		
-		var some_controller_matched = true
-		
-		if joy_name == "PS4 Controller":
-			path += "PS4/"
-		elif joy_name == "PS5 Controller":
-			path += "PS5/"
-		elif joy_name.begins_with("Xbox"):
-			path += "Xbox Series/"
-		elif joy_name == "Joy-Con (L)":
-			path += "Switch_Left/"
-		elif joy_name == "Joy-Con (R)":
-			path += "Switch_Right/"
-		else:
-			path += "Keys/" + str(i) + "/"
-			some_controller_matched = false
-		
-		var sprite = load(path + "Bottom_Action.png") if some_controller_matched else load(path + "Up.png")
-		var col = $PlayerRegister/Left if i < 2 else $PlayerRegister/Right
-		col.get_node("P" + str(i + 1) + "/Unregistered/Container/Sprite2D").texture = sprite
+	pass
+	
+func update_controls(controller_id):
+	var col = $PlayerRegister/Left if controller_id < 2 else $PlayerRegister/Right
+	col.get_node("P" + str(controller_id + 1) + "/Unregistered/Container/Sprite2D").texture = \
+		Players.control_icons[controller_id]["jump"]
 	
 func set_registered_players(id):
 	var container = $PlayerRegister/Left if id in [1, 2] else $PlayerRegister/Right
@@ -37,6 +20,7 @@ func set_registered_players(id):
 		container.get_node("P" + str(id) + "/Unregistered").set_visible(true)
 	else:
 		registered_players.push_back(id)
+		$PlayerRegister/Center/StartPrompt/CenterContainer/Sprite2D.texture = Players.control_icons[id - 1]["start"]
 		container.get_node("P" + str(id) + "/Unregistered").set_visible(false)
 		container.get_node("P" + str(id) + "/Registered").set_visible(true)
 	

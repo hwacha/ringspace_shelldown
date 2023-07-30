@@ -1,17 +1,14 @@
-[gd_scene load_steps=46 format=3 uid="uid://bcqi1dwvih6h5"]
+[gd_scene load_steps=48 format=3 uid="uid://bcqi1dwvih6h5"]
 
 [ext_resource type="Script" path="res://scripts/how_to.gd" id="1_7ft2m"]
 [ext_resource type="SpriteFrames" uid="uid://civqu1ibw4bfh" path="res://animations/SpriteFrames_P1.tres" id="1_p8i6v"]
+[ext_resource type="Texture2D" uid="uid://bcm3pmml4kcu4" path="res://assets/Generic/Left_Stick.png" id="3_hy3xs"]
 [ext_resource type="Texture2D" uid="uid://dsnabdhpvx7nu" path="res://assets/Keys/0/Left.png" id="3_rt4b6"]
-[ext_resource type="Texture2D" uid="uid://ck20eflof74u6" path="res://assets/Xbox Series/Left_Stick.png" id="3_x6nlp"]
 [ext_resource type="Texture2D" uid="uid://cu7dp2cqrs2yg" path="res://assets/Keys/0/Right.png" id="4_k6v8y"]
-[ext_resource type="Texture2D" uid="uid://d31o8ytnyi25e" path="res://assets/Xbox Series/Bottom_Action.png" id="5_2cmrq"]
 [ext_resource type="Texture2D" uid="uid://c4ldhifsfbloo" path="res://assets/Keys/1/Left.png" id="5_c75dv"]
-[ext_resource type="Texture2D" uid="uid://chkpkapgfvi8t" path="res://assets/Xbox Series/Right_Action.png" id="6_6n5xi"]
 [ext_resource type="Texture2D" uid="uid://c0jug04u3duk4" path="res://assets/Keys/1/Right.png" id="6_crq0s"]
 [ext_resource type="Texture2D" uid="uid://hfhdfvmtvsny" path="res://assets/Keys/2/Left.png" id="7_jq2im"]
 [ext_resource type="Texture2D" uid="uid://dvuqepyjk6t2y" path="res://assets/Keys/2/Right.png" id="8_ggxqu"]
-[ext_resource type="Texture2D" uid="uid://8ul0ygqwgtf2" path="res://assets/Xbox Series/Left_Action.png" id="8_unrms"]
 [ext_resource type="Texture2D" uid="uid://ce0u2fcrorg71" path="res://assets/Keys/3/Left.png" id="9_jrhdi"]
 [ext_resource type="Texture2D" uid="uid://ctdceccuytl05" path="res://assets/Keys/3/Right.png" id="10_136ra"]
 [ext_resource type="Texture2D" uid="uid://d1m06jrmk2nr4" path="res://assets/PS5/Left_Stick.png" id="11_77jwl"]
@@ -20,12 +17,17 @@
 [ext_resource type="SpriteFrames" uid="uid://bcnvggjm2vmxk" path="res://animations/SpriteFrames_P2.tres" id="12_upxir"]
 [ext_resource type="Texture2D" uid="uid://chmc6ox2wf5rh" path="res://assets/Switch_Left/Left_Stick.png" id="13_0sxsw"]
 [ext_resource type="Texture2D" uid="uid://d25j330obfpub" path="res://assets/Switch_Right/Left_Stick.png" id="14_1road"]
+[ext_resource type="Texture2D" uid="uid://ck20eflof74u6" path="res://assets/Xbox_Series/Left_Stick.png" id="16_2sh2e"]
 [ext_resource type="SpriteFrames" uid="uid://cfmjxgo5aubws" path="res://animations/SpriteFrames_Fastfall.tres" id="17_pw3dp"]
+[ext_resource type="Texture2D" uid="uid://c5li6gjnmyhj3" path="res://assets/Xbox_360/Left_Stick.png" id="17_uxq0w"]
 [ext_resource type="SpriteFrames" uid="uid://k1ump0j1pjx3" path="res://animations/SpriteFrames_P3.tres" id="18_ajrve"]
 [ext_resource type="Texture2D" uid="uid://cbisq58hs2ijh" path="res://assets/left.png" id="18_riu6m"]
 [ext_resource type="Texture2D" uid="uid://32qfsdtyscxi" path="res://assets/right.png" id="19_5642t"]
+[ext_resource type="Texture2D" uid="uid://d31o8ytnyi25e" path="res://assets/Xbox_Series/Bottom_Action.png" id="20_88tu3"]
+[ext_resource type="Texture2D" uid="uid://chkpkapgfvi8t" path="res://assets/Xbox_Series/Right_Action.png" id="21_8awg0"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="23_86abl"]
 [ext_resource type="SpriteFrames" uid="uid://cd0y1l6t3vi0v" path="res://animations/SpriteFrames_P4.tres" id="23_io15b"]
+[ext_resource type="Texture2D" uid="uid://8ul0ygqwgtf2" path="res://assets/Xbox_Series/Left_Action.png" id="23_sihvl"]
 [ext_resource type="Texture2D" uid="uid://drgarrrgy84r6" path="res://assets/shield.png" id="25_stkxg"]
 [ext_resource type="Texture2D" uid="uid://bqh6qd8d4g8so" path="res://assets/BlueOrb_Halo.png" id="26_fcfms"]
 [ext_resource type="Texture2D" uid="uid://f15nqclgc2ow" path="res://assets/GreenOrb_Halo.png" id="27_2x78x"]
@@ -48,6 +50,14 @@ corner_radius_bottom_left = 50
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ygf0i"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hy3xs")
+}],
+"loop": true,
+"name": &"generic",
+"speed": 1.0
+}, {
 "frames": [{
 "duration": 2.0,
 "texture": ExtResource("3_rt4b6")
@@ -134,10 +144,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_x6nlp")
+"texture": ExtResource("16_2sh2e")
 }],
 "loop": true,
 "name": &"xbox",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_uxq0w")
+}],
+"loop": true,
+"name": &"xbox_360",
 "speed": 1.0
 }]
 
@@ -524,7 +542,7 @@ size_flags_vertical = 6
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ControlsPanel/MarginContainer/Controls/Run/RunControl1"]
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_ygf0i")
-animation = &"xbox"
+animation = &"generic"
 
 [node name="Tilt" type="Node2D" parent="ControlsPanel/MarginContainer/Controls/Run/RunControl1"]
 
@@ -596,7 +614,7 @@ size_flags_vertical = 6
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="ControlsPanel/MarginContainer/Controls/Jump/JumpControl1"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("5_2cmrq")
+texture = ExtResource("20_88tu3")
 
 [node name="Arrow2" type="CenterContainer" parent="ControlsPanel/MarginContainer/Controls/Jump"]
 layout_mode = 2
@@ -645,7 +663,7 @@ size_flags_vertical = 6
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="ControlsPanel/MarginContainer/Controls/Fastfall/FastfallControl1"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("6_6n5xi")
+texture = ExtResource("21_8awg0")
 
 [node name="Arrow3" type="CenterContainer" parent="ControlsPanel/MarginContainer/Controls/Fastfall"]
 layout_mode = 2
@@ -702,7 +720,7 @@ size_flags_vertical = 6
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="ControlsPanel/MarginContainer/Controls/Use/UseControl1"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("8_unrms")
+texture = ExtResource("23_sihvl")
 
 [node name="Arrow4" type="CenterContainer" parent="ControlsPanel/MarginContainer/Controls/Use"]
 layout_mode = 2

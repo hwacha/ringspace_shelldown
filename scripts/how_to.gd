@@ -54,53 +54,21 @@ func start_animations_and_set_shield_color(id : int):
 	$ControlsPanel/MarginContainer/Controls/Use/UseAnimation/UseAnimation.material\
 		.set("shader_parameter/primary_color", Players.player_invulnerability_colors[id])
 
-	var joy_name = Input.get_joy_name(id)
+	var control_icons = Players.control_icons[id]
+	$ControlsPanel/MarginContainer/Controls/Jump/JumpControl1/AnimatedSprite2D.texture = \
+		control_icons["jump"]
+	$ControlsPanel/MarginContainer/Controls/Fastfall/FastfallControl1/AnimatedSprite2D.texture = \
+		control_icons["fastfall"]
+	$ControlsPanel/MarginContainer/Controls/Use/UseControl1/AnimatedSprite2D.texture = \
+		control_icons["powerup"]
 	
-	var path = "res://assets/"
-	var run_animation = ""
+	$ControlsPanel/MarginContainer/Controls/Run/RunControl1/Tilt.visible = control_icons["has_analog_stick"]
 
-	var some_controller_matched = true
-	if joy_name == "PS4 Controller":
-		path += "PS4/"
-		run_animation = "ps4"
-	elif joy_name == "PS5 Controller":
-		path += "PS5/"
-		run_animation = "ps5"
-	elif joy_name.begins_with("Xbox"):
-		path += "Xbox Series/"
-		run_animation = "xbox"
-	elif joy_name == "Joy-Con (L)":
-		path += "Switch_Left/"
-		run_animation = "switch_left"
-	elif joy_name == "Joy-Con (R)":
-		path += "Switch_Right/"
-		run_animation = "switch_right"
-	else:
-		some_controller_matched = false
-		path += "Keys/" + str(id) + "/"
-		run_animation = "keys_" + str(id)
-		$ControlsPanel/MarginContainer/Controls/Jump/JumpControl1/AnimatedSprite2D.texture = \
-			load(path + "Up.png")
-		$ControlsPanel/MarginContainer/Controls/Fastfall/FastfallControl1/AnimatedSprite2D.texture = \
-			load(path + "Down.png")
-		$ControlsPanel/MarginContainer/Controls/Use/UseControl1/AnimatedSprite2D.texture = \
-			load(path + "UpLeft.png")
-
-	if some_controller_matched:
-		$ControlsPanel/MarginContainer/Controls/Jump/JumpControl1/AnimatedSprite2D.texture = \
-			load(path +  "Bottom_Action.png")
-		$ControlsPanel/MarginContainer/Controls/Fastfall/FastfallControl1/AnimatedSprite2D.texture = \
-			load(path + "Right_Action.png")
-		$ControlsPanel/MarginContainer/Controls/Use/UseControl1/AnimatedSprite2D.texture = \
-			load(path + "Left_Action.png")
-	
-	$ControlsPanel/MarginContainer/Controls/Run/RunControl1/Tilt.visible = some_controller_matched
-
-	$ControlsPanel/MarginContainer/Controls/Run/RunControl1/AnimatedSprite2D.animation = run_animation
+	$ControlsPanel/MarginContainer/Controls/Run/RunControl1/AnimatedSprite2D.animation = control_icons["run"]
 	$ControlsPanel/MarginContainer/Controls/Run/RunControl1/AnimatedSprite2D.play()
 	
 	if id + 1 in get_parent().registered_players:
-		get_node("../PlayerRegister/Center/StartPrompt/CenterContainer/Sprite2D").texture = load(path + "Start.png")
+		get_node("../PlayerRegister/Center/StartPrompt/CenterContainer/Sprite2D").texture = control_icons["start"]
 
 func _draw():
 	var epsilon = 0.03
