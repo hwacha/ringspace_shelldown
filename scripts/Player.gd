@@ -582,8 +582,11 @@ func _on_HurtBox_area_entered(hitbox):
 	var hitbox_down  = hitter.transform.origin - centroid
 	var hurtbox_down = self.transform.origin - centroid
 	
-	if hitter.norm_velocity.dot(hitbox_down) > 0 or \
-	norm_velocity.dot(hurtbox_down) < 0:
+	print(hitter.norm_velocity.length() + self.norm_velocity.length())
+	
+	if (hitter.norm_velocity.dot(hitbox_down) > 0 or \
+		self.norm_velocity.dot(hurtbox_down) < 0) \
+		and hitter.norm_velocity.length() + self.norm_velocity.length() > 1000:
 		# bounce
 		hitter.norm_velocity = -hurtbox_down * jump_impulse
 		hitter.set_fast_falling(false)

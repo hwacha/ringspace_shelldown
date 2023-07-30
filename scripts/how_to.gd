@@ -57,5 +57,5 @@ func _draw():
 	var epsilon = 0.03
 	var theta = 2 * PI / Players.play_to
 	for i in range(0, Players.play_to):
-		draw_arc(Vector2(1673, 771), 30, \
+		draw_arc(Vector2(1670, 679), 30, \
 				(i * theta) + epsilon, ((i + 1) * theta) - epsilon, 100, Players.player_colors[cur_id], 7)

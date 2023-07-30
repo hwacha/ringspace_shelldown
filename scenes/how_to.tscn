@@ -439,28 +439,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7ft2m")
 
-[node name="ControlsTitle" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_left = -76.0
-offset_top = 245.0
-offset_right = 344.0
-offset_bottom = 380.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ControlsTitle"]
-custom_minimum_size = Vector2(420, 2.08165e-12)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center]Controls[/center]"
-fit_content = true
-scroll_active = false
-
 [node name="ControlsPanel" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_top = 337.5
+offset_top = 80.0
 offset_right = 420.0
-offset_bottom = 877.5
+offset_bottom = 755.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s8ndh")
 
 [node name="MarginContainer" type="MarginContainer" parent="ControlsPanel"]
@@ -469,6 +452,18 @@ theme_override_constants/margin_bottom = 30
 
 [node name="Controls" type="VBoxContainer" parent="ControlsPanel/MarginContainer"]
 layout_mode = 2
+
+[node name="ControlsTitle" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPanel/MarginContainer/Controls/ControlsTitle"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 24
+text = "Controls"
+fit_content = true
+scroll_active = false
 
 [node name="MarginContainer" type="MarginContainer" parent="ControlsPanel/MarginContainer/Controls"]
 layout_mode = 2
@@ -688,36 +683,30 @@ libraries = {
 "": SubResource("AnimationLibrary_ifcmt")
 }
 
-[node name="HowToPlayTitle" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_left = 1365.0
-offset_top = 245.0
-offset_right = 1905.0
-offset_bottom = 380.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlayTitle"]
-custom_minimum_size = Vector2(540, 2.08165e-12)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("33_wkclh")
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center]How to Play[/center]"
-fit_content = true
-scroll_active = false
-
 [node name="HowToPanel" type="PanelContainer" parent="."]
 layout_mode = 2
-offset_left = 1504.0
-offset_top = 310.0
-offset_right = 1924.0
-offset_bottom = 850.0
+offset_left = 1500.0
+offset_top = 80.0
+offset_right = 1920.0
+offset_bottom = 755.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k705f")
 
 [node name="HowToPlay" type="VBoxContainer" parent="HowToPanel"]
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+
+[node name="HowToPlayTitle" type="MarginContainer" parent="HowToPanel/HowToPlay"]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPanel/HowToPlay/HowToPlayTitle"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("33_wkclh")
+theme_override_font_sizes/normal_font_size = 24
+text = "How to Play"
+fit_content = true
+scroll_active = false
 
 [node name="CenterContainer2" type="CenterContainer" parent="HowToPanel/HowToPlay"]
 layout_mode = 2
@@ -777,12 +766,12 @@ size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("33_wkclh")
 theme_override_font_sizes/normal_font_size = 20
 text = "
-Kill              to get        + half"
+Kill               to get          + half"
 fit_content = true
 scroll_active = false
 
 [node name="Orb" type="Sprite2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
-position = Vector2(204, 47.8252)
+position = Vector2(214, 47.8252)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("35_cio6b")
 region_enabled = true
@@ -824,7 +813,7 @@ sprite_frames = ExtResource("38_iotmw")
 
 [node name="Orbs2" type="Node2D" parent="HowToPanel/HowToPlay/CenterContainer3/Kill"]
 modulate = Color(1, 1, 1, 0.5)
-position = Vector2(311, 48.825)
+position = Vector2(333, 48.825)
 script = ExtResource("35_u3pv3")
 
 [node name="Orb" parent="HowToPanel/HowToPlay/CenterContainer3/Kill/Orbs2" instance=ExtResource("36_wkj43")]
