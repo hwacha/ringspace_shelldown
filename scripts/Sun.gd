@@ -16,7 +16,7 @@ func _on_body_entered(body):
 	if is_approaching:
 		return
 
-	if not (body.invulnerable or body.shields.size() > 0):
+	if not body.invulnerable:
 		if not body.try_auto_teleport():
 			body.die()
 			body.lock_physics = true

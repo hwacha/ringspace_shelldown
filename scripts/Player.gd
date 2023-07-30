@@ -40,6 +40,7 @@ var rand = RandomNumberGenerator.new()
 
 var t = 0
 
+var prepping_fastfall = false : set = set_prepping_fastfall
 var fast_falling = false: set = set_fast_falling
 var fastfall_depleted = false
 var dead = false
@@ -259,15 +260,11 @@ func get_input(diff):
 		if speedy:
 			ps *= fast_increase_factor
 		set_fast_falling(false)
-		frames_in_air = 0
 		fastfall_depleted = false
 		$BounceTimer.stop()
 		if spawning > 0:
 			spawning -= 1
 	else:
-		# frame timer
-		frames_in_air += 1
-		
 		# uncomment this for logistic speed curve
 		var inflection_point = surface_to_centroid / 2
 		var steepness = 1.0 / 150
@@ -364,9 +361,12 @@ func get_input(diff):
 			30 * Vector2(cos(self.rotation + PI/2), sin(self.rotation + PI/2))
 		
 		double_jump_animation_instance.play()
-
-	if fast_fall and not (grounded or fast_falling or fastfall_depleted):
-		set_fast_falling(true)
+		
+	if fast_fall and not (fast_falling or fastfall_depleted):
+		if grounded and not jump_animation_ongoing or jump_input:
+			prepping_fastfall = true
+		else:
+			set_fast_falling(true)
 			
 	if use:
 		emit_signal("used_powerup", self)
@@ -420,7 +420,8 @@ func _physics_process(delta):
 		$AnimatedSprite2D.offset = Vector2(0, 0)
 
 	if is_on_floor():
-		
+		frames_in_air = 0
+		prepping_fastfall = false
 		$ShadowSprite.visible = false
 		
 		# big stuns nearby players
@@ -440,6 +441,7 @@ func _physics_process(delta):
 		
 		was_grounded_last_frame = true
 	else:
+		frames_in_air += 1
 		was_grounded_last_frame = false
 		
 		if is_in_event_horizon:
@@ -486,15 +488,26 @@ func _physics_process(delta):
 
 	norm_velocity += diff * cf * fast_fall_mult * Engine.time_scale
 	
-	if not dead:
+	if prepping_fastfall and frames_in_air > 20:
+		prepping_fastfall = false
+		fast_falling = true
+	
+	if not (dead or prepping_fastfall):
 		get_input(diff)
 	
 	var total_velocity = norm_velocity + (perp_velocity * Engine.time_scale)
 	
+	if prepping_fastfall:
+		total_velocity = Vector2(0, 0)
+		if self.position.distance_squared_to(centroid) > (surface_to_centroid_squared * 9 / 25):
+			self.position = lerp(self.position, centroid, 0.04)
+
 	if black_hole != null and not (is_on_floor() or spawning):
 		var black_hole_diff = black_hole.transform.origin - self.transform.origin
 		var black_hole_direction = black_hole_diff.normalized()
 		if is_in_event_horizon:
+			prepping_fastfall = false
+			$AnimatedSprite2D.animation = "falling"
 			var period = 2.5 # seconds it takes to get to center
 			self.transform.origin = black_hole.transform.origin + lerp(event_horizon_entry_point, Vector2(0, 0), time_in_event_horizon / period)
 			total_velocity = Vector2(0, 0)
@@ -527,9 +540,15 @@ func _set_is_in_event_horizon(new_is_in_event_horizon):
 		stunned = false
 	is_in_event_horizon = new_is_in_event_horizon
 
+func set_prepping_fastfall(new_prepping_fastfall):
+	prepping_fastfall = new_prepping_fastfall
+
 func set_fast_falling(new_fast_falling):
 	if not fast_falling and new_fast_falling:
 		if not is_in_event_horizon:
+			var diff = position - centroid
+			if norm_velocity.dot(diff) < 0:
+				norm_velocity = norm_velocity.project(diff.orthogonal())
 			$FastFall.play()
 			anim.set_animation("fastfalling")
 			$FastfallAnimation.visible = true
@@ -583,6 +602,7 @@ func die():
 	dead = true
 	name += "_(dead)"
 	stunned = false
+	prepping_fastfall = false
 	remove_shields(shields.size()) # not strictly necessary
 	norm_velocity = Vector2(0, 0)
 	$TrailingPowerup.visible = false

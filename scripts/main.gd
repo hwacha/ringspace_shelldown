@@ -5,6 +5,8 @@ var players_not_playing
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	print(Vector2(0, 2).project(Vector2(1, 1).normalized()))
+	print(Vector2(2, 2).project(Vector2(1, 0)))
 	Players.lock_action = true
 #	var bus_idx = AudioServer.get_bus_index("Master")
 #	AudioServer.set_bus_mute(bus_idx, true)
@@ -131,7 +133,7 @@ func _on_obstacle_timeout():
 		return
 
 	var obstacles = [
-		preload("res://scenes/Sun.tscn"),
+#		preload("res://scenes/Sun.tscn"),
 		preload("res://scenes/BlackHole.tscn")
 	]
 	var rand = rng.randi_range(0, obstacles.size() - 1)
