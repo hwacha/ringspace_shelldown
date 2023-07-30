@@ -230,10 +230,18 @@ func vacuum():
 	vacuum_instance.player_who_threw = self
 	vacuum_instance.modulate = color
 	
-	var diff = self.transform.origin - centroid
-	vacuum_instance.velocity = norm_velocity + perp_velocity
-	if vacuum_instance.velocity.length() == 0:
-		vacuum_instance.velocity = -diff
+	var analog_h_movement = Input.get_axis("move_left_analog_p" + str(id), "move_right_analog_p" + str(id))
+	var analog_v_movement = Input.get_axis("move_up_analog_p" + str(id), "move_down_analog_p" + str(id))
+	var analog_movement = Vector2(analog_h_movement, analog_v_movement)
+	
+	if analog_movement.is_zero_approx():
+		if is_on_floor():
+			vacuum_instance.velocity = self.position.direction_to(centroid) * 500
+		else:
+			vacuum_instance.velocity = norm_velocity + perp_velocity
+	else:
+		vacuum_instance.velocity = analog_movement * 500
+
 	vacuum_instance.transform.origin = self.transform.origin
 	get_parent().get_parent().add_child(vacuum_instance)
 	return true

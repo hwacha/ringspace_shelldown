@@ -238,7 +238,7 @@ wait_time = 7.5
 wait_time = 10.0
 
 [node name="ObstacleTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 102.0
 one_shot = true
 
 [node name="MatchTimer" type="Timer" parent="."]

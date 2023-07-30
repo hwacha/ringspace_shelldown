@@ -16,7 +16,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	transform.origin += velocity * speed * delta
-	scale += Vector2(0.2, 0.2)
+	scale += delta * 15 * Vector2(1, 1)
 	rotate(-2.0 * delta)
 
 func _on_decay_timeout():
