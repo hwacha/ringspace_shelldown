@@ -47,6 +47,6 @@ func _on_area_entered(area):
 	area.call_deferred("release_orbs_and_destruct")
 
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	get_parent().remove_child(self)
 	queue_free()

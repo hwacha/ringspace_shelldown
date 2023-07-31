@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=32 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://dubqjsa6ooahi" path="res://assets/ring_game_shield_two.wav" id="16_do0lq"]
 [ext_resource type="AudioStream" uid="uid://b4d4f0tkusc4f" path="res://assets/ring_game_shield_break_one.wav" id="16_yek1r"]
 [ext_resource type="AudioStream" uid="uid://x4ljkk3d4grm" path="res://assets/ring_game_shield_break_two.wav" id="18_de4by"]
+[ext_resource type="AudioStream" uid="uid://bpbu5hfv0h52p" path="res://assets/ring_game_expand.wav" id="19_5vdc5"]
+[ext_resource type="AudioStream" uid="uid://dth4uf0c253jy" path="res://assets/ring_game_deflate.wav" id="20_0csdf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
 resource_local_to_scene = true
@@ -280,6 +282,14 @@ volume_db = -80.0
 
 [node name="Break" type="AudioStreamPlayer2D" parent="Shield2"]
 stream = ExtResource("18_de4by")
+
+[node name="Expand" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_5vdc5")
+volume_db = 3.0
+
+[node name="Deflate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_0csdf")
+volume_db = 3.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

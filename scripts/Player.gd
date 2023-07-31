@@ -141,8 +141,11 @@ func remove_shields(num_shields: int) -> bool:
 func _set_expansion(new_expanded: bool):
 	if not expanded and new_expanded:
 		scale *= expansion_factor
+		$Expand.play()
 	elif expanded and not new_expanded:
 		scale /= expansion_factor
+		if not dead:
+			$Deflate.play()
 		if not $ExpandTimer.is_stopped():
 			$ExpandTimer.stop()
 		
