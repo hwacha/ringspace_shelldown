@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=30 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://m2x4jue20ggv" path="res://assets/Stun.png" id="7_cq5ab"]
 [ext_resource type="Script" path="res://scripts/Stun.gd" id="8_edg5s"]
 [ext_resource type="AudioStream" uid="uid://dp2xfrd22fns3" path="res://assets/ring_game_orb_collect.wav" id="11_jf6hc"]
+[ext_resource type="AudioStream" uid="uid://du5kxm6xht2gd" path="res://assets/ring_game_shield_one.wav" id="15_s4fay"]
+[ext_resource type="AudioStream" uid="uid://dubqjsa6ooahi" path="res://assets/ring_game_shield_two.wav" id="16_do0lq"]
+[ext_resource type="AudioStream" uid="uid://b4d4f0tkusc4f" path="res://assets/ring_game_shield_break_one.wav" id="16_yek1r"]
+[ext_resource type="AudioStream" uid="uid://x4ljkk3d4grm" path="res://assets/ring_game_shield_break_two.wav" id="18_de4by"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
 resource_local_to_scene = true
@@ -87,14 +91,14 @@ sprite_frames = ExtResource("4_gf6m5")
 
 [node name="LeftArrow" type="Sprite2D" parent="."]
 visible = false
-z_index = 1
+z_index = 30
 position = Vector2(-35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("4_t6g85")
 
 [node name="RightArrow" type="Sprite2D" parent="."]
 visible = false
-z_index = 1
+z_index = 30
 position = Vector2(35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("5_tvpea")
@@ -262,6 +266,20 @@ volume_db = -6.0
 stream = ExtResource("6")
 volume_db = -14.0
 pitch_scale = 1.33
+
+[node name="Shield1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_s4fay")
+volume_db = 3.0
+
+[node name="Break" type="AudioStreamPlayer2D" parent="Shield1"]
+stream = ExtResource("16_yek1r")
+
+[node name="Shield2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_do0lq")
+volume_db = -80.0
+
+[node name="Break" type="AudioStreamPlayer2D" parent="Shield2"]
+stream = ExtResource("18_de4by")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

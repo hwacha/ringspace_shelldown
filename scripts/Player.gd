@@ -108,7 +108,12 @@ func add_shields(num_shields: int):
 		get_parent().get_parent().add_child(shield_timer)
 		shield_timer.start()
 		shields.push_back(shield_timer)
-
+	
+	if shields.size() >= 1 and not $Shield1.playing:
+		$Shield1.play()
+		$Shield2.play()
+	
+	$Shield2.volume_db = $Shield1.volume_db + 3 if shields.size() >= 2 else -80
 	$AnimatedSprite2D.material.set("shader_parameter/num_shields", shields.size())
 
 func remove_shields(num_shields: int) -> bool:
@@ -124,6 +129,13 @@ func remove_shields(num_shields: int) -> bool:
 			cur_timer.queue_free()
 
 	$AnimatedSprite2D.material.set("shader_parameter/num_shields", shields.size())
+	
+	if shields.size() == 0:
+		$Shield1.stop()
+		$Shield2.stop()
+	
+	$Shield2.volume_db = $Shield1.volume_db + 3 if shields.size() >= 2 else -80
+	
 	return excess_shield_break
 	
 func _set_expansion(new_expanded: bool):
@@ -612,10 +624,19 @@ func _on_HurtBox_area_entered(hitbox):
 		# kill
 		if shields.size() > 0:
 			var excess_hits = false
+			var old_num_shields = shields.size()
 			if hitter.expanded:
 				excess_hits = remove_shields(3)
 			else:
 				excess_hits = remove_shields(1)
+			
+			var new_num_shields = shields.size()
+			
+			if old_num_shields >= 2 and new_num_shields < 2:
+				$Shield2/Break.play()
+			if old_num_shields >= 1 and new_num_shields < 1:
+				$Shield1/Break.play()
+			
 			if not excess_hits:
 				return
 		
