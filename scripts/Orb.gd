@@ -70,6 +70,7 @@ func _on_area_entered(area):
 			$WaitingToTravel.stop()
 			$AnimatedSprite2D.animation = "default"
 			get_parent().call_deferred("remove_child", self)
+			player.orb_sound_queue += 1
 			var new_orbs = player.get_node("Orbs")
 			new_orbs.call_deferred("add_child", self)
 			new_orbs.call_deferred("on_add_orb", self)
@@ -182,6 +183,7 @@ func _on_animation_player_animation_finished(_anim_name):
 			else: # respawned
 				claimed_player.get_node("Orbs").call_deferred("add_child", self)
 				claimed_player.get_node("Orbs").call_deferred("on_add_orb", self)
+				claimed_player.orb_sound_queue += 1
 				
 		else:
 			# unclaimed orbs should be grabbable and move around
@@ -195,7 +197,7 @@ func _on_animation_player_animation_finished(_anim_name):
 		else:
 			next_claimant.get_node("Orbs").call_deferred("add_child", self)
 			next_claimant.get_node("Orbs").call_deferred("on_add_orb", self)
-		
+			next_claimant.orb_sound_queue += 1
 		next_claimant = null
 	
 

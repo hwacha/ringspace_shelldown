@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=26 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bgkhlkm6fuxo4" path="res://assets/ring_game_fast_fall.wav" id="6"]
 [ext_resource type="Texture2D" uid="uid://m2x4jue20ggv" path="res://assets/Stun.png" id="7_cq5ab"]
 [ext_resource type="Script" path="res://scripts/Stun.gd" id="8_edg5s"]
+[ext_resource type="AudioStream" uid="uid://dp2xfrd22fns3" path="res://assets/ring_game_orb_collect.wav" id="11_jf6hc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
 resource_local_to_scene = true
@@ -241,6 +242,14 @@ explosiveness = 1.0
 wait_time = 1.8
 one_shot = true
 
+[node name="OrbCollect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_jf6hc")
+volume_db = 9.0
+pitch_scale = 1.3
+
+[node name="Timer" type="Timer" parent="OrbCollect"]
+wait_time = 0.05
+
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4")
 volume_db = -21.0
@@ -252,7 +261,7 @@ volume_db = -6.0
 [node name="FastFall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6")
 volume_db = -14.0
-pitch_scale = 1.5
+pitch_scale = 1.33
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
@@ -267,3 +276,4 @@ pitch_scale = 1.5
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="OrbCollect/Timer" to="." method="_on_orbcollect_timer_timeout"]

@@ -5,7 +5,8 @@ var registered_players = []
 var t = 0
 
 func _ready():
-	pass
+	for i in range(4):
+		update_controls(i)
 	
 func update_controls(controller_id):
 	var col = $PlayerRegister/Left if controller_id < 2 else $PlayerRegister/Right
@@ -25,9 +26,7 @@ func set_registered_players(id):
 		container.get_node("P" + str(id) + "/Registered").set_visible(true)
 	
 	var has_one_player = registered_players.size() > 0
-#	if not $PlayerRegister/Center/StartPrompt.visible and has_one_player:
-#		t = 0
-	$PlayerRegister/Center/StartPrompt.visible = registered_players.size() > 0
+	$PlayerRegister/Center/StartPrompt.visible = has_one_player
 	
 func get_input():
 	for i in range(1, 5):

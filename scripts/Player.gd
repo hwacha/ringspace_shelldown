@@ -62,6 +62,8 @@ var is_in_event_horizon = false : set = _set_is_in_event_horizon
 var event_horizon_entry_point = null
 var time_in_event_horizon : float = 0 # seconds
 
+var orb_sound_queue = 0 : set = set_orb_sound_queue
+
 func _ready():
 	var crust = get_node("../../Crust")
 	centroid = crust.transform.origin
@@ -257,6 +259,22 @@ func bomb():
 	
 	get_parent().get_parent().add_child(bomb_instance)
 	return true
+
+func set_orb_sound_queue(new_orb_sound_queue):
+	if new_orb_sound_queue > 5:
+		return
+
+	if orb_sound_queue == 0 and new_orb_sound_queue > 0:
+		if $OrbCollect/Timer.is_stopped():
+			$OrbCollect.play()
+			$OrbCollect/Timer.start()
+			orb_sound_queue = new_orb_sound_queue - 1
+	elif orb_sound_queue > 0 and new_orb_sound_queue == 0:
+		$OrbCollect/Timer.stop()
+	else:
+		$OrbCollect.play()
+	
+	orb_sound_queue = new_orb_sound_queue
 
 func get_input(diff):
 	perp_velocity = Vector2(0, 0)
@@ -726,3 +744,7 @@ func _on_bounce_timer_timeout():
 
 func _on_stun_timer_timeout():
 	stunned = false
+
+
+func _on_orbcollect_timer_timeout():
+	orb_sound_queue -= 1
