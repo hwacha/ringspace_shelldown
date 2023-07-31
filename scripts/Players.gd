@@ -94,7 +94,6 @@ var elapsed_time = 0
 @export var mute_sound : bool = false
 
 func on_controller_change(controller_id: int, connected: bool):
-	print("on controller change")
 	if controller_id > 3:
 		return
 

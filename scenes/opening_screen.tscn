@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="3"]
 [ext_resource type="Texture2D" uid="uid://2n2sfvhnedvq" path="res://assets/starfield.png" id="3_rwijt"]
-[ext_resource type="Texture2D" uid="uid://d31o8ytnyi25e" path="res://assets/Xbox_Series/Bottom_Action.png" id="5_u42cq"]
+[ext_resource type="Texture2D" uid="uid://d1dortphwfptw" path="res://assets/Generic/Bottom_Action.png" id="5_iypub"]
 [ext_resource type="Texture2D" uid="uid://u6ldt35i7cuo" path="res://assets/Keys/3/Start.png" id="6_68qrk"]
 [ext_resource type="PackedScene" uid="uid://bcqi1dwvih6h5" path="res://scenes/how_to.tscn" id="6_emi4r"]
 
@@ -125,7 +125,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Left/P1/Unregistered/Container"]
-texture = ExtResource("5_u42cq")
+texture = ExtResource("5_iypub")
 centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Left/P1"]
@@ -171,7 +171,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Left/P2/Unregistered/Container"]
-texture = ExtResource("5_u42cq")
+texture = ExtResource("5_iypub")
 centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Left/P2"]
@@ -252,7 +252,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Right/P4/Unregistered/Container"]
-texture = ExtResource("5_u42cq")
+texture = ExtResource("5_iypub")
 centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Right/P4"]
@@ -298,7 +298,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerRegister/Right/P3/Unregistered/Container"]
-texture = ExtResource("5_u42cq")
+texture = ExtResource("5_iypub")
 centered = false
 
 [node name="Registered" type="RichTextLabel" parent="PlayerRegister/Right/P3"]

@@ -25,8 +25,8 @@ func set_registered_players(id):
 		container.get_node("P" + str(id) + "/Registered").set_visible(true)
 	
 	var has_one_player = registered_players.size() > 0
-	if not $PlayerRegister/Center/StartPrompt.visible and has_one_player:
-		t = 0
+#	if not $PlayerRegister/Center/StartPrompt.visible and has_one_player:
+#		t = 0
 	$PlayerRegister/Center/StartPrompt.visible = registered_players.size() > 0
 	
 func get_input():
@@ -60,7 +60,7 @@ func _process(delta):
 
 	$Title.rotate(-0.1 * delta)
 	
-	var flash_t = 1 + cos(t * 3)
+	var flash_t = 1 + cos(t * 8 / PI)
 	$PlayerRegister/Center/StartPrompt/CenterContainer/RichTextLabel.modulate.a = flash_t
 	$PlayerRegister/Center/StartPrompt/CenterContainer/Sprite2D.modulate.a = flash_t
 	t += delta
