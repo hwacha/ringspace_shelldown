@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cy1q5p8gb1ttp"]
+[gd_scene load_steps=15 format=3 uid="uid://cy1q5p8gb1ttp"]
 
 [ext_resource type="Script" path="res://scripts/NeutralOrbCapsule.gd" id="1_1lavi"]
 [ext_resource type="Texture2D" uid="uid://ckwlwcbkffn01" path="res://assets/NeutraPod SpriteSheet.png" id="1_3jet8"]
@@ -63,12 +63,46 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ooui"]
 radius = 32.0156
 
+[sub_resource type="Animation" id="Animation_kwop4"]
+resource_name = "arrival"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.100111, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(3, 3, 3, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t0wdm"]
+_data = {
+"arrival": SubResource("Animation_kwop4")
+}
+
 [node name="NeutralOrbCapsule" type="Area2D"]
+modulate = Color(1, 1, 1, 0)
 collision_layer = 1048580
 collision_mask = 8
 script = ExtResource("1_1lavi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(10, 10, 10, 1)
 z_index = 1
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_3vsck")
@@ -91,6 +125,11 @@ script = ExtResource("3_7plo4")
 wait_time = 15.0
 one_shot = true
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t0wdm")
+}
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]

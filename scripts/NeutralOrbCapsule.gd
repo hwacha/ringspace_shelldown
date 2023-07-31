@@ -14,6 +14,7 @@ var hover_speed : float = 2
 var is_opening : bool = false
 
 func _ready():
+	$AnimationPlayer.play("arrival")
 	original_position = self.transform.origin
 	var norm_theta = self.rotation - PI/2
 	norm_direction = Vector2(cos(norm_theta), sin(norm_theta))
