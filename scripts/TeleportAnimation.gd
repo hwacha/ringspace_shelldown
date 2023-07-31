@@ -37,6 +37,8 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 	add_child(animation_player)
+	
+	$Pew.play()
 
 func _process(_delta):
 	if powerup != null:
@@ -56,7 +58,6 @@ func _on_animation_finished(_anim):
 	player.transform.origin = destination
 	player.visible = true
 	player.lock_physics = false
-	
 	
 	get_parent().remove_child(self)
 	queue_free()
