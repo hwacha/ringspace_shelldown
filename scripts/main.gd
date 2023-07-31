@@ -37,6 +37,7 @@ func _process(_delta):
 				# add powerup node
 				var powerup = preload("res://scenes/Powerup.tscn").instantiate()
 				powerup.transform.origin = $Score.score_locations[str(id)]
+				powerup.modulate = Players.player_colors[id - 1].lightened(0.5)
 				powerup.name += str(id)
 				$Powerups.add_child(powerup)
 				#spawn player
