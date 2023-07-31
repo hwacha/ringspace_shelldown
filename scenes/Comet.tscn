@@ -1,10 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxq2m3u86oem5"]
+[gd_scene load_steps=7 format=3 uid="uid://bxq2m3u86oem5"]
 
 [ext_resource type="Script" path="res://scripts/Comet.gd" id="1_7r0yo"]
 [ext_resource type="Texture2D" uid="uid://c3st2svoy0plk" path="res://assets/comet_Blue.png" id="2_1txub"]
+[ext_resource type="AudioStream" uid="uid://i1ic2n0jjtji" path="res://assets/ring_game_comet.wav" id="3_v042m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w2oti"]
 radius = 19.0
+
+[sub_resource type="Animation" id="Animation_4c22a"]
+resource_name = "lifetime"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(0.1, 0.1), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Launch:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vov2"]
+_data = {
+"lifetime": SubResource("Animation_4c22a")
+}
 
 [node name="Comet" type="Area2D"]
 scale = Vector2(1.5, 1.5)
@@ -14,16 +59,22 @@ script = ExtResource("1_7r0yo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(39, 1.19209e-07)
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.01, 0.01)
 texture = ExtResource("2_1txub")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_w2oti")
 
-[node name="Decay" type="Timer" parent="."]
-one_shot = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2vov2")
+}
+
+[node name="Launch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_v042m")
+volume_db = -7.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Decay" to="." method="_on_decay_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

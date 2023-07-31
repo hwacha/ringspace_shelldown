@@ -14,7 +14,7 @@ func _set_player_who_shot(player):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Decay.start()
+	$AnimationPlayer.play("lifetime")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -23,11 +23,6 @@ func _process(delta):
 	var perp_velocity = diff.rotated(dir_sign * (PI / 2 + 0.01)).normalized() * delta * speed
 	rotation = perp_velocity.angle() + PI
 	self.transform.origin += perp_velocity
-
-
-func _on_decay_timeout():
-	get_parent().remove_child(self)
-	self.queue_free()
 
 
 func _on_body_entered(body):
@@ -50,3 +45,8 @@ func _on_area_entered(area):
 		orb.next_claimant = player_who_shot
 		orb.next_claimant_id = player_who_shot_id
 	area.call_deferred("release_orbs_and_destruct")
+
+
+func _on_animation_player_animation_finished(anim_name):
+	get_parent().remove_child(self)
+	queue_free()
