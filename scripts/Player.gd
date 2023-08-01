@@ -63,6 +63,7 @@ var event_horizon_entry_point = null
 var time_in_event_horizon : float = 0 # seconds
 
 var orb_sound_queue = 0 : set = set_orb_sound_queue
+var footstep_index = 0
 
 func _ready():
 	var crust = get_node("../../Crust")
@@ -467,6 +468,7 @@ func _physics_process(delta):
 		
 		# big stuns nearby players
 		if not was_grounded_last_frame and expanded and fast_falling:
+			$ExpandStomp.play()
 			for player in get_parent().get_children():
 				if player == self:
 					continue
@@ -693,6 +695,10 @@ func _on_Overlap_area_exited(area):
 func _on_animated_sprite_2d_frame_changed():
 	if anim.animation == "jumping" and anim.frame == 2:
 		jump_complete = true
+	
+	if anim.animation == "running" and anim.frame in [1, 5] and expanded:
+		$Expand.get_child(footstep_index).play()
+		footstep_index = (footstep_index + 1) % $Expand.get_child_count()
 
 func _on_teleport_invulnerability_timeout():
 	invulnerable = false

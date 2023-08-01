@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=34 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
@@ -20,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://x4ljkk3d4grm" path="res://assets/ring_game_shield_break_two.wav" id="18_de4by"]
 [ext_resource type="AudioStream" uid="uid://bpbu5hfv0h52p" path="res://assets/ring_game_expand.wav" id="19_5vdc5"]
 [ext_resource type="AudioStream" uid="uid://dth4uf0c253jy" path="res://assets/ring_game_deflate.wav" id="20_0csdf"]
+[ext_resource type="AudioStream" uid="uid://cs5qx4kas55yc" path="res://assets/ring_game_expand_footstep.wav" id="20_lstha"]
+[ext_resource type="AudioStream" uid="uid://kioydvob0k3d" path="res://assets/ring_game_expand_stomp.wav" id="22_evg4u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sc3mh"]
 resource_local_to_scene = true
@@ -287,9 +289,34 @@ stream = ExtResource("18_de4by")
 stream = ExtResource("19_5vdc5")
 volume_db = 3.0
 
+[node name="Footstep1" type="AudioStreamPlayer2D" parent="Expand"]
+stream = ExtResource("20_lstha")
+volume_db = -6.0
+pitch_scale = 0.75
+
+[node name="Footstep2" type="AudioStreamPlayer2D" parent="Expand"]
+stream = ExtResource("20_lstha")
+volume_db = -6.0
+pitch_scale = 0.75
+
+[node name="Footstep3" type="AudioStreamPlayer2D" parent="Expand"]
+stream = ExtResource("20_lstha")
+volume_db = -6.0
+pitch_scale = 0.75
+
+[node name="Footstep4" type="AudioStreamPlayer2D" parent="Expand"]
+stream = ExtResource("20_lstha")
+volume_db = -6.0
+pitch_scale = 0.8
+
 [node name="Deflate" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_0csdf")
 volume_db = 3.0
+
+[node name="ExpandStomp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_evg4u")
+volume_db = -6.0
+pitch_scale = 0.9
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
