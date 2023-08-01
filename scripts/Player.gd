@@ -622,6 +622,9 @@ func _on_HurtBox_area_entered(hitbox):
 	var hitbox_down  = hitter.transform.origin - centroid
 	var hurtbox_down = self.transform.origin - centroid
 	
+	if self.norm_velocity.length() < 500 and hitter.norm_velocity.length() < 500:
+		return
+	
 	if (hitter.norm_velocity.dot(hitbox_down) > 0 or \
 		self.norm_velocity.dot(hurtbox_down) < 0):
 		# bounce
