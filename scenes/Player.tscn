@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=39 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://m2x4jue20ggv" path="res://assets/Stun.png" id="7_cq5ab"]
 [ext_resource type="Script" path="res://scripts/Stun.gd" id="8_edg5s"]
 [ext_resource type="AudioStream" uid="uid://dp2xfrd22fns3" path="res://assets/ring_game_orb_collect.wav" id="11_jf6hc"]
+[ext_resource type="Texture2D" uid="uid://bnmnlqeriod70" path="res://assets/Generic/Left_Action.png" id="11_jor5a"]
 [ext_resource type="AudioStream" uid="uid://dp8asf157hfgv" path="res://assets/ring_game_wrong_action.wav" id="11_o875n"]
 [ext_resource type="AudioStream" uid="uid://du5kxm6xht2gd" path="res://assets/ring_game_shield_one.wav" id="15_s4fay"]
 [ext_resource type="AudioStream" uid="uid://dubqjsa6ooahi" path="res://assets/ring_game_shield_two.wav" id="16_do0lq"]
@@ -216,6 +217,16 @@ show_behind_parent = true
 top_level = true
 scale = Vector2(0.05, 0.05)
 
+[node name="Prompt" type="Sprite2D" parent="TrailingPowerup"]
+visible = false
+position = Vector2(350, -350)
+scale = Vector2(6, 6)
+texture = ExtResource("11_jor5a")
+
+[node name="Timer" type="Timer" parent="TrailingPowerup/Prompt"]
+wait_time = 0.5
+autostart = true
+
 [node name="PowerupWhiff" type="GPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.4)
 position = Vector2(-50, 0)
@@ -359,6 +370,7 @@ explosiveness = 1.0
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="area_entered" from="Overlap" to="." method="_on_Overlap_area_entered"]
 [connection signal="area_exited" from="Overlap" to="." method="_on_Overlap_area_exited"]
+[connection signal="timeout" from="TrailingPowerup/Prompt/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TeleportInvulnerability" to="." method="_on_teleport_invulnerability_timeout"]
 [connection signal="timeout" from="ExpandTimer" to="." method="_on_expand_timer_timeout"]
 [connection signal="timeout" from="FastTimer" to="." method="_on_fast_timer_timeout"]

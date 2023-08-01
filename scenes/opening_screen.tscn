@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=14 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://u6ldt35i7cuo" path="res://assets/Keys/3/Start.png" id="6_68qrk"]
 [ext_resource type="PackedScene" uid="uid://bcqi1dwvih6h5" path="res://scenes/how_to.tscn" id="6_emi4r"]
 [ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="6_utyt7"]
+[ext_resource type="AudioStream" uid="uid://croqd1mmik6dk" path="res://assets/ring_game_menu_music.wav" id="9_kara6"]
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -50,6 +51,40 @@ corner_radius_top_left = 150
 corner_radius_top_right = 150
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
+
+[sub_resource type="Animation" id="Animation_xfccm"]
+resource_name = "fade in music"
+length = 91.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3, 89.1, 91.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-80.0, -12.0, -12.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2cfe"]
+_data = {
+"play_music": SubResource("Animation_xfccm")
+}
 
 [node name="OpeningScreen" type="Control"]
 layout_mode = 3
@@ -355,3 +390,13 @@ pitch_scale = 1.5
 layout_mode = 1
 offset_left = -420.0
 dir = 1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_kara6")
+volume_db = -80.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BackgroundMusic"]
+autoplay = "play_music"
+libraries = {
+"": SubResource("AnimationLibrary_t2cfe")
+}

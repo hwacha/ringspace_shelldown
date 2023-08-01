@@ -2,11 +2,15 @@ extends Control
 
 var registered_players = []
 
+var rng = RandomNumberGenerator.new()
+
 var t = 0
 
 func _ready():
 	for i in range(4):
 		update_controls(i)
+	
+	rng.randomize()
 	
 func update_controls(controller_id):
 	var col = $PlayerRegister/Left if controller_id < 2 else $PlayerRegister/Right

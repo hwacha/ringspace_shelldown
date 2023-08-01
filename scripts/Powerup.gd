@@ -40,6 +40,7 @@ func on_use_powerup(reference):
 			powerup_used = reference.bomb()
 
 	if powerup_used:
+		Players.players_have_used_one_powerup[reference.id - 1] = true
 		lock_use_powerup = true
 		$AnimationPlayer.play("deplete")
 	else:

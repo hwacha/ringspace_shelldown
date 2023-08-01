@@ -64,6 +64,7 @@ var time_in_event_horizon : float = 0 # seconds
 
 var orb_sound_queue = 0 : set = set_orb_sound_queue
 var footstep_index = 0
+var prompt_blink = true
 
 func _ready():
 	var crust = get_node("../../Crust")
@@ -449,7 +450,15 @@ func _physics_process(delta):
 	$TrailingPowerup.position = $TrailingPowerup.position.lerp(destination.global_transform.origin, delta * 8.0)
 	$TrailingPowerup.rotation = $TrailingPowerup.position.angle_to_point(Vector2(540,540)) + PI/2
 	$TrailingPowerup.scale = 0.05 * powerup.scale * ((expansion_factor * 0.75) if expanded else 1.0)
-	$TrailingPowerup.modulate = powerup.modulate * powerup_sprite.modulate
+	$TrailingPowerup.self_modulate = powerup.modulate * powerup_sprite.modulate
+	
+	
+	$TrailingPowerup/Prompt.visible = $TrailingPowerup.texture != null and prompt_blink \
+		and not Players.players_have_used_one_powerup[self.id - 1]
+	
+	if $TrailingPowerup/Prompt.visible:
+		$TrailingPowerup/Prompt.rotation = -$TrailingPowerup.rotation
+		$TrailingPowerup/Prompt.texture = Players.control_icons[self.id - 1]["powerup"]
 	
 	$LeftArrow.visible = false
 	$RightArrow.visible = false
@@ -781,3 +790,7 @@ func _on_stun_timer_timeout():
 
 func _on_orbcollect_timer_timeout():
 	orb_sound_queue -= 1
+
+
+func _on_timer_timeout():
+	prompt_blink = not prompt_blink

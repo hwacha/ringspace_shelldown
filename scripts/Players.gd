@@ -89,6 +89,13 @@ var stored_orbs = [
 	[]
 ]
 
+var players_have_used_one_powerup = [
+	false,
+	false,
+	false,
+	false
+]
+
 var elapsed_time = 0
 
 @export var mute_sound : bool = false
@@ -198,6 +205,12 @@ func spawn_players():
 		
 		get_node("/root/Main/PlayersOnField").call_deferred("add_child", player_instance)
 	
+	players_have_used_one_powerup = [
+		false,
+		false,
+		false,
+		false
+	]
 	is_round_ongoing = true
 	
 func respawn_player(player_id, priority):
