@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dfmogfs60yw7s"]
+[gd_scene load_steps=38 format=3 uid="uid://dfmogfs60yw7s"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
 [ext_resource type="Shader" path="res://scripts/player.gdshader" id="2_isd1j"]
@@ -75,6 +75,27 @@ gravity = Vector3(0, 0, 0)
 initial_velocity_min = 300.0
 initial_velocity_max = 300.0
 scale_curve = SubResource("CurveTexture_m1t1k")
+
+[sub_resource type="Curve" id="Curve_hs2wd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.447061), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mmyq0"]
+curve = SubResource("Curve_hs2wd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7fsp7"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 90.0
+flatness = 1.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 150.0
+initial_velocity_max = 225.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.04
+scale_max = 0.04
+scale_curve = SubResource("CurveTexture_mmyq0")
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
@@ -322,6 +343,16 @@ volume_db = 3.0
 stream = ExtResource("22_evg4u")
 volume_db = -6.0
 pitch_scale = 0.9
+
+[node name="StompParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 31)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_7fsp7")
+texture = ExtResource("3_yudyd")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

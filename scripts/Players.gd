@@ -174,7 +174,9 @@ func player_constructor(id, priority):
 	player_instance.id = id
 	player_instance.color = player_colors[id - 1]
 	player_instance.get_node("DeathParticles").modulate = player_instance.color
+	player_instance.get_node("StompParticles").modulate = player_instance.color
 	player_instance.get_node("DeathParticles").modulate.a = 0.3
+	player_instance.get_node("StompParticles").modulate.a = 0.6
 	player_instance.get_node("AnimatedSprite2D").material.set("shader_parameter/primary_color", player_invulnerability_colors[id - 1])
 	player_instance.starting_theta = 0
 	player_instance.set_process_priority(priority)

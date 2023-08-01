@@ -470,6 +470,8 @@ func _physics_process(delta):
 		# big stuns nearby players
 		if not was_grounded_last_frame and expanded and fast_falling:
 			$ExpandStomp.play()
+			$StompParticles.restart()
+			$StompParticles.emitting = true
 			for player in get_parent().get_children():
 				if player == self:
 					continue
