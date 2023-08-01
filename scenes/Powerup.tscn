@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg3v46vj7p1fd"]
+[gd_scene load_steps=6 format=3 uid="uid://cg3v46vj7p1fd"]
 
 [ext_resource type="Script" path="res://scripts/Powerup.gd" id="1_p8mi1"]
+[ext_resource type="AudioStream" uid="uid://dp2xfrd22fns3" path="res://assets/ring_game_orb_collect.wav" id="2_kr3uk"]
 
 [sub_resource type="Animation" id="Animation_77lnt"]
 resource_name = "deplete"
@@ -51,5 +52,10 @@ scale = Vector2(0.1, 0.1)
 libraries = {
 "": SubResource("AnimationLibrary_km8f1")
 }
+
+[node name="Collect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_kr3uk")
+volume_db = 12.0
+pitch_scale = 0.75
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

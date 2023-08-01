@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy1q5p8gb1ttp"]
+[gd_scene load_steps=16 format=3 uid="uid://cy1q5p8gb1ttp"]
 
 [ext_resource type="Script" path="res://scripts/NeutralOrbCapsule.gd" id="1_1lavi"]
 [ext_resource type="Texture2D" uid="uid://ckwlwcbkffn01" path="res://assets/NeutraPod SpriteSheet.png" id="1_3jet8"]
 [ext_resource type="Script" path="res://scripts/Orbs.gd" id="3_7plo4"]
 [ext_resource type="PackedScene" uid="uid://djy1ltinuio1p" path="res://scenes/Orb.tscn" id="3_afj57"]
+[ext_resource type="AudioStream" uid="uid://b6ox2tejy2kpl" path="res://assets/ring_game_capsule_click.wav" id="5_iauih"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dcpbr"]
 atlas = ExtResource("1_3jet8")
@@ -130,6 +131,11 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_t0wdm")
 }
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_iauih")
+volume_db = -20.0
+pitch_scale = 0.75
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]

@@ -73,7 +73,7 @@ libraries = {
 
 [node name="Launch" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_v042m")
-volume_db = -7.0
+volume_db = -9.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

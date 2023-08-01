@@ -51,6 +51,7 @@ func _on_area_entered(area):
 			
 		# open the capsule
 		$Release.stop()
+		$Click.play()
 		$AnimatedSprite2D.animation = "open"
 		
 		# player is next orb claimant

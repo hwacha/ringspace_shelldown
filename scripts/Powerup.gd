@@ -19,6 +19,7 @@ func set_powerup(new_powerup):
 	else:
 		$Sprite2D.texture = load("res://assets/" + powerup + ".png")
 		$AnimationPlayer.play("spawn")
+		$Collect.play()
 
 func on_use_powerup(reference):
 	var powerup_used = false
