@@ -98,6 +98,7 @@ _data = {
 
 [node name="NeutralOrbCapsule" type="Area2D"]
 modulate = Color(1, 1, 1, 0)
+z_index = 2
 collision_layer = 1048580
 collision_mask = 8
 script = ExtResource("1_1lavi")

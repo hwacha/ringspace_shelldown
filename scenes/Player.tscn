@@ -210,15 +210,18 @@ debug_color = Color(0.415686, 0.392157, 0.701961, 0.419608)
 
 [node name="Orbs" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.5)
+z_index = -3
 script = ExtResource("4_v8tyi")
 
 [node name="TrailingPowerup" type="Sprite2D" parent="."]
 show_behind_parent = true
 top_level = true
+z_index = 2
 scale = Vector2(0.05, 0.05)
 
 [node name="Prompt" type="Sprite2D" parent="TrailingPowerup"]
 visible = false
+z_index = 1
 position = Vector2(350, -350)
 scale = Vector2(6, 6)
 texture = ExtResource("11_jor5a")
