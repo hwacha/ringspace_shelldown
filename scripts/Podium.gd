@@ -219,6 +219,7 @@ func _on_animation_finished(_anim):
 
 	$LaunchFireworks.play("launch_fireworks")
 	$InputTimer.start()
+	$Victory.play()
 
 func _on_input_timer_timeout():
 	accepting_input = true

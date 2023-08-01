@@ -19,11 +19,13 @@ func set_registered_players(id):
 		registered_players.erase(id)
 		container.get_node("P" + str(id) + "/Registered").set_visible(false)
 		container.get_node("P" + str(id) + "/Unregistered").set_visible(true)
+		container.get_node("P" + str(id) + "/Unregister").play()
 	else:
 		registered_players.push_back(id)
 		$PlayerRegister/Center/StartPrompt/CenterContainer/Sprite2D.texture = Players.control_icons[id - 1]["start"]
 		container.get_node("P" + str(id) + "/Unregistered").set_visible(false)
 		container.get_node("P" + str(id) + "/Registered").set_visible(true)
+		container.get_node("P" + str(id) + "/Register").play()
 	
 	var has_one_player = registered_players.size() > 0
 	$PlayerRegister/Center/StartPrompt.visible = has_one_player

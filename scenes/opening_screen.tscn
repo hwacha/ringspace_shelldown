@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmu5yhute6x8k"]
+[gd_scene load_steps=11 format=3 uid="uid://dmu5yhute6x8k"]
 
 [ext_resource type="Script" path="res://scripts/opening_screen.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bw38om84lja25" path="res://assets/CircleTitle Small.png" id="2_do112"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d1dortphwfptw" path="res://assets/Generic/Bottom_Action.png" id="5_iypub"]
 [ext_resource type="Texture2D" uid="uid://u6ldt35i7cuo" path="res://assets/Keys/3/Start.png" id="6_68qrk"]
 [ext_resource type="PackedScene" uid="uid://bcqi1dwvih6h5" path="res://scenes/how_to.tscn" id="6_emi4r"]
+[ext_resource type="AudioStream" uid="uid://776gei1fv8sj" path="res://assets/ring_game_round_beep.wav" id="6_utyt7"]
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -142,6 +143,15 @@ text = "[center]P1 Joined[/center]"
 fit_content = true
 scroll_active = false
 
+[node name="Register" type="AudioStreamPlayer2D" parent="PlayerRegister/Left/P1"]
+stream = ExtResource("6_utyt7")
+pitch_scale = 2.0
+
+[node name="Unregister" type="AudioStreamPlayer2D" parent="PlayerRegister/Left/P1"]
+position = Vector2(816, 167)
+stream = ExtResource("6_utyt7")
+pitch_scale = 1.5
+
 [node name="P2" type="CenterContainer" parent="PlayerRegister/Left"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -187,6 +197,15 @@ bbcode_enabled = true
 text = "[center]P2 Joined[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="Register" type="AudioStreamPlayer2D" parent="PlayerRegister/Left/P2"]
+stream = ExtResource("6_utyt7")
+pitch_scale = 2.0
+
+[node name="Unregister" type="AudioStreamPlayer2D" parent="PlayerRegister/Left/P2"]
+position = Vector2(816, 0)
+stream = ExtResource("6_utyt7")
+pitch_scale = 1.5
 
 [node name="Center" type="CenterContainer" parent="PlayerRegister"]
 layout_mode = 2
@@ -269,6 +288,15 @@ text = "[center]P4 Joined[/center]"
 fit_content = true
 scroll_active = false
 
+[node name="Register" type="AudioStreamPlayer2D" parent="PlayerRegister/Right/P4"]
+stream = ExtResource("6_utyt7")
+pitch_scale = 2.0
+
+[node name="Unregister" type="AudioStreamPlayer2D" parent="PlayerRegister/Right/P4"]
+position = Vector2(0, 167)
+stream = ExtResource("6_utyt7")
+pitch_scale = 1.5
+
 [node name="P3" type="CenterContainer" parent="PlayerRegister/Right"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -314,6 +342,14 @@ bbcode_enabled = true
 text = "[center]P3 Joined[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="Register" type="AudioStreamPlayer2D" parent="PlayerRegister/Right/P3"]
+stream = ExtResource("6_utyt7")
+pitch_scale = 2.0
+
+[node name="Unregister" type="AudioStreamPlayer2D" parent="PlayerRegister/Right/P3"]
+stream = ExtResource("6_utyt7")
+pitch_scale = 1.5
 
 [node name="how_to" parent="." instance=ExtResource("6_emi4r")]
 layout_mode = 1

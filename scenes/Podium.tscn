@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2msnbyhjjr1v"]
+[gd_scene load_steps=13 format=3 uid="uid://c2msnbyhjjr1v"]
 
 [ext_resource type="Script" path="res://scripts/Podium.gd" id="1_l7k1u"]
 [ext_resource type="FontFile" uid="uid://b186fidq2hqpa" path="res://assets/Silver Forte.ttf" id="2_83oer"]
 [ext_resource type="PackedScene" uid="uid://bbxijbnvpxfkh" path="res://scenes/firework.tscn" id="3_x7tq7"]
+[ext_resource type="AudioStream" uid="uid://dmp86wb15pdqe" path="res://assets/ring_game_victory_music.wav" id="4_rdhny"]
 
 [sub_resource type="Animation" id="Animation_mrkc5"]
 resource_name = "fadeout"
@@ -18,6 +19,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Victory:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.0, -30.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jkisj"]
@@ -83,28 +96,28 @@ _data = {
 "launch_fireworks": SubResource("Animation_6agsq")
 }
 
-[sub_resource type="Curve2D" id="Curve2D_07g8e"]
+[sub_resource type="Curve2D" id="Curve2D_gn86s"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -263, 151)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_4sgvx"]
+[sub_resource type="Curve2D" id="Curve2D_6grgo"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, -74, 52)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_36cg7"]
+[sub_resource type="Curve2D" id="Curve2D_nnjm7"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, 127, 58)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_nr5ry"]
+[sub_resource type="Curve2D" id="Curve2D_jbcs4"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(-40.9179, 633.008, 40.9179, -633.008, 0, 675, 0, 0, 0, 0, 304, 150)
@@ -173,19 +186,23 @@ libraries = {
 
 [node name="Firework1" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_07g8e")
+curve = SubResource("Curve2D_gn86s")
 
 [node name="Firework2" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_4sgvx")
+curve = SubResource("Curve2D_6grgo")
 
 [node name="Firework3" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_36cg7")
+curve = SubResource("Curve2D_nnjm7")
 
 [node name="Firework4" parent="." instance=ExtResource("3_x7tq7")]
 visible = false
-curve = SubResource("Curve2D_nr5ry")
+curve = SubResource("Curve2D_jbcs4")
+
+[node name="Victory" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_rdhny")
+volume_db = -6.0
 
 [connection signal="timeout" from="InputTimer" to="." method="_on_input_timer_timeout"]
 [connection signal="timeout" from="Timeout" to="." method="_on_timeout_timeout"]
