@@ -17,6 +17,7 @@ _data = [Vector2(0, 0.0500182), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="BlackHoleExit" type="Path2D"]
+z_index = 10
 curve = SubResource("Curve2D_i8n25")
 script = ExtResource("1_y0csx")
 
@@ -25,13 +26,13 @@ loop = false
 
 [node name="Sprite2D" type="Sprite2D" parent="PathFollow2D"]
 modulate = Color(1, 1, 1, 0.7)
-z_index = 5
+z_index = 2
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("2_4xxkk")
 
 [node name="Line2D" type="Line2D" parent="."]
 modulate = Color(1, 1, 1, 0.3)
-z_index = 4
+z_index = 1
 width = 50.0
 width_curve = SubResource("Curve_ie68x")
 texture = ExtResource("3_35163")

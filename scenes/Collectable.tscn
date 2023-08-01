@@ -27,7 +27,7 @@ _data = {
 }
 
 [node name="Collectable" type="Area2D"]
-z_index = 3
+z_index = 20
 scale = Vector2(0.1, 0.1)
 collision_layer = 0
 collision_mask = 2

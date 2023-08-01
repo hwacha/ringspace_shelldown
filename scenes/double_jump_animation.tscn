@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/double_jump_animation.gd" id="2_6t3vx"]
 
 [node name="DoubleJumpAnimation" type="AnimatedSprite2D"]
-z_index = 1
+z_index = 31
 position = Vector2(0, -25)
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("1_5m2jf")

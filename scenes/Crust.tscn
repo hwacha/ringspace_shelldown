@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/crust.gd" id="1_7kl40"]
 
 [node name="Crust" type="StaticBody2D"]
-z_index = 1
 position = Vector2(540, 540)
 collision_mask = 2
 script = ExtResource("1_7kl40")

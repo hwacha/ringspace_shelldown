@@ -106,6 +106,7 @@ script = ExtResource("1")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 material = SubResource("ShaderMaterial_sc3mh")
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("2_l3i4t")
@@ -113,25 +114,29 @@ sprite_frames = ExtResource("2_l3i4t")
 [node name="FastfallAnimation" type="AnimatedSprite2D" parent="."]
 visible = false
 show_behind_parent = true
+z_index = 4
 scale = Vector2(0.05, 0.05)
 sprite_frames = ExtResource("4_gf6m5")
 
 [node name="LeftArrow" type="Sprite2D" parent="."]
 visible = false
-z_index = 30
+z_index = 40
+z_as_relative = false
 position = Vector2(-35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("4_t6g85")
 
 [node name="RightArrow" type="Sprite2D" parent="."]
 visible = false
-z_index = 30
+z_index = 40
+z_as_relative = false
 position = Vector2(35, -12)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("5_tvpea")
 
 [node name="Stun" type="Sprite2D" parent="."]
 visible = false
+z_index = 3
 scale = Vector2(0.12, 0.06)
 texture = ExtResource("7_cq5ab")
 script = ExtResource("8_edg5s")
@@ -210,13 +215,13 @@ debug_color = Color(0.415686, 0.392157, 0.701961, 0.419608)
 
 [node name="Orbs" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.5)
-z_index = -3
 script = ExtResource("4_v8tyi")
 
 [node name="TrailingPowerup" type="Sprite2D" parent="."]
 show_behind_parent = true
 top_level = true
-z_index = 2
+z_index = 32
+z_as_relative = false
 scale = Vector2(0.05, 0.05)
 
 [node name="Prompt" type="Sprite2D" parent="TrailingPowerup"]

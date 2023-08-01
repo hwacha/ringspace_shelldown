@@ -482,11 +482,7 @@ func _physics_process(delta):
 			$StompParticles.restart()
 			$StompParticles.emitting = true
 			for player in get_parent().get_children():
-				if player == self:
-					continue
-				
-				# don't restun
-				if player.stunned:
+				if player == self or player.stunned or player.dead or player.invulnerable:
 					continue
 				
 				var stun_threshold = 200

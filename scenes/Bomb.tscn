@@ -329,6 +329,7 @@ resource_local_to_scene = true
 radius = 20.0
 
 [node name="Bomb" type="AnimatableBody2D"]
+z_index = 20
 collision_layer = 0
 sync_to_physics = false
 script = ExtResource("1_0goo4")

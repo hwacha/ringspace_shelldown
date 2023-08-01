@@ -98,7 +98,7 @@ _data = {
 
 [node name="NeutralOrbCapsule" type="Area2D"]
 modulate = Color(1, 1, 1, 0)
-z_index = 2
+z_index = 25
 collision_layer = 1048580
 collision_mask = 8
 script = ExtResource("1_1lavi")
@@ -115,7 +115,6 @@ offset = Vector2(2.08165e-12, -200)
 shape = SubResource("CircleShape2D_1ooui")
 
 [node name="Orbs" type="Node2D" parent="."]
-z_index = -3
 position = Vector2(0, -3)
 script = ExtResource("3_7plo4")
 

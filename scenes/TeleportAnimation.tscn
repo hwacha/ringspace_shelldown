@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dd5l5xeyykbpf" path="res://assets/laser-like-percussion-synthetic-transients-short-laser-faller.wav" id="2_72mp8"]
 
 [node name="TeleportAnimation" type="Node2D"]
+z_index = 19
 script = ExtResource("1_mxn1m")
 
 [node name="Pew" type="AudioStreamPlayer2D" parent="."]
