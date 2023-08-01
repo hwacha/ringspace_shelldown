@@ -418,6 +418,7 @@ func whiff_powerup():
 	$PowerupWhiff.position = src.position
 	$PowerupWhiff.restart()
 	$PowerupWhiff.emitting = true
+	$PowerupWhiff/Sound.play()
 
 func _physics_process(delta):
 	if lock_physics:
