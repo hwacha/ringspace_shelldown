@@ -253,11 +253,11 @@ func vacuum():
 	
 	if analog_movement.is_zero_approx():
 		if is_on_floor():
-			vacuum_instance.velocity = self.position.direction_to(centroid) * 500
+			vacuum_instance.velocity = self.position.direction_to(centroid) * 720
 		else:
-			vacuum_instance.velocity = norm_velocity + perp_velocity
+			vacuum_instance.velocity = (norm_velocity + perp_velocity).normalized() * 720
 	else:
-		vacuum_instance.velocity = analog_movement * 500
+		vacuum_instance.velocity = analog_movement * 720
 
 	vacuum_instance.transform.origin = self.transform.origin
 	get_parent().get_parent().add_child(vacuum_instance)

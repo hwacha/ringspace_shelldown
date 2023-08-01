@@ -10,7 +10,8 @@ var speed = 0.4
 func _ready():
 	modulate.a = 0.5
 	$Decay.start()
-	pass # Replace with function body.
+	$Suck.play()
+	$Lifetime.play("lifetime")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

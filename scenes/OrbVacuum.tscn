@@ -1,18 +1,54 @@
-[gd_scene load_steps=5 format=3 uid="uid://braftv351vxys"]
+[gd_scene load_steps=8 format=3 uid="uid://braftv351vxys"]
 
 [ext_resource type="Script" path="res://scripts/OrbVacuum.gd" id="1_1pxg8"]
 [ext_resource type="Texture2D" uid="uid://dlaamn3h6xhlp" path="res://assets/Orb Vortex Spiral.png" id="2_f5pf6"]
 [ext_resource type="Texture2D" uid="uid://7h6ykbxckdkp" path="res://assets/glow_effect.png" id="2_gb3et"]
+[ext_resource type="AudioStream" uid="uid://drcyl3kc55dqr" path="res://assets/ring_game_orb_vacuum.wav" id="4_qkltg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3qugh"]
 radius = 11.0
 
+[sub_resource type="Animation" id="Animation_xb5eo"]
+resource_name = "lifetime"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vortex:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_crjgu"]
+_data = {
+"lifetime": SubResource("Animation_xb5eo")
+}
+
 [node name="OrbVacuum" type="Area2D"]
+modulate = Color(1, 1, 1, 0)
 collision_layer = 512
 collision_mask = 0
 script = ExtResource("1_1pxg8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_gb3et")
 
@@ -27,5 +63,14 @@ shape = SubResource("CircleShape2D_3qugh")
 [node name="Decay" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="Suck" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qkltg")
+volume_db = 12.0
+
+[node name="Lifetime" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_crjgu")
+}
 
 [connection signal="timeout" from="Decay" to="." method="_on_decay_timeout"]
