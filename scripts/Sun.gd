@@ -26,6 +26,7 @@ func _on_body_entered(body):
 func _on_decay_timeout():
 	$CollisionShape2D.disabled = true
 	$Body/Halo.material.set("shader_parameter/is_active", false)
+	$Fire.stop()
 	$AnimationPlayer.play("departure")
 
 
@@ -33,6 +34,7 @@ func _on_animation_player_animation_finished(anim_name):
 	if (anim_name == "arrival"):
 		$CollisionShape2D.disabled = false
 		$Body/Halo.material.set("shader_parameter/is_active", true)
+		$Fire.play()
 		$Decay.start()
 		is_approaching = false
 	else:

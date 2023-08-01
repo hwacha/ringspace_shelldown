@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cte0vceiqqln3"]
+[gd_scene load_steps=13 format=3 uid="uid://cte0vceiqqln3"]
 
 [ext_resource type="Script" path="res://scripts/Sun.gd" id="1_e1lq8"]
 [ext_resource type="Texture2D" uid="uid://dl2l325yhxb17" path="res://assets/sun_body.png" id="2_35wqw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ddyout3ocvd1r" path="res://assets/sun_halo.png" id="3_wwngj"]
 [ext_resource type="Texture2D" uid="uid://u3ddp8gf6ism" path="res://assets/alert.png" id="4_i4lds"]
 [ext_resource type="AudioStream" uid="uid://jm5c8xsyqmwq" path="res://assets/ring_game_segment_alarm.wav" id="5_aohj8"]
+[ext_resource type="AudioStream" uid="uid://b13dvblpadmp8" path="res://assets/ring_game_sun_flame.wav" id="7_xi52t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iplf4"]
 shader = ExtResource("3_6kc4c")
@@ -151,6 +152,10 @@ libraries = {
 [node name="Alarm" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_aohj8")
 volume_db = -9.0
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_xi52t")
+volume_db = -12.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Decay" to="." method="_on_decay_timeout"]
